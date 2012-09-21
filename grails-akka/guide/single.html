@@ -44,8 +44,7 @@ function addJsClass(el) {
                 
                 
             </div>
-            <p>Let Grails webapps to call/use Akka actors from Groovy and Java.
-Note that it requires a Servlet 3.x environment to run.
+            <p>Akka actors integration from Groovy and Java, in a Servlet 3.x environment.
 </p>
         </div>
 
@@ -84,7 +83,7 @@ Note that it requires a Servlet 3.x environment to run.
                         
 
 <h1 id="1 Introduction">1 Introduction</h1>
-<h1>Grails-Akka</h1><p class="paragraph"/><h2>Introduction</h2><p class="paragraph"/>This plugin makes it easy to use Akka(http://akka.io/) Actors (both local and remote) from a Grails webapp.<p class="paragraph"/>All using standard Groovy / Java code.<p class="paragraph"/>
+<h1>Grails-Akka</h1><p class="paragraph"/><h2>Introduction</h2><p class="paragraph"/>This plugin makes it easy to use <a href="http://akka.io/" target="blank">Akka</a> Actors (both local and remote) from a Grails webapp.<p class="paragraph"/>All using standard Groovy / Java code.<p class="paragraph"/>
 
 
 <h2 id="1.1 History">1.1 History</h2>
@@ -94,22 +93,41 @@ Note that it requires a Servlet 3.x environment to run.
 <ul class="star">
 <li>0.5 release</li>
 <ul class="star">
-<li>First public version of the plugin, with some basic features, and the inline test webapp</li>
+<li>First public version of the plugin, with some basic features</li>
+<li>Advanced features of Akka have not been yet tested/shown here (even under heavy load), but it's in plan for the next release</li>
+<li>In Plugin sources under the test folder there there are some initial unit and integration tests, and an inline test webapp</li>
 </ul></ul></ul><p class="paragraph"/>
 
 
 <h1 id="2 Usage">2 Usage</h1>
-<h1>Grails-Akka</h1><p class="paragraph"/><h2>Usage</h2><p class="paragraph"/>TODO &#8230;
+<h4>Installing the plugin</h4><p class="paragraph"/>First you need to install the plugin into a Grails application:
+using the recommended way, configure it as a dependency in <code>BuildConfig.groovy</code>:
+<div class="code"><pre>plugins &#123;
+    compile ':akka:0.5'
+&#125;</pre></div><p class="paragraph"/>or the old way:
+<div class="code"><pre>grails install&#45;plugin akka</pre></div><p class="paragraph"/>
+<h4>Requirements</h4>
+<ul class="star">
+<li>a Servlet 3.x container to run the Web application, so be sure to force it in <code>BuildConfig.groovy</code>:</li>
+</ul><p class="paragraph"/><div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div>
+<ul class="star">
+<li>Akka 2.x (as specified in plugin descriptor) and related dependencies,</li>
+</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled), and the Typesafe Maven Repository (defined inside the plugin).<p class="paragraph"/>
 
 
 
 <h1 id="3 Tutorials">3 Tutorials</h1>
-<h1>Grails-Akka</h1><p class="paragraph"/><h2>Tutorials</h2><p class="paragraph"/>TODO &#8230;
+<h4>Samples</h4><p class="paragraph"/>In Plugin sources under the <a href="https://github.com/smartiniOnGitHub/grails-akka/tree/master/test/" target="blank">test</a> folder
+there there are some initial unit and integration tests,
+and even an inline test webapp.<p class="paragraph"/>Code is duplicated to avoid unnecessary complexity.<p class="paragraph"/>Note that some code is more general than required for tests, but only to show some basic features.<p class="paragraph"/>
+<h4>Akka documentation</h4><p class="paragraph"/>Look at Akka API for Java, usable from Groovy and Java code,
+from here <a href="http://doc.akka.io/docs/akka/2.0.3/java/" target="blank">Akka Java API</a><p class="paragraph"/>
 
 
 
 <h1 id="4 Troubleshooting">4 Troubleshooting</h1>
-<h1>Grails-Akka</h1><p class="paragraph"/><h2>Troubleshooting</h2><p class="paragraph"/>TODO &#8230;
+<h4>Tricks</h4><p class="paragraph"/>None.<p class="paragraph"/>
+<h4>Workarounds</h4><p class="paragraph"/>None.<p class="paragraph"/>
 
 
                     </div>

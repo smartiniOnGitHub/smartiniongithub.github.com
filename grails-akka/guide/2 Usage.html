@@ -49,8 +49,7 @@ function addJsClass() {
         
         
     </div>
-    <p>Let Grails webapps to call/use Akka actors from Groovy and Java.
-Note that it requires a Servlet 3.x environment to run.
+    <p>Akka actors integration from Groovy and Java, in a Servlet 3.x environment.
 </p>
 </div>
 
@@ -86,7 +85,19 @@ Note that it requires a Servlet 3.x environment to run.
                 
 
 <h1 id="2 Usage">2 Usage</h1>
-<h1>Grails-Akka</h1><p class="paragraph"/><h2>Usage</h2><p class="paragraph"/>TODO &#8230;
+<h4>Installing the plugin</h4><p class="paragraph"/>First you need to install the plugin into a Grails application:
+using the recommended way, configure it as a dependency in <code>BuildConfig.groovy</code>:
+<div class="code"><pre>plugins &#123;
+    compile ':akka:0.5'
+&#125;</pre></div><p class="paragraph"/>or the old way:
+<div class="code"><pre>grails install&#45;plugin akka</pre></div><p class="paragraph"/>
+<h4>Requirements</h4>
+<ul class="star">
+<li>a Servlet 3.x container to run the Web application, so be sure to force it in <code>BuildConfig.groovy</code>:</li>
+</ul><p class="paragraph"/><div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div>
+<ul class="star">
+<li>Akka 2.x (as specified in plugin descriptor) and related dependencies,</li>
+</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled), and the Typesafe Maven Repository (defined inside the plugin).<p class="paragraph"/>
 
 
 
