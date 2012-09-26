@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Akka Integration 0.5</title>
+        <title>Akka Integration 0.8</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -59,7 +59,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Akka Integration - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini</p>
-                            <p><strong>Version:</strong> 0.5</p>
+                            <p><strong>Version:</strong> 0.8</p>
                             
                         </div>
 
@@ -84,6 +84,7 @@ function addJsClass(el) {
 
 <h1 id="1 Introduction">1 Introduction</h1>
 <h1>Grails-Akka</h1><p class="paragraph"/><h2>Introduction</h2><p class="paragraph"/>This plugin makes it easy to use <a href="http://akka.io/" target="blank">Akka</a> Actors (both local and remote) from a Grails webapp.<p class="paragraph"/>All using standard Groovy / Java code.<p class="paragraph"/>
+<h4>License</h4><p class="paragraph"/>Licensed under the terms of the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="blank">Apache License, Version 2.0</a><p class="paragraph"/>
 
 
 <h2 id="1.1 History">1.1 History</h2>
@@ -103,7 +104,7 @@ function addJsClass(el) {
 <h4>Installing the plugin</h4><p class="paragraph"/>First you need to install the plugin into a Grails application:
 using the recommended way, configure it as a dependency in <code>BuildConfig.groovy</code>:
 <div class="code"><pre>plugins &#123;
-    compile ':akka:0.5'
+    compile ':akka:&#60;plugin version&#62;'
 &#125;</pre></div><p class="paragraph"/>or the old way:
 <div class="code"><pre>grails install&#45;plugin akka</pre></div><p class="paragraph"/>
 <h4>Requirements</h4>
@@ -112,7 +113,8 @@ using the recommended way, configure it as a dependency in <code>BuildConfig.gro
 </ul><p class="paragraph"/><div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div>
 <ul class="star">
 <li>Akka 2.x (as specified in plugin descriptor) and related dependencies,</li>
-</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled), and the Typesafe Maven Repository (defined inside the plugin).<p class="paragraph"/>
+</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled),
+and the Typesafe Maven Repository (defined inside the plugin).<p class="paragraph"/>
 
 
 
