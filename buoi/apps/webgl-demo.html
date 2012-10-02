@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Dart + WebGL</title>
+  </head>
+  <body>
+
+    <div id='message'></div>
+	<br/>
+
+	<canvas id="drawHere" width="200" height="200"></canvas>
+	<br/>
+
+<script type='application/dart'>
+#import('dart:html');
+void main() {
+	document.query('#message').innerHTML = 'Hello from Dart + WebGL';
+}
+</script>
+
+	<!--
+	<script src="webgl-demo.dart.js"></script>
+	//-->
+    <script type="application/dart" src="webgl-demo.dart"></script>
+    <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+
+  </body>
+
+</html>
