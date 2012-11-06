@@ -4,9 +4,9 @@
 
 part of clock;
 
-int clientWidth() => window.innerWidth;
+int get clientWidth => window.innerWidth;
 
-int clientHeight() => window.innerHeight;
+int get clientHeight => window.innerHeight;
 
 class Balls {
   static const double RADIUS2 = Ball.RADIUS * Ball.RADIUS;
@@ -27,7 +27,7 @@ class Balls {
   ];
 
   DivElement root;
-  int lastTime;
+  num lastTime;
   List<Ball> balls;
 
   Balls() :
@@ -39,7 +39,7 @@ class Balls {
     setElementSize(root, 0.0, 0.0, 0.0, 0.0);
   }
 
-  void tick(int now) {
+  void tick(num now) {
     showFps(1000.0 / (now - lastTime + 0.01));
 
     double delta = min((now - lastTime) / 1000.0, 0.1);
@@ -135,7 +135,7 @@ class Ball {
   double age;
 
   Ball(this.root, this.x, this.y, int color) {
-    elem = new ImageElement(Balls.PNGS[color]);
+    elem = new ImageElement(src: Balls.PNGS[color]);
     makeAbsolute(elem);
     setElementPosition(elem, x, y);
     root.nodes.add(elem);
@@ -157,14 +157,14 @@ class Ball {
     y += vy * delta;
 
     // Handle falling off the edge.
-    if ((x < RADIUS) || (x > clientWidth())) {
+    if ((x < RADIUS) || (x > clientWidth)) {
       elem.remove();
       return false;
     }
 
     // Handle ground collisions.
-    if (y > clientHeight()) {
-      y = clientHeight().toDouble();
+    if (y > clientHeight) {
+      y = clientHeight.toDouble();
       vy *= -RESTITUTION;
     }
 

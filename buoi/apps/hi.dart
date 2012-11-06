@@ -2,9 +2,9 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-#library('hi');
+library hi;
 
-#import('dart:html');
+import 'dart:html';
 
 main() {
   document.query('#status').innerHTML = 'Hi, Dart';
