@@ -1,0 +1,33 @@
+.DS_Store
+.bzr
+.hg
+.svn
+.cache
+.gradle
+.metadata
+.settings
+# .classpath
+# .project
+*.log
+*.iws
+*.bak
+*~*
+# *~
+# Dart generated files
+*.js
+*.map
+/*.zip
+/*.log
+/*DB.*
+/_old/
+/out/
+/private/
+# /server/
+/bin/
+/classes/
+/target/
+/target-eclipse/
+/temp/
+/dist/
+/doc/
+/install/
