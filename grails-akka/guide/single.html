@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Akka Integration 0.6.2</title>
+        <title>Akka Integration 0.12.5</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Akka Integration - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini</p>
-                            <p><strong>Version:</strong> 0.6.2</p>
+                            <p><strong>Version:</strong> 0.12.5</p>
                             
                         </div>
 
@@ -89,6 +89,16 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>February 2014</li>
+<ul class="star">
+<li>0.12.5 release</li>
+<ul class="star">
+<li>Updated to Akka-2.2.3 (aligned with Scala-2.10.2)</li>
+<li>No more needed the Typesafe Maven Repository</li>
+<li>Last release for Grails-2.0.x</li>
+<li>Updated all tests to make it work with Akka-2.2.x</li>
+</ul>
+</ul>
 <li>January 2013</li>
 <ul class="star">
 <li>0.6.2 release</li>
@@ -125,16 +135,14 @@ function addJsClass(el) {
 using the recommended way, configure it as a dependency in <code>BuildConfig.groovy</code>:
 <div class="code"><pre>plugins &#123;
     compile ':akka:&#60;plugin version&#62;'
-&#125;</pre></div><p class="paragraph"/>or the old way:
-<div class="code"><pre>grails install&#45;plugin akka</pre></div><p class="paragraph"/>
+&#125;</pre></div><p class="paragraph"/>
 <h4>Requirements</h4>
 <ul class="star">
 <li>a Servlet 3.x container to run the Web application, so be sure to force it in <code>BuildConfig.groovy</code>:</li>
 </ul><p class="paragraph"/><div class="code"><pre>grails.servlet.version = <span class="java&#45;quote">"3.0"</span></pre></div>
 <ul class="star">
 <li>Akka 2.x (as specified in plugin descriptor) and related dependencies,</li>
-</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled),
-and the Typesafe Maven Repository (defined inside the plugin).<p class="paragraph"/>
+</ul><p class="paragraph"/>all downloaded from the Central Maven Repository (that must be enabled).<p class="paragraph"/>
 
 
 
@@ -143,7 +151,7 @@ and the Typesafe Maven Repository (defined inside the plugin).<p class="paragrap
 there there are some initial unit and integration tests,
 and even an inline test webapp.<p class="paragraph"/>Code is duplicated to avoid unnecessary complexity.<p class="paragraph"/>Note that some code is more general than required for tests, but only to show some basic features.<p class="paragraph"/>
 <h4>Akka documentation</h4><p class="paragraph"/>Look at Akka API for Java, usable from Groovy and Java code,
-from here <a href="http://doc.akka.io/docs/akka/2.0.5/java/" target="blank">Akka Java API</a><p class="paragraph"/>
+from here <a href="http://doc.akka.io/docs/akka/2.2.3/java.html" target="blank">Akka Java API</a><p class="paragraph"/>
 
 
 
