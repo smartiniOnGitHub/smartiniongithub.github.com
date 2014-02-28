@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Akka Integration 0.12.5</title>
+        <title>Akka Integration 2.2.3</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Akka Integration - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini</p>
-                            <p><strong>Version:</strong> 0.12.5</p>
+                            <p><strong>Version:</strong> 2.2.3</p>
                             
                         </div>
 
@@ -89,6 +89,14 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>February 2014</li>
+<ul class="star">
+<li>2.2.3 release</li>
+<ul class="star">
+<li>Updated to Grails-2.2.4</li>
+<li>Add AkkaService (see Tutorials for more info)</li>
+</ul>
+</ul>
 <li>February 2014</li>
 <ul class="star">
 <li>0.12.5 release</li>
@@ -149,7 +157,19 @@ using the recommended way, configure it as a dependency in <code>BuildConfig.gro
 <h1 id="3 Tutorials">3 Tutorials</h1>
 <h4>Samples</h4><p class="paragraph"/>In Plugin sources under the <a href="https://github.com/smartiniOnGitHub/grails-akka/tree/master/test/" target="blank">test</a> folder
 there there are some initial unit and integration tests,
-and even an inline test webapp.<p class="paragraph"/>Code is duplicated to avoid unnecessary complexity.<p class="paragraph"/>Note that some code is more general than required for tests, but only to show some basic features.<p class="paragraph"/>
+and even an inline test webapp.<p class="paragraph"/>Code is duplicated to avoid unnecessary complexity.
+Unnecessary code in plugin sources is already excluded in plugin packaging.<p class="paragraph"/>Note that some code is more general than required for tests, but only to show some basic features.<p class="paragraph"/>
+<h5>AkkaService</h5>
+The plugin now has an utility service (AkkaService) that by default creates an Akka ActorSystem at application startup
+with a default name:
+<ul class="minus">
+<li>if defined, the value of grails_akka.akkaSystem.name variable, set in Grails config file</li>
+<li>otherwise, the webapp context name</li>
+<li>otherwise (at last), "grails-akka" will be used.</li>
+</ul><p class="paragraph"/>Use it like any other Grails services, defining an akkaService variable.
+For more info, look at its API in generated docs.<p class="paragraph"/>In the test webapp you can see that in Bootstrap a sample Actor is created in the system.
+There is even a sample controller (AkkaController) that interacts with plugin AkkaService, 
+and show some info of the actor system and actors.<p class="paragraph"/>
 <h4>Akka documentation</h4><p class="paragraph"/>Look at Akka API for Java, usable from Groovy and Java code,
 from here <a href="http://doc.akka.io/docs/akka/2.2.3/java.html" target="blank">Akka Java API</a><p class="paragraph"/>
 

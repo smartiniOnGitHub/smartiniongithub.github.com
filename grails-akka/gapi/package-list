@@ -1,4 +1,5 @@
 DefaultPackage
+grails_akka
 grails_akka_test.actor
 grails_akka_test.command
 grails_akka_test.message
