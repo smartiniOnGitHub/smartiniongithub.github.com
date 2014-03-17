@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AngularJS Grails Plugin 1.2.14</title>
+        <title>AngularJS Grails Plugin 1.2.14.1</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>AngularJS Grails Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini, originally developed by Vladimír Oraný</p>
-                            <p><strong>Version:</strong> 1.2.14</p>
+                            <p><strong>Version:</strong> 1.2.14.1</p>
                             
                         </div>
 
@@ -89,6 +89,16 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>March 2014</li>
+<ul class="star">
+<li>1.2.14.1 release</li>
+<ul class="star">
+<li>Maintenance over 1.2.14 plugin release</li>
+<li>Closed all existing issues</li>
+<li>Fixed no-minification of AngularJS js files in DEV environment (but only there)</li>
+<li>Updated modules, clarified docs, samples, and the test webapp</li>
+</ul>
+</ul>
 <li>March 2014</li>
 <ul class="star">
 <li>1.2.14 release</li>
@@ -165,7 +175,27 @@ using the recommended way, configure it as a dependency in <code>BuildConfig.gro
 &#125;</pre></div><p class="paragraph"/><h4>Requirements</h4>
 <ul class="star">
 <li>a Servlet container to run the Web application</li>
-</ul><p class="paragraph"/><h4>Sample usage</h4><p class="paragraph"/>There is a sample/minimal test webapp (under test/webapp) with some examples on how to use the plugin, see sources.<p class="paragraph"/>
+</ul><p class="paragraph"/><h4>Description</h4>
+This plugin adds AngularJS resources to the Grails Application.<p class="paragraph"/>It uses new Resources Plugin to handle resources gracefully. 
+Just let your AngularJS resources (services, controllers etc.) depend on <strong class="bold">'angular'</strong> module and it's done. 
+Following AngularJS modules are also provided out of box: 
+angular-animate, angular-cookies, angular-loader, angular-resource, angular-route, angular-sanitize, angular-touch.<p class="paragraph"/>There is also controller for AngularJS scenario testing. 
+Just navigate to &#60;app&#62;/nge2e/&#60;scenario-module-name&#62; to see the results. 
+The scenario module must depend on <strong class="bold">'angular-scenario'</strong>.<p class="paragraph"/>The plugin serves minified version for environments other than development. 
+If jQuery plugin is installed it automatically depends on it.<p class="paragraph"/>To simplify usage from applications, additional modules are defined:
+<strong class="bold">'angular-top'</strong> with most-common AngularJS scripts, <strong class="bold">'angular-all'</strong> with all scripts but not test-related scripts, etc.<p class="paragraph"/>
+<h4>Quick Start</h4><p class="paragraph"/>Add AngularJS tags in gsp/html pages (for example for ng-app app), 
+define routes and then create related fragment pages to be included by AngularJS (at client side).<p class="paragraph"/>Optional, write AngularJS application-specific files (usually app.js, controllers, services, filters, directives, etc.) 
+or put all inline in some page.<p class="paragraph"/>Optional, in ApplicationResources.groovy, group application-specific files (seen before) in a specific module (for example 'app-js').
+In ApplicationResources.groovy, define an application specific module (for example app) and make it dependent 
+on desired AngularJS modules published by the plugin, and maybe even from 'app-js' module just defined.
+If needed, define even an 'index' module.<p class="paragraph"/>In gsp pages(or directly in layout pages, for simpler inclusion in all pages) use resource modules defined in the plugin or in the webapp, 
+and then use AngularJS tags as needed (pages could be even static html pages to speedup prototyping, 
+but in this case it's not-so-simple to get js files published by resources plugin in a generic, non-hardcoded way).<p class="paragraph"/>Note that to call AngularJS from application-specific scripts (inline in page), 
+you must put them after the inclusion of AngularJS scripts (for example at the beginning of the body section), 
+or include it in a r:script tag and optionally force it at the end of head specifying disposition="head".<p class="paragraph"/>
+<h4>Sample usage</h4><p class="paragraph"/>There is a sample/minimal test webapp (under test/webapp) with some examples on how to use the plugin, see sources.<p class="paragraph"/>
+
 
 
 <h1 id="3 Tutorials">3 Tutorials</h1>
@@ -182,6 +212,10 @@ but note that it's a pure HTML5/JavaScript web application.<p class="paragraph"/
 <h1 id="4 Troubleshooting">4 Troubleshooting</h1>
 <h4>Tricks</h4>
 <ul class="star">
+<li>angular not defined, in application-specific JavaScript files</li>
+<ul class="star">
+<li>Resources plugin put AngularJS scripts at the end of head section in HTML pages, so to call AngularJS from application-specific scripts (written directly in page, without using Resources Plugin) you must put them after the inclusion of AngularJS scripts (for example at the beginning of the body section), or include it in a r:script</li>
+</ul>
 <li>Module "index" missing in webapp, when trying to use angularjs.Nge2eController</li>
 <ul class="star">
 <li>Remember to define an "index" module in <code>ApplicationResources.groovy</code>, needed by Resources plugin</li>

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 Troubleshooting 1.2.14</title>
+    <title>4 Troubleshooting 1.2.14.1</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -72,7 +72,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Sandro Martini, originally developed by Vladimír Oraný</p>
 
-                    <p><strong>Version:</strong> 1.2.14</p>
+                    <p><strong>Version:</strong> 1.2.14.1</p>
 
                     
                 </div>
@@ -84,6 +84,10 @@ function addJsClass() {
 <h1 id="4 Troubleshooting">4 Troubleshooting</h1>
 <h4>Tricks</h4>
 <ul class="star">
+<li>angular not defined, in application-specific JavaScript files</li>
+<ul class="star">
+<li>Resources plugin put AngularJS scripts at the end of head section in HTML pages, so to call AngularJS from application-specific scripts (written directly in page, without using Resources Plugin) you must put them after the inclusion of AngularJS scripts (for example at the beginning of the body section), or include it in a r:script</li>
+</ul>
 <li>Module "index" missing in webapp, when trying to use angularjs.Nge2eController</li>
 <ul class="star">
 <li>Remember to define an "index" module in <code>ApplicationResources.groovy</code>, needed by Resources plugin</li>
