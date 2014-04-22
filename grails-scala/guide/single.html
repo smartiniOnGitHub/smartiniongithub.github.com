@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Scala 0.10.3</title>
+        <title>Scala 2.10.4</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>Scala - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini, originally developed by Vaclav Pech and Domingo Suarez Torres</p>
-                            <p><strong>Version:</strong> 0.10.3</p>
+                            <p><strong>Version:</strong> 2.10.4</p>
                             
                         </div>
 
@@ -89,6 +89,16 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>April 2014</li>
+<ul class="star">
+<li>2.10.4 release</li>
+<ul class="star">
+<li>Updated to Scala-2.10.4</li>
+<li>Updated to Grails-2.2.5</li>
+<li>Add some Scala code as a sample (but only in plugin sources, and in the test webapp) and show its usage</li>
+<li>Add ScalaService to get some info on Scala available by the plugin</li>
+</ul>
+</ul>
 <li>December 2013</li>
 <ul class="star">
 <li>0.10.3 release</li>
@@ -173,7 +183,16 @@ using the recommended way, configure it as a dependency in <code>BuildConfig.gro
 
 <h1 id="3 Tutorials">3 Tutorials</h1>
 <h4>Samples</h4><p class="paragraph"/>In Plugin sources under the <a href="https://github.com/smartiniOnGitHub/grails-scala/tree/master/test/" target="blank">test</a> folder
-there there are some initial unit and integration tests, and even an inline test webapp.<p class="paragraph"/>Sample code could be duplicated to avoid unnecessary complexity.<p class="paragraph"/>Note that some code is more general than required for tests, but only to show some basic features.<p class="paragraph"/>
+there there are some initial unit and integration tests, and even an inline test webapp.<p class="paragraph"/>There are even some Sample Scala sources under <a href="https://github.com/smartiniOnGitHub/grails-scala/tree/master/src/scala/" target="blank">src/scala</a> folder
+to ensure that Scala code (many different kind of classes) compiles inside the plugin, 
+but of course that code is excluded when packaging it.
+Note that those Sample Scala sources are used only from the
+<a href="https://github.com/smartiniOnGitHub/grails-scala/tree/master/test/webapp/grails-scala-test/" target="blank">test webapp</a>, 
+both from Scala code and from Groovy code (using the Java interoperability way).<p class="paragraph"/>Last, to ensure that the plugin is working right, in the
+<a href="https://github.com/smartiniOnGitHub/grails-scala/tree/master/test/webapp/grails-scala-test/" target="blank">test webapp</a>, 
+there are some Unit Test classes done in Scala that are using <a href="http://scalatest.org/" target="blank">ScalaTest</a>,
+but to avoid including it as dependency in the plugin, they are included only there.
+And they are not triggered by Grails tests (the test-app command).<p class="paragraph"/>
 <h4>Scala documentation</h4><p class="paragraph"/>Look at <a href="http://www.scala-lang.org/api/current/" target="blank">Scala API</a> ,
 or generic <a href="http://docs.scala-lang.org/" target="blank">Scala doc site</a>
 
