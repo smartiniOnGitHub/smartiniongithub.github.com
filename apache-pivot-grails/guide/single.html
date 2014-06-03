@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Grails Plugin for Apache Pivot 1.0.6</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+    </head>
+
+    <body class="body" onload="addJsClass();">
+        <div id="navigation">
+            <ul>
+                <li>
+                    <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                        <a href="../guide/index.html" class="button">Table of contents</a>
+                        <div id="nav-summary-childs" style="display:none;">
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#history"><strong>2</strong><span>History</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#usage"><strong>3</strong><span>Usage</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#tutorials"><strong>4</strong><span>Tutorials</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#troubleshooting"><strong>5</strong><span>Troubleshooting</span></a></div>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li class="separator selected">
+                    <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+                </li>
+            </ul>
+        </div>
+        <div id="header">
+            <div class="images clearfix">
+                
+                
+            </div>
+            <p>
+Grails Plugin for Apache Pivot
+</p>
+        </div>
+
+
+        <table id="colset" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="col1">
+                    <div id="main" class="corner-all">
+
+                        <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                        <div class="project">
+                            <h1>Grails Plugin for Apache Pivot - Reference Documentation</h1>
+                            <p><strong>Authors:</strong> Sandro Martini</p>
+                            <p><strong>Version:</strong> 1.0.6</p>
+                            
+                        </div>
+
+                        
+                        <div id="table-of-content">
+                            <h2>Table of Contents</h2>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#history"><strong>2</strong><span>History</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#usage"><strong>3</strong><span>Usage</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#tutorials"><strong>4</strong><span>Tutorials</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#troubleshooting"><strong>5</strong><span>Troubleshooting</span></a></div>
+                            
+                            <div style="clear:both" ></div>
+                        </div>
+                        
+                        
+
+<h1 id="introduction">1 Introduction</h1>
+<h1>Apache-Pivot-Grails</h1><p class="paragraph"/><h2>Introduction</h2><p class="paragraph"/>This plugin makes it possible to deploy <a href="http://pivot.apache.org/" target="blank">Apache Pivot</a> applications with a Grails webapp, 
+using them at client side (running as Applets or with Java Web Start).<p class="paragraph"/>All using the usual jar files at server side, and (if wanted) even forwarding them at client side.<p class="paragraph"/>
+<h4>License</h4><p class="paragraph"/>Licensed under the terms of the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="blank">Apache License, Version 2.0</a><p class="paragraph"/>
+
+
+<h1 id="history">2 History</h1>
+<h4>History</h4>
+<ul class="star">
+<li>June 2014</li>
+<ul class="star">
+<li>1.0.4 release</li>
+<ul class="star">
+<li>Updated to Apache Pivot 2.0.4</li>
+<li>Updated to Grails 2.2.5 (needed minimum version if Grails 2.0.0)</li>
+<li>Cleanup in plugin and in pages</li>
+</ul>
+</ul>
+<li>Past releases</li>
+<ul class="star">
+<li>Look in old docs</li>
+</ul></ul><p class="paragraph"/>
+
+
+<h1 id="usage">3 Usage</h1>
+<h4>Installing the plugin</h4><p class="paragraph"/>First you need to install the plugin into a Grails application:
+using the recommended way, configure it as a dependency in <code>BuildConfig.groovy</code>:
+<div class="code"><pre>plugins &#123;
+    compile ':apache&#45;pivot&#45;grails:&#60;plugin version&#62;'
+	// compile 'pivot_stuff:apache&#45;pivot&#45;grails:&#60;plugin version&#62;'  // or use <span class="java&#45;keyword">this</span> <span class="java&#45;keyword">if</span> the previous line doesn't work &#8230;
+	// or at least use the runtime scope &#8230;
+&#125;</pre></div><p class="paragraph"/><h4>Requirements</h4>
+<ul class="star">
+<li>a Servlet container to run the Web application</li>
+</ul><p class="paragraph"/><h4>Description</h4>
+This plugin allows your Grails application to use Apache Pivot 2.x features on Server side, 
+and (if enabled the JarDownloadServlet in web.xml) even to forward Pivot jars to Clients, 
+to be able to use the same jars even in Applets and Java Web Start Applications.<p class="paragraph"/>
+<h4>Quick Start</h4><p class="paragraph"/>There is a wiki page on how to use it:
+<a href="https://code.google.com/a/apache-extras.org/p/pivot-stuff/wiki/ApachePivotPluginForGrails_UsageNotes" target="blank">Usage Wiki Page</a><p class="paragraph"/>
+<h4>Sample usage</h4><p class="paragraph"/>Look at the sample/minimal test webapp (under test/webapp) with some examples on how to use the plugin, inside its test sources.<p class="paragraph"/>
+
+
+<h1 id="tutorials">4 Tutorials</h1>
+<h4>Samples</h4><p class="paragraph"/>In Plugin sources under the <a href="https://code.google.com/a/apache-extras.org/p/pivot-stuff/source/browse/#svn%2Ftrunk%2Fapache-pivot-grails%2Ftest/" target="blank">test</a> folder 
+there there are some initial unit and integration tests,
+and even an inline <a href="https://code.google.com/a/apache-extras.org/p/pivot-stuff/source/browse/#svn%2Ftrunk%2Fapache-pivot-grails%2Ftest%2Fwebapp%2Fapache-pivot-grails-test" target="blank">test webapp</a> (much more useful).<p class="paragraph"/>
+<h4>Apache Pivot documentation</h4><p class="paragraph"/>Look at Apache Pivot Tutorials
+<a href="http://pivot.apache.org/tutorials/" target="blank">Apache Pivot Tutorials</a><p class="paragraph"/>
+
+
+<h1 id="troubleshooting">5 Troubleshooting</h1>
+<h4>Tricks</h4>
+<ul class="star">
+<li>jar files not forwarded to clients, or not found</li>
+<ul class="star">
+<li>look at <strong class="bold">web.xml</strong> of your webapp (before you need to install grails templates), if the JarDownloadServlet has been enabled and if it works in your configuration</li>
+</ul></ul><p class="paragraph"/><h4>Workarounds</h4>
+<ul class="star">
+<li>run-app doesn't generate the right folder/structure for published plugin resources</li>
+<ul class="star">
+<li>use run-war instead</li>
+</ul></ul><p class="paragraph"/>
+
+                    </div>
+                </td>
+                <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Items</h1><div class="menu-sub">
+                        
+                        
+                        <div class="menu-item"><a href="../ref/Items/reference.html">reference</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+            </tr>
+        </table>
+
+        <div id="footer">
+            
+            
+        </div>
+
+
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+    </body>
+</html>
