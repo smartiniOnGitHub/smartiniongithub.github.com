@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AngularJS Grails Plugin 1.3.16</title>
+        <title>AngularJS Grails Plugin 1.4.0</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>AngularJS Grails Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini, originally developed by Vladimír Oraný</p>
-                            <p><strong>Version:</strong> 1.3.16</p>
+                            <p><strong>Version:</strong> 1.4.0</p>
                             
                         </div>
 
@@ -89,6 +89,13 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>June 2015</li>
+<ul class="star">
+<li>1.4.0 release</li>
+<ul class="star">
+<li>Updated to AngularJS 1.4.0</li>
+</ul>
+</ul>
 <li>June 2015</li>
 <ul class="star">
 <li>1.3.16 release, in maintenance branch 1.3.x</li>
@@ -317,7 +324,8 @@ using the recommended way, configure it as a dependency in <code>BuildConfig.gro
 This plugin adds AngularJS resources to the Grails Application.<p class="paragraph"/>It uses new Resources Plugin to handle resources gracefully. 
 Just let your AngularJS resources (services, controllers etc.) depend on <strong class="bold">'angular'</strong> module and it's done. 
 Following AngularJS modules are also provided out of box: 
-angular-animate, angular-aria, angular-cookies, angular-loader, angular-messages, angular-resource, angular-route, angular-sanitize, angular-touch.<p class="paragraph"/>There is also controller for AngularJS scenario testing. 
+angular-animate, angular-aria, angular-cookies, angular-loader, angular-message-format, angular-messages, 
+angular-resource, angular-route, angular-sanitize, angular-touch.<p class="paragraph"/>There is also controller for AngularJS scenario testing. 
 Just navigate to &#60;app&#62;/nge2e/&#60;scenario-module-name&#62; to see the results. 
 The scenario module must depend on <strong class="bold">'angular-scenario'</strong>.<p class="paragraph"/>The plugin serves minified version for environments other than development. 
 If jQuery plugin is installed it automatically depends on it.<p class="paragraph"/>To simplify usage from applications, additional modules are defined:
