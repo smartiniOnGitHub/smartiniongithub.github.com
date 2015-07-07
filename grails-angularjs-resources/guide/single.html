@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>AngularJS Grails Plugin 1.4.1</title>
+        <title>AngularJS Grails Plugin 1.4.2</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -58,7 +58,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>AngularJS Grails Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Sandro Martini, originally developed by Vladimír Oraný</p>
-                            <p><strong>Version:</strong> 1.4.1</p>
+                            <p><strong>Version:</strong> 1.4.2</p>
                             
                         </div>
 
@@ -89,6 +89,16 @@ function addJsClass(el) {
 <h2 id="1.1 History">1.1 History</h2>
 <h4>History</h4>
 <ul class="star">
+<li>July 2015</li>
+<ul class="star">
+<li>1.4.2 release</li>
+<ul class="star">
+<li>Updated to AngularJS 1.4.2</li>
+<li>AngularJsAjaxFilters, set default prefix to check all controllers and all action names that starts with 'ajax', but both can be overridden by a configuration variable (resp. angularjs_resources.filter.controllers , angularjs_resources.filter.actions)</li>
+<li>AngularJsAjaxFilters, now returns HTTP error 403 for filtered out queries</li>
+<li>update test webapp 2.4 to show AngularJsAjaxFilters usage, and in one page do an ajax call to ajaxData action of Rest sample Controller (from an xhr right request, and from another non-xhr that is filtered out); update even sample js code to force add the usual (non standard but common) request header used by default in Grails check for xhr requests ('X-Requested-With' set to 'XMLHttpRequest')</li>
+</ul>
+</ul>
 <li>June 2015</li>
 <ul class="star">
 <li>1.4.1 release</li>
