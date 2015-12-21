@@ -1,0 +1,401 @@
+<!doctype html>
+<!-- <html lang="en" class="no-js"> -->
+<!-- Tweaked by hand, temporary -->
+<html lang="en" class="">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Welcome to Grails</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Tweaked by hand, temporary -->
+        <link rel="stylesheet" href="grails.css"/>
+        <script src="grails.js" type="text/javascript" ></script>
+<!--
+//-->
+        
+        <meta name="layout" content="main"/>
+
+
+<!-- Tweaked by hand, temporary -->
+<style type="text/css" media="screen">
+* {
+	margin: 0;
+}
+html, body {
+	/* TODO: remove from grails.css or update/override here ... */
+	/* box-shadow ... */
+	/* height:100%; */
+	background-color:#ffffff;
+	color:#000000;
+	font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight:normal;
+	padding:0;
+	margin:0;
+}
+
+#header, header {
+	background-color:#4d8618;
+	border:0
+	/* text-transform: capitalize; */
+	font-weight:400;
+	font-size:1.5em;
+	/* line-height:1.6em; */
+	width:100%;
+	z-index:100;
+	top:0;
+	left:0;
+	clear: both;
+}
+#footer, footer {
+	/* background-color:#4d8618; */
+	background-color:#aaaaaa;
+	border:0
+	text-transform: capitalize;
+	font-weight:100;
+	font-size:0.8em;
+	/* line-height:1.25em; */
+	width:100%;
+	z-index:100;
+	top:0;
+	left:0;
+	clear: both;
+}
+
+nav {
+	background-color:#4d8618;
+	border:0
+	text-transform: capitalize;
+	font-weight:400;
+	/* font-size:1.5em; */
+	/* line-height:1.6em; */
+	/* width:100%; */
+	z-index:100000;
+	top:0;
+	left:0;
+	margin: 0px auto;
+	text-align: center;
+	/* width:960px; */
+	/* max-width:90%; */
+}
+
+nav ul, 
+#footer ul, footer ul {
+	list-style:none;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+nav ul li {
+	display:inline-block;
+	/* padding:0.5em; */
+	zoom:1;
+	letter-spacing:normal;
+	/* text-transform:uppercase; */
+	min-width:6em;
+	/* line-height:3.125em; */
+	margin:0;
+	vertical-align: middle;
+}
+nav a, nav a:link, nav a:visited, 
+nav ul li a, nav ul li a:visited {
+	display: inline-block;
+	text-decoration:none;
+	color:#ffffff;
+	opacity:0.8;
+	padding:0.5em;
+}
+nav a:hover, nav ul li a:hover {
+	opacity:1
+}
+nav ul li:hover, nav ul li.active {
+}
+nav a:hover, nav ul li a:hover {
+	background-color:#db4800!important;
+	color:#ffffff!important
+}
+nav a, nav ul li a,
+#footer a, #footer ul li a,
+footer a, footer ul li a {
+	/* color:#ffffff; &*/
+	color:#000000;
+}
+
+#footer ul li, footer ul li {
+	display:inline-block;
+	padding:1px;
+	zoom:1;
+	min-width:1em;
+	margin:0;
+}
+#footer ul, footer ul {
+	list-style:none;
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+#footer a, #footer a:link, #footer ul li a:visited, 
+footer a, footer a:link, footer ul li a:visited {
+	display: inline-block;
+	text-decoration:none;
+	opacity:0.8;
+	color:#ffffff;
+}
+#footer a, footer a, 
+#footer ul li, footer ul li {
+	text-transform:none;
+}
+#footer ul li:before, footer ul li:before {
+	content: "~";
+	padding-right:0.5em;
+}
+
+h1 {
+	color: #4d8618;
+	font-weight:400;
+	font-size:2em;
+	margin: 0.8em 0 0.25em 0;
+}
+
+h2 {
+	color: #4d8618;
+	font-weight:200;
+	font-size:1.5em;
+	margin: 0.6em 0 0.2em 0;
+}
+
+hr {
+	background-color: #4d8618;
+	height: 1px;
+	/* width: 80%; */
+	margin: 0.5em;
+}
+
+a 
+{
+	color:#db4800;
+	text-decoration:underline;
+	font-weight:200;
+}
+a:hover {
+	color:#db4800;
+	text-decoration:none;
+}
+
+/* For backwards compatibility, probably not needed in most moder browsers now */
+article, aside, header, footer, nav, section, hgroup, figure, figcaption {
+	display:block;
+}
+
+aside {
+	float:left;
+	padding: 1em;
+	vertical-align: top;
+}
+
+
+.grails_color {
+	background-color:#4d8618!important;
+}
+.grails_hilite_color {
+	background-color:#db4800!important;
+}
+.grails_test_color {
+	background-color:#00ff00!important;
+}
+
+.hidden {
+	display: none;
+}
+
+.responsive_image {
+	max-width: 100%;
+	height: auto;
+}
+
+.container, .grid {
+	margin: 0 auto;
+	/* width: 960px; */
+	max-width: 90%;
+	vertical-align: top;
+}
+.container {
+	padding-left:  1em;
+	padding-right: 1em;
+}
+
+.group:before, .group:after {
+	content: "";
+	display: table;
+}
+.group:after {
+	clear: both;
+}
+.group {
+	clear: both;
+	*zoom: 1;
+}
+
+
+/* Sticky Containers sample: manually add the style to related tag in page to try it */
+header.sticky {
+	position:fixed;
+	z-index:1000000;
+	top:0px;
+}
+
+body.sticky {
+	top:0px;
+	/* margin-top:     100px; */  /* equal to header height */
+	/* margin-bottom: -100px; */  /* equal to footer height */
+}
+
+footer.sticky {
+	position:fixed;
+	z-index:1000000;
+	/* TODO: ... */
+}
+
+
+/* Status area */
+#status {
+	background-color: #eee;
+	border: .2em solid #fff;
+	margin: 2em 2em 1em;
+/*
+	padding: 1em;
+	width: 12em;
+ */
+	float: left;
+	-moz-box-shadow: 0px 0px 1.25em #ccc;
+	-webkit-box-shadow: 0px 0px 1.25em #ccc;
+	box-shadow: 0px 0px 1.25em #ccc;
+	-moz-border-radius: 0.6em;
+	-webkit-border-radius: 0.6em;
+	border-radius: 0.6em;
+}
+#status ul {
+	list-style-type: none;
+/*
+	font-size: 0.9em;
+	margin-bottom: 0.6em;
+	padding: 0;
+ */
+}
+#status li {
+/*
+	line-height: 1.3;
+ */
+}
+
+
+@media screen and (max-width: 768px) {
+	aside, #status {
+		display:none;
+	}
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+<!-- Tweaked by hand, temporary -->
+	<header id="header" class="" role="banner">
+		<nav class="container" role="navigation">
+			<!--
+			<a href="http://grails.org"><img src="grails_logo.png" alt="Grails Webapp" alt="Grails Webapp"/></a>
+			<a href="/" style="">Home</a>
+				| Info
+			-->
+		<!-- alternative (more correct version) -->
+			<ul>
+				<li><a href="http://grails.org"><img src="grails_logo.png" alt="Go to Grails Web Site" title="Go to Grails Web Site"/></a></li>
+				<li><a href="#">Home</a></li>
+				<li><a href="#controllers">Controllers</a></li>
+				<li>Info</li>
+			</ul>
+		</nav>
+	</header>
+
+<!-- Tweaked by hand, temporary -->
+	<div id="skip-to-content" class="hidden">
+		<a href="#page-body">Skip to content…</a>
+	</div>
+
+<!-- Tweaked by hand, temporary -->
+	<section id="page-body" class="container" role="main">
+
+<!-- Tweaked by hand, temporary -->
+		<aside id="status" role="complementary" style="">
+            <h2>Application Status</h2>
+            <ul>
+                <li>Environment: production</li><li>App profile: web</li>
+                <li>App version: 1.0</li><li>Grails version: 3.1.0-SNAPSHOT</li><li>Groovy version: 2.4.5</li>
+                <li>JVM version: 1.8.0_60-cedar14</li><li>Reloading active: false</li>
+            </ul>
+            <h2>Artefacts</h2>
+            <ul>
+                <li>Controllers: 0</li><li>Domains: 0</li><li>Services: 3</li><li>Tag Libraries: 14</li>
+            </ul>
+            <h2>Installed Plugins</h2>
+            <ul>
+                    <li>restResponder - 3.0.9</li><li>fields - 2.1.0</li><li>core - 3.0.9</li><li>eventBus - 3.0.9</li><li>codecs - 3.0.9</li><li>dataBinding - 3.0.9</li><li>i18n - 3.0.9</li><li>dataSource - 3.0.9</li><li>controllers - 3.0.9</li><li>urlMappings - 3.0.9</li><li>assetPipeline - 3.0.8</li><li>mimeTypes - 3.0.9</li><li>domainClass - 3.0.9</li><li>controllersAsync - 3.0.9</li><li>filters - 3.0.9</li><li>interceptors - 3.0.9</li><li>groovyPages - 3.0.9</li><li>converters - 3.0.9</li><li>hibernate - 4.3.10.7</li><li>services - 3.0.9</li><li>scaffolding - 3.1.2</li><li>cache - 3.0.1</li>
+            </ul>
+		</aside>
+
+<!-- Tweaked by hand, temporary -->
+		<section id="page-content" style="">
+            <h1>Welcome to Grails</h1>
+            <p>Congratulations, you have successfully started your first Grails application! At the moment
+               this is the default page, feel free to modify it to either redirect to a controller or display whatever
+               content you may choose. Below is a list of controllers that are currently deployed in this application,
+               click on each to execute its default action:</p>
+
+<!-- Tweaked by hand, temporary -->
+            <section id="controller-list">
+				<a id="controllers"></a>
+                <h2>Available Controllers:</h2>
+				<a href="test">TestController</a>
+            </section>
+		</section>
+
+<hr>
+
+<section id="other">
+	<h2>Other content, as a sample</h2>
+	<p>
+		Example with some text ...<br/>
+		Other text. Other text. Other text. Other text. Other text. Other text. Other text. Other text.<br/>
+	</p>
+	<p>
+		Example Image:<br/>
+		<img src="grails_logo.png" alt="Sample image" title="Sample image"/>
+	</p>
+	<br/>
+</section>
+
+<hr>
+
+	</section>
+
+
+<!-- Tweaked by hand, temporary -->
+        <footer id="footer" class="footer" role="contentinfo">
+
+	<ul>
+                <li>Environment: production</li><li>App profile: web</li><li>App version: 1.0</li><li>Grails version: 3.1.0-SNAPSHOT</li><li>Groovy version: 2.4.5</li><li>JVM version: 1.8.0_60-cedar14</li><li>Reloading active: false</li>
+<!-- Tweaked by hand, temporary -->
+				<li>Made with <a href="http://grails.org">Grails</a></li>
+	</ul>
+
+</footer>
+<!-- Tweaked by hand, temporary -->
+<div id="spinner" class="spinner hidden">Loading…</div>
+    
+
+</body>
+
+
+</html>
