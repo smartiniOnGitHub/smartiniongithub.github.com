@@ -1,4 +1,72 @@
 .DS_Store
 .hg
-.settings
 .svn
+
+# .classpath
+# .project
+*.log
+*.iws
+*~*
+# *~
+*.bak
+
+/*.db
+/*.zip
+/*.tar.gz
+/*.log
+/*.tmp
+/*DB.*
+/*.ser
+/_old/
+/out/
+/private/
+# /server/
+/target/
+/target-eclipse/
+/temp/
+
+# Eclipse-related folders
+.settings
+# .cache
+.cache*
+.metadata
+.worksheet
+RemoteSystemsTempFiles/
+Servers/
+
+# NetBeans-related folders
+/nbproject/private/
+
+# Gradle-related folders
+.gradle
+bin/
+build/
+
+# Java build files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IntelliJ-IDEA related files and folders
+.idea
+atlassian-ide-plugin.xml
+test-results.xml
+
+# Node.js related folders
+node_modules
+# www
+# .sass-cache
+app/bower_components
+coverage
+# folder for Bower components (set in .bowerrc)
+www/lib/
+
+# Various binary extensions
+obj/
+*.o
+*.pyc
