@@ -1,0 +1,39 @@
+/* Styles for mobile devices */
+
+@media screen and (max-width: 768px) {
+    aside {
+        font-size:0.6em;
+    }
+
+    .container, .grid {
+        margin: 0 auto;
+        max-width: 96%;
+        vertical-align: top;
+    }
+    .container {
+        padding-left:  0.5em;
+        padding-right: 0.5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #header, header,
+    h1, h2, h3, h4 {
+        font-size:1em;
+    }
+
+    aside {
+        display:none;
+    }
+
+    .container, .grid {
+        margin: 0 auto;
+        max-width: 100%;
+        vertical-align: top;
+    }
+    .container {
+        padding-left:  0.1em;
+        padding-right: 0.1em;
+    }
+}
+
