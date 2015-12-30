@@ -84,7 +84,7 @@ a:hover {
 }
 
 .spinner {
-    background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
+    background: url(spinner.gif) 50% 50% no-repeat transparent;
     height: 1em;
     width: 1em;
     padding: 0.5em;
