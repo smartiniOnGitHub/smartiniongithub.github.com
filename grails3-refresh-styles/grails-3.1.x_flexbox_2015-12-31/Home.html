@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://localhost:8080/# -->
+<html lang="en" class="no-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home _ Grails</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./Home_files/main_modularized.css">
+<link rel="stylesheet" href="./Home_files/page-layout.css">
+<link rel="stylesheet" href="./Home_files/message-error.css">
+<link rel="stylesheet" href="./Home_files/scaffold-navigate.css">
+<link rel="stylesheet" href="./Home_files/scaffold-create-edit.css">
+<link rel="stylesheet" href="./Home_files/scaffold-list.css">
+<link rel="stylesheet" href="./Home_files/scaffold-paginate.css">
+<link rel="stylesheet" href="./Home_files/scaffold-action.css">
+<link rel="stylesheet" href="./Home_files/scaffold.css">
+<link rel="stylesheet" href="./Home_files/mobile.css">
+<link rel="stylesheet" href="./Home_files/application.css">
+
+        <script type="text/javascript" src="./Home_files/jquery.js"></script>
+<script type="text/javascript" src="./Home_files/application.js"></script>
+
+
+        
+        <meta name="layout" content="main">
+        
+        <style type="text/css" media="screen">
+            #status {
+                background-color: #eeeeee;
+                border: .2em solid #ffffff;
+                margin: 1em 2em 1em;
+                box-shadow: 0px 0px 1.25em #cccccc;
+                border-radius: 0.6em;
+            }
+            #status ul {
+                list-style-type: none;
+            }
+            #status li {
+            }
+
+            @media screen and (max-width: 30em) {
+                #status {
+                    display: none;
+                }
+            }
+        </style>
+    
+    </head>
+    <body>
+        <header id="header" role="banner">
+            <nav class="container" role="navigation">
+                <ul>
+                    <li id="logo" role="banner" style="float:left;"><a href="./Home_files/Home.html"><img src="./Home_files/grails-cupsonly-logo-white.svg" alt="Home Page" title="Home Page"></a></li>
+                    <li><a href="./Home_files/Home.html">Home</a></li>
+                    <li><a href="http://localhost:8080/#controllers">Controllers</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="skip-to-content" class="hidden">
+            <a href="http://localhost:8080/#page-body">Skip to content…</a>
+        </div>
+
+        
+
+        <section id="page-body" class="container" role="main">
+
+            <aside id="status" role="complementary" class="primary">
+                <h2>Application Status</h2>
+                <ul>
+                    <li>Environment: development</li>
+                    <li>App profile: web</li>
+                    <li>App version: 0.1</li>
+                    <li>Grails version: 3.1.0.BUILD-SNAPSHOT</li>
+                    <li>Groovy version: 2.4.5</li>
+                    <li>JVM version: 1.8.0_66</li>
+                    <li>Reloading active: true</li>
+                </ul>
+                <h2>Artefacts</h2>
+                <ul>
+                    <li>Controllers: 4</li>
+                    <li>Domains: 1</li>
+                    <li>Services: 3</li>
+                    <li>Tag Libraries: 14</li>
+                </ul>
+                <h2>Installed Plugins</h2>
+                <ul>
+                    
+                        <li>restResponder - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>dataBinding - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>fields - 2.1.1</li>
+                    
+                        <li>i18n - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>eventBus - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>core - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>codecs - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>controllers - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>urlMappings - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>assetPipeline - 3.0.14</li>
+                    
+                        <li>dataSource - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>controllersAsync - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>mimeTypes - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>interceptors - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>domainClass - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>filters - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>converters - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>hibernate - 5.0.0.RC3</li>
+                    
+                        <li>groovyPages - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>services - 3.1.0.BUILD-SNAPSHOT</li>
+                    
+                        <li>scaffolding - 3.1.2</li>
+                    
+                        <li>cache - 3.0.1</li>
+                    
+                </ul>
+            </aside>
+
+            <section id="page-content" style="">
+                <h1>Welcome to Grails</h1>
+                <p>Congratulations, you have successfully started your first Grails application! At the moment
+                   this is the default page, feel free to modify it to either redirect to a controller or display whatever
+                   content you may choose. Below is a list of controllers that are currently deployed in this application,
+                   click on each to execute its default action:</p>
+
+                <div id="controller-list" role="navigation">
+                    <h2>Available Controllers:</h2>
+                    <a id="controllers"></a>
+                    <ul>
+                        
+                            <li class="controller"><a href="http://localhost:8080/bar/index">profilerefresh.BarController</a></li>
+                        
+                            <li class="controller"><a href="http://localhost:8080/error/index">profilerefresh.ErrorController</a></li>
+                        
+                            <li class="controller"><a href="http://localhost:8080/foo2/index">profilerefresh.Foo2Controller</a></li>
+                        
+                            <li class="controller"><a href="http://localhost:8080/foo/index">profilerefresh.FooController</a></li>
+                        
+                    </ul>
+                </div>
+
+                <br>
+            </section>
+
+        </section>
+
+    
+
+        <div id="spinner" class="spinner hidden">Loading…</div>
+
+        <footer id="footer" role="contentinfo">
+            <p>
+                    Powered by &nbsp;
+                    <a href="http://grails.org/">Grails</a>
+            </p>
+        </footer>
+    
+
+</body></html>
