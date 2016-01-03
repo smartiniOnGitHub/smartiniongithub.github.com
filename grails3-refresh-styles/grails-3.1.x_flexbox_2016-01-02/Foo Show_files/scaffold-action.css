@@ -50,14 +50,14 @@
 }
 
 .buttons .delete {
-    background-image: url(../../images/skin/database_delete.png);
+    background-image: url(../skin/database_delete.png);
 }
 
 .buttons .edit {
-    background-image: url(../../images/skin/database_edit.png);
+    background-image: url(../skin/database_edit.png);
 }
 
 .buttons .save {
-    background-image: url(../../images/skin/database_save.png);
+    background-image: url(../skin/database_save.png);
 }
 

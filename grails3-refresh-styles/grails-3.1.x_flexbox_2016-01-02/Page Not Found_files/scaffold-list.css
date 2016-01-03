@@ -70,11 +70,11 @@
 }
 
 .scaffold-list th.asc a {
-    background-image: url(../../images/skin/sorted_asc.gif);
+    background-image: url(../skin/sorted_asc.gif);
 }
 
 .scaffold-list th.desc a {
-    background-image: url(../../images/skin/sorted_desc.gif);
+    background-image: url(../skin/sorted_desc.gif);
 }
 
 .scaffold-list .odd {
