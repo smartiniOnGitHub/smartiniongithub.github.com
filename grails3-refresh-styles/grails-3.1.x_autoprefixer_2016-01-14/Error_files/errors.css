@@ -1,0 +1,101 @@
+/* Styles for error messages */
+
+.error {
+    margin: 1em;
+}
+
+.exceptionMessage {
+    border: 1px solid #000000;
+    padding: 0.5em;
+    background-color: #E9E9E9;
+}
+
+.error-details {
+    border: 1px solid #FFAAAA;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    background-color:#FFF3F3;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+.error-details dt {
+    clear: left;
+    float: left;
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.error-details dt:after {
+    content: ":";
+}
+
+.error-details dd {
+    display: block;
+}
+
+/* stack trace */
+.stack {
+    padding: 0.5em;
+    overflow: auto;
+    min-height: 10em;
+    max-height: 20em;
+}
+
+/* code snippet */
+.snippet {
+    background-color: #FFFFFF;
+    font-family: monospace;
+}
+
+.snippet .line {
+    display: block;
+}
+
+.snippet .lineNumber {
+    background-color: #DDDDDD;
+    color: #999999;
+    display: inline-block;
+    margin-right: 0.5em;
+    padding: 0 0.25em;
+    text-align: right;
+    width: 3em;
+}
+
+.snippet .error {
+    background-color: #FFF3F3;
+    font-weight: bold;
+}
+
+.snippet .error .lineNumber {
+    background-color: #FFAAAA;
+    color: #333333;
+    font-weight: bold;
+}
+
+.snippet .line:first-child .lineNumber {
+    padding-top: 0.5em;
+}
+
+.snippet .line:last-child .lineNumber {
+    padding-bottom: 0.5em;
+}
+
+
+.filename {
+    font-style: italic;
+}
+
+.error-details,
+.stack,
+.snippet {
+    margin: 0 1.5em 0.8em;
+}
+
+
+.stack,
+.snippet {
+    border: 1px solid #cccccc;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
