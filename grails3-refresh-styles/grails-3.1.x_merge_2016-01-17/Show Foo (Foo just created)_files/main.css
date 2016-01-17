@@ -1,0 +1,314 @@
+/* Main Styles */
+
+* {
+    margin: 0;
+    border: 0;
+}
+html, body {
+    background-color:#ffffff;
+    color:#000000;
+    padding:0;
+    margin:0;
+    font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:normal;
+}
+
+html.no-cssgradients {
+    background-color: #aaaaaa;
+}
+
+h1 {
+    color: #000000;
+    font-weight:700;
+    font-size:2em;
+    margin: 0.8em 0 0.25em 0;
+}
+h2 {
+    color: #000000;
+    font-weight:700;
+    font-size:1.78em;
+    margin: 0.6em 0 0.2em 0;
+}
+h3 {
+    color: #000000;
+    font-weight:700;
+    font-size:1.44em;
+    margin: 0.4em 0 0.15em 0;
+}
+h4 {
+    color: #000000;
+    font-weight:700;
+    font-size:1em;
+    margin: 0.2em 0 0.1em 0;
+}
+
+a {
+    color:#db4800;
+    text-decoration:underline;
+    font-weight:200;
+}
+a:hover {
+    color:#db4800;
+    text-decoration:none;
+}
+
+.grails_color {
+    background-color:#4d8618!important;
+}
+.grails_hilite_color {
+    background-color:#db4800!important;
+}
+.grails_test_color {
+    background-color:#00ff00!important;
+}
+
+.grails_color hr {
+    background-color: #4d8618;
+    height: 1px;
+    margin: 0.5em;
+}
+
+.hidden {
+    display: none;
+}
+
+.responsive_image {
+    max-width: 100%;
+    height: auto;
+}
+
+.spinner {
+    background: url(spinner.gif) 50% 50% no-repeat transparent;
+    height: 1em;
+    width: 1em;
+    padding: 0.5em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-indent: -9999px;
+}
+
+a.skip {
+    position: absolute;
+    left: -9999px;
+}
+
+
+/* Styles for page layout */
+
+.main-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+}
+
+.container, .wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+#page-body, #page-content, header, nav, aside, footer,
+.header, .main, .navigation, .primary, .secondary, .content, .footer {
+}
+
+header, .header {
+    order: 10;
+}
+
+nav, .navigation {
+    order: 20;
+}
+
+aside, .primary {
+    order: 30;
+}
+
+#page-body, #page-content, .main, .content {
+    order: 50;
+}
+
+.secondary {
+    order: 70;
+}
+
+footer, .footer {
+    order: 90;
+}
+
+header, .header {
+    background-color:#4d8618;
+    font-weight:400;
+    font-size:1.4em;
+}
+
+footer, .footer {
+    background-color:#888888;
+    text-transform: capitalize;
+    font-weight:100;
+    font-size:0.8em;
+    padding:0.4em;
+}
+
+
+nav, .navigation {
+    background-color:#4d8618;
+    text-transform: capitalize;
+    font-weight:400;
+    z-index:100000;
+    top:0;
+    left:0;
+    margin: 0px auto;
+    text-align: center;
+}
+
+nav ul, .navigation ul 
+footer ul, .footer ul {
+    list-style:none;
+    text-align:center;
+    padding:0;
+    margin:0;
+}
+nav ul li, .navigation ul li {
+    display: inline-block;
+    letter-spacing:normal;
+    min-width:6em;
+    margin:0;
+    vertical-align: middle;
+}
+nav a, nav a:link, nav a:visited, 
+nav ul li a, nav ul li a:visited,
+.navigation a, .navigation a:link, .navigation a:visited {
+    display: inline-block;
+    text-decoration:none;
+    color:#ffffff;
+    opacity:0.8;
+    padding:0.5em;
+}
+nav a:hover, nav ul li a:hover {
+    opacity:1
+}
+nav ul li:hover, nav ul li.active {
+}
+nav a:hover, nav ul li a:hover {
+    background-color:#db4800!important;
+    color:#ffffff!important
+}
+nav a, nav ul li a,
+footer a, footer ul li a,
+.footer a, .footer ul li a {
+    color:#000000;
+}
+
+footer ul li, .footer ul li {
+    display: inline-block;
+    padding:1px;
+    min-width:1em;
+    margin:0;
+}
+footer ul, .footer ul {
+    list-style:none;
+    text-align:center;
+    padding:0;
+    margin:0;
+}
+footer a, footer a:link, footer ul li a:visited,
+.footer a, .footer a:link, .footer ul li a:visited {
+    display: inline-block;
+    text-decoration:none;
+    opacity:0.8;
+    color:#ffffff;
+}
+footer a, .footer a, 
+footer ul li, .footer ul li {
+    text-transform:none;
+}
+footer ul li:after, .footer ul li:after {
+    content: "~";
+    padding-right:0.5em;
+}
+
+footer p, .footer p {
+    text-align: center;
+}
+
+#logo img {
+    height: 1.4em;
+}
+
+
+@media screen and (min-width: 48em) {
+    aside, .primary, .secondary {
+        font-size:0.6em;
+        min-width: 25%;
+        max-width: 33%;
+    }
+    #page-content, .main, .content {
+        min-width: 50%;
+    }
+
+}
+
+
+/* Messages and Errors */
+
+.errors,
+.message {
+    font-size: 0.8em;
+    line-height: 2;
+    margin: 1em 2em;
+    padding: 0.25em;
+}
+
+.message {
+    background: #f3f3ff;
+    border: 1px solid #b2d1ff;
+    color: #006dba;
+    box-shadow: 0 0 0.25em #b2d1ff;
+}
+
+.errors {
+    background: #fff3f3;
+    border: 1px solid #ffaaaa;
+    color: #cc0000;
+    box-shadow: 0 0 0.25em #ff8888;
+}
+
+.errors ul,
+.message {
+    padding: 0;
+}
+
+.errors li {
+    list-style: none;
+    background: transparent url(skin/exclamation.png) 0.5em 50% no-repeat;
+    text-indent: 2.2em;
+}
+
+.message {
+    background: transparent url(skin/information.png) 0.5em 50% no-repeat;
+    text-indent: 2.2em;
+}
+
+/* form fields with errors */
+.error input, .error select, .error textarea {
+    background: #fff3f3;
+    border-color: #ffaaaa;
+    color: #cc0000;
+}
+
+.error input:focus, .error select:focus, .error textarea:focus {
+    box-shadow: 0 0 0.5em #ffaaaa;
+}
+
+/* same effects for browsers that support HTML5 client-side validation (these have to be specified separately or IE will ignore the entire rule) */
+.fieldcontain input:invalid, .fieldcontain select:invalid, .fieldcontain textarea:invalid {
+    background: #fff3f3;
+    border-color: #ffaaaa;
+    color: #cc0000;
+}
+
+.fieldcontain input:invalid:focus, .fieldcontain select:invalid:focus, .fieldcontain textarea:invalid:focus {
+    box-shadow: 0 0 0.5em #ffaaaa;
+}
+
+

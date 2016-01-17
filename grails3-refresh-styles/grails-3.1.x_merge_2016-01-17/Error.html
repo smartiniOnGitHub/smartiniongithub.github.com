@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://localhost:8080/error/index -->
+<html lang="en" class="no-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Grails Runtime Exception</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./Error_files/main.css">
+<link rel="stylesheet" href="./Error_files/mobile.css">
+<link rel="stylesheet" href="./Error_files/scaffold.css">
+<link rel="stylesheet" href="./Error_files/application.css">
+
+        <script type="text/javascript" src="./Error_files/jquery.js"></script>
+<script type="text/javascript" src="./Error_files/application.js"></script>
+
+
+        
+        
+        <meta name="layout" content="main">
+        <link rel="stylesheet" href="./Error_files/errors.css">
+
+    
+    </head>
+    <body>
+        <header id="header" role="banner">
+            <nav class="container" role="navigation">
+                <ul>
+                    <li id="logo" role="banner" style="float:left;"><a href="http://localhost:8080/#"><img src="./Error_files/grails-cupsonly-logo-white.svg" alt="Home Page" title="Home Page"></a></li>
+                    <li><a href="http://localhost:8080/#">Home</a></li>
+                    <li><a href="http://localhost:8080/#controllers">Controllers</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="skip-to-content" class="hidden">
+            <a href="http://localhost:8080/error/index#page-body">Skip to content…</a>
+        </div>
+
+        
+        <section id="page-content" class="error">
+        
+            
+                <h1>Error 500: Internal Server Error</h1>
+<dl class="error-details">
+<dt>URI</dt><dd>/error/index</dd>
+<dt>Class</dt><dd>java.lang.Exception</dd><dt>Message</dt><dd>null</dd><dt>Caused by</dt><dd>Sample Exception</dd></dl><h2>Around line 6 of <span class="filename">grails-app\controllers\profilerefresh\ErrorController.groovy</span></h2>
+<pre class="snippet"><code class="line"><span class="lineNumber">3:</span>class ErrorController {</code><code class="line"><span class="lineNumber">4:</span></code><code class="line"><span class="lineNumber">5:</span>    def index() {</code><code class="line error"><span class="lineNumber">6:</span>        throw new Exception('Sample Exception')</code><code class="line"><span class="lineNumber">7:</span>    }</code><code class="line"><span class="lineNumber">8:</span></code><code class="line"><span class="lineNumber">9:</span>}</code></pre><h2>Trace</h2><pre class="stack">    Line | Method
+-&gt;&gt; 1142 | runWorker in java.util.concurrent.ThreadPoolExecutor
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+|    617 | run       in java.util.concurrent.ThreadPoolExecutor$Worker
+^    745 | run . . . in java.lang.Thread
+
+Caused by Exception: Sample Exception
+-&gt;&gt;    6 | index     in ErrorController.groovy
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+|   1142 | runWorker in java.util.concurrent.ThreadPoolExecutor
+|    617 | run . . . in java.util.concurrent.ThreadPoolExecutor$Worker
+^    745 | run       in java.lang.Thread
+</pre>
+            
+        
+        </section>
+    
+
+        <div id="spinner" class="spinner hidden">Loading…</div>
+
+        <footer id="footer" role="contentinfo">
+            <p>
+                    Powered by &nbsp;
+                    <a href="http://grails.org/">Grails</a>
+            </p>
+        </footer>
+    
+
+</body></html>
