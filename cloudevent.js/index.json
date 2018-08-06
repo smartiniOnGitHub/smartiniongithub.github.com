@@ -1,0 +1,2434 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/cloudevent.js",
+    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * CloudEvent:\r\n * this module exports some useful definition and utility related to CloudEvents.\r\n */\r\n\r\n/**\r\n * Get a reference to cloudevent validator class.\r\n */\r\nconst V = require('./validator') // get validator from here\r\n\r\n/**\r\n * CloudEvent implementation.\r\n *\r\n * @see https://github.com/cloudevents/spec/blob/master/json-format.md\r\n */\r\nclass CloudEvent {\r\n  /**\r\n   * Create a new instance of a CloudEvent object.\r\n   * @param {!string} eventID the ID of the event (unique), mandatory\r\n   * @param {!string} eventType the type of the event (usually), mandatory\r\n   * @param {(object|Map|Set)} data the real event data\r\n   * @param {object} options optional attributes of the event; some has default values chosen here:\r\n   *        cloudEventsVersion (string, default '0.1'),\r\n   *        eventTypeVersion (string) optional,\r\n   *        source (uri, default '/'),\r\n   *        eventTime (timestamp, default now),\r\n   *        extensions (object) optional but if given must contain at least 1 property (key/value),\r\n   *        contentType (string, default 'application/json') tell how the data attribute must be encoded,\r\n   *        schemaURL (uri) optional,\r\n   *        strict (boolean, default false) tell if object instance will be validated in a more strict way\r\n   * @throws {Error} if strict is true and eventID or eventType is undefined or null\r\n   */\r\n  constructor (eventID, eventType, data, {\r\n    cloudEventsVersion = '0.1',\r\n    eventTypeVersion,\r\n    source = '/',\r\n    eventTime = new Date(),\r\n    extensions,\r\n    contentType = 'application/json',\r\n    schemaURL,\r\n    strict = false } = {}\r\n  ) {\r\n    // console.log(`DEBUG - eventID = ${eventID}, eventType = ${eventType}, data = ${data}, { strict = ${strict}, ... }`)\r\n    // console.log(`DEBUG - ${this.constructor.dumpObject(eventID, 'eventID')}, ${this.constructor.dumpObject(eventType, 'eventType')}, ${this.constructor.dumpObject(data, 'data')}, { strict = ${strict}, ... }`)\r\n    if (strict === true) {\r\n      if (!eventID || !eventType) {\r\n        throw new Error('Unable to create CloudEvent instance, mandatory field missing')\r\n      }\r\n    }\r\n\r\n    /**\r\n     * The event ID.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventID = eventID\r\n    /**\r\n     * The event type.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventType = eventType\r\n    /**\r\n     * The real event data.\r\n     * @type {object|Map|Set}\r\n     * @private\r\n     */\r\n    this.data = data\r\n\r\n    /**\r\n     * The CloudEvent specification version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.cloudEventsVersion = cloudEventsVersion\r\n    /**\r\n     * The MIME Type for the encoding of the data attribute, when serialized.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.contentType = contentType\r\n    /**\r\n     * The event timestamp.\r\n     * @type {timestamp}\r\n     * @private\r\n     */\r\n    this.eventTime = eventTime\r\n    /**\r\n     * The event version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventTypeVersion = eventTypeVersion\r\n    /**\r\n     * Extensions defined for the event.\r\n     * @type {object}\r\n     * @private\r\n     */\r\n    this.extensions = extensions\r\n    /**\r\n     * The URL of schema for the event, if any.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.schemaURL = schemaURL\r\n    /**\r\n     * The source URI of the event.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.source = source\r\n\r\n    // add strict to extensions, but only when defined\r\n    if (strict === true) {\r\n      this.extensions = extensions || {}\r\n      this.extensions.strict = strict\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility function that return a dump of the given object.\r\n   *\r\n   * @static\r\n   * @param {(object|Map|Set)} obj the object to dump\r\n   * @param {string} name the name to assign in the returned string\r\n   * @return {string} the dump of the object or a message when obj is undefined/null/not an object\r\n   */\r\n  static dumpObject (obj, name) {\r\n    const n = name || 'noname'\r\n    if (V.isUndefined(obj)) {\r\n      return `${n}: undefined`\r\n    } else if (V.isNull(obj)) {\r\n      return `${n}: null`\r\n    } else if (!V.isObjectOrCollection(obj)) {\r\n      return `${n}: '${obj.toString()}'`\r\n    } else {\r\n      return `${n}: ${JSON.stringify(obj)}`\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the MIME Type for a CloudEvent\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static mediaType () {\r\n    return 'application/cloudevents+json'\r\n  }\r\n\r\n  /**\r\n   * Tell if the object has the strict flag enabled.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @return {boolean} true if strict, otherwise false\r\n   * @throws {Error} if event if undefined or null\r\n   */\r\n  static isStrictEvent (event) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (V.isDefinedAndNotNull(event.extensions)) {\r\n      return event.extensions.strict\r\n    } else {\r\n      return false\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Validate the given CloudEvent.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  static validateEvent (event, { strict = false } = {}) {\r\n    // console.log(`DEBUG - cloudEvent = ${event}, { strict = ${strict}, ... }`)\r\n    if (V.isUndefinedOrNull(event)) {\r\n      return [new Error('CloudEvent undefined or null')]\r\n    }\r\n    let ve = [] // validation errors\r\n\r\n    // standard validation\r\n    ve.push(V.ensureIsStringNotEmpty(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventID, 'eventID'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventType, 'eventType'))\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.data)) {\r\n    // ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n    // }\r\n    if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.eventTypeVersion, 'eventTypeVersion'))\r\n    }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.source)) {\r\n    // ve.push(V.ensureIsStringNotEmpty(event.source, 'source')) // keep commented here ... ok\r\n    // }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // ve.push(V.ensureIsDateValid(event.eventTime, 'eventTime'))\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.extensions)) {\r\n    //   ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n    // }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // ve.push(ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n    if (V.isDefinedAndNotNull(event.schemaURL)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    // additional validation if strict mode enabled, or if enabled in the event ...\r\n    if (strict === true || CloudEvent.isStrictEvent(event) === true) {\r\n      ve.push(V.ensureIsClass(event, CloudEvent, 'CloudEvent_Subclass'))\r\n      ve.push(V.ensureIsVersion(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n      if (V.isDefinedAndNotNull(event.data)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n      }\r\n      if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n        ve.push(V.ensureIsVersion(event.eventTypeVersion, 'eventTypeVersion'))\r\n      }\r\n      ve.push(V.ensureIsURI(event.source, 'source'))\r\n      if (V.isDefinedAndNotNull(event.extensions)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n        const extensionsSize = V.getSize(event.extensions)\r\n        if (extensionsSize < 1) {\r\n          ve.push(new Error(`The object 'extensions' must contain at least 1 property`))\r\n        }\r\n      }\r\n      ve.push(V.ensureIsDatePast(event.eventTime, 'eventTime'))\r\n      ve.push(V.ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n      ve.push(V.ensureIsURI(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    return ve.filter((i) => i)\r\n  }\r\n\r\n  /**\r\n   * Tell the given CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  static isValidEvent (event, { strict = false } = {}) {\r\n    const validationErrors = CloudEvent.validateEvent(event, { strict })\r\n    const size = V.getSize(validationErrors)\r\n    return (size === 0)\r\n  }\r\n\r\n  /**\r\n   * Validate the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  validate ({ strict = false } = {}) {\r\n    return this.constructor.validateEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Tell the current CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.isValidEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  isValid ({ strict = false } = {}) {\r\n    return this.constructor.isValidEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Getter method to tell if the object has the strict flag enabled.\r\n   *\r\n   * See {@link CloudEvent.isStrictEvent}.\r\n   *\r\n   * @type {boolean}\r\n   */\r\n  get isStrict () {\r\n    return this.constructor.isStrictEvent(this)\r\n  }\r\n\r\n  /**\r\n   * Override the usual toString method.\r\n   *\r\n   * See {@link Object.toString}.\r\n   *\r\n   * @return {string} a string representation for object instance\r\n   */\r\n  toString () {\r\n    return `CloudEvent[cloudEventsVersion: ${this.cloudEventsVersion}, ${this.constructor.dumpObject(this.eventID, 'eventID')}, ${this.constructor.dumpObject(this.eventType, 'eventType')}, ${this.constructor.dumpObject(this.data, 'data')}, ...]`\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'CloudEvent'\r\n  }\r\n}\r\n\r\nmodule.exports = CloudEvent\r\n",
+    "static": true,
+    "longname": "/Users/martinis/work/prove/cloudevent.js/src/cloudevent.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "CloudEvent",
+    "memberof": "src/cloudevent.js",
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent",
+    "access": "public",
+    "export": true,
+    "importPath": "cloudevent.js/src/cloudevent.js",
+    "importStyle": "CloudEvent",
+    "description": "CloudEvent implementation.",
+    "see": [
+      "https://github.com/cloudevents/spec/blob/master/json-format.md"
+    ],
+    "lineNumber": 33,
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#constructor",
+    "access": "public",
+    "description": "Create a new instance of a CloudEvent object.",
+    "lineNumber": 50,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventID",
+        "description": "the ID of the event (unique), mandatory"
+      },
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "eventType",
+        "description": "the type of the event (usually), mandatory"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object",
+          "Map",
+          "Set"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "the real event data"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "optional attributes of the event; some has default values chosen here:\n       cloudEventsVersion (string, default '0.1'),\n       eventTypeVersion (string) optional,\n       source (uri, default '/'),\n       eventTime (timestamp, default now),\n       extensions (object) optional but if given must contain at least 1 property (key/value),\n       contentType (string, default 'application/json') tell how the data attribute must be encoded,\n       schemaURL (uri) optional,\n       strict (boolean, default false) tell if object instance will be validated in a more strict way"
+      }
+    ],
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if strict is true and eventID or eventType is undefined or null"
+      }
+    ]
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "eventID",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#eventID",
+    "access": "private",
+    "description": "The event ID.",
+    "lineNumber": 73,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "eventType",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#eventType",
+    "access": "private",
+    "description": "The event type.",
+    "lineNumber": 79,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "data",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#data",
+    "access": "private",
+    "description": "The real event data.",
+    "lineNumber": 85,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object",
+        "Map",
+        "Set"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "cloudEventsVersion",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#cloudEventsVersion",
+    "access": "private",
+    "description": "The CloudEvent specification version.",
+    "lineNumber": 92,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "contentType",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#contentType",
+    "access": "private",
+    "description": "The MIME Type for the encoding of the data attribute, when serialized.",
+    "lineNumber": 98,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "name": "eventTime",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#eventTime",
+    "access": "private",
+    "description": "The event timestamp.",
+    "lineNumber": 104,
+    "type": {
+      "nullable": null,
+      "types": [
+        "timestamp"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "member",
+    "name": "eventTypeVersion",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#eventTypeVersion",
+    "access": "private",
+    "description": "The event version.",
+    "lineNumber": 110,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "extensions",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#extensions",
+    "access": "private",
+    "description": "Extensions defined for the event.",
+    "lineNumber": 116,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "name": "schemaURL",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#schemaURL",
+    "access": "private",
+    "description": "The URL of schema for the event, if any.",
+    "lineNumber": 122,
+    "type": {
+      "nullable": null,
+      "types": [
+        "uri"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "member",
+    "name": "source",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#source",
+    "access": "private",
+    "description": "The source URI of the event.",
+    "lineNumber": 128,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "dumpObject",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent.dumpObject",
+    "access": "public",
+    "description": "Utility function that return a dump of the given object.",
+    "lineNumber": 145,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object",
+          "Map",
+          "Set"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "obj",
+        "description": "the object to dump"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to assign in the returned string"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "the dump of the object or a message when obj is undefined/null/not an object"
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "method",
+    "name": "mediaType",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent.mediaType",
+    "access": "public",
+    "description": "Return the MIME Type for a CloudEvent",
+    "lineNumber": 164,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "the value"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "isStrictEvent",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent.isStrictEvent",
+    "access": "public",
+    "description": "Tell if the object has the strict flag enabled.",
+    "lineNumber": 176,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the CloudEvent to validate"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if strict, otherwise false"
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if event if undefined or null"
+      }
+    ]
+  },
+  {
+    "__docId__": 65,
+    "kind": "method",
+    "name": "validateEvent",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent.validateEvent",
+    "access": "public",
+    "description": "Validate the given CloudEvent.",
+    "lineNumber": 195,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the CloudEvent to validate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object[]"
+      ],
+      "spread": false,
+      "description": "an array of (non null) validation errors, or at least an empty array"
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "method",
+    "name": "isValidEvent",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/cloudevent.js~CloudEvent.isValidEvent",
+    "access": "public",
+    "description": "Tell the given CloudEvent, if it's valid.\n\nSee {@link CloudEvent.validateEvent}.",
+    "lineNumber": 265,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "event",
+        "description": "the CloudEvent to validate"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if valid, otherwise false"
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "method",
+    "name": "validate",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#validate",
+    "access": "public",
+    "description": "Validate the current CloudEvent.\n\nSee {@link CloudEvent.validateEvent}.",
+    "lineNumber": 279,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "object[]"
+      ],
+      "spread": false,
+      "description": "an array of (non null) validation errors, or at least an empty array"
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "method",
+    "name": "isValid",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#isValid",
+    "access": "public",
+    "description": "Tell the current CloudEvent, if it's valid.\n\nSee {@link CloudEvent.isValidEvent}.",
+    "lineNumber": 291,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if valid, otherwise false"
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "get",
+    "name": "isStrict",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#isStrict",
+    "access": "public",
+    "description": "Getter method to tell if the object has the strict flag enabled.\n\nSee {@link CloudEvent.isStrictEvent}.",
+    "lineNumber": 302,
+    "type": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#toString",
+    "access": "public",
+    "description": "Override the usual toString method.\n\nSee {@link Object.toString}.",
+    "lineNumber": 313,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "a string representation for object instance"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 71,
+    "kind": "get",
+    "name": "[Symbol.toStringTag]",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#[Symbol.toStringTag]",
+    "access": "public",
+    "description": "Gives a string valued property that is used in the creation of the default string description of an object.\n\nSee {@link Symbol.toStringTag}.",
+    "lineNumber": 324,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "a string representation of the object type"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Get a reference to cloudevent class definition.\r\n */\r\nconst cloudEventDefinition = require('./cloudevent') // get CloudEvent definition and related utilities\r\n\r\nmodule.exports = cloudEventDefinition\r\n",
+    "static": true,
+    "longname": "/Users/martinis/work/prove/cloudevent.js/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 73,
+    "kind": "file",
+    "name": "src/validator.js",
+    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Validators:\r\n * this module exports some useful generic functions for the validation of objects.\r\n */\r\n\r\nconst url = require('url')\r\n\r\n/**\r\n * Generic Validator implementation.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass Validator {\r\n  /**\r\n   * Create a new instance of a Validator object.\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'Validator'\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined, false otherwise\r\n   */\r\n  static isUndefined (arg) {\r\n    return (arg === undefined)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if null, false otherwise\r\n   */\r\n  static isNull (arg) {\r\n    return (arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined or null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined or null, false otherwise\r\n   */\r\n  static isUndefinedOrNull (arg) {\r\n    return (arg === undefined || arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is defined and not null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if defined and not null, false otherwise\r\n   */\r\n  static isDefinedAndNotNull (arg) {\r\n    return (arg !== undefined && arg !== null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a string, false otherwise\r\n   */\r\n  static isString (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a not empty string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a not empty string, false otherwise\r\n   */\r\n  static isStringNotEmpty (arg) {\r\n    return (Validator.isString(arg) && (arg.length > 0))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a date.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a date, false otherwise\r\n   */\r\n  static isDate (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object' || arg instanceof Date))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date, false otherwise\r\n   */\r\n  static isDateValid (arg) {\r\n    return (Validator.isDate(arg) && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date and in the past.\r\n   *\r\n   * See {@link Validator.isDateValid}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date in the past, false otherwise\r\n   */\r\n  static isDatePast (arg) {\r\n    return (Validator.isDateValid(arg) && arg < Date.now())\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a number.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a number, false otherwise\r\n   */\r\n  static isNumber (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && typeof arg === 'number' && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an array.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an array, false otherwise\r\n   */\r\n  static isArray (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (Array.isArray(arg)))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a boolean.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a boolean, false otherwise\r\n   */\r\n  static isBoolean (arg) {\r\n    return (typeof arg === 'boolean')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @return {boolean} true if it's an instance (or extends) that class, false otherwise\r\n   */\r\n  static isClass (arg, classReference) {\r\n    return (arg instanceof classReference)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a function, false otherwise\r\n   */\r\n  static isFunction (arg) {\r\n    return (typeof arg === 'function')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object, false otherwise\r\n   */\r\n  static isObject (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a keyed collection.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a Map|WeakMap or a Set|WeakSet, false otherwise\r\n   */\r\n  static isKeyedCollection (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (\r\n      arg instanceof Map || arg instanceof WeakMap ||\r\n      arg instanceof Set || arg instanceof WeakSet\r\n    ))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection.\r\n   *\r\n   * See {@link Validator.isObject}, {@link Validator.isKeyedCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection, false otherwise\r\n   */\r\n  static isObjectOrCollection (arg) {\r\n    return (Validator.isObject(arg) || Validator.isKeyedCollection(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection, but not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection but not a string, false otherwise\r\n   */\r\n  static isObjectOrCollectionNotString (arg) {\r\n    return (Validator.isObjectOrCollection(arg) && (typeof arg !== 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string representation of a version number.\r\n   *\r\n   * Note that the version string could be something like:\r\n   * - as minimum a number is needed for an integer version\r\n   * - at the beginning I can have an optional char 'v' or 'V'\r\n   * - anything after the third number will be considered as a string\r\n   * - format updated to handle version output of 'git describe'\r\n   *\r\n   * @static\r\n   * @param {string} arg the version string to check\r\n   * @return {boolean} true if it's a version string, false otherwise\r\n   */\r\n  static isVersion (arg) {\r\n    // quick check if the given string is in the format 'n.n.n'\r\n    const versionRegex = /^(?:v|V?)((\\d+)(?:\\.?)){1,3}(?:\\W|_?)(.*)$/gm\r\n    return (Validator.isStringNotEmpty(arg) && versionRegex.test(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an URI or an URL.\r\n   *\r\n   * @static\r\n   * @param {string} arg the uri/url to check\r\n   * @param {string} base the (optional) base to build the full URL\r\n   * @return {boolean} true if it's an URI/URL, false otherwise\r\n   */\r\n  static isURI (arg, base) {\r\n    // quick check if the given string is an URI or an URL\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return false\r\n    }\r\n    // simple check if it's an URL, trying to instancing it\r\n    // note that this requires to import related module here (but not in Browsers) ...\r\n    if (Validator.isStringNotEmpty(base)) {\r\n      try {\r\n        const u = new url.URL(arg, base)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    } else {\r\n      // simple check if it's an URI (or better, a relative URL)\r\n      if (arg.startsWith('/')) {\r\n        return true\r\n      }\r\n      try {\r\n        // return (new URL(arg) !== null)\r\n        const u = new url.URL(arg)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsClass (arg, classReference, name) {\r\n    if (!Validator.isClass(arg, classReference)) {\r\n      return new TypeError(`The argument '${name}' must be an instance of the given class reference, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsFunction (arg, name) {\r\n    if (!Validator.isFunction(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a function, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not a string, nothing otherwise\r\n   */\r\n  static ensureIsString (arg, name) {\r\n    if (!Validator.isString(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a string, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a not empty string.\r\n   *\r\n   * See {@link Validator.isStringNotEmpty}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a not empty string, nothing otherwise\r\n   */\r\n  static ensureIsStringNotEmpty (arg, name) {\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return new Error(`The string '${name}' must be not empty`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollection (arg, name) {\r\n    if (!Validator.isObjectOrCollection(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection, not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollectionNotString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollectionNotString (arg, name) {\r\n    if (!Validator.isObjectOrCollectionNotString(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection, and not a string`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date, nothing otherwise\r\n   */\r\n  static ensureIsDate (arg, name) {\r\n    if (!Validator.isDate(arg)) {\r\n      return new Error(`The object '${name}' must be a Date`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date in the past.\r\n   *\r\n   * See {@link Validator.isDatePast}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date in the past, nothing otherwise\r\n   */\r\n  static ensureIsDatePast (arg, name) {\r\n    if (!Validator.isDatePast(arg)) {\r\n      return new Error(`The object '${name}' must be a Date that belongs to the past`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string version.\r\n   *\r\n   * See {@link Validator.isVersion}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a string version, nothing otherwise\r\n   */\r\n  static ensureIsVersion (arg, name) {\r\n    if (!Validator.isVersion(arg)) {\r\n      return new Error(`The object '${name}' must be a string in the format 'n.n.n', and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an URI/URL.\r\n   *\r\n   * See {@link Validator.isURI}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not an URI/URL, nothing otherwise\r\n   */\r\n  static ensureIsURI (arg, name) {\r\n    if (!Validator.isURI(arg)) {\r\n      return new Error(`The object '${name}' must be an URI or URL string, and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Tell the size of the given aobject\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {number} the size if it's an array|Map|Set|object|string, nothing otherwise\r\n   */\r\n  static getSize (arg) {\r\n    if ((arg === undefined || arg === null)) {\r\n      return\r\n    }\r\n    if (Array.isArray(arg)) {\r\n      return arg.length\r\n    } else if (arg instanceof Map || arg instanceof Set) {\r\n      return arg.size\r\n    } else if (typeof arg === 'object') {\r\n      return Object.keys(arg).length\r\n    } else if (typeof arg === 'string') {\r\n      return arg.length\r\n    }\r\n  }\r\n}\r\n\r\nmodule.exports = Validator\r\n",
+    "static": true,
+    "longname": "/Users/martinis/work/prove/cloudevent.js/src/validator.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 74,
+    "kind": "class",
+    "name": "Validator",
+    "memberof": "src/validator.js",
+    "static": true,
+    "longname": "src/validator.js~Validator",
+    "access": "public",
+    "export": true,
+    "importPath": "cloudevent.js/src/validator.js",
+    "importStyle": "Validator",
+    "description": "Generic Validator implementation.\n\nNote that all methods here are static, so no need to instance this class;\nsee it as an Utility/Companion class.",
+    "lineNumber": 31,
+    "interface": false
+  },
+  {
+    "__docId__": 75,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/validator.js~Validator#constructor",
+    "access": "public",
+    "description": "Create a new instance of a Validator object.",
+    "lineNumber": 36,
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "because instancing not allowed for this class"
+      }
+    ]
+  },
+  {
+    "__docId__": 76,
+    "kind": "get",
+    "name": "[Symbol.toStringTag]",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/validator.js~Validator#[Symbol.toStringTag]",
+    "access": "public",
+    "description": "Gives a string valued property that is used in the creation of the default string description of an object.\n\nSee {@link Symbol.toStringTag}.",
+    "lineNumber": 47,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "a string representation of the object type"
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "isUndefined",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isUndefined",
+    "access": "public",
+    "description": "Tell if the given ergument is undefined.",
+    "lineNumber": 58,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if undefined, false otherwise"
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "isNull",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isNull",
+    "access": "public",
+    "description": "Tell if the given ergument is null.",
+    "lineNumber": 69,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if null, false otherwise"
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "method",
+    "name": "isUndefinedOrNull",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isUndefinedOrNull",
+    "access": "public",
+    "description": "Tell if the given ergument is undefined or null.",
+    "lineNumber": 80,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if undefined or null, false otherwise"
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "isDefinedAndNotNull",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isDefinedAndNotNull",
+    "access": "public",
+    "description": "Tell if the given ergument is defined and not null.",
+    "lineNumber": 91,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if defined and not null, false otherwise"
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "isString",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isString",
+    "access": "public",
+    "description": "Tell if the given ergument is a string.",
+    "lineNumber": 102,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a string, false otherwise"
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "isStringNotEmpty",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isStringNotEmpty",
+    "access": "public",
+    "description": "Tell if the given ergument is a not empty string.\n\nSee {@link Validator.isString}.",
+    "lineNumber": 115,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a not empty string, false otherwise"
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "method",
+    "name": "isDate",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isDate",
+    "access": "public",
+    "description": "Tell if the given ergument is a date.",
+    "lineNumber": 126,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a date, false otherwise"
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "method",
+    "name": "isDateValid",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isDateValid",
+    "access": "public",
+    "description": "Tell if the given ergument is a valid date.\n\nSee {@link Validator.isDate}.",
+    "lineNumber": 139,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a valid date, false otherwise"
+    }
+  },
+  {
+    "__docId__": 85,
+    "kind": "method",
+    "name": "isDatePast",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isDatePast",
+    "access": "public",
+    "description": "Tell if the given ergument is a valid date and in the past.\n\nSee {@link Validator.isDateValid}.",
+    "lineNumber": 152,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a valid date in the past, false otherwise"
+    }
+  },
+  {
+    "__docId__": 86,
+    "kind": "method",
+    "name": "isNumber",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isNumber",
+    "access": "public",
+    "description": "Tell if the given ergument is a number.",
+    "lineNumber": 163,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a number, false otherwise"
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "method",
+    "name": "isArray",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isArray",
+    "access": "public",
+    "description": "Tell if the given ergument is an array.",
+    "lineNumber": 174,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an array, false otherwise"
+    }
+  },
+  {
+    "__docId__": 88,
+    "kind": "method",
+    "name": "isBoolean",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isBoolean",
+    "access": "public",
+    "description": "Tell if the given ergument is a boolean.",
+    "lineNumber": 185,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a boolean, false otherwise"
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "isClass",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isClass",
+    "access": "public",
+    "description": "Tell if the given ergument is an instance of the given class reference.",
+    "lineNumber": 197,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "classReference",
+        "description": "the class that should be implemented/extended"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an instance (or extends) that class, false otherwise"
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "name": "isFunction",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isFunction",
+    "access": "public",
+    "description": "Tell if the given ergument is a function.",
+    "lineNumber": 208,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a function, false otherwise"
+    }
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "name": "isObject",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isObject",
+    "access": "public",
+    "description": "Tell if the given ergument is an object.",
+    "lineNumber": 219,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an object, false otherwise"
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "isKeyedCollection",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isKeyedCollection",
+    "access": "public",
+    "description": "Tell if the given ergument is a keyed collection.",
+    "lineNumber": 230,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a Map|WeakMap or a Set|WeakSet, false otherwise"
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "method",
+    "name": "isObjectOrCollection",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isObjectOrCollection",
+    "access": "public",
+    "description": "Tell if the given ergument is an object or a keyed collection.\n\nSee {@link Validator.isObject}, {@link Validator.isKeyedCollection}.",
+    "lineNumber": 246,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an object or a keyed collection, false otherwise"
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "method",
+    "name": "isObjectOrCollectionNotString",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isObjectOrCollectionNotString",
+    "access": "public",
+    "description": "Tell if the given ergument is an object or a keyed collection, but not a string.\n\nSee {@link Validator.isObjectOrCollection}.",
+    "lineNumber": 259,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an object or a keyed collection but not a string, false otherwise"
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "method",
+    "name": "isVersion",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isVersion",
+    "access": "public",
+    "description": "Tell if the given ergument is a string representation of a version number.\n\nNote that the version string could be something like:\n- as minimum a number is needed for an integer version\n- at the beginning I can have an optional char 'v' or 'V'\n- anything after the third number will be considered as a string\n- format updated to handle version output of 'git describe'",
+    "lineNumber": 276,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the version string to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a version string, false otherwise"
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "method",
+    "name": "isURI",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.isURI",
+    "access": "public",
+    "description": "Tell if the given ergument is an URI or an URL.",
+    "lineNumber": 290,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the uri/url to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "base",
+        "description": "the (optional) base to build the full URL"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's an URI/URL, false otherwise"
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "method",
+    "name": "ensureIsClass",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsClass",
+    "access": "public",
+    "description": "Ensure that the given ergument is an instance of the given class reference.",
+    "lineNumber": 330,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "classReference",
+        "description": "the class that should be implemented/extended"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "TypeError"
+      ],
+      "spread": false,
+      "description": "if it's not an instance (or extends) that class, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "method",
+    "name": "ensureIsFunction",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsFunction",
+    "access": "public",
+    "description": "Ensure that the given ergument is a function.",
+    "lineNumber": 344,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "TypeError"
+      ],
+      "spread": false,
+      "description": "if it's not an instance (or extends) that class, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "method",
+    "name": "ensureIsString",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsString",
+    "access": "public",
+    "description": "Ensure that the given argument ia a string.\n\nSee {@link Validator.isString}.",
+    "lineNumber": 360,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "TypeError"
+      ],
+      "spread": false,
+      "description": "if it's not a string, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "ensureIsStringNotEmpty",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsStringNotEmpty",
+    "access": "public",
+    "description": "Ensure that the given argument ia a not empty string.\n\nSee {@link Validator.isStringNotEmpty}.",
+    "lineNumber": 376,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": "if it's not a not empty string, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "ensureIsObjectOrCollection",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsObjectOrCollection",
+    "access": "public",
+    "description": "Ensure that the given argument ia an object or a collection.\n\nSee {@link Validator.isObjectOrCollection}.",
+    "lineNumber": 392,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "TypeError"
+      ],
+      "spread": false,
+      "description": "if it's not an object nor a collection, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "ensureIsObjectOrCollectionNotString",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsObjectOrCollectionNotString",
+    "access": "public",
+    "description": "Ensure that the given argument ia an object or a collection, not a string.\n\nSee {@link Validator.isObjectOrCollectionNotString}.",
+    "lineNumber": 408,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "TypeError"
+      ],
+      "spread": false,
+      "description": "if it's not an object nor a collection, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "method",
+    "name": "ensureIsDate",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsDate",
+    "access": "public",
+    "description": "Ensure that the given argument ia a date.\n\nSee {@link Validator.isDate}.",
+    "lineNumber": 424,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": "if it's not a date, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 104,
+    "kind": "method",
+    "name": "ensureIsDatePast",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsDatePast",
+    "access": "public",
+    "description": "Ensure that the given argument ia a date in the past.\n\nSee {@link Validator.isDatePast}.",
+    "lineNumber": 440,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": "if it's not a date in the past, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 105,
+    "kind": "method",
+    "name": "ensureIsVersion",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsVersion",
+    "access": "public",
+    "description": "Ensure that the given argument ia a string version.\n\nSee {@link Validator.isVersion}.",
+    "lineNumber": 456,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": "if it's not a string version, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 106,
+    "kind": "method",
+    "name": "ensureIsURI",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.ensureIsURI",
+    "access": "public",
+    "description": "Ensure that the given argument ia an URI/URL.\n\nSee {@link Validator.isURI}.",
+    "lineNumber": 472,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Error"
+      ],
+      "spread": false,
+      "description": "if it's not an URI/URL, nothing otherwise"
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "method",
+    "name": "getSize",
+    "memberof": "src/validator.js~Validator",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/validator.js~Validator.getSize",
+    "access": "public",
+    "description": "Tell the size of the given aobject",
+    "lineNumber": 485,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": "the size if it's an array|Map|Set|object|string, nothing otherwise"
+    }
+  },
+  {
+    "kind": "index",
+    "content": "# cloudevent.js\n\nJavaScript/Node.js implementation of http://cloudevents.io/\n\n\n## Usage\n\n```js\nconst CEClass = require('cloudevent.js')()\n\n// create some sample not so good intances ...\nconst ceEmpty = new CEClass() // create a not valid CloudEvent instance (for the validator, when strict mode flag is enabled)\nconst ceMinimalMandatoryUndefinedNoStrict = new CEClass(undefined, undefined, undefined, { strict: false })\nconst ceMinimalMandatoryUndefinedStrict = new CEClass(undefined, undefined, undefined, { strict: true })\n\n// create some sample minimal but good intances ...\nconst ceMinimal = new CEClass('1', // eventID\n'org.fastify.plugins.cloudevents.testevent', // eventType\n{} // data (empty) // optional, but useful the same in this sample usage\n)\n\n// create some instance with all attributes ...\n// could be useful to define some common attributes\nconst ceCommonOptions = {\n  cloudEventsVersion: '0.0.0',\n  eventTypeVersion: '1.0.0',\n  source: '/test',\n  eventTime: new Date(),\n  extensions: { 'exampleExtension': 'value' },\n  contentType: 'application/json',\n  schemaURL: 'http://my-schema.localhost.localdomain',\n  strict: false // same as default\n}\n// create an instance with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\n// note that null values are not handled by default values, only undefined values ...\nconst ceFull1 = new CEClass('1/full',\n'org.fastify.plugins.cloudevents.testevent',\n{ 'hello': 'world' }, // data\nceCommonOptions\n)\n\n// then, to validate objects, use class static methods like 'isValidEvent' and 'ValidateEvent', or instance methods like 'isValid', 'validate', etc ...\n\n// etc ...\n```\n\nIn the [example](./example/) folder there are some simple server scripts that uses the library  (inline but it's the same using it from npm registry).\n\n\n## Requirements\n\nNode.js 8.11.x or later.\n\n\n## Note\n\nSee the CloudEvents Specification [here](https://github.com/cloudevents/spec).\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
+    "longname": "/Users/martinis/work/prove/cloudevent.js/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"cloudevent.js\",\n  \"version\": \"0.1.0\",\n  \"description\": \"JavaScript/Node.js implementation of the CloudEvents standard format\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/example\",\n    \"lint\": \"standard \\\"./*.js\\\" \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"test:unit\": \"tap test/*.test.js test/*/*.test.js\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.3\",\n    \"simple-get\": \"^3.0.2\",\n    \"standard\": \"^11.0.1\",\n    \"tap\": \"^12.0.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.11.3\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/cloudevent.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/cloudevent.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/cloudevent.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"cloudevents\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
+    "longname": "/Users/martinis/work/prove/cloudevent.js/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]
