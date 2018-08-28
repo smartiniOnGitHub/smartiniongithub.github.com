@@ -566,621 +566,6 @@
   {
     "__docId__": 48,
     "kind": "file",
-    "name": "src/cloudevent.js",
-    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * CloudEvent:\r\n * this module exports some useful definition and utility related to CloudEvents.\r\n */\r\n\r\n/**\r\n * Get a reference to cloudevent validator class.\r\n */\r\nconst V = require('./validator') // get validator from here\r\n\r\n/**\r\n * CloudEvent implementation.\r\n *\r\n * @see https://github.com/cloudevents/spec/blob/master/json-format.md\r\n */\r\nclass CloudEvent {\r\n  /**\r\n   * Create a new instance of a CloudEvent object.\r\n   * @param {!string} eventID the ID of the event (unique), mandatory\r\n   * @param {!string} eventType the type of the event (usually), mandatory\r\n   * @param {(object|Map|Set)} data the real event data\r\n   * @param {object} options optional attributes of the event; some has default values chosen here:\r\n   *        cloudEventsVersion (string, default '0.1'),\r\n   *        eventTypeVersion (string) optional,\r\n   *        source (uri, default '/'),\r\n   *        eventTime (timestamp, default now),\r\n   *        extensions (object) optional but if given must contain at least 1 property (key/value),\r\n   *        contentType (string, default 'application/json') tell how the data attribute must be encoded,\r\n   *        schemaURL (uri) optional,\r\n   *        strict (boolean, default false) tell if object instance will be validated in a more strict way\r\n   * @throws {Error} if strict is true and eventID or eventType is undefined or null\r\n   */\r\n  constructor (eventID, eventType, data, {\r\n    cloudEventsVersion = '0.1',\r\n    eventTypeVersion,\r\n    source = '/',\r\n    eventTime = new Date(),\r\n    extensions,\r\n    contentType = 'application/json',\r\n    schemaURL,\r\n    strict = false } = {}\r\n  ) {\r\n    // console.log(`DEBUG - eventID = ${eventID}, eventType = ${eventType}, data = ${data}, { strict = ${strict}, ... }`)\r\n    // console.log(`DEBUG - ${this.constructor.dumpObject(eventID, 'eventID')}, ${this.constructor.dumpObject(eventType, 'eventType')}, ${this.constructor.dumpObject(data, 'data')}, { strict = ${strict}, ... }`)\r\n    if (strict === true) {\r\n      if (!eventID || !eventType) {\r\n        throw new Error('Unable to create CloudEvent instance, mandatory field missing')\r\n      }\r\n    }\r\n\r\n    /**\r\n     * The event ID.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventID = eventID\r\n    /**\r\n     * The event type.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventType = eventType\r\n    /**\r\n     * The real event data.\r\n     * @type {object|Map|Set}\r\n     * @private\r\n     */\r\n    this.data = data\r\n\r\n    /**\r\n     * The CloudEvent specification version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.cloudEventsVersion = cloudEventsVersion\r\n    /**\r\n     * The MIME Type for the encoding of the data attribute, when serialized.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.contentType = contentType\r\n    /**\r\n     * The event timestamp.\r\n     * @type {timestamp}\r\n     * @private\r\n     */\r\n    this.eventTime = eventTime\r\n    /**\r\n     * The event version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventTypeVersion = eventTypeVersion\r\n    /**\r\n     * Extensions defined for the event.\r\n     * @type {object}\r\n     * @private\r\n     */\r\n    this.extensions = extensions\r\n    /**\r\n     * The URL of schema for the event, if any.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.schemaURL = schemaURL\r\n    /**\r\n     * The source URI of the event.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.source = source\r\n\r\n    // add strict to extensions, but only when defined\r\n    if (strict === true) {\r\n      this.extensions = extensions || {}\r\n      this.extensions.strict = strict\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility function that return a dump of the given object.\r\n   *\r\n   * @static\r\n   * @param {(object|Map|Set)} obj the object to dump\r\n   * @param {string} name the name to assign in the returned string\r\n   * @return {string} the dump of the object or a message when obj is undefined/null/not an object\r\n   */\r\n  static dumpObject (obj, name) {\r\n    const n = name || 'noname'\r\n    if (V.isUndefined(obj)) {\r\n      return `${n}: undefined`\r\n    } else if (V.isNull(obj)) {\r\n      return `${n}: null`\r\n    } else if (!V.isObjectOrCollection(obj)) {\r\n      return `${n}: '${obj.toString()}'`\r\n    } else {\r\n      return `${n}: ${JSON.stringify(obj)}`\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the MIME Type for a CloudEvent\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static mediaType () {\r\n    return 'application/cloudevents+json'\r\n  }\r\n\r\n  /**\r\n   * Tell if the object has the strict flag enabled.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @return {boolean} true if strict, otherwise false\r\n   * @throws {Error} if event if undefined or null\r\n   */\r\n  static isStrictEvent (event) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (V.isDefinedAndNotNull(event.extensions)) {\r\n      return event.extensions.strict\r\n    } else {\r\n      return false\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Validate the given CloudEvent.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  static validateEvent (event, { strict = false } = {}) {\r\n    // console.log(`DEBUG - cloudEvent = ${event}, { strict = ${strict}, ... }`)\r\n    if (V.isUndefinedOrNull(event)) {\r\n      return [new Error('CloudEvent undefined or null')]\r\n    }\r\n    let ve = [] // validation errors\r\n\r\n    // standard validation\r\n    ve.push(V.ensureIsStringNotEmpty(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventID, 'eventID'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventType, 'eventType'))\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.data)) {\r\n    // ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n    // }\r\n    if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.eventTypeVersion, 'eventTypeVersion'))\r\n    }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.source)) {\r\n    // ve.push(V.ensureIsStringNotEmpty(event.source, 'source')) // keep commented here ... ok\r\n    // }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // ve.push(V.ensureIsDateValid(event.eventTime, 'eventTime'))\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // if (V.isDefinedAndNotNull(event.extensions)) {\r\n    //   ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n    // }\r\n    // no check here because I assign a default value, and I check in strict mode ... ok\r\n    // ve.push(ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n    if (V.isDefinedAndNotNull(event.schemaURL)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    // additional validation if strict mode enabled, or if enabled in the event ...\r\n    if (strict === true || CloudEvent.isStrictEvent(event) === true) {\r\n      ve.push(V.ensureIsClass(event, CloudEvent, 'CloudEvent_Subclass'))\r\n      ve.push(V.ensureIsVersion(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n      if (V.isDefinedAndNotNull(event.data)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n      }\r\n      if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n        ve.push(V.ensureIsVersion(event.eventTypeVersion, 'eventTypeVersion'))\r\n      }\r\n      ve.push(V.ensureIsURI(event.source, 'source'))\r\n      if (V.isDefinedAndNotNull(event.extensions)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n        const extensionsSize = V.getSize(event.extensions)\r\n        if (extensionsSize < 1) {\r\n          ve.push(new Error(`The object 'extensions' must contain at least 1 property`))\r\n        }\r\n      }\r\n      ve.push(V.ensureIsDatePast(event.eventTime, 'eventTime'))\r\n      ve.push(V.ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n      ve.push(V.ensureIsURI(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    return ve.filter((i) => i)\r\n  }\r\n\r\n  /**\r\n   * Tell the given CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  static isValidEvent (event, { strict = false } = {}) {\r\n    const validationErrors = CloudEvent.validateEvent(event, { strict })\r\n    const size = V.getSize(validationErrors)\r\n    return (size === 0)\r\n  }\r\n\r\n  /**\r\n   * Validate the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  validate ({ strict = false } = {}) {\r\n    return this.constructor.validateEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Tell the current CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.isValidEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  isValid ({ strict = false } = {}) {\r\n    return this.constructor.isValidEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Getter method to tell if the object has the strict flag enabled.\r\n   *\r\n   * See {@link CloudEvent.isStrictEvent}.\r\n   *\r\n   * @type {boolean}\r\n   */\r\n  get isStrict () {\r\n    return this.constructor.isStrictEvent(this)\r\n  }\r\n\r\n  /**\r\n   * Override the usual toString method.\r\n   *\r\n   * See {@link Object.toString}.\r\n   *\r\n   * @return {string} a string representation for object instance\r\n   */\r\n  toString () {\r\n    return `CloudEvent[cloudEventsVersion: ${this.cloudEventsVersion}, ${this.constructor.dumpObject(this.eventID, 'eventID')}, ${this.constructor.dumpObject(this.eventType, 'eventType')}, ${this.constructor.dumpObject(this.data, 'data')}, ...]`\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'CloudEvent'\r\n  }\r\n}\r\n\r\nmodule.exports = CloudEvent\r\n",
-    "static": true,
-    "longname": "/Users/martinis/work/prove/cloudevent.js/src/cloudevent.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 49,
-    "kind": "class",
-    "name": "CloudEvent",
-    "memberof": "src/cloudevent.js",
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent",
-    "access": "public",
-    "export": true,
-    "importPath": "cloudevent.js/src/cloudevent.js",
-    "importStyle": "CloudEvent",
-    "description": "CloudEvent implementation.",
-    "see": [
-      "https://github.com/cloudevents/spec/blob/master/json-format.md"
-    ],
-    "lineNumber": 33,
-    "interface": false
-  },
-  {
-    "__docId__": 50,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#constructor",
-    "access": "public",
-    "description": "Create a new instance of a CloudEvent object.",
-    "lineNumber": 50,
-    "params": [
-      {
-        "nullable": false,
-        "types": [
-          "string"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "eventID",
-        "description": "the ID of the event (unique), mandatory"
-      },
-      {
-        "nullable": false,
-        "types": [
-          "string"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "eventType",
-        "description": "the type of the event (usually), mandatory"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object",
-          "Map",
-          "Set"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "data",
-        "description": "the real event data"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "options",
-        "description": "optional attributes of the event; some has default values chosen here:\n       cloudEventsVersion (string, default '0.1'),\n       eventTypeVersion (string) optional,\n       source (uri, default '/'),\n       eventTime (timestamp, default now),\n       extensions (object) optional but if given must contain at least 1 property (key/value),\n       contentType (string, default 'application/json') tell how the data attribute must be encoded,\n       schemaURL (uri) optional,\n       strict (boolean, default false) tell if object instance will be validated in a more strict way"
-      }
-    ],
-    "throws": [
-      {
-        "types": [
-          "Error"
-        ],
-        "description": "if strict is true and eventID or eventType is undefined or null"
-      }
-    ]
-  },
-  {
-    "__docId__": 51,
-    "kind": "member",
-    "name": "eventID",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#eventID",
-    "access": "private",
-    "description": "The event ID.",
-    "lineNumber": 73,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 52,
-    "kind": "member",
-    "name": "eventType",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#eventType",
-    "access": "private",
-    "description": "The event type.",
-    "lineNumber": 79,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 53,
-    "kind": "member",
-    "name": "data",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#data",
-    "access": "private",
-    "description": "The real event data.",
-    "lineNumber": 85,
-    "type": {
-      "nullable": null,
-      "types": [
-        "object",
-        "Map",
-        "Set"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 54,
-    "kind": "member",
-    "name": "cloudEventsVersion",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#cloudEventsVersion",
-    "access": "private",
-    "description": "The CloudEvent specification version.",
-    "lineNumber": 92,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 55,
-    "kind": "member",
-    "name": "contentType",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#contentType",
-    "access": "private",
-    "description": "The MIME Type for the encoding of the data attribute, when serialized.",
-    "lineNumber": 98,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 56,
-    "kind": "member",
-    "name": "eventTime",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#eventTime",
-    "access": "private",
-    "description": "The event timestamp.",
-    "lineNumber": 104,
-    "type": {
-      "nullable": null,
-      "types": [
-        "timestamp"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 57,
-    "kind": "member",
-    "name": "eventTypeVersion",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#eventTypeVersion",
-    "access": "private",
-    "description": "The event version.",
-    "lineNumber": 110,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 58,
-    "kind": "member",
-    "name": "extensions",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#extensions",
-    "access": "private",
-    "description": "Extensions defined for the event.",
-    "lineNumber": 116,
-    "type": {
-      "nullable": null,
-      "types": [
-        "object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 59,
-    "kind": "member",
-    "name": "schemaURL",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#schemaURL",
-    "access": "private",
-    "description": "The URL of schema for the event, if any.",
-    "lineNumber": 122,
-    "type": {
-      "nullable": null,
-      "types": [
-        "uri"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 60,
-    "kind": "member",
-    "name": "source",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#source",
-    "access": "private",
-    "description": "The source URI of the event.",
-    "lineNumber": 128,
-    "type": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 62,
-    "kind": "method",
-    "name": "dumpObject",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent.dumpObject",
-    "access": "public",
-    "description": "Utility function that return a dump of the given object.",
-    "lineNumber": 145,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "object",
-          "Map",
-          "Set"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "obj",
-        "description": "the object to dump"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "string"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "name",
-        "description": "the name to assign in the returned string"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": "the dump of the object or a message when obj is undefined/null/not an object"
-    }
-  },
-  {
-    "__docId__": 63,
-    "kind": "method",
-    "name": "mediaType",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent.mediaType",
-    "access": "public",
-    "description": "Return the MIME Type for a CloudEvent",
-    "lineNumber": 164,
-    "return": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": "the value"
-    },
-    "params": []
-  },
-  {
-    "__docId__": 64,
-    "kind": "method",
-    "name": "isStrictEvent",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent.isStrictEvent",
-    "access": "public",
-    "description": "Tell if the object has the strict flag enabled.",
-    "lineNumber": 176,
-    "params": [
-      {
-        "nullable": false,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "event",
-        "description": "the CloudEvent to validate"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "boolean"
-      ],
-      "spread": false,
-      "description": "true if strict, otherwise false"
-    },
-    "throws": [
-      {
-        "types": [
-          "Error"
-        ],
-        "description": "if event if undefined or null"
-      }
-    ]
-  },
-  {
-    "__docId__": 65,
-    "kind": "method",
-    "name": "validateEvent",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent.validateEvent",
-    "access": "public",
-    "description": "Validate the given CloudEvent.",
-    "lineNumber": 195,
-    "params": [
-      {
-        "nullable": false,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "event",
-        "description": "the CloudEvent to validate"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "options",
-        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "object[]"
-      ],
-      "spread": false,
-      "description": "an array of (non null) validation errors, or at least an empty array"
-    }
-  },
-  {
-    "__docId__": 66,
-    "kind": "method",
-    "name": "isValidEvent",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/cloudevent.js~CloudEvent.isValidEvent",
-    "access": "public",
-    "description": "Tell the given CloudEvent, if it's valid.\n\nSee {@link CloudEvent.validateEvent}.",
-    "lineNumber": 265,
-    "params": [
-      {
-        "nullable": false,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "event",
-        "description": "the CloudEvent to validate"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "options",
-        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "boolean"
-      ],
-      "spread": false,
-      "description": "true if valid, otherwise false"
-    }
-  },
-  {
-    "__docId__": 67,
-    "kind": "method",
-    "name": "validate",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#validate",
-    "access": "public",
-    "description": "Validate the current CloudEvent.\n\nSee {@link CloudEvent.validateEvent}.",
-    "lineNumber": 279,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "options",
-        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "object[]"
-      ],
-      "spread": false,
-      "description": "an array of (non null) validation errors, or at least an empty array"
-    }
-  },
-  {
-    "__docId__": 68,
-    "kind": "method",
-    "name": "isValid",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#isValid",
-    "access": "public",
-    "description": "Tell the current CloudEvent, if it's valid.\n\nSee {@link CloudEvent.isValidEvent}.",
-    "lineNumber": 291,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "options",
-        "description": "containing: strict (boolean, default false) to validate it in a more strict way"
-      }
-    ],
-    "return": {
-      "nullable": null,
-      "types": [
-        "boolean"
-      ],
-      "spread": false,
-      "description": "true if valid, otherwise false"
-    }
-  },
-  {
-    "__docId__": 69,
-    "kind": "get",
-    "name": "isStrict",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#isStrict",
-    "access": "public",
-    "description": "Getter method to tell if the object has the strict flag enabled.\n\nSee {@link CloudEvent.isStrictEvent}.",
-    "lineNumber": 302,
-    "type": {
-      "nullable": null,
-      "types": [
-        "boolean"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 70,
-    "kind": "method",
-    "name": "toString",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#toString",
-    "access": "public",
-    "description": "Override the usual toString method.\n\nSee {@link Object.toString}.",
-    "lineNumber": 313,
-    "return": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": "a string representation for object instance"
-    },
-    "params": []
-  },
-  {
-    "__docId__": 71,
-    "kind": "get",
-    "name": "[Symbol.toStringTag]",
-    "memberof": "src/cloudevent.js~CloudEvent",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/cloudevent.js~CloudEvent#[Symbol.toStringTag]",
-    "access": "public",
-    "description": "Gives a string valued property that is used in the creation of the default string description of an object.\n\nSee {@link Symbol.toStringTag}.",
-    "lineNumber": 324,
-    "return": {
-      "nullable": null,
-      "types": [
-        "string"
-      ],
-      "spread": false,
-      "description": "a string representation of the object type"
-    },
-    "type": {
-      "types": [
-        "string"
-      ]
-    }
-  },
-  {
-    "__docId__": 72,
-    "kind": "file",
     "name": "src/index.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Get a reference to cloudevent class definition.\r\n */\r\nconst cloudEventDefinition = require('./cloudevent') // get CloudEvent definition and related utilities\r\n\r\nmodule.exports = cloudEventDefinition\r\n",
     "static": true,
@@ -1190,7 +575,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 73,
+    "__docId__": 49,
     "kind": "file",
     "name": "src/validator.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Validators:\r\n * this module exports some useful generic functions for the validation of objects.\r\n */\r\n\r\nconst url = require('url')\r\n\r\n/**\r\n * Generic Validator implementation.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass Validator {\r\n  /**\r\n   * Create a new instance of a Validator object.\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'Validator'\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined, false otherwise\r\n   */\r\n  static isUndefined (arg) {\r\n    return (arg === undefined)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if null, false otherwise\r\n   */\r\n  static isNull (arg) {\r\n    return (arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined or null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined or null, false otherwise\r\n   */\r\n  static isUndefinedOrNull (arg) {\r\n    return (arg === undefined || arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is defined and not null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if defined and not null, false otherwise\r\n   */\r\n  static isDefinedAndNotNull (arg) {\r\n    return (arg !== undefined && arg !== null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a string, false otherwise\r\n   */\r\n  static isString (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a not empty string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a not empty string, false otherwise\r\n   */\r\n  static isStringNotEmpty (arg) {\r\n    return (Validator.isString(arg) && (arg.length > 0))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a date.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a date, false otherwise\r\n   */\r\n  static isDate (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object' || arg instanceof Date))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date, false otherwise\r\n   */\r\n  static isDateValid (arg) {\r\n    return (Validator.isDate(arg) && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date and in the past.\r\n   *\r\n   * See {@link Validator.isDateValid}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date in the past, false otherwise\r\n   */\r\n  static isDatePast (arg) {\r\n    return (Validator.isDateValid(arg) && arg < Date.now())\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a number.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a number, false otherwise\r\n   */\r\n  static isNumber (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && typeof arg === 'number' && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an array.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an array, false otherwise\r\n   */\r\n  static isArray (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (Array.isArray(arg)))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a boolean.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a boolean, false otherwise\r\n   */\r\n  static isBoolean (arg) {\r\n    return (typeof arg === 'boolean')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @return {boolean} true if it's an instance (or extends) that class, false otherwise\r\n   */\r\n  static isClass (arg, classReference) {\r\n    return (arg instanceof classReference)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a function, false otherwise\r\n   */\r\n  static isFunction (arg) {\r\n    return (typeof arg === 'function')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object, false otherwise\r\n   */\r\n  static isObject (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a keyed collection.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a Map|WeakMap or a Set|WeakSet, false otherwise\r\n   */\r\n  static isKeyedCollection (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (\r\n      arg instanceof Map || arg instanceof WeakMap ||\r\n      arg instanceof Set || arg instanceof WeakSet\r\n    ))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection.\r\n   *\r\n   * See {@link Validator.isObject}, {@link Validator.isKeyedCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection, false otherwise\r\n   */\r\n  static isObjectOrCollection (arg) {\r\n    return (Validator.isObject(arg) || Validator.isKeyedCollection(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection, but not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection but not a string, false otherwise\r\n   */\r\n  static isObjectOrCollectionNotString (arg) {\r\n    return (Validator.isObjectOrCollection(arg) && (typeof arg !== 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string representation of a version number.\r\n   *\r\n   * Note that the version string could be something like:\r\n   * - as minimum a number is needed for an integer version\r\n   * - at the beginning I can have an optional char 'v' or 'V'\r\n   * - anything after the third number will be considered as a string\r\n   * - format updated to handle version output of 'git describe'\r\n   *\r\n   * @static\r\n   * @param {string} arg the version string to check\r\n   * @return {boolean} true if it's a version string, false otherwise\r\n   */\r\n  static isVersion (arg) {\r\n    // quick check if the given string is in the format 'n.n.n'\r\n    const versionRegex = /^(?:v|V?)((\\d+)(?:\\.?)){1,3}(?:\\W|_?)(.*)$/gm\r\n    return (Validator.isStringNotEmpty(arg) && versionRegex.test(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an URI or an URL.\r\n   *\r\n   * @static\r\n   * @param {string} arg the uri/url to check\r\n   * @param {string} base the (optional) base to build the full URL\r\n   * @return {boolean} true if it's an URI/URL, false otherwise\r\n   */\r\n  static isURI (arg, base) {\r\n    // quick check if the given string is an URI or an URL\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return false\r\n    }\r\n    // simple check if it's an URL, trying to instancing it\r\n    // note that this requires to import related module here (but not in Browsers) ...\r\n    if (Validator.isStringNotEmpty(base)) {\r\n      try {\r\n        const u = new url.URL(arg, base)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    } else {\r\n      // simple check if it's an URI (or better, a relative URL)\r\n      if (arg.startsWith('/')) {\r\n        return true\r\n      }\r\n      try {\r\n        // return (new URL(arg) !== null)\r\n        const u = new url.URL(arg)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsClass (arg, classReference, name) {\r\n    if (!Validator.isClass(arg, classReference)) {\r\n      return new TypeError(`The argument '${name}' must be an instance of the given class reference, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsFunction (arg, name) {\r\n    if (!Validator.isFunction(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a function, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not a string, nothing otherwise\r\n   */\r\n  static ensureIsString (arg, name) {\r\n    if (!Validator.isString(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a string, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a not empty string.\r\n   *\r\n   * See {@link Validator.isStringNotEmpty}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a not empty string, nothing otherwise\r\n   */\r\n  static ensureIsStringNotEmpty (arg, name) {\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return new Error(`The string '${name}' must be not empty`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollection (arg, name) {\r\n    if (!Validator.isObjectOrCollection(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection, not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollectionNotString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollectionNotString (arg, name) {\r\n    if (!Validator.isObjectOrCollectionNotString(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection, and not a string`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date, nothing otherwise\r\n   */\r\n  static ensureIsDate (arg, name) {\r\n    if (!Validator.isDate(arg)) {\r\n      return new Error(`The object '${name}' must be a Date`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date in the past.\r\n   *\r\n   * See {@link Validator.isDatePast}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date in the past, nothing otherwise\r\n   */\r\n  static ensureIsDatePast (arg, name) {\r\n    if (!Validator.isDatePast(arg)) {\r\n      return new Error(`The object '${name}' must be a Date that belongs to the past`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string version.\r\n   *\r\n   * See {@link Validator.isVersion}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a string version, nothing otherwise\r\n   */\r\n  static ensureIsVersion (arg, name) {\r\n    if (!Validator.isVersion(arg)) {\r\n      return new Error(`The object '${name}' must be a string in the format 'n.n.n', and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an URI/URL.\r\n   *\r\n   * See {@link Validator.isURI}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not an URI/URL, nothing otherwise\r\n   */\r\n  static ensureIsURI (arg, name) {\r\n    if (!Validator.isURI(arg)) {\r\n      return new Error(`The object '${name}' must be an URI or URL string, and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Tell the size of the given aobject\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {number} the size if it's an array|Map|Set|object|string, nothing otherwise\r\n   */\r\n  static getSize (arg) {\r\n    if ((arg === undefined || arg === null)) {\r\n      return\r\n    }\r\n    if (Array.isArray(arg)) {\r\n      return arg.length\r\n    } else if (arg instanceof Map || arg instanceof Set) {\r\n      return arg.size\r\n    } else if (typeof arg === 'object') {\r\n      return Object.keys(arg).length\r\n    } else if (typeof arg === 'string') {\r\n      return arg.length\r\n    }\r\n  }\r\n}\r\n\r\nmodule.exports = Validator\r\n",
@@ -1201,7 +586,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 74,
+    "__docId__": 50,
     "kind": "class",
     "name": "Validator",
     "memberof": "src/validator.js",
@@ -1216,7 +601,7 @@
     "interface": false
   },
   {
-    "__docId__": 75,
+    "__docId__": 51,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/validator.js~Validator",
@@ -1237,7 +622,7 @@
     ]
   },
   {
-    "__docId__": 76,
+    "__docId__": 52,
     "kind": "get",
     "name": "[Symbol.toStringTag]",
     "memberof": "src/validator.js~Validator",
@@ -1263,7 +648,7 @@
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 53,
     "kind": "method",
     "name": "isUndefined",
     "memberof": "src/validator.js~Validator",
@@ -1296,7 +681,7 @@
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 54,
     "kind": "method",
     "name": "isNull",
     "memberof": "src/validator.js~Validator",
@@ -1329,7 +714,7 @@
     }
   },
   {
-    "__docId__": 79,
+    "__docId__": 55,
     "kind": "method",
     "name": "isUndefinedOrNull",
     "memberof": "src/validator.js~Validator",
@@ -1362,7 +747,7 @@
     }
   },
   {
-    "__docId__": 80,
+    "__docId__": 56,
     "kind": "method",
     "name": "isDefinedAndNotNull",
     "memberof": "src/validator.js~Validator",
@@ -1395,7 +780,7 @@
     }
   },
   {
-    "__docId__": 81,
+    "__docId__": 57,
     "kind": "method",
     "name": "isString",
     "memberof": "src/validator.js~Validator",
@@ -1428,7 +813,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 58,
     "kind": "method",
     "name": "isStringNotEmpty",
     "memberof": "src/validator.js~Validator",
@@ -1461,7 +846,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 59,
     "kind": "method",
     "name": "isDate",
     "memberof": "src/validator.js~Validator",
@@ -1494,7 +879,7 @@
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 60,
     "kind": "method",
     "name": "isDateValid",
     "memberof": "src/validator.js~Validator",
@@ -1527,7 +912,7 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 61,
     "kind": "method",
     "name": "isDatePast",
     "memberof": "src/validator.js~Validator",
@@ -1560,7 +945,7 @@
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 62,
     "kind": "method",
     "name": "isNumber",
     "memberof": "src/validator.js~Validator",
@@ -1593,7 +978,7 @@
     }
   },
   {
-    "__docId__": 87,
+    "__docId__": 63,
     "kind": "method",
     "name": "isArray",
     "memberof": "src/validator.js~Validator",
@@ -1626,7 +1011,7 @@
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 64,
     "kind": "method",
     "name": "isBoolean",
     "memberof": "src/validator.js~Validator",
@@ -1659,7 +1044,7 @@
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 65,
     "kind": "method",
     "name": "isClass",
     "memberof": "src/validator.js~Validator",
@@ -1702,7 +1087,7 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 66,
     "kind": "method",
     "name": "isFunction",
     "memberof": "src/validator.js~Validator",
@@ -1735,7 +1120,7 @@
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 67,
     "kind": "method",
     "name": "isObject",
     "memberof": "src/validator.js~Validator",
@@ -1768,7 +1153,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 68,
     "kind": "method",
     "name": "isKeyedCollection",
     "memberof": "src/validator.js~Validator",
@@ -1801,7 +1186,7 @@
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 69,
     "kind": "method",
     "name": "isObjectOrCollection",
     "memberof": "src/validator.js~Validator",
@@ -1834,7 +1219,7 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 70,
     "kind": "method",
     "name": "isObjectOrCollectionNotString",
     "memberof": "src/validator.js~Validator",
@@ -1867,7 +1252,7 @@
     }
   },
   {
-    "__docId__": 95,
+    "__docId__": 71,
     "kind": "method",
     "name": "isVersion",
     "memberof": "src/validator.js~Validator",
@@ -1900,7 +1285,7 @@
     }
   },
   {
-    "__docId__": 96,
+    "__docId__": 72,
     "kind": "method",
     "name": "isURI",
     "memberof": "src/validator.js~Validator",
@@ -1943,7 +1328,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 73,
     "kind": "method",
     "name": "ensureIsClass",
     "memberof": "src/validator.js~Validator",
@@ -1996,7 +1381,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 74,
     "kind": "method",
     "name": "ensureIsFunction",
     "memberof": "src/validator.js~Validator",
@@ -2039,7 +1424,7 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 75,
     "kind": "method",
     "name": "ensureIsString",
     "memberof": "src/validator.js~Validator",
@@ -2082,7 +1467,7 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 76,
     "kind": "method",
     "name": "ensureIsStringNotEmpty",
     "memberof": "src/validator.js~Validator",
@@ -2125,7 +1510,7 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 77,
     "kind": "method",
     "name": "ensureIsObjectOrCollection",
     "memberof": "src/validator.js~Validator",
@@ -2168,7 +1553,7 @@
     }
   },
   {
-    "__docId__": 102,
+    "__docId__": 78,
     "kind": "method",
     "name": "ensureIsObjectOrCollectionNotString",
     "memberof": "src/validator.js~Validator",
@@ -2211,7 +1596,7 @@
     }
   },
   {
-    "__docId__": 103,
+    "__docId__": 79,
     "kind": "method",
     "name": "ensureIsDate",
     "memberof": "src/validator.js~Validator",
@@ -2254,7 +1639,7 @@
     }
   },
   {
-    "__docId__": 104,
+    "__docId__": 80,
     "kind": "method",
     "name": "ensureIsDatePast",
     "memberof": "src/validator.js~Validator",
@@ -2297,7 +1682,7 @@
     }
   },
   {
-    "__docId__": 105,
+    "__docId__": 81,
     "kind": "method",
     "name": "ensureIsVersion",
     "memberof": "src/validator.js~Validator",
@@ -2340,7 +1725,7 @@
     }
   },
   {
-    "__docId__": 106,
+    "__docId__": 82,
     "kind": "method",
     "name": "ensureIsURI",
     "memberof": "src/validator.js~Validator",
@@ -2383,7 +1768,7 @@
     }
   },
   {
-    "__docId__": 107,
+    "__docId__": 83,
     "kind": "method",
     "name": "getSize",
     "memberof": "src/validator.js~Validator",
@@ -2417,7 +1802,7 @@
   },
   {
     "kind": "index",
-    "content": "# cloudevent.js\n\nJavaScript/Node.js implementation of http://cloudevents.io/\n\n\n## Usage\n\n```js\nconst CEClass = require('cloudevent.js')()\n\n// create some sample not so good intances ...\nconst ceEmpty = new CEClass() // create a not valid CloudEvent instance (for the validator, when strict mode flag is enabled)\nconst ceMinimalMandatoryUndefinedNoStrict = new CEClass(undefined, undefined, undefined, { strict: false })\nconst ceMinimalMandatoryUndefinedStrict = new CEClass(undefined, undefined, undefined, { strict: true })\n\n// create some sample minimal but good intances ...\nconst ceMinimal = new CEClass('1', // eventID\n'org.fastify.plugins.cloudevents.testevent', // eventType\n{} // data (empty) // optional, but useful the same in this sample usage\n)\n\n// create some instance with all attributes ...\n// could be useful to define some common attributes\nconst ceCommonOptions = {\n  cloudEventsVersion: '0.0.0',\n  eventTypeVersion: '1.0.0',\n  source: '/test',\n  eventTime: new Date(),\n  extensions: { 'exampleExtension': 'value' },\n  contentType: 'application/json',\n  schemaURL: 'http://my-schema.localhost.localdomain',\n  strict: false // same as default\n}\n// create an instance with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\n// note that null values are not handled by default values, only undefined values ...\nconst ceFull1 = new CEClass('1/full',\n'org.fastify.plugins.cloudevents.testevent',\n{ 'hello': 'world' }, // data\nceCommonOptions\n)\n\n// then, to validate objects, use class static methods like 'isValidEvent' and 'ValidateEvent', or instance methods like 'isValid', 'validate', etc ...\n\n// etc ...\n```\n\nIn the [example](./example/) folder there are some simple server scripts that uses the library  (inline but it's the same using it from npm registry).\n\n\n## Requirements\n\nNode.js 8.11.x or later.\n\n\n## Note\n\nSee the CloudEvents Specification [here](https://github.com/cloudevents/spec).\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
+    "content": "# cloudevent.js\n\nJavaScript/Node.js implementation of [CloudEvents](http://cloudevents.io/)\n\nThe purpose of this library is to create instances of CloudEvents in a simple way (with some useful defaults), \nor in a full way (all attributes).\nOptional, it's possible to validate created instances to be sure they are compliant with the standard.\n\nThen, created instances can be serialized, for example to be sent (or saved/stored) somewhere.\n\nNote that many features are exposed directly from the CloudEvent class with standard class instance methods, and even as class static methods (that operates on a given CloudEvent).\n\nMore features will follow.\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\n\nconst CloudEvent = require('cloudevent.js')\n```\n\ncreate some sample CloudEvent instances:\n\n```js\n// create some sample instances but without mandatory fields (for validation) ...\nconst ceEmpty = new CloudEvent() // create an empty CloudEvent instance (not valid for the validator, even in default case, when strict mode flag is disabled)\nconst ceMinimalMandatoryUndefinedNoStrict = new CloudEvent(undefined, undefined, undefined, { strict: false }) // expected success\nconst ceMinimalMandatoryUndefinedStrict = new CloudEvent(undefined, undefined, undefined, { strict: true }) // expected failure, so ceMinimalMandatoryUndefinedStrict will not be defined\n\n// create some sample minimal instances, good even for validation ...\nconst ceMinimal = new CloudEvent('1', // eventID\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\n  {} // data (empty) // optional, but useful the same in this sample usage\n)\n\n// create some instance with all attributes ...\n// define some common attributes\nconst ceCommonOptions = {\n  cloudEventsVersion: '0.0.0',\n  eventTypeVersion: '1.0.0',\n  source: '/test',\n  eventTime: new Date(),\n  extensions: { 'exampleExtension': 'value' },\n  contentType: 'application/json',\n  schemaURL: 'http://my-schema.localhost.localdomain',\n  strict: false // same as default\n}\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\n// create some instances with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\n// note that null values are not handled by default values, only undefined values ...\nconst ceFull = new CloudEvent('1/full',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  { 'hello': 'world' }, // data\n  ceCommonOptions\n)\nconst ceFullStrict = new CloudEvent('2/full-strict',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  { 'hello': 'world' }, // data\n  ceCommonOptionsStrict // use common options, but set strict mode to true\n)\nassert(ceFullStrict.isStrict)\nassert(!ceFull.isStrict) // ensure common options object has not been changed when reusing some of its values for the second instance\nassert(!CloudEvent.isStrictEvent(ceFull)) // the same, but using static method\n\n```\n\noptional, do some validations/checks on created instances.\nAs sample, use class static methods like 'isValidEvent' and 'ValidateEvent', or instance methods like 'isValid', 'validate', etc ...\n\n```js\nassert(!ceEmpty.isValid())\nassert(!ceMinimalMandatoryUndefinedNoStrict.isValid())\nassert(ceMinimal.isValid())\nassert(ceFull.isValid())\nassert(ceFullStrict.isValid())\n// the same, but using static method\nassert(!CloudEvent.isValidEvent(ceEmpty))\nassert(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict))\nassert(CloudEvent.isValidEvent(ceMinimal))\nassert(CloudEvent.isValidEvent(ceFull))\nassert(CloudEvent.isValidEvent(ceFullStrict))\nassert(CloudEvent.validateEvent(ceEmpty).length > 0)\nassert(CloudEvent.validateEvent(ceEmpty, { strict: true }).length > 0)\nassert(CloudEvent.validateEvent(ceMinimalMandatoryUndefinedNoStrict).length > 0)\nassert(CloudEvent.validateEvent(ceMinimal).length === 0)\nassert(CloudEvent.validateEvent(ceFull).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\n\nconsole.log(`Validation on ceEmpty: isValid: ${ceEmpty.isValid()}, `)\n\nconsole.log(`Validation output for ceEmpty, default strict mode is: size: ${CloudEvent.validateEvent(ceEmpty).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty))\nconsole.log(`Validation output for ceEmpty, force strict mode to true is size: ${CloudEvent.validateEvent(ceEmpty, { strict: true }).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty, { strict: true }))\n```\n\nserialization examples:\n\n```js\nconst ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\nconst ceFullSerialized = ceFull.serialize()\nconsole.log(`Serialization output for ceFull, details:\\n` + ceFullSerialized)\n\n// then use (send/store/etc) serialized instances ...\n\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library (inline but it's the same using it from npm registry).\n\n\n## Requirements\n\nNode.js 8.11.x or later.\n\n\n## Note\n\nNote that in this implementation there is even the ability to validate CloudEvent instances in a stricter way, by setting to true the attribute 'strict' in options in costructor options; or specify it during validation.\nThat attribute when set will be put in the 'extensions' standard attribute of a CloudEvent.\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/cloudevent.js/).\n\nSee the CloudEvents Specification [here](https://github.com/cloudevents/spec).\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
     "longname": "/Users/martinis/work/prove/cloudevent.js/README.md",
     "name": "./README.md",
     "static": true,
@@ -2425,7 +1810,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cloudevent.js\",\n  \"version\": \"0.1.0\",\n  \"description\": \"JavaScript/Node.js implementation of the CloudEvents standard format\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/example\",\n    \"lint\": \"standard \\\"./*.js\\\" \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"test:unit\": \"tap test/*.test.js test/*/*.test.js\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.3\",\n    \"simple-get\": \"^3.0.2\",\n    \"standard\": \"^11.0.1\",\n    \"tap\": \"^12.0.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.11.3\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/cloudevent.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/cloudevent.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/cloudevent.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"cloudevents\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
+    "content": "{\n  \"name\": \"cloudevent.js\",\n  \"version\": \"0.1.0\",\n  \"description\": \"JavaScript/Node.js implementation of the CloudEvents standard format\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./*.js\\\" \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"test:unit\": \"tap test/*.test.js test/*/*.test.js\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.3\",\n    \"simple-get\": \"^3.0.3\",\n    \"standard\": \"^11.0.1\",\n    \"tap\": \"^12.0.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.11.4\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/cloudevent.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/cloudevent.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/cloudevent.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"cloudevents\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
     "longname": "/Users/martinis/work/prove/cloudevent.js/package.json",
     "name": "package.json",
     "static": true,
