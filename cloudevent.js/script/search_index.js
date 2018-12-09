@@ -12,6 +12,72 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/validator.test.js.html#lineNumber50",
+    "create CloudEvent instances with different class hierarchy, and ensure the validation is right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber249",
+    "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber54",
+    "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber89",
+    "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber200",
+    "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber22",
+    "ensure decorator functions (exposed by the plugin) exists",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber37",
+    "ensure isValid and validate works good on undefined and null objects",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber22",
+    "ensure the CloudEvent class is exported by the library",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/validator.test.js.html#lineNumber24",
+    "ensure the Validator class (not exported by the library) works good",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber151",
+    "serialize a CloudEvent instance with a non default contentType, expect error",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber65",
+    "serialize some CloudEvent instances to JSON, and ensure they are right",
+    "test"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -372,6 +438,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/cloudevent.js~cloudevent#schema",
+    "class/src/cloudevent.js~CloudEvent.html#instance-get-schema",
+    "src/cloudevent.js~CloudEvent#schema",
+    "member"
+  ],
+  [
     "src/cloudevent.js~cloudevent#schemaurl",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-schemaURL",
     "src/cloudevent.js~CloudEvent#schemaURL",
@@ -435,6 +507,12 @@ window.esdocSearchIndex = [
     "src/cloudevent.js~cloudevent.validateevent",
     "class/src/cloudevent.js~CloudEvent.html#static-method-validateEvent",
     "src/cloudevent.js~CloudEvent.validateEvent",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.version",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-version",
+    "src/cloudevent.js~CloudEvent.version",
     "method"
   ],
   [
@@ -646,5 +724,23 @@ window.esdocSearchIndex = [
     "class/src/validator.js~Validator.html#static-method-isVersion",
     "src/validator.js~Validator.isVersion",
     "method"
+  ],
+  [
+    "test/cloudevent-serialization.test.js",
+    "test-file/test/cloudevent-serialization.test.js.html",
+    "test/cloudevent-serialization.test.js",
+    "testFile"
+  ],
+  [
+    "test/cloudevent.test.js",
+    "test-file/test/cloudevent.test.js.html",
+    "test/cloudevent.test.js",
+    "testFile"
+  ],
+  [
+    "test/validator.test.js",
+    "test-file/test/validator.test.js.html",
+    "test/validator.test.js",
+    "testFile"
   ]
 ]
