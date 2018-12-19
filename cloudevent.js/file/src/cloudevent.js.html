@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">src/cloudevent.js | cloudevent.js</title>
+  <title data-ice="title">src/cloudevent.js | cloudevent</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent.js"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
+<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -123,8 +123,7 @@ class CloudEvent {
      * @type {(object|Map|Set)}
      * @private
      */
-    // this.data = { ...data }
-    this.data = { data } // temp
+    this.data = { ...data }
     if (V.isString(data)) {
       // handle an edge case: if the given data is a String, I need to clone in a different way ...
       this.data = data.slice()
@@ -161,8 +160,7 @@ class CloudEvent {
      * @type {object}
      * @private
      */
-    // this.extensions = { ...extensions }
-    this.extensions = { extensions } // temp
+    this.extensions = { ...extensions }
     /**
      * The URL of schema for the event, if any.
      * @type {uri}
@@ -327,6 +325,42 @@ class CloudEvent {
   }
 
   /**
+   * Get the JSON Schema for a CloudEvent.
+   * Note that it&apos;s not used in standard serialization to JSON,
+   * but only in some serialization libraries.
+   *
+   * See JSON Schema.
+   *
+   * @return {object} the JSON Schema
+   */
+  static getJSONSchema () {
+    // define a schema for serializing a CloudEvent object to JSON
+    // note that properties not in the schema will be ignored
+    // (in json output) by some json serialization libraries, if additionalProperties is false
+    return {
+      title: &apos;CloudEvent Schema with required fields&apos;,
+      type: &apos;object&apos;,
+      properties: {
+        cloudEventsVersion: { type: &apos;string&apos; },
+        eventID: { type: &apos;string&apos; },
+        eventType: { type: &apos;string&apos; },
+        // data: { type: &apos;object&apos; },
+        eventTypeVersion: { type: &apos;string&apos; },
+        source: { type: &apos;string&apos; },
+        eventTime: { type: &apos;string&apos; },
+        // extensions: { type: &apos;object&apos; },
+        contentType: { type: &apos;string&apos; },
+        // TODO: use if/then/else on contentType ... wip
+        schemaURL: { type: &apos;string&apos; }
+      },
+      required: [&apos;cloudEventsVersion&apos;, &apos;eventID&apos;, &apos;eventType&apos;,
+        &apos;source&apos;, &apos;contentType&apos;
+      ],
+      additionalProperties: true // to handle data, extensions, and maybe other (non-standard) properties
+    }
+  }
+
+  /**
    * Serialize the current CloudEvent.
    *
    * See {@link CloudEvent.serializeeEvent}.
@@ -375,35 +409,12 @@ class CloudEvent {
   /**
    * Getter method to return JSON Schema for a CloudEvent.
    *
-   * See JSON Schema.
+   * See {@link CloudEvent.getJSONSchema}.
    *
    * @type {object}
    */
   get schema () {
-    // define a schema for serializing a CloudEvent object to JSON
-    // note that properties not in the schema will be ignored
-    // (in json output) by some json serialization libraries, if additionalProperties is false
-    return {
-      title: &apos;CloudEvent Schema with required fields&apos;,
-      type: &apos;object&apos;,
-      properties: {
-        cloudEventsVersion: { type: &apos;string&apos; },
-        eventID: { type: &apos;string&apos; },
-        eventType: { type: &apos;string&apos; },
-        // data: { type: &apos;object&apos; },
-        eventTypeVersion: { type: &apos;string&apos; },
-        source: { type: &apos;string&apos; },
-        eventTime: { type: &apos;string&apos; },
-        // extensions: { type: &apos;object&apos; },
-        contentType: { type: &apos;string&apos; },
-        // TODO: use if/then/else on contentType ... wip
-        schemaURL: { type: &apos;string&apos; }
-      },
-      required: [&apos;cloudEventsVersion&apos;, &apos;eventID&apos;, &apos;eventType&apos;,
-        &apos;source&apos;, &apos;contentType&apos;
-      ],
-      additionalProperties: true // to handle data, extensions, and maybe other (non-standard) properties
-    }
+    return this.constructor.getJSONSchema()
   }
 
   /**

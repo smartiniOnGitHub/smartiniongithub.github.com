@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl">
-  <title data-ice="title">Home | cloudevent.js</title>
+  <title data-ice="title">Home | cloudevent</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent.js"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
+<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -35,10 +35,11 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="cloudevent-js">cloudevent.js</h1><p>  <a href="https://npmjs.org/package/cloudevent.js/"><img src="https://img.shields.io/npm/v/cloudevent.js.svg?style=flat" alt="NPM Version"></a>
-  <a href="https://npmjs.org/package/cloudevent.js/"><img src="https://img.shields.io/npm/dm/cloudevent.js.svg?style=flat" alt="NPM Downloads"></a>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="cloudevent-js">cloudevent.js</h1><p>  <a href="https://npmjs.org/package/cloudevent/"><img src="https://img.shields.io/npm/v/cloudevent.svg?style=flat" alt="NPM Version"></a>
+  <a href="https://npmjs.org/package/cloudevent/"><img src="https://img.shields.io/npm/dm/cloudevent.svg?style=flat" alt="NPM Downloads"></a>
   <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
-  <a href="https://coveralls.io/github/smartiniOnGitHub/cloudevent.js/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/cloudevent.js/badge.svg?branch=master" alt="Coverage Status"></a></p>
+  <a href="https://coveralls.io/github/smartiniOnGitHub/cloudevent.js/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/cloudevent.js/badge.svg?branch=master" alt="Coverage Status"></a>
+  <a href="https://david-dm.org/smartiniOnGitHub/cloudevent.js.svg"><img src="https://david-dm.org/smartiniOnGitHub/cloudevent.js.svg" alt="Dependencies"></a></p>
 <p>JavaScript/Node.js implementation of <a href="http://cloudevents.io/">CloudEvents</a></p>
 <p>The purpose of this library is to create instances of CloudEvents in a simple way (with some useful defaults), 
 or in a full way (all attributes).
@@ -49,7 +50,7 @@ Optional, it&apos;s possible to validate created instances to be sure they are c
 <h2 id="usage">Usage</h2><p>Get a reference to the library:</p>
 <pre><code class="lang-js"><code class="source-code prettyprint">// Node.js example
 
-const CloudEvent = require(&apos;cloudevent.js&apos;)</code>
+const CloudEvent = require(&apos;cloudevent&apos;)</code>
 </code></pre>
 <p>create some sample CloudEvent instances:</p>
 <pre><code class="lang-js"><code class="source-code prettyprint">// create some sample instances but without mandatory fields (for validation) ...
@@ -133,11 +134,11 @@ console.log(`Serialization output for ceFull, details:\n` + ceFullSerialized)
 </code></pre>
 <p>Look into the <a href="./example/">example</a> folder for more sample scripts that uses the library (inline but it&apos;s the same using it from npm registry).</p>
 <h2 id="requirements">Requirements</h2><p>Node.js 8.14.x or later.</p>
-<h2 id="note">Note</h2><p>Note that in this implementation there is even the ability to validate CloudEvent instances in a stricter way, by setting to true the attribute &apos;strict&apos; in options in costructor options; or specify it during validation.
+<h2 id="note">Note</h2><p>Note that in this implementation there is even the ability to validate CloudEvent instances in a stricter way, by setting to true the attribute &apos;strict&apos; in options in constructor options; or specify it during validation.
 That attribute when set will be put in the &apos;extensions&apos; standard attribute of a CloudEvent.</p>
 <p>You can find Code Documentation for the API of the library <a href="https://smartiniongithub.github.io/cloudevent.js/">here</a>.</p>
 <p>See the CloudEvents Specification <a href="https://github.com/cloudevents/spec">here</a>.</p>
-<p>The package name &apos;cloudevent.js&apos; will change just after the &apos;0.2.0&apos; release 
+<p>The package name &apos;cloudevent.js&apos; is changed just after the &apos;0.2.0&apos; release 
 to the simpler &apos;cloudevent&apos; (published the same as &apos;0.2.0&apos; release),
 so it will be easier to get it at npm.</p>
 <h2 id="contributing">Contributing</h2><ol>

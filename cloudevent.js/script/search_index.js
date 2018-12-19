@@ -1,14 +1,14 @@
 window.esdocSearchIndex = [
   [
-    "cloudevent.js/src/cloudevent.js~cloudevent",
+    "cloudevent/src/cloudevent.js~cloudevent",
     "class/src/cloudevent.js~CloudEvent.html",
-    "<span>CloudEvent</span> <span class=\"search-result-import-path\">cloudevent.js/src/cloudevent.js</span>",
+    "<span>CloudEvent</span> <span class=\"search-result-import-path\">cloudevent/src/cloudevent.js</span>",
     "class"
   ],
   [
-    "cloudevent.js/src/validator.js~validator",
+    "cloudevent/src/validator.js~validator",
     "class/src/validator.js~Validator.html",
-    "<span>Validator</span> <span class=\"search-result-import-path\">cloudevent.js/src/validator.js</span>",
+    "<span>Validator</span> <span class=\"search-result-import-path\">cloudevent/src/validator.js</span>",
     "class"
   ],
   [
@@ -19,7 +19,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber249",
+    "test-file/test/cloudevent.test.js.html#lineNumber248",
     "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "test"
   ],
@@ -37,7 +37,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber200",
+    "test-file/test/cloudevent.test.js.html#lineNumber199",
     "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
     "test"
   ],
@@ -61,19 +61,25 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber178",
+    "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
     "test-file/test/validator.test.js.html#lineNumber24",
     "ensure the Validator class (not exported by the library) works good",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber151",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber150",
     "serialize a CloudEvent instance with a non default contentType, expect error",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber65",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber64",
     "serialize some CloudEvent instances to JSON, and ensure they are right",
     "test"
   ],
@@ -477,6 +483,12 @@ window.esdocSearchIndex = [
     "src/cloudevent.js~cloudevent.dumpobject",
     "class/src/cloudevent.js~CloudEvent.html#static-method-dumpObject",
     "src/cloudevent.js~CloudEvent.dumpObject",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.getjsonschema",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-getJSONSchema",
+    "src/cloudevent.js~CloudEvent.getJSONSchema",
     "method"
   ],
   [
