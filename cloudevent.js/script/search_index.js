@@ -61,7 +61,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber178",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber294",
     "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
     "test"
   ],
@@ -73,8 +73,20 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber150",
-    "serialize a CloudEvent instance with a non default contentType, expect error",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber215",
+    "serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber153",
+    "serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber336",
+    "serialize some CloudEvent instances to JSON with nested data, and ensure they are right",
     "test"
   ],
   [
@@ -442,6 +454,12 @@ window.esdocSearchIndex = [
     "class/src/cloudevent.js~CloudEvent.html#instance-method-isValid",
     "src/cloudevent.js~CloudEvent#isValid",
     "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#payload",
+    "class/src/cloudevent.js~CloudEvent.html#instance-get-payload",
+    "src/cloudevent.js~CloudEvent#payload",
+    "member"
   ],
   [
     "src/cloudevent.js~cloudevent#schema",

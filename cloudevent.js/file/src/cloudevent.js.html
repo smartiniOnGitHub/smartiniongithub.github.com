@@ -308,20 +308,37 @@ class CloudEvent {
   /**
    * Serialize the given CloudEvent in JSON format.
    * Note that here standard serialization to JSON is used (no additional libraries).
+   * Note that the result of encoder function is assigned to encoded data.
    *
    * @param {!object} event the CloudEvent to serialize
+   * @param {object} options optional serialization attributes:
+   *        encoder (function, default null) a function that takes data and returns encoded data,
+   *        encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),
    * @return {string} the serialized event, as a string
    */
-  static serializeEvent (event) {
+  static serializeEvent (event, { encoder, encodedData } = {}) {
     if (V.isUndefinedOrNull(event)) {
       throw new Error(&apos;CloudEvent undefined or null&apos;)
     }
-    if (event.contentType !== &apos;application/json&apos;) {
-      throw new Error(`Unsupported content type: &apos;${event.contentType}&apos;. Not yet implemented.`)
+    if (event.contentType === &apos;application/json&apos;) {
+      return JSON.stringify(event)
     }
-
-    const serialized = JSON.stringify(event)
-    return serialized
+    // else
+    if (V.isDefinedAndNotNull(encoder)) {
+      if (!V.isFunction(encoder)) {
+        throw new Error(`Missing or wrong encoder function: &apos;${encoder}&apos; for the given content type: &apos;${event.contentType}&apos;.`)
+      }
+      encodedData = encoder(event.payload)
+    } else {
+      // encoder not defined
+      if (!V.isDefinedAndNotNull(encodedData)) {
+        throw new Error(`Missing encoder function: use encoder function or encoded data with the given content type: &apos;${event.contentType}&apos;.`)
+      }
+    }
+    if (!V.isStringNotEmpty(encodedData)) {
+      throw new Error(`Missing or wrong encoded data: &apos;${encodedData}&apos; for the given content type: &apos;${event.contentType}&apos;.`)
+    }
+    return JSON.stringify({ ...event, data: encodedData })
   }
 
   /**
@@ -363,12 +380,15 @@ class CloudEvent {
   /**
    * Serialize the current CloudEvent.
    *
-   * See {@link CloudEvent.serializeeEvent}.
+   * See {@link CloudEvent.serializeEvent}.
    *
+   * @param {object} options optional serialization attributes:
+   *        encoder (function, default null) a function that takes data and returns encoded data,
+   *        encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),
    * @return {string} the serialized event, as a string
    */
-  serialize () {
-    return this.constructor.serializeEvent(this)
+  serialize ({ encoder, encodedData } = {}) {
+    return this.constructor.serializeEvent(this, { encoder, encodedData })
   }
 
   /**
@@ -415,6 +435,18 @@ class CloudEvent {
    */
   get schema () {
     return this.constructor.getJSONSchema()
+  }
+
+  /**
+   * Getter method to return a copy of CloudEvent data attribute,
+   * or original data payload.
+   *
+   * See {@link CloudEvent.data}.
+   *
+   * @type {(object|Map|Set)}
+   */
+  get payload () {
+    return { ...this.data }
   }
 
   /**

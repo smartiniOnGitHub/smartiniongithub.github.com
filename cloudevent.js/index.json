@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/cloudevent.js",
-    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * CloudEvent:\r\n * this module exports some useful definition and utility related to CloudEvents.\r\n */\r\n\r\n/**\r\n * Get a reference to cloudevent validator class.\r\n */\r\nconst V = require('./validator') // get validator from here\r\n\r\n/**\r\n * CloudEvent implementation.\r\n *\r\n * @see https://github.com/cloudevents/spec/blob/master/json-format.md\r\n */\r\nclass CloudEvent {\r\n  /**\r\n   * Create a new instance of a CloudEvent object.\r\n   * @param {!string} eventID the ID of the event (unique), mandatory\r\n   * @param {!string} eventType the type of the event (usually), mandatory\r\n   * @param {!uri} source the source uri of the event (use '/' if empty), mandatory\r\n   * @param {(object|Map|Set)} data the real event data\r\n   * @param {object} options optional attributes of the event; some has default values chosen here:\r\n   *        eventTypeVersion (string) optional,\r\n   *        eventTime (timestamp, default now),\r\n   *        extensions (object) optional but if given must contain at least 1 property (key/value),\r\n   *        contentType (string, default 'application/json') tell how the data attribute must be encoded,\r\n   *        schemaURL (uri) optional,\r\n   *        strict (boolean, default false) tell if object instance will be validated in a more strict way\r\n   * @throws {Error} if strict is true and eventID or eventType is undefined or null\r\n   */\r\n  constructor (eventID, eventType, source, data, {\r\n    eventTypeVersion,\r\n    eventTime = new Date(),\r\n    extensions,\r\n    contentType = 'application/json',\r\n    schemaURL,\r\n    strict = false } = {}\r\n  ) {\r\n    if (strict === true) {\r\n      if (!eventID || !eventType || !source) {\r\n        throw new Error('Unable to create CloudEvent instance, mandatory field missing')\r\n      }\r\n    }\r\n\r\n    /**\r\n     * The event ID.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventID = eventID\r\n    /**\r\n     * The event type.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventType = eventType\r\n    /**\r\n     * The source URI of the event.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.source = source\r\n    /**\r\n     * The real event data.\r\n     * Usually it's an object, but could be even a Map or a Set.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {(object|Map|Set)}\r\n     * @private\r\n     */\r\n    this.data = { ...data }\r\n    if (V.isString(data)) {\r\n      // handle an edge case: if the given data is a String, I need to clone in a different way ...\r\n      this.data = data.slice()\r\n    }\r\n\r\n    /**\r\n     * The CloudEvent specification version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.cloudEventsVersion = this.constructor.version()\r\n    /**\r\n     * The MIME Type for the encoding of the data attribute, when serialized.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.contentType = contentType\r\n    /**\r\n     * The event timestamp.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {timestamp}\r\n     * @private\r\n     */\r\n    this.eventTime = new Date(eventTime.valueOf())\r\n    /**\r\n     * The event version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventTypeVersion = eventTypeVersion\r\n    /**\r\n     * Extensions defined for the event.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {object}\r\n     * @private\r\n     */\r\n    this.extensions = { ...extensions }\r\n    /**\r\n     * The URL of schema for the event, if any.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.schemaURL = schemaURL\r\n\r\n    // add strict to extensions, but only when defined\r\n    if (strict === true) {\r\n      this.extensions = this.extensions || {}\r\n      this.extensions.strict = strict\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility function that return a dump of the given object.\r\n   *\r\n   * @static\r\n   * @param {(object|Map|Set)} obj the object to dump\r\n   * @param {string} name the name to assign in the returned string\r\n   * @return {string} the dump of the object or a message when obj is undefined/null/not an object\r\n   */\r\n  static dumpObject (obj, name) {\r\n    const n = name || 'noname'\r\n    if (V.isUndefined(obj)) {\r\n      return `${n}: undefined`\r\n    } else if (V.isNull(obj)) {\r\n      return `${n}: null`\r\n    } else if (!V.isObjectOrCollection(obj)) {\r\n      return `${n}: '${obj.toString()}'`\r\n    } else {\r\n      return `${n}: ${JSON.stringify(obj)}`\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the version of the CloudEvent Specification implemented here\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static version () {\r\n    return '0.1'\r\n  }\r\n\r\n  /**\r\n   * Return the MIME Type for a CloudEvent\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static mediaType () {\r\n    return 'application/cloudevents+json'\r\n  }\r\n\r\n  /**\r\n   * Tell if the object has the strict flag enabled.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @return {boolean} true if strict, otherwise false\r\n   * @throws {Error} if event if undefined or null\r\n   */\r\n  static isStrictEvent (event) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (V.isDefinedAndNotNull(event.extensions)) {\r\n      return event.extensions.strict === true\r\n    } else {\r\n      return false\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Validate the given CloudEvent.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  static validateEvent (event, { strict = false } = {}) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      return [new Error('CloudEvent undefined or null')]\r\n    }\r\n    let ve = [] // validation errors\r\n\r\n    // standard validation\r\n    // note that some properties are not checked here because I assign a default value, and I check them in strict mode, like:\r\n    // data, eventTime, extensions, contentType ...\r\n    // ve.push(V.ensureIsStringNotEmpty(event.cloudEventsVersion, 'cloudEventsVersion')) // no more a public attribute\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventID, 'eventID'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventType, 'eventType'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.source, 'source'))\r\n    if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.eventTypeVersion, 'eventTypeVersion'))\r\n    }\r\n    if (V.isDefinedAndNotNull(event.schemaURL)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    // additional validation if strict mode enabled, or if enabled in the event ...\r\n    if (strict === true || CloudEvent.isStrictEvent(event) === true) {\r\n      ve.push(V.ensureIsClass(event, CloudEvent, 'CloudEvent_Subclass'))\r\n      ve.push(V.ensureIsVersion(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n      if (V.isDefinedAndNotNull(event.data)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n      }\r\n      if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n        ve.push(V.ensureIsVersion(event.eventTypeVersion, 'eventTypeVersion'))\r\n      }\r\n      ve.push(V.ensureIsURI(event.source, 'source'))\r\n      if (V.isDefinedAndNotNull(event.extensions)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n        const extensionsSize = V.getSize(event.extensions)\r\n        if (extensionsSize < 1) {\r\n          ve.push(new Error(`The object 'extensions' must contain at least 1 property`))\r\n        }\r\n      }\r\n      ve.push(V.ensureIsDatePast(event.eventTime, 'eventTime'))\r\n      ve.push(V.ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n      ve.push(V.ensureIsURI(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    return ve.filter((i) => i)\r\n  }\r\n\r\n  /**\r\n   * Tell the given CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  static isValidEvent (event, { strict = false } = {}) {\r\n    const validationErrors = CloudEvent.validateEvent(event, { strict })\r\n    const size = V.getSize(validationErrors)\r\n    return (size === 0)\r\n  }\r\n\r\n  /**\r\n   * Serialize the given CloudEvent in JSON format.\r\n   * Note that here standard serialization to JSON is used (no additional libraries).\r\n   *\r\n   * @param {!object} event the CloudEvent to serialize\r\n   * @return {string} the serialized event, as a string\r\n   */\r\n  static serializeEvent (event) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (event.contentType !== 'application/json') {\r\n      throw new Error(`Unsupported content type: '${event.contentType}'. Not yet implemented.`)\r\n    }\r\n\r\n    const serialized = JSON.stringify(event)\r\n    return serialized\r\n  }\r\n\r\n  /**\r\n   * Get the JSON Schema for a CloudEvent.\r\n   * Note that it's not used in standard serialization to JSON,\r\n   * but only in some serialization libraries.\r\n   *\r\n   * See JSON Schema.\r\n   *\r\n   * @return {object} the JSON Schema\r\n   */\r\n  static getJSONSchema () {\r\n    // define a schema for serializing a CloudEvent object to JSON\r\n    // note that properties not in the schema will be ignored\r\n    // (in json output) by some json serialization libraries, if additionalProperties is false\r\n    return {\r\n      title: 'CloudEvent Schema with required fields',\r\n      type: 'object',\r\n      properties: {\r\n        cloudEventsVersion: { type: 'string' },\r\n        eventID: { type: 'string' },\r\n        eventType: { type: 'string' },\r\n        // data: { type: 'object' },\r\n        eventTypeVersion: { type: 'string' },\r\n        source: { type: 'string' },\r\n        eventTime: { type: 'string' },\r\n        // extensions: { type: 'object' },\r\n        contentType: { type: 'string' },\r\n        // TODO: use if/then/else on contentType ... wip\r\n        schemaURL: { type: 'string' }\r\n      },\r\n      required: ['cloudEventsVersion', 'eventID', 'eventType',\r\n        'source', 'contentType'\r\n      ],\r\n      additionalProperties: true // to handle data, extensions, and maybe other (non-standard) properties\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Serialize the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.serializeeEvent}.\r\n   *\r\n   * @return {string} the serialized event, as a string\r\n   */\r\n  serialize () {\r\n    return this.constructor.serializeEvent(this)\r\n  }\r\n\r\n  /**\r\n   * Validate the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  validate ({ strict = false } = {}) {\r\n    return this.constructor.validateEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Tell the current CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.isValidEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  isValid ({ strict = false } = {}) {\r\n    return this.constructor.isValidEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Getter method to tell if the object has the strict flag enabled.\r\n   *\r\n   * See {@link CloudEvent.isStrictEvent}.\r\n   *\r\n   * @type {boolean}\r\n   */\r\n  get isStrict () {\r\n    return this.constructor.isStrictEvent(this)\r\n  }\r\n\r\n  /**\r\n   * Getter method to return JSON Schema for a CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.getJSONSchema}.\r\n   *\r\n   * @type {object}\r\n   */\r\n  get schema () {\r\n    return this.constructor.getJSONSchema()\r\n  }\r\n\r\n  /**\r\n   * Override the usual toString method.\r\n   *\r\n   * See {@link Object.toString}.\r\n   *\r\n   * @return {string} a string representation for object instance\r\n   */\r\n  toString () {\r\n    return `CloudEvent[cloudEventsVersion: ${this.cloudEventsVersion}, ${this.constructor.dumpObject(this.eventID, 'eventID')}, ${this.constructor.dumpObject(this.eventType, 'eventType')}, ${this.constructor.dumpObject(this.data, 'data')}, ...]`\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'CloudEvent'\r\n  }\r\n}\r\n\r\nmodule.exports = CloudEvent\r\n",
+    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * CloudEvent:\r\n * this module exports some useful definition and utility related to CloudEvents.\r\n */\r\n\r\n/**\r\n * Get a reference to cloudevent validator class.\r\n */\r\nconst V = require('./validator') // get validator from here\r\n\r\n/**\r\n * CloudEvent implementation.\r\n *\r\n * @see https://github.com/cloudevents/spec/blob/master/json-format.md\r\n */\r\nclass CloudEvent {\r\n  /**\r\n   * Create a new instance of a CloudEvent object.\r\n   * @param {!string} eventID the ID of the event (unique), mandatory\r\n   * @param {!string} eventType the type of the event (usually), mandatory\r\n   * @param {!uri} source the source uri of the event (use '/' if empty), mandatory\r\n   * @param {(object|Map|Set)} data the real event data\r\n   * @param {object} options optional attributes of the event; some has default values chosen here:\r\n   *        eventTypeVersion (string) optional,\r\n   *        eventTime (timestamp, default now),\r\n   *        extensions (object) optional but if given must contain at least 1 property (key/value),\r\n   *        contentType (string, default 'application/json') tell how the data attribute must be encoded,\r\n   *        schemaURL (uri) optional,\r\n   *        strict (boolean, default false) tell if object instance will be validated in a more strict way\r\n   * @throws {Error} if strict is true and eventID or eventType is undefined or null\r\n   */\r\n  constructor (eventID, eventType, source, data, {\r\n    eventTypeVersion,\r\n    eventTime = new Date(),\r\n    extensions,\r\n    contentType = 'application/json',\r\n    schemaURL,\r\n    strict = false } = {}\r\n  ) {\r\n    if (strict === true) {\r\n      if (!eventID || !eventType || !source) {\r\n        throw new Error('Unable to create CloudEvent instance, mandatory field missing')\r\n      }\r\n    }\r\n\r\n    /**\r\n     * The event ID.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventID = eventID\r\n    /**\r\n     * The event type.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventType = eventType\r\n    /**\r\n     * The source URI of the event.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.source = source\r\n    /**\r\n     * The real event data.\r\n     * Usually it's an object, but could be even a Map or a Set.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {(object|Map|Set)}\r\n     * @private\r\n     */\r\n    this.data = { ...data }\r\n    if (V.isString(data)) {\r\n      // handle an edge case: if the given data is a String, I need to clone in a different way ...\r\n      this.data = data.slice()\r\n    }\r\n\r\n    /**\r\n     * The CloudEvent specification version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.cloudEventsVersion = this.constructor.version()\r\n    /**\r\n     * The MIME Type for the encoding of the data attribute, when serialized.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.contentType = contentType\r\n    /**\r\n     * The event timestamp.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {timestamp}\r\n     * @private\r\n     */\r\n    this.eventTime = new Date(eventTime.valueOf())\r\n    /**\r\n     * The event version.\r\n     * @type {string}\r\n     * @private\r\n     */\r\n    this.eventTypeVersion = eventTypeVersion\r\n    /**\r\n     * Extensions defined for the event.\r\n     * Copy the original object to avoid changing objects that could be shared.\r\n     * @type {object}\r\n     * @private\r\n     */\r\n    this.extensions = { ...extensions }\r\n    /**\r\n     * The URL of schema for the event, if any.\r\n     * @type {uri}\r\n     * @private\r\n     */\r\n    this.schemaURL = schemaURL\r\n\r\n    // add strict to extensions, but only when defined\r\n    if (strict === true) {\r\n      this.extensions = this.extensions || {}\r\n      this.extensions.strict = strict\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility function that return a dump of the given object.\r\n   *\r\n   * @static\r\n   * @param {(object|Map|Set)} obj the object to dump\r\n   * @param {string} name the name to assign in the returned string\r\n   * @return {string} the dump of the object or a message when obj is undefined/null/not an object\r\n   */\r\n  static dumpObject (obj, name) {\r\n    const n = name || 'noname'\r\n    if (V.isUndefined(obj)) {\r\n      return `${n}: undefined`\r\n    } else if (V.isNull(obj)) {\r\n      return `${n}: null`\r\n    } else if (!V.isObjectOrCollection(obj)) {\r\n      return `${n}: '${obj.toString()}'`\r\n    } else {\r\n      return `${n}: ${JSON.stringify(obj)}`\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the version of the CloudEvent Specification implemented here\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static version () {\r\n    return '0.1'\r\n  }\r\n\r\n  /**\r\n   * Return the MIME Type for a CloudEvent\r\n   *\r\n   * @static\r\n   * @return {string} the value\r\n   */\r\n  static mediaType () {\r\n    return 'application/cloudevents+json'\r\n  }\r\n\r\n  /**\r\n   * Tell if the object has the strict flag enabled.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @return {boolean} true if strict, otherwise false\r\n   * @throws {Error} if event if undefined or null\r\n   */\r\n  static isStrictEvent (event) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (V.isDefinedAndNotNull(event.extensions)) {\r\n      return event.extensions.strict === true\r\n    } else {\r\n      return false\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Validate the given CloudEvent.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  static validateEvent (event, { strict = false } = {}) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      return [new Error('CloudEvent undefined or null')]\r\n    }\r\n    let ve = [] // validation errors\r\n\r\n    // standard validation\r\n    // note that some properties are not checked here because I assign a default value, and I check them in strict mode, like:\r\n    // data, eventTime, extensions, contentType ...\r\n    // ve.push(V.ensureIsStringNotEmpty(event.cloudEventsVersion, 'cloudEventsVersion')) // no more a public attribute\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventID, 'eventID'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.eventType, 'eventType'))\r\n    ve.push(V.ensureIsStringNotEmpty(event.source, 'source'))\r\n    if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.eventTypeVersion, 'eventTypeVersion'))\r\n    }\r\n    if (V.isDefinedAndNotNull(event.schemaURL)) {\r\n      ve.push(V.ensureIsStringNotEmpty(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    // additional validation if strict mode enabled, or if enabled in the event ...\r\n    if (strict === true || CloudEvent.isStrictEvent(event) === true) {\r\n      ve.push(V.ensureIsClass(event, CloudEvent, 'CloudEvent_Subclass'))\r\n      ve.push(V.ensureIsVersion(event.cloudEventsVersion, 'cloudEventsVersion'))\r\n      if (V.isDefinedAndNotNull(event.data)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.data, 'data'))\r\n      }\r\n      if (V.isDefinedAndNotNull(event.eventTypeVersion)) {\r\n        ve.push(V.ensureIsVersion(event.eventTypeVersion, 'eventTypeVersion'))\r\n      }\r\n      ve.push(V.ensureIsURI(event.source, 'source'))\r\n      if (V.isDefinedAndNotNull(event.extensions)) {\r\n        ve.push(V.ensureIsObjectOrCollectionNotString(event.extensions, 'extensions'))\r\n        const extensionsSize = V.getSize(event.extensions)\r\n        if (extensionsSize < 1) {\r\n          ve.push(new Error(`The object 'extensions' must contain at least 1 property`))\r\n        }\r\n      }\r\n      ve.push(V.ensureIsDatePast(event.eventTime, 'eventTime'))\r\n      ve.push(V.ensureIsStringNotEmpty(event.contentType, 'contentType'))\r\n      ve.push(V.ensureIsURI(event.schemaURL, 'schemaURL'))\r\n    }\r\n\r\n    return ve.filter((i) => i)\r\n  }\r\n\r\n  /**\r\n   * Tell the given CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @static\r\n   * @param {!object} event the CloudEvent to validate\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  static isValidEvent (event, { strict = false } = {}) {\r\n    const validationErrors = CloudEvent.validateEvent(event, { strict })\r\n    const size = V.getSize(validationErrors)\r\n    return (size === 0)\r\n  }\r\n\r\n  /**\r\n   * Serialize the given CloudEvent in JSON format.\r\n   * Note that here standard serialization to JSON is used (no additional libraries).\r\n   * Note that the result of encoder function is assigned to encoded data.\r\n   *\r\n   * @param {!object} event the CloudEvent to serialize\r\n   * @param {object} options optional serialization attributes:\r\n   *        encoder (function, default null) a function that takes data and returns encoded data,\r\n   *        encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),\r\n   * @return {string} the serialized event, as a string\r\n   */\r\n  static serializeEvent (event, { encoder, encodedData } = {}) {\r\n    if (V.isUndefinedOrNull(event)) {\r\n      throw new Error('CloudEvent undefined or null')\r\n    }\r\n    if (event.contentType === 'application/json') {\r\n      return JSON.stringify(event)\r\n    }\r\n    // else\r\n    if (V.isDefinedAndNotNull(encoder)) {\r\n      if (!V.isFunction(encoder)) {\r\n        throw new Error(`Missing or wrong encoder function: '${encoder}' for the given content type: '${event.contentType}'.`)\r\n      }\r\n      encodedData = encoder(event.payload)\r\n    } else {\r\n      // encoder not defined\r\n      if (!V.isDefinedAndNotNull(encodedData)) {\r\n        throw new Error(`Missing encoder function: use encoder function or encoded data with the given content type: '${event.contentType}'.`)\r\n      }\r\n    }\r\n    if (!V.isStringNotEmpty(encodedData)) {\r\n      throw new Error(`Missing or wrong encoded data: '${encodedData}' for the given content type: '${event.contentType}'.`)\r\n    }\r\n    return JSON.stringify({ ...event, data: encodedData })\r\n  }\r\n\r\n  /**\r\n   * Get the JSON Schema for a CloudEvent.\r\n   * Note that it's not used in standard serialization to JSON,\r\n   * but only in some serialization libraries.\r\n   *\r\n   * See JSON Schema.\r\n   *\r\n   * @return {object} the JSON Schema\r\n   */\r\n  static getJSONSchema () {\r\n    // define a schema for serializing a CloudEvent object to JSON\r\n    // note that properties not in the schema will be ignored\r\n    // (in json output) by some json serialization libraries, if additionalProperties is false\r\n    return {\r\n      title: 'CloudEvent Schema with required fields',\r\n      type: 'object',\r\n      properties: {\r\n        cloudEventsVersion: { type: 'string' },\r\n        eventID: { type: 'string' },\r\n        eventType: { type: 'string' },\r\n        // data: { type: 'object' },\r\n        eventTypeVersion: { type: 'string' },\r\n        source: { type: 'string' },\r\n        eventTime: { type: 'string' },\r\n        // extensions: { type: 'object' },\r\n        contentType: { type: 'string' },\r\n        // TODO: use if/then/else on contentType ... wip\r\n        schemaURL: { type: 'string' }\r\n      },\r\n      required: ['cloudEventsVersion', 'eventID', 'eventType',\r\n        'source', 'contentType'\r\n      ],\r\n      additionalProperties: true // to handle data, extensions, and maybe other (non-standard) properties\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Serialize the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.serializeEvent}.\r\n   *\r\n   * @param {object} options optional serialization attributes:\r\n   *        encoder (function, default null) a function that takes data and returns encoded data,\r\n   *        encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),\r\n   * @return {string} the serialized event, as a string\r\n   */\r\n  serialize ({ encoder, encodedData } = {}) {\r\n    return this.constructor.serializeEvent(this, { encoder, encodedData })\r\n  }\r\n\r\n  /**\r\n   * Validate the current CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.validateEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {object[]} an array of (non null) validation errors, or at least an empty array\r\n   */\r\n  validate ({ strict = false } = {}) {\r\n    return this.constructor.validateEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Tell the current CloudEvent, if it's valid.\r\n   *\r\n   * See {@link CloudEvent.isValidEvent}.\r\n   *\r\n   * @param {object} options containing: strict (boolean, default false) to validate it in a more strict way\r\n   * @return {boolean} true if valid, otherwise false\r\n   */\r\n  isValid ({ strict = false } = {}) {\r\n    return this.constructor.isValidEvent(this, { strict })\r\n  }\r\n\r\n  /**\r\n   * Getter method to tell if the object has the strict flag enabled.\r\n   *\r\n   * See {@link CloudEvent.isStrictEvent}.\r\n   *\r\n   * @type {boolean}\r\n   */\r\n  get isStrict () {\r\n    return this.constructor.isStrictEvent(this)\r\n  }\r\n\r\n  /**\r\n   * Getter method to return JSON Schema for a CloudEvent.\r\n   *\r\n   * See {@link CloudEvent.getJSONSchema}.\r\n   *\r\n   * @type {object}\r\n   */\r\n  get schema () {\r\n    return this.constructor.getJSONSchema()\r\n  }\r\n\r\n  /**\r\n   * Getter method to return a copy of CloudEvent data attribute,\r\n   * or original data payload.\r\n   *\r\n   * See {@link CloudEvent.data}.\r\n   *\r\n   * @type {(object|Map|Set)}\r\n   */\r\n  get payload () {\r\n    return { ...this.data }\r\n  }\r\n\r\n  /**\r\n   * Override the usual toString method.\r\n   *\r\n   * See {@link Object.toString}.\r\n   *\r\n   * @return {string} a string representation for object instance\r\n   */\r\n  toString () {\r\n    return `CloudEvent[cloudEventsVersion: ${this.cloudEventsVersion}, ${this.constructor.dumpObject(this.eventID, 'eventID')}, ${this.constructor.dumpObject(this.eventType, 'eventType')}, ${this.constructor.dumpObject(this.data, 'data')}, ...]`\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'CloudEvent'\r\n  }\r\n}\r\n\r\nmodule.exports = CloudEvent\r\n",
     "static": true,
     "longname": "/Users/martinis/work/prove/cloudevent.js/src/cloudevent.js",
     "access": "public",
@@ -1085,8 +1085,8 @@
     "static": true,
     "longname": "src/cloudevent.js~CloudEvent.serializeEvent",
     "access": "public",
-    "description": "Serialize the given CloudEvent in JSON format.\nNote that here standard serialization to JSON is used (no additional libraries).",
-    "lineNumber": 277,
+    "description": "Serialize the given CloudEvent in JSON format.\nNote that here standard serialization to JSON is used (no additional libraries).\nNote that the result of encoder function is assigned to encoded data.",
+    "lineNumber": 281,
     "params": [
       {
         "nullable": false,
@@ -1097,6 +1097,16 @@
         "optional": false,
         "name": "event",
         "description": "the CloudEvent to serialize"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "optional serialization attributes:\n       encoder (function, default null) a function that takes data and returns encoded data,\n       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),"
       }
     ],
     "return": {
@@ -1119,7 +1129,7 @@
     "longname": "src/cloudevent.js~CloudEvent.getJSONSchema",
     "access": "public",
     "description": "Get the JSON Schema for a CloudEvent.\nNote that it's not used in standard serialization to JSON,\nbut only in some serialization libraries.\n\nSee JSON Schema.",
-    "lineNumber": 298,
+    "lineNumber": 315,
     "return": {
       "nullable": null,
       "types": [
@@ -1140,8 +1150,20 @@
     "static": false,
     "longname": "src/cloudevent.js~CloudEvent#serialize",
     "access": "public",
-    "description": "Serialize the current CloudEvent.\n\nSee {@link CloudEvent.serializeeEvent}.",
-    "lineNumber": 332,
+    "description": "Serialize the current CloudEvent.\n\nSee {@link CloudEvent.serializeEvent}.",
+    "lineNumber": 352,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "optional serialization attributes:\n       encoder (function, default null) a function that takes data and returns encoded data,\n       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),"
+      }
+    ],
     "return": {
       "nullable": null,
       "types": [
@@ -1149,8 +1171,7 @@
       ],
       "spread": false,
       "description": "the serialized event, as a string"
-    },
-    "params": []
+    }
   },
   {
     "__docId__": 72,
@@ -1163,7 +1184,7 @@
     "longname": "src/cloudevent.js~CloudEvent#validate",
     "access": "public",
     "description": "Validate the current CloudEvent.\n\nSee {@link CloudEvent.validateEvent}.",
-    "lineNumber": 344,
+    "lineNumber": 364,
     "params": [
       {
         "nullable": null,
@@ -1196,7 +1217,7 @@
     "longname": "src/cloudevent.js~CloudEvent#isValid",
     "access": "public",
     "description": "Tell the current CloudEvent, if it's valid.\n\nSee {@link CloudEvent.isValidEvent}.",
-    "lineNumber": 356,
+    "lineNumber": 376,
     "params": [
       {
         "nullable": null,
@@ -1229,7 +1250,7 @@
     "longname": "src/cloudevent.js~CloudEvent#isStrict",
     "access": "public",
     "description": "Getter method to tell if the object has the strict flag enabled.\n\nSee {@link CloudEvent.isStrictEvent}.",
-    "lineNumber": 367,
+    "lineNumber": 387,
     "type": {
       "nullable": null,
       "types": [
@@ -1250,7 +1271,7 @@
     "longname": "src/cloudevent.js~CloudEvent#schema",
     "access": "public",
     "description": "Getter method to return JSON Schema for a CloudEvent.\n\nSee {@link CloudEvent.getJSONSchema}.",
-    "lineNumber": 378,
+    "lineNumber": 398,
     "type": {
       "nullable": null,
       "types": [
@@ -1262,6 +1283,29 @@
   },
   {
     "__docId__": 76,
+    "kind": "get",
+    "name": "payload",
+    "memberof": "src/cloudevent.js~CloudEvent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/cloudevent.js~CloudEvent#payload",
+    "access": "public",
+    "description": "Getter method to return a copy of CloudEvent data attribute,\nor original data payload.\n\nSee {@link CloudEvent.data}.",
+    "lineNumber": 410,
+    "type": {
+      "nullable": null,
+      "types": [
+        "object",
+        "Map",
+        "Set"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 77,
     "kind": "method",
     "name": "toString",
     "memberof": "src/cloudevent.js~CloudEvent",
@@ -1271,7 +1315,7 @@
     "longname": "src/cloudevent.js~CloudEvent#toString",
     "access": "public",
     "description": "Override the usual toString method.\n\nSee {@link Object.toString}.",
-    "lineNumber": 389,
+    "lineNumber": 421,
     "return": {
       "nullable": null,
       "types": [
@@ -1283,7 +1327,7 @@
     "params": []
   },
   {
-    "__docId__": 77,
+    "__docId__": 78,
     "kind": "get",
     "name": "[Symbol.toStringTag]",
     "memberof": "src/cloudevent.js~CloudEvent",
@@ -1293,7 +1337,7 @@
     "longname": "src/cloudevent.js~CloudEvent#[Symbol.toStringTag]",
     "access": "public",
     "description": "Gives a string valued property that is used in the creation of the default string description of an object.\n\nSee {@link Symbol.toStringTag}.",
-    "lineNumber": 400,
+    "lineNumber": 432,
     "return": {
       "nullable": null,
       "types": [
@@ -1309,7 +1353,7 @@
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 79,
     "kind": "file",
     "name": "src/index.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Get a reference to cloudevent class definition.\r\n */\r\nconst cloudEventDefinition = require('./cloudevent') // get CloudEvent definition and related utilities\r\n\r\nmodule.exports = cloudEventDefinition\r\n",
@@ -1320,7 +1364,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 79,
+    "__docId__": 80,
     "kind": "file",
     "name": "src/validator.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * Validators:\r\n * this module exports some useful generic functions for the validation of objects.\r\n */\r\n\r\nconst url = require('url')\r\n\r\n/**\r\n * Generic Validator implementation.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass Validator {\r\n  /**\r\n   * Create a new instance of a Validator object.\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Gives a string valued property that is used in the creation of the default string description of an object.\r\n   *\r\n   * See {@link Symbol.toStringTag}.\r\n   *\r\n   * @return {string} a string representation of the object type\r\n   */\r\n  get [Symbol.toStringTag] () {\r\n    return 'Validator'\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined, false otherwise\r\n   */\r\n  static isUndefined (arg) {\r\n    return (arg === undefined)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if null, false otherwise\r\n   */\r\n  static isNull (arg) {\r\n    return (arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is undefined or null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if undefined or null, false otherwise\r\n   */\r\n  static isUndefinedOrNull (arg) {\r\n    return (arg === undefined || arg === null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is defined and not null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if defined and not null, false otherwise\r\n   */\r\n  static isDefinedAndNotNull (arg) {\r\n    return (arg !== undefined && arg !== null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a string, false otherwise\r\n   */\r\n  static isString (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a not empty string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a not empty string, false otherwise\r\n   */\r\n  static isStringNotEmpty (arg) {\r\n    return (Validator.isString(arg) && (arg.length > 0))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a date.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a date, false otherwise\r\n   */\r\n  static isDate (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object' || arg instanceof Date))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date, false otherwise\r\n   */\r\n  static isDateValid (arg) {\r\n    return (Validator.isDate(arg) && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a valid date and in the past.\r\n   *\r\n   * See {@link Validator.isDateValid}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a valid date in the past, false otherwise\r\n   */\r\n  static isDatePast (arg) {\r\n    return (Validator.isDateValid(arg) && arg < Date.now())\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a number.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a number, false otherwise\r\n   */\r\n  static isNumber (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && typeof arg === 'number' && !isNaN(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an array.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an array, false otherwise\r\n   */\r\n  static isArray (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (Array.isArray(arg)))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a boolean.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a boolean, false otherwise\r\n   */\r\n  static isBoolean (arg) {\r\n    return (typeof arg === 'boolean')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @return {boolean} true if it's an instance (or extends) that class, false otherwise\r\n   */\r\n  static isClass (arg, classReference) {\r\n    return (arg instanceof classReference)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a function, false otherwise\r\n   */\r\n  static isFunction (arg) {\r\n    return (typeof arg === 'function')\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object, false otherwise\r\n   */\r\n  static isObject (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (typeof arg === 'object'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a keyed collection.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a Map|WeakMap or a Set|WeakSet, false otherwise\r\n   */\r\n  static isKeyedCollection (arg) {\r\n    return (Validator.isDefinedAndNotNull(arg) && (\r\n      arg instanceof Map || arg instanceof WeakMap ||\r\n      arg instanceof Set || arg instanceof WeakSet\r\n    ))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection.\r\n   *\r\n   * See {@link Validator.isObject}, {@link Validator.isKeyedCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection, false otherwise\r\n   */\r\n  static isObjectOrCollection (arg) {\r\n    return (Validator.isObject(arg) || Validator.isKeyedCollection(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an object or a keyed collection, but not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's an object or a keyed collection but not a string, false otherwise\r\n   */\r\n  static isObjectOrCollectionNotString (arg) {\r\n    return (Validator.isObjectOrCollection(arg) && (typeof arg !== 'string'))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is a string representation of a version number.\r\n   *\r\n   * Note that the version string could be something like:\r\n   * - as minimum a number is needed for an integer version\r\n   * - at the beginning I can have an optional char 'v' or 'V'\r\n   * - anything after the third number will be considered as a string\r\n   * - format updated to handle version output of 'git describe'\r\n   *\r\n   * @static\r\n   * @param {string} arg the version string to check\r\n   * @return {boolean} true if it's a version string, false otherwise\r\n   */\r\n  static isVersion (arg) {\r\n    // quick check if the given string is in the format 'n.n.n'\r\n    const versionRegex = /^(?:v|V?)((\\d+)(?:\\.?)){1,3}(?:\\W|_?)(.*)$/gm\r\n    return (Validator.isStringNotEmpty(arg) && versionRegex.test(arg))\r\n  }\r\n\r\n  /**\r\n   * Tell if the given ergument is an URI or an URL.\r\n   *\r\n   * @static\r\n   * @param {string} arg the uri/url to check\r\n   * @param {string} base the (optional) base to build the full URL\r\n   * @return {boolean} true if it's an URI/URL, false otherwise\r\n   */\r\n  static isURI (arg, base) {\r\n    // quick check if the given string is an URI or an URL\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return false\r\n    }\r\n    // simple check if it's an URL, trying to instancing it\r\n    // note that this requires to import related module here (but not in Browsers) ...\r\n    if (Validator.isStringNotEmpty(base)) {\r\n      try {\r\n        const u = new url.URL(arg, base)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    } else {\r\n      // simple check if it's an URI (or better, a relative URL)\r\n      if (arg.startsWith('/')) {\r\n        return true\r\n      }\r\n      try {\r\n        // return (new URL(arg) !== null)\r\n        const u = new url.URL(arg)\r\n        return (u !== null)\r\n      } catch (e) {\r\n        // console.error(e)\r\n        return false\r\n      }\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is an instance of the given class reference.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {object} classReference the class that should be implemented/extended\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsClass (arg, classReference, name) {\r\n    if (!Validator.isClass(arg, classReference)) {\r\n      return new TypeError(`The argument '${name}' must be an instance of the given class reference, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given ergument is a function.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an instance (or extends) that class, nothing otherwise\r\n   */\r\n  static ensureIsFunction (arg, name) {\r\n    if (!Validator.isFunction(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a function, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string.\r\n   *\r\n   * See {@link Validator.isString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not a string, nothing otherwise\r\n   */\r\n  static ensureIsString (arg, name) {\r\n    if (!Validator.isString(arg)) {\r\n      return new TypeError(`The argument '${name}' must be a string, instead got a '${typeof arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a not empty string.\r\n   *\r\n   * See {@link Validator.isStringNotEmpty}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a not empty string, nothing otherwise\r\n   */\r\n  static ensureIsStringNotEmpty (arg, name) {\r\n    if (!Validator.isStringNotEmpty(arg)) {\r\n      return new Error(`The string '${name}' must be not empty`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection.\r\n   *\r\n   * See {@link Validator.isObjectOrCollection}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollection (arg, name) {\r\n    if (!Validator.isObjectOrCollection(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an object or a collection, not a string.\r\n   *\r\n   * See {@link Validator.isObjectOrCollectionNotString}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {TypeError} if it's not an object nor a collection, nothing otherwise\r\n   */\r\n  static ensureIsObjectOrCollectionNotString (arg, name) {\r\n    if (!Validator.isObjectOrCollectionNotString(arg)) {\r\n      return new TypeError(`The object '${name}' must be an object or a collection, and not a string`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date.\r\n   *\r\n   * See {@link Validator.isDate}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date, nothing otherwise\r\n   */\r\n  static ensureIsDate (arg, name) {\r\n    if (!Validator.isDate(arg)) {\r\n      return new Error(`The object '${name}' must be a Date`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a date in the past.\r\n   *\r\n   * See {@link Validator.isDatePast}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a date in the past, nothing otherwise\r\n   */\r\n  static ensureIsDatePast (arg, name) {\r\n    if (!Validator.isDatePast(arg)) {\r\n      return new Error(`The object '${name}' must be a Date that belongs to the past`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia a string version.\r\n   *\r\n   * See {@link Validator.isVersion}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not a string version, nothing otherwise\r\n   */\r\n  static ensureIsVersion (arg, name) {\r\n    if (!Validator.isVersion(arg)) {\r\n      return new Error(`The object '${name}' must be a string in the format 'n.n.n', and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument ia an URI/URL.\r\n   *\r\n   * See {@link Validator.isURI}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any)\r\n   * @return {Error} if it's not an URI/URL, nothing otherwise\r\n   */\r\n  static ensureIsURI (arg, name) {\r\n    if (!Validator.isURI(arg)) {\r\n      return new Error(`The object '${name}' must be an URI or URL string, and not '${arg}'`)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Tell the size of the given aobject\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {number} the size if it's an array|Map|Set|object|string, nothing otherwise\r\n   */\r\n  static getSize (arg) {\r\n    if ((arg === undefined || arg === null)) {\r\n      return\r\n    }\r\n    if (Array.isArray(arg)) {\r\n      return arg.length\r\n    } else if (arg instanceof Map || arg instanceof Set) {\r\n      return arg.size\r\n    } else if (typeof arg === 'object') {\r\n      return Object.keys(arg).length\r\n    } else if (typeof arg === 'string') {\r\n      return arg.length\r\n    }\r\n  }\r\n}\r\n\r\nmodule.exports = Validator\r\n",
@@ -1331,7 +1375,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 80,
+    "__docId__": 81,
     "kind": "class",
     "name": "Validator",
     "memberof": "src/validator.js",
@@ -1346,7 +1390,7 @@
     "interface": false
   },
   {
-    "__docId__": 81,
+    "__docId__": 82,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/validator.js~Validator",
@@ -1367,7 +1411,7 @@
     ]
   },
   {
-    "__docId__": 82,
+    "__docId__": 83,
     "kind": "get",
     "name": "[Symbol.toStringTag]",
     "memberof": "src/validator.js~Validator",
@@ -1393,7 +1437,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 84,
     "kind": "method",
     "name": "isUndefined",
     "memberof": "src/validator.js~Validator",
@@ -1426,7 +1470,7 @@
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 85,
     "kind": "method",
     "name": "isNull",
     "memberof": "src/validator.js~Validator",
@@ -1459,7 +1503,7 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 86,
     "kind": "method",
     "name": "isUndefinedOrNull",
     "memberof": "src/validator.js~Validator",
@@ -1492,7 +1536,7 @@
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 87,
     "kind": "method",
     "name": "isDefinedAndNotNull",
     "memberof": "src/validator.js~Validator",
@@ -1525,7 +1569,7 @@
     }
   },
   {
-    "__docId__": 87,
+    "__docId__": 88,
     "kind": "method",
     "name": "isString",
     "memberof": "src/validator.js~Validator",
@@ -1558,7 +1602,7 @@
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 89,
     "kind": "method",
     "name": "isStringNotEmpty",
     "memberof": "src/validator.js~Validator",
@@ -1591,7 +1635,7 @@
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 90,
     "kind": "method",
     "name": "isDate",
     "memberof": "src/validator.js~Validator",
@@ -1624,7 +1668,7 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 91,
     "kind": "method",
     "name": "isDateValid",
     "memberof": "src/validator.js~Validator",
@@ -1657,7 +1701,7 @@
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 92,
     "kind": "method",
     "name": "isDatePast",
     "memberof": "src/validator.js~Validator",
@@ -1690,7 +1734,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 93,
     "kind": "method",
     "name": "isNumber",
     "memberof": "src/validator.js~Validator",
@@ -1723,7 +1767,7 @@
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 94,
     "kind": "method",
     "name": "isArray",
     "memberof": "src/validator.js~Validator",
@@ -1756,7 +1800,7 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 95,
     "kind": "method",
     "name": "isBoolean",
     "memberof": "src/validator.js~Validator",
@@ -1789,7 +1833,7 @@
     }
   },
   {
-    "__docId__": 95,
+    "__docId__": 96,
     "kind": "method",
     "name": "isClass",
     "memberof": "src/validator.js~Validator",
@@ -1832,7 +1876,7 @@
     }
   },
   {
-    "__docId__": 96,
+    "__docId__": 97,
     "kind": "method",
     "name": "isFunction",
     "memberof": "src/validator.js~Validator",
@@ -1865,7 +1909,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 98,
     "kind": "method",
     "name": "isObject",
     "memberof": "src/validator.js~Validator",
@@ -1898,7 +1942,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 99,
     "kind": "method",
     "name": "isKeyedCollection",
     "memberof": "src/validator.js~Validator",
@@ -1931,7 +1975,7 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 100,
     "kind": "method",
     "name": "isObjectOrCollection",
     "memberof": "src/validator.js~Validator",
@@ -1964,7 +2008,7 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 101,
     "kind": "method",
     "name": "isObjectOrCollectionNotString",
     "memberof": "src/validator.js~Validator",
@@ -1997,7 +2041,7 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 102,
     "kind": "method",
     "name": "isVersion",
     "memberof": "src/validator.js~Validator",
@@ -2030,7 +2074,7 @@
     }
   },
   {
-    "__docId__": 102,
+    "__docId__": 103,
     "kind": "method",
     "name": "isURI",
     "memberof": "src/validator.js~Validator",
@@ -2073,7 +2117,7 @@
     }
   },
   {
-    "__docId__": 103,
+    "__docId__": 104,
     "kind": "method",
     "name": "ensureIsClass",
     "memberof": "src/validator.js~Validator",
@@ -2126,7 +2170,7 @@
     }
   },
   {
-    "__docId__": 104,
+    "__docId__": 105,
     "kind": "method",
     "name": "ensureIsFunction",
     "memberof": "src/validator.js~Validator",
@@ -2169,7 +2213,7 @@
     }
   },
   {
-    "__docId__": 105,
+    "__docId__": 106,
     "kind": "method",
     "name": "ensureIsString",
     "memberof": "src/validator.js~Validator",
@@ -2212,7 +2256,7 @@
     }
   },
   {
-    "__docId__": 106,
+    "__docId__": 107,
     "kind": "method",
     "name": "ensureIsStringNotEmpty",
     "memberof": "src/validator.js~Validator",
@@ -2255,7 +2299,7 @@
     }
   },
   {
-    "__docId__": 107,
+    "__docId__": 108,
     "kind": "method",
     "name": "ensureIsObjectOrCollection",
     "memberof": "src/validator.js~Validator",
@@ -2298,7 +2342,7 @@
     }
   },
   {
-    "__docId__": 108,
+    "__docId__": 109,
     "kind": "method",
     "name": "ensureIsObjectOrCollectionNotString",
     "memberof": "src/validator.js~Validator",
@@ -2341,7 +2385,7 @@
     }
   },
   {
-    "__docId__": 109,
+    "__docId__": 110,
     "kind": "method",
     "name": "ensureIsDate",
     "memberof": "src/validator.js~Validator",
@@ -2384,7 +2428,7 @@
     }
   },
   {
-    "__docId__": 110,
+    "__docId__": 111,
     "kind": "method",
     "name": "ensureIsDatePast",
     "memberof": "src/validator.js~Validator",
@@ -2427,7 +2471,7 @@
     }
   },
   {
-    "__docId__": 111,
+    "__docId__": 112,
     "kind": "method",
     "name": "ensureIsVersion",
     "memberof": "src/validator.js~Validator",
@@ -2470,7 +2514,7 @@
     }
   },
   {
-    "__docId__": 112,
+    "__docId__": 113,
     "kind": "method",
     "name": "ensureIsURI",
     "memberof": "src/validator.js~Validator",
@@ -2513,7 +2557,7 @@
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 114,
     "kind": "method",
     "name": "getSize",
     "memberof": "src/validator.js~Validator",
@@ -2547,7 +2591,7 @@
   },
   {
     "kind": "index",
-    "content": "# cloudevent.js\n\n  [![NPM Version](https://img.shields.io/npm/v/cloudevent.svg?style=flat)](https://npmjs.org/package/cloudevent/)\n  [![NPM Downloads](https://img.shields.io/npm/dm/cloudevent.svg?style=flat)](https://npmjs.org/package/cloudevent/)\n  [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)\n  [![Coverage Status](https://coveralls.io/repos/github/smartiniOnGitHub/cloudevent.js/badge.svg?branch=master)](https://coveralls.io/github/smartiniOnGitHub/cloudevent.js/?branch=master)\n  [![Dependencies](https://david-dm.org/smartiniOnGitHub/cloudevent.js.svg)](https://david-dm.org/smartiniOnGitHub/cloudevent.js.svg)\n\nJavaScript/Node.js implementation of [CloudEvents](http://cloudevents.io/)\n\nThe purpose of this library is to create instances of CloudEvents in a simple way (with some useful defaults), \nor in a full way (all attributes).\nOptional, it's possible to validate created instances to be sure they are compliant with the standard.\n\nThen, created instances can be serialized, for example to be sent (or saved/stored) somewhere.\n\nNote that many features are exposed directly from the CloudEvent class with standard class instance methods, and even as class static methods (that operates on a given CloudEvent).\n\nMore features will follow.\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\n\nconst CloudEvent = require('cloudevent')\n```\n\ncreate some sample CloudEvent instances:\n\n```js\n// create some sample instances but without mandatory fields (for validation) ...\nconst ceEmpty = new CloudEvent() // create an empty CloudEvent instance (not valid for the validator, even in default case, when strict mode flag is disabled)\nconst ceMinimalMandatoryUndefinedNoStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: false }) // expected success\nconst ceMinimalMandatoryUndefinedStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true }) // expected failure, so ceMinimalMandatoryUndefinedStrict will not be defined\n\n// create some sample minimal instances, good even for validation ...\nconst ceMinimal = new CloudEvent('1', // eventID\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\n  '/', // source\n  {} // data (empty) // optional, but useful the same in this sample usage\n)\n\n// create some instance with all attributes ...\n// define some common attributes\nconst ceCommonOptions = {\n  eventTypeVersion: '1.0.0',\n  eventTime: new Date(),\n  extensions: { 'exampleExtension': 'value' },\n  contentType: 'application/json',\n  schemaURL: 'http://my-schema.localhost.localdomain',\n  strict: false // same as default\n}\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\n// create some instances with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\n// note that null values are not handled by default values, only undefined values ...\nconst ceFull = new CloudEvent('1/full',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  '/test',\n  { 'hello': 'world', year: 2018 }, // data\n  ceCommonOptions\n)\nconst ceFullStrict = new CloudEvent('2/full-strict',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  '/test',\n  { 'hello': 'world', year: 2018 }, // data\n  ceCommonOptionsStrict // use common options, but set strict mode to true\n)\nassert(ceFullStrict.isStrict)\nassert(!ceFull.isStrict) // ensure common options object has not been changed when reusing some of its values for the second instance\nassert(!CloudEvent.isStrictEvent(ceFull)) // the same, but using static method\n\n```\n\noptional, do some validations/checks on created instances.\nAs sample, use class static methods like 'isValidEvent' and 'ValidateEvent', or instance methods like 'isValid', 'validate', etc ...\n\n```js\nassert(!ceEmpty.isValid())\nassert(!ceMinimalMandatoryUndefinedNoStrict.isValid())\nassert(ceMinimal.isValid())\nassert(ceFull.isValid())\nassert(ceFullStrict.isValid())\n// the same, but using static method\nassert(!CloudEvent.isValidEvent(ceEmpty))\nassert(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict))\nassert(CloudEvent.isValidEvent(ceMinimal))\nassert(CloudEvent.isValidEvent(ceFull))\nassert(CloudEvent.isValidEvent(ceFullStrict))\nassert(CloudEvent.validateEvent(ceEmpty).length > 0)\nassert(CloudEvent.validateEvent(ceEmpty, { strict: true }).length > 0)\nassert(CloudEvent.validateEvent(ceMinimalMandatoryUndefinedNoStrict).length > 0)\nassert(CloudEvent.validateEvent(ceMinimal).length === 0)\nassert(CloudEvent.validateEvent(ceFull).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\n\nconsole.log(`Validation on ceEmpty: isValid: ${ceEmpty.isValid()}, `)\n\nconsole.log(`Validation output for ceEmpty, default strict mode is: size: ${CloudEvent.validateEvent(ceEmpty).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty))\nconsole.log(`Validation output for ceEmpty, force strict mode to true is size: ${CloudEvent.validateEvent(ceEmpty, { strict: true }).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty, { strict: true }))\n```\n\nserialization examples:\n\n```js\nconst ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\nconst ceFullSerialized = ceFull.serialize()\nconsole.log(`Serialization output for ceFull, details:\\n` + ceFullSerialized)\n\n// then use (send/store/etc) serialized instances ...\n\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library (inline but it's the same using it from npm registry).\n\n\n## Requirements\n\nNode.js 8.14.x or later.\n\n\n## Note\n\nNote that in this implementation there is even the ability to validate CloudEvent instances in a stricter way, by setting to true the attribute 'strict' in options in constructor options; or specify it during validation.\nThat attribute when set will be put in the 'extensions' standard attribute of a CloudEvent.\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/cloudevent.js/).\n\nSee the CloudEvents Specification [here](https://github.com/cloudevents/spec).\n\nThe package name 'cloudevent.js' is changed just after the '0.2.0' release \nto the simpler 'cloudevent' (published the same as '0.2.0' release),\nso it will be easier to get it at npm.\n\n\n## Contributing\n\n1. Fork it ( https://github.com/smartiniOnGitHub/cloudevent.js/fork )\n2. Create your feature branch (git checkout -b my-new-feature)\n3. Commit your changes (git commit -am 'Add some feature')\n4. Push to the branch (git push origin my-new-feature)\n5. Create a new Pull Request\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
+    "content": "# cloudevent.js\n\n  [![NPM Version](https://img.shields.io/npm/v/cloudevent.svg?style=flat)](https://npmjs.org/package/cloudevent/)\n  [![NPM Downloads](https://img.shields.io/npm/dm/cloudevent.svg?style=flat)](https://npmjs.org/package/cloudevent/)\n  [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)\n  [![Coverage Status](https://coveralls.io/repos/github/smartiniOnGitHub/cloudevent.js/badge.svg?branch=master)](https://coveralls.io/github/smartiniOnGitHub/cloudevent.js/?branch=master)\n  [![dependencies Status](https://david-dm.org/smartiniOnGitHub/cloudevent.js/status.svg)](https://david-dm.org/smartiniOnGitHub/cloudevent.js)\n  [![devDependencies Status](https://david-dm.org/smartiniOnGitHub/cloudevent.js/dev-status.svg)](https://david-dm.org/smartiniOnGitHub/cloudevent.js?type=dev)\n\nJavaScript/Node.js implementation of [CloudEvents](http://cloudevents.io/)\n\nThe purpose of this library is to create instances of CloudEvents in a simple way (with some useful defaults), \nor in a full way (all attributes).\nOptional, it's possible to validate created instances to be sure they are compliant with the standard.\n\nThen, created instances can be serialized, for example to be sent (or saved/stored) somewhere.\n\nNote that many features are exposed directly from the CloudEvent class with standard class instance methods, and even as class static methods (that operates on a given CloudEvent).\n\nMore features will follow.\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\n\nconst CloudEvent = require('cloudevent')\n```\n\ncreate some sample CloudEvent instances:\n\n```js\n// create some sample instances but without mandatory fields (for validation) ...\nconst ceEmpty = new CloudEvent() // create an empty CloudEvent instance (not valid for the validator, even in default case, when strict mode flag is disabled)\nconst ceMinimalMandatoryUndefinedNoStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: false }) // expected success\nconst ceMinimalMandatoryUndefinedStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true }) // expected failure, so ceMinimalMandatoryUndefinedStrict will not be defined\n\n// create some sample minimal instances, good even for validation ...\nconst ceMinimal = new CloudEvent('1', // eventID\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\n  '/', // source\n  {} // data (empty) // optional, but useful the same in this sample usage\n)\n\n// create some instance with all attributes ...\n// define some common attributes\nconst ceCommonOptions = {\n  eventTypeVersion: '1.0.0',\n  eventTime: new Date(),\n  extensions: { 'exampleExtension': 'value' },\n  contentType: 'application/json',\n  schemaURL: 'http://my-schema.localhost.localdomain',\n  strict: false // same as default\n}\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\n// create some instances with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\n// note that null values are not handled by default values, only undefined values ...\nconst ceFull = new CloudEvent('1/full',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  '/test',\n  { 'hello': 'world', year: 2018 }, // data\n  ceCommonOptions\n)\nconst ceFullStrict = new CloudEvent('2/full-strict',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  '/test',\n  { 'hello': 'world', year: 2018 }, // data\n  ceCommonOptionsStrict // use common options, but set strict mode to true\n)\nassert(ceFullStrict.isStrict)\nassert(!ceFull.isStrict) // ensure common options object has not been changed when reusing some of its values for the second instance\nassert(!CloudEvent.isStrictEvent(ceFull)) // the same, but using static method\n\nconst ceFullStrictOtherContentType = new CloudEvent('3/full-strict-other-content-type',\n  'com.github.smartiniOnGitHub.cloudeventjs.testevent',\n  '/test',\n  { 'hello': 'world', year: 2018 }, // data\n  { ...ceCommonOptionsStrict, contentType: 'application/xml' } // use common strict options, but set strict mode to true\n)\nassert(ceFullStrictOtherContentType !== null)\nassert(ceFullStrictOtherContentType.isStrict)\nassert(!ceFull.ceFullStrictOtherContentType) // ensure common options object has not been changed when reusing some of its values for the second instance\nassert(!CloudEvent.isStrictEvent(ceFull)) // the same, but using static method\n\n```\n\noptional, do some validations/checks on created instances.\nAs sample, use class static methods like 'isValidEvent' and 'ValidateEvent', or instance methods like 'isValid', 'validate', etc ...\n\n```js\nassert(!ceEmpty.isValid())\nassert(!ceMinimalMandatoryUndefinedNoStrict.isValid())\nassert(ceMinimal.isValid())\nassert(ceFull.isValid())\nassert(ceFullStrict.isValid())\nassert(ceFullStrictOtherContentType.isValid())\n// the same, but using static method\nassert(!CloudEvent.isValidEvent(ceEmpty))\nassert(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict))\nassert(CloudEvent.isValidEvent(ceMinimal))\nassert(CloudEvent.isValidEvent(ceFull))\nassert(CloudEvent.isValidEvent(ceFullStrict))\nassert(CloudEvent.isValidEvent(ceFullStrictOtherContentType))\nassert(CloudEvent.validateEvent(ceEmpty).length > 0)\nassert(CloudEvent.validateEvent(ceEmpty, { strict: true }).length > 0)\nassert(CloudEvent.validateEvent(ceMinimalMandatoryUndefinedNoStrict).length > 0)\nassert(CloudEvent.validateEvent(ceMinimal).length === 0)\nassert(CloudEvent.validateEvent(ceFull).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrictOtherContentType).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrictOtherContentType, { strict: false }).length === 0)\nassert(CloudEvent.validateEvent(ceFullStrictOtherContentType, { strict: true }).length === 0)\n\nconsole.log(`Validation on ceEmpty: isValid: ${ceEmpty.isValid()}, `)\n\nconsole.log(`Validation output for ceEmpty, default strict mode is: size: ${CloudEvent.validateEvent(ceEmpty).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty))\nconsole.log(`Validation output for ceEmpty, force strict mode to true is size: ${CloudEvent.validateEvent(ceEmpty, { strict: true }).length}, details:\\n` + CloudEvent.validateEvent(ceEmpty, { strict: true }))\n```\n\nserialization examples:\n\n```js\n// default contentType\nconst ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\nconst ceFullSerialized = ceFull.serialize()\nconsole.log(`Serialization output for ceFull, details:\\n` + ceFullSerialized)\n// non default contentType\nconst ceFullStrictOtherContentTypeSerializedStatic = CloudEvent.serializeEvent(ceFullStrictOtherContentType, {\n  // encoder: (data) => '<data encoder=\"sample\" />'\n  encodedData: '<data \"hello\"=\"world\" \"year\"=\"2018\" />'\n})\nconst ceFullStrictOtherContentTypeSerialized = ceFullStrictOtherContentType.serialize({\n  // encoder: (data) => '<data encoder=\"sample\" />'\n  encodedData: '<data \"hello\"=\"world\" \"year\"=\"2018\" />'\n})\nconsole.log(`Serialization output for ceFullStrictOtherContentType, details:\\n` + ceFullStrictOtherContentTypeSerialized)\n\n// then use (send/store/etc) serialized instances ...\n\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library (inline but it's the same using it from npm registry).\n\n\n## Requirements\n\nNode.js 8.15.x or later.\n\n\n## Note\n\nNote that in this implementation there is even the ability to validate CloudEvent instances in a stricter way, by setting to true the attribute 'strict' in options in constructor options; or specify it during validation.\nThat attribute when set will be put in the 'extensions' standard attribute of a CloudEvent.\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/cloudevent.js/).\n\nSee the CloudEvents Specification [here](https://github.com/cloudevents/spec).\n\nIn the past the name for this package was 'cloudevent.js', but it has deprecated and changed to the simpler 'cloudevent' (published the same as '0.2.0' release), so it will be easier to get it at npm.\n\n\n## Contributing\n\n1. Fork it ( https://github.com/smartiniOnGitHub/cloudevent.js/fork )\n2. Create your feature branch (git checkout -b my-new-feature)\n3. Commit your changes (git commit -am 'Add some feature')\n4. Push to the branch (git push origin my-new-feature)\n5. Create a new Pull Request\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
     "longname": "/Users/martinis/work/prove/cloudevent.js/README.md",
     "name": "./README.md",
     "static": true,
@@ -2555,17 +2599,17 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"cloudevent\",\n  \"version\": \"0.2.1\",\n  \"description\": \"JavaScript/Node.js implementation of the CloudEvents standard format\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./*.js\\\" \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"test:unit\": \"tap -J test/*.test.js test/*/*.test.js\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.4\",\n    \"simple-get\": \"^3.0.3\",\n    \"standard\": \"^12.0.1\",\n    \"tap\": \"^12.1.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.14.0\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/cloudevent.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/cloudevent.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/cloudevent.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"cloudevents\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
+    "content": "{\n  \"name\": \"cloudevent\",\n  \"version\": \"0.2.2\",\n  \"description\": \"JavaScript/Node.js implementation of the CloudEvents standard format\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"lint:log\": \"npm run lint > ./temp/lint-standard.log\",\n    \"license-check\": \"npx legally\",\n    \"license-check:log\": \"npx legally > ./temp/license-check.log\",\n    \"license-checker\": \"npx license-checker --production --onlyAllow='Apache-2.0;BSD-2-Clause;BSD-3-Clause;MIT;ISC'\",\n    \"license-checker:log\": \"npm run license-checker | tee ./temp/license-checker.log\",\n    \"test:unit\": \"tap -J test/*.test.js test/*/*.test.js\",\n    \"test:unit:debug\": \"tap -T --strict --node-arg=--inspect-brk test/*.test.js test/*/*.test.js\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.4\",\n    \"simple-get\": \"^3.0.3\",\n    \"standard\": \"^12.0.1\",\n    \"tap\": \"^12.1.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.15.0\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/cloudevent.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/cloudevent.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/cloudevent.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"cloudevents\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
     "longname": "/Users/martinis/work/prove/cloudevent.js/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 114,
+    "__docId__": 115,
     "kind": "testFile",
     "name": "test/cloudevent-serialization.test.js",
-    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure decorator functions (exposed by the plugin) exists', (t) => {\r\n  t.plan(6)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // optional, using some standard Node.js assert statements, as a sample\r\n  assert(CloudEvent !== null)\r\n  assert.strictEqual(typeof CloudEvent, 'function')\r\n  assert(new CloudEvent() instanceof CloudEvent)\r\n  assert.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n  t.ok(CloudEvent)\r\n  t.strictEqual(typeof CloudEvent, 'function')\r\n  t.strictEqual(new CloudEvent() instanceof CloudEvent, true)\r\n  t.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n\r\n  const ceSerialize = CloudEvent.serializeEvent\r\n  assert(ceSerialize !== null)\r\n  assert(typeof ceSerialize === 'function')\r\n  t.ok(ceSerialize)\r\n  t.strictEqual(typeof ceSerialize, 'function')\r\n})\r\n\r\n/** create some common options, for better reuse in tests */\r\nconst commonEventTime = new Date()\r\nconst ceCommonOptions = {\r\n  eventTypeVersion: '1.0.0',\r\n  eventTime: commonEventTime,\r\n  extensions: { 'exampleExtension': 'value' },\r\n  contentType: 'application/json',\r\n  schemaURL: 'http://my-schema.localhost.localdomain',\r\n  strict: false\r\n}\r\n/** create some common options with strict flag enabled, for better reuse in tests */\r\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\r\n/** create some common data from an object, for better reuse in tests */\r\nconst ceCommonData = { 'hello': 'world', year: 2018 }\r\n/** create some common data from a Map, for better reuse in tests */\r\nconst ceMapData = new Map() // empty Map\r\n// const ceMapData = new Map(['key-1', 'value 1'], ['key-2', 'value 2'])\r\nceMapData.set('key-1', 'value 1')\r\nceMapData.set('key-2', 'value 2')\r\n\r\n/** @test {CloudEvent} */\r\ntest('serialize some CloudEvent instances to JSON, and ensure they are right', (t) => {\r\n  t.plan(36)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // t.ok(CloudEvent)\r\n\r\n  // create an instance with undefined data attribute, but with strict flag disabled: expected success ...\r\n  // note that null values are not handled by default values, only undefined values ...\r\n  const ceFull = new CloudEvent('1/full/sample-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData, // data\r\n    ceCommonOptions\r\n  )\r\n  assert(ceFull !== null)\r\n  t.ok(ceFull)\r\n  t.ok(ceFull.isValid())\r\n  t.ok(ceFull.validate().length === 0)\r\n  t.ok(ceFull.validate({ strict: false }).length === 0)\r\n  t.ok(ceFull.validate({ strict: true }).length === 0)\r\n  t.ok(CloudEvent.isValidEvent(ceFull))\r\n  t.ok(CloudEvent.validateEvent(ceFull).length === 0)\r\n  t.ok(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\r\n  t.ok(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\r\n\r\n  const ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\r\n  t.ok(ceFullSerializedStatic)\r\n  const ceFullSerialized = ceFull.serialize()\r\n  t.ok(ceFullSerialized)\r\n  assert(ceFullSerializedStatic === ceFullSerialized)\r\n  t.strictSame(ceFullSerializedStatic, ceFullSerialized)\r\n  const ceSerialize = CloudEvent.serializeEvent\r\n  assert(ceSerialize !== null)\r\n  t.ok(ceSerialize)\r\n  const ceFullSerializedFunction = ceSerialize(ceFull)\r\n  t.ok(ceFullSerializedFunction)\r\n  t.strictSame(ceFullSerializedFunction, ceFullSerializedStatic)\r\n  t.strictSame(ceFullSerializedFunction, ceFullSerialized)\r\n\r\n  const ceFullSerializedComparison = `{\"eventID\":\"1/full/sample-data/no-strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\"},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n  t.strictSame(ceFullSerialized, ceFullSerializedComparison)\r\n  const ceFullDeserialized = JSON.parse(ceFullSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n  ceFullDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n  t.same(ceFull, ceFullDeserialized)\r\n\r\n  // the same with with strict mode enabled ...\r\n  const ceFullStrict = new CloudEvent('1/full/sample-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullStrict !== null)\r\n  t.ok(ceFullStrict)\r\n  t.ok(ceFullStrict.isValid())\r\n  t.ok(ceFullStrict.validate().length === 0)\r\n  t.ok(ceFullStrict.validate({ strict: true }).length === 0)\r\n  t.ok(ceFullStrict.validate({ strict: false }).length === 0)\r\n  t.ok(CloudEvent.isValidEvent(ceFullStrict))\r\n  t.ok(CloudEvent.validateEvent(ceFullStrict).length === 0)\r\n  t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\r\n  t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\r\n\r\n  const ceFullStrictSerializedStatic = CloudEvent.serializeEvent(ceFullStrict)\r\n  t.ok(ceFullStrictSerializedStatic)\r\n  const ceFullStrictSerialized = ceFullStrict.serialize()\r\n  t.ok(ceFullStrictSerialized)\r\n  assert(ceFullStrictSerializedStatic === ceFullStrictSerialized)\r\n  t.strictSame(ceFullStrictSerializedStatic, ceFullStrictSerialized)\r\n  // const ceSerialize = CloudEvent.serializeEvent\r\n  assert(ceSerialize !== null)\r\n  t.ok(ceSerialize)\r\n  const ceFullStrictSerializedFunction = ceSerialize(ceFullStrict)\r\n  t.ok(ceFullStrictSerializedFunction)\r\n  t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerializedStatic)\r\n  t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerialized)\r\n\r\n  const ceFullStrictSerializedComparison = `{\"eventID\":\"1/full/sample-data/strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\",\"strict\":true},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n  t.strictSame(ceFullStrictSerialized, ceFullStrictSerializedComparison)\r\n  const ceFullStrictDeserialized = JSON.parse(ceFullStrictSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n  ceFullStrictDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n  t.same(ceFullStrict, ceFullStrictDeserialized)\r\n})\r\n\r\n// TODO: this is a limit if the current implementation, and will be resolved soon ... wip\r\n/** @test {CloudEvent} */\r\ntest('serialize a CloudEvent instance with a non default contentType, expect error', (t) => {\r\n  t.plan(4)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // create an instance with non default contentType (other options default): expected success ...\r\n  // but when I try to serialize it, expect to have an error raised ...\r\n  const ceFullOtherContentType = new CloudEvent('1/non-default-contentType/sample-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData, // data\r\n    {\r\n      contentType: 'application/xml'\r\n    }\r\n  )\r\n  assert(ceFullOtherContentType !== null)\r\n  t.ok(ceFullOtherContentType)\r\n  t.ok(ceFullOtherContentType.isValid())\r\n  // const ceFullStrictSerialized = ceFullOtherContentType.serialize()\r\n  // t.ok(ceFullStrictSerialized)\r\n  t.throws(function () {\r\n    const ceFullStrictSerialized = ceFullOtherContentType.serialize()\r\n    assert(ceFullStrictSerialized === null) // never executed\r\n  }, Error, 'Expected exception when serializing the current CloudEvent instance')\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available', (t) => {\r\n  t.plan(6)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // get JSON Schema from a static method\r\n  const jsonSchemaStatic = CloudEvent.getJSONSchema()\r\n  assert(jsonSchemaStatic !== null)\r\n  t.ok(jsonSchemaStatic)\r\n  t.strictEqual(typeof jsonSchemaStatic, 'object')\r\n\r\n  // create a sample CloudEvent instance ...\r\n  const ceFullStrict = new CloudEvent('1/full/sample-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullStrict !== null)\r\n  t.ok(ceFullStrict)\r\n  // get JSON Schema from that instance\r\n  const jsonSchema = ceFullStrict.schema\r\n  assert(jsonSchema !== null)\r\n  t.ok(jsonSchema)\r\n  t.strictEqual(typeof jsonSchema, 'object')\r\n})\r\n",
+    "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure decorator functions (exposed by the plugin) exists', (t) => {\r\n  t.plan(6)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // optional, using some standard Node.js assert statements, as a sample\r\n  assert(CloudEvent !== null)\r\n  assert.strictEqual(typeof CloudEvent, 'function')\r\n  assert(new CloudEvent() instanceof CloudEvent)\r\n  assert.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n  t.ok(CloudEvent)\r\n  t.strictEqual(typeof CloudEvent, 'function')\r\n  t.strictEqual(new CloudEvent() instanceof CloudEvent, true)\r\n  t.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n\r\n  const ceSerialize = CloudEvent.serializeEvent\r\n  assert(ceSerialize !== null)\r\n  assert(typeof ceSerialize === 'function')\r\n  t.ok(ceSerialize)\r\n  t.strictEqual(typeof ceSerialize, 'function')\r\n})\r\n\r\n/** create some common options, for better reuse in tests */\r\nconst commonEventTime = new Date()\r\nconst ceCommonOptions = {\r\n  eventTypeVersion: '1.0.0',\r\n  eventTime: commonEventTime,\r\n  extensions: { 'exampleExtension': 'value' },\r\n  contentType: 'application/json',\r\n  schemaURL: 'http://my-schema.localhost.localdomain',\r\n  strict: false\r\n}\r\n/** create some common options with strict flag enabled, for better reuse in tests */\r\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\r\n/** create some common data from an object, for better reuse in tests */\r\nconst ceCommonData = { 'hello': 'world', year: 2018 }\r\n/** create some common data from a Map, for better reuse in tests */\r\nconst ceMapData = new Map() // empty Map\r\n// const ceMapData = new Map(['key-1', 'value 1'], ['key-2', 'value 2'])\r\nceMapData.set('key-1', 'value 1')\r\nceMapData.set('key-2', 'value 2')\r\n\r\n/** @test {CloudEvent} */\r\ntest('serialize some CloudEvent instances to JSON, and ensure they are right', (t) => {\r\n  t.plan(36)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // t.ok(CloudEvent)\r\n\r\n  {\r\n    // create an instance with undefined data attribute, but with strict flag disabled: expected success ...\r\n    // note that null values are not handled by default values, only undefined values ...\r\n    const ceFull = new CloudEvent('1/full/sample-data/no-strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      ceCommonOptions\r\n    )\r\n    assert(ceFull !== null)\r\n    t.ok(ceFull)\r\n    t.ok(ceFull.isValid())\r\n    t.ok(ceFull.validate().length === 0)\r\n    t.ok(ceFull.validate({ strict: false }).length === 0)\r\n    t.ok(ceFull.validate({ strict: true }).length === 0)\r\n    t.ok(CloudEvent.isValidEvent(ceFull))\r\n    t.ok(CloudEvent.validateEvent(ceFull).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\r\n\r\n    const ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\r\n    t.ok(ceFullSerializedStatic)\r\n    const ceFullSerialized = ceFull.serialize()\r\n    t.ok(ceFullSerialized)\r\n    assert(ceFullSerializedStatic === ceFullSerialized)\r\n    t.strictSame(ceFullSerializedStatic, ceFullSerialized)\r\n    const ceSerialize = CloudEvent.serializeEvent\r\n    assert(ceSerialize !== null)\r\n    t.ok(ceSerialize)\r\n    const ceFullSerializedFunction = ceSerialize(ceFull)\r\n    t.ok(ceFullSerializedFunction)\r\n    t.strictSame(ceFullSerializedFunction, ceFullSerializedStatic)\r\n    t.strictSame(ceFullSerializedFunction, ceFullSerialized)\r\n\r\n    const ceFullSerializedComparison = `{\"eventID\":\"1/full/sample-data/no-strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\"},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n    t.strictSame(ceFullSerialized, ceFullSerializedComparison)\r\n    const ceFullDeserialized = JSON.parse(ceFullSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n    ceFullDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n    t.same(ceFull, ceFullDeserialized)\r\n  }\r\n\r\n  {\r\n    // the same with with strict mode enabled ...\r\n    const ceFullStrict = new CloudEvent('1/full/sample-data/strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      ceCommonOptionsStrict\r\n    )\r\n    assert(ceFullStrict !== null)\r\n    t.ok(ceFullStrict)\r\n    t.ok(ceFullStrict.isValid())\r\n    t.ok(ceFullStrict.validate().length === 0)\r\n    t.ok(ceFullStrict.validate({ strict: true }).length === 0)\r\n    t.ok(ceFullStrict.validate({ strict: false }).length === 0)\r\n    t.ok(CloudEvent.isValidEvent(ceFullStrict))\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\r\n\r\n    const ceFullStrictSerializedStatic = CloudEvent.serializeEvent(ceFullStrict)\r\n    t.ok(ceFullStrictSerializedStatic)\r\n    const ceFullStrictSerialized = ceFullStrict.serialize()\r\n    t.ok(ceFullStrictSerialized)\r\n    assert(ceFullStrictSerializedStatic === ceFullStrictSerialized)\r\n    t.strictSame(ceFullStrictSerializedStatic, ceFullStrictSerialized)\r\n    const ceSerialize = CloudEvent.serializeEvent\r\n    assert(ceSerialize !== null)\r\n    t.ok(ceSerialize)\r\n    const ceFullStrictSerializedFunction = ceSerialize(ceFullStrict)\r\n    t.ok(ceFullStrictSerializedFunction)\r\n    t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerializedStatic)\r\n    t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerialized)\r\n\r\n    const ceFullStrictSerializedComparison = `{\"eventID\":\"1/full/sample-data/strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\",\"strict\":true},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n    t.strictSame(ceFullStrictSerialized, ceFullStrictSerializedComparison)\r\n    const ceFullStrictDeserialized = JSON.parse(ceFullStrictSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n    ceFullStrictDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n    t.same(ceFullStrict, ceFullStrictDeserialized)\r\n  }\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error', (t) => {\r\n  t.plan(8)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  {\r\n    // create an instance with non default contentType (other options default): expected success ...\r\n    // when I try to serialize it without specifying already encoded data (encodedData options), expect to have an error raised ...\r\n    const ceFullOtherContentType = new CloudEvent('1/non-default-contentType/sample-data/no-strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      {\r\n        ...ceCommonOptions,\r\n        contentType: 'application/xml'\r\n      }\r\n    )\r\n    assert(ceFullOtherContentType !== null)\r\n    t.ok(ceFullOtherContentType)\r\n    t.ok(ceFullOtherContentType.isValid())\r\n    t.throws(function () {\r\n      const ceFullOtherContentTypeSerialized = ceFullOtherContentType.serialize()\r\n      assert(ceFullOtherContentTypeSerialized === null) // never executed\r\n    }, Error, 'Expected exception when serializing the current CloudEvent instance')\r\n  }\r\n\r\n  {\r\n    // the same with with strict mode enabled ...\r\n    const ceFullOtherContentTypeStrict = new CloudEvent('1/non-default-contentType/sample-data/strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      {\r\n        ...ceCommonOptionsStrict,\r\n        contentType: 'application/xml'\r\n      }\r\n    )\r\n    assert(ceFullOtherContentTypeStrict !== null)\r\n    t.ok(ceFullOtherContentTypeStrict)\r\n    t.ok(ceFullOtherContentTypeStrict.isValid())\r\n    t.throws(function () {\r\n      const ceFullOtherContentTypeStrictSerialized = ceFullOtherContentTypeStrict.serialize()\r\n      assert(ceFullOtherContentTypeStrictSerialized === null) // never executed\r\n    }, Error, 'Expected exception when serializing the current CloudEvent instance')\r\n    t.throws(function () {\r\n      const ceFullOtherContentTypeStrictSerialized = ceFullOtherContentTypeStrict.serialize({\r\n        encoder: null,\r\n        encodedData: null\r\n      })\r\n      assert(ceFullOtherContentTypeStrictSerialized === null) // never executed\r\n    }, Error, 'Expected exception when serializing the current CloudEvent instance')\r\n  }\r\n})\r\n\r\n// sample encoding function, to use in tests here\r\nfunction encoderSample () {\r\n  // return `<data \"hello\"=\"world\" \"year\"=\"2018\" />`\r\n  return `<data encoder=\"sample\" />`\r\n}\r\n\r\n/** @test {CloudEvent} */\r\ntest('serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success', (t) => {\r\n  t.plan(11)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  {\r\n    // create an instance with non default contentType (other options default): expected success ...\r\n    // when I try to serialize specifying already encoded data (encodedData options), expect success ...\r\n    const ceFullOtherContentType = new CloudEvent('1/non-default-contentType/sample-data/no-strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      {\r\n        ...ceCommonOptions,\r\n        contentType: 'application/xml'\r\n      }\r\n    )\r\n    assert(ceFullOtherContentType !== null)\r\n    t.ok(ceFullOtherContentType)\r\n    t.ok(ceFullOtherContentType.isValid())\r\n    // test different combinations of serialization options\r\n    // note that if given, encoder function has priority over encoded data\r\n    const cceFullOtherContentTypeSerialized1 = ceFullOtherContentType.serialize({\r\n      encoder: encoderSample\r\n    })\r\n    t.ok(cceFullOtherContentTypeSerialized1)\r\n    const cceFullOtherContentTypeSerialized2 = ceFullOtherContentType.serialize({\r\n      encodedData: `<data \"hello\"=\"world\" \"year\"=\"2018\" />`\r\n    })\r\n    t.ok(cceFullOtherContentTypeSerialized2)\r\n    const constEncodedData = `<data \"constant\"=\"encoded\" />`\r\n    const cceFullOtherContentTypeSerialized3 = ceFullOtherContentType.serialize({\r\n      encoder: encoderSample,\r\n      // encodedData: undefined\r\n      // encodedData: null\r\n      // encodedData: `<data \"hello\"=\"world\" \"year\"=\"2018\" />`\r\n      encodedData: constEncodedData\r\n    })\r\n    t.ok(cceFullOtherContentTypeSerialized3)\r\n  }\r\n\r\n  {\r\n    // the same with with strict mode enabled ...\r\n    const ceFullOtherContentTypeStrict = new CloudEvent('1/non-default-contentType/sample-data/strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonData, // data\r\n      {\r\n        ...ceCommonOptionsStrict,\r\n        contentType: 'application/xml'\r\n      }\r\n    )\r\n    assert(ceFullOtherContentTypeStrict !== null)\r\n    t.ok(ceFullOtherContentTypeStrict)\r\n    t.ok(ceFullOtherContentTypeStrict.isValid())\r\n    // test different combinations of serialization options\r\n    // note that if given, encoder function has priority over encoded data\r\n    const ceFullOtherContentTypeStrictSerialized1 = ceFullOtherContentTypeStrict.serialize({\r\n      encoder: encoderSample\r\n    })\r\n    t.ok(ceFullOtherContentTypeStrictSerialized1)\r\n    const ceFullOtherContentTypeStrictSerialized2 = ceFullOtherContentTypeStrict.serialize({\r\n      encodedData: `<data \"hello\"=\"world\" \"year\"=\"2018\" />`\r\n    })\r\n    t.ok(ceFullOtherContentTypeStrictSerialized2)\r\n    const constEncodedData = `<data \"constant\"=\"encoded\" />`\r\n    const ceFullOtherContentTypeStrictSerialized3 = ceFullOtherContentTypeStrict.serialize({\r\n      encoder: encoderSample,\r\n      // encodedData: undefined\r\n      // encodedData: null\r\n      // encodedData: `<data \"hello\"=\"world\" \"year\"=\"2018\" />`\r\n      encodedData: constEncodedData\r\n    })\r\n    t.ok(ceFullOtherContentTypeStrictSerialized3)\r\n  }\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available', (t) => {\r\n  t.plan(6)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // get JSON Schema from a static method\r\n  const jsonSchemaStatic = CloudEvent.getJSONSchema()\r\n  assert(jsonSchemaStatic !== null)\r\n  t.ok(jsonSchemaStatic)\r\n  t.strictEqual(typeof jsonSchemaStatic, 'object')\r\n\r\n  // create a sample CloudEvent instance ...\r\n  const ceFullStrict = new CloudEvent('1/full/sample-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullStrict !== null)\r\n  t.ok(ceFullStrict)\r\n  // get JSON Schema from that instance\r\n  const jsonSchema = ceFullStrict.schema\r\n  assert(jsonSchema !== null)\r\n  t.ok(jsonSchema)\r\n  t.strictEqual(typeof jsonSchema, 'object')\r\n})\r\n\r\n/** create some common data with nested attributes, for better reuse in tests */\r\nconst ceCommonNestedData = { ...ceCommonData,\r\n  nested1: {\r\n    level1attribute: 'level1attributeValue',\r\n    nested2: {\r\n      level2attribute: 'level2attributeValue',\r\n      nested3: {\r\n        level3attribute: 'level3attributeValue'\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n/** @test {CloudEvent} */\r\ntest('serialize some CloudEvent instances to JSON with nested data, and ensure they are right', (t) => {\r\n  t.plan(48)\r\n\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // t.ok(CloudEvent)\r\n\r\n  {\r\n    const ceFull = new CloudEvent('1/full/sample-data-nested/no-strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonNestedData, // data\r\n      ceCommonOptions\r\n    )\r\n    assert(ceFull !== null)\r\n    t.ok(ceFull)\r\n    t.ok(ceFull.isValid())\r\n    t.ok(ceFull.validate().length === 0)\r\n    t.ok(ceFull.validate({ strict: false }).length === 0)\r\n    t.ok(ceFull.validate({ strict: true }).length === 0)\r\n    t.ok(CloudEvent.isValidEvent(ceFull))\r\n    t.ok(CloudEvent.validateEvent(ceFull).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFull, { strict: false }).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFull, { strict: true }).length === 0)\r\n\r\n    const ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)\r\n    t.ok(ceFullSerializedStatic)\r\n    const ceFullSerialized = ceFull.serialize()\r\n    t.ok(ceFullSerialized)\r\n    assert(ceFullSerializedStatic === ceFullSerialized)\r\n    t.strictSame(ceFullSerializedStatic, ceFullSerialized)\r\n    const ceSerialize = CloudEvent.serializeEvent\r\n    assert(ceSerialize !== null)\r\n    t.ok(ceSerialize)\r\n    const ceFullSerializedFunction = ceSerialize(ceFull)\r\n    t.ok(ceFullSerializedFunction)\r\n    t.strictSame(ceFullSerializedFunction, ceFullSerializedStatic)\r\n    t.strictSame(ceFullSerializedFunction, ceFullSerialized)\r\n\r\n    const ceFullSerializedComparison = `{\"eventID\":\"1/full/sample-data-nested/no-strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018,\"nested1\":{\"level1attribute\":\"level1attributeValue\",\"nested2\":{\"level2attribute\":\"level2attributeValue\",\"nested3\":{\"level3attribute\":\"level3attributeValue\"}}}},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\"},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n    t.strictSame(ceFullSerialized, ceFullSerializedComparison)\r\n    const ceFullDeserialized = JSON.parse(ceFullSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n    ceFullDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n    t.same(ceFull, ceFullDeserialized)\r\n\r\n    // ensure payload data is a copy of event data\r\n    let dataShallowClone = ceFull.payload\r\n    // then ensure they are different object (references) ...\r\n    assert(dataShallowClone !== null)\r\n    assert(dataShallowClone !== ceFull.data) // they must be different object references\r\n    assert(dataShallowClone !== ceFull.payload) // they must be different object references, at any invocation\r\n    t.notEqual(dataShallowClone, ceFull.data)\r\n    t.notStrictEqual(dataShallowClone, ceFull.data)\r\n    t.notEqual(dataShallowClone, ceFull.payload)\r\n    dataShallowClone = 'changed: true' // reassign to test that data won't be affected by that change\r\n    t.notEqual(dataShallowClone, ceFull.data)\r\n    t.strictNotSame(dataShallowClone, ceFull.data)\r\n    t.notEqual(dataShallowClone, ceFull.payload)\r\n  }\r\n\r\n  {\r\n    // the same with with strict mode enabled ...\r\n    const ceFullStrict = new CloudEvent('1/full/sample-data-nested/strict',\r\n      'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n      '/test',\r\n      ceCommonNestedData, // data\r\n      ceCommonOptionsStrict\r\n    )\r\n    assert(ceFullStrict !== null)\r\n    t.ok(ceFullStrict)\r\n    t.ok(ceFullStrict.isValid())\r\n    t.ok(ceFullStrict.validate().length === 0)\r\n    t.ok(ceFullStrict.validate({ strict: true }).length === 0)\r\n    t.ok(ceFullStrict.validate({ strict: false }).length === 0)\r\n    t.ok(CloudEvent.isValidEvent(ceFullStrict))\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: true }).length === 0)\r\n    t.ok(CloudEvent.validateEvent(ceFullStrict, { strict: false }).length === 0)\r\n\r\n    const ceFullStrictSerializedStatic = CloudEvent.serializeEvent(ceFullStrict)\r\n    t.ok(ceFullStrictSerializedStatic)\r\n    const ceFullStrictSerialized = ceFullStrict.serialize()\r\n    t.ok(ceFullStrictSerialized)\r\n    assert(ceFullStrictSerializedStatic === ceFullStrictSerialized)\r\n    t.strictSame(ceFullStrictSerializedStatic, ceFullStrictSerialized)\r\n    const ceSerialize = CloudEvent.serializeEvent\r\n    assert(ceSerialize !== null)\r\n    t.ok(ceSerialize)\r\n    const ceFullStrictSerializedFunction = ceSerialize(ceFullStrict)\r\n    t.ok(ceFullStrictSerializedFunction)\r\n    t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerializedStatic)\r\n    t.strictSame(ceFullStrictSerializedFunction, ceFullStrictSerialized)\r\n\r\n    const ceFullStrictSerializedComparison = `{\"eventID\":\"1/full/sample-data-nested/strict\",\"eventType\":\"com.github.smartiniOnGitHub.cloudeventjs.testevent\",\"source\":\"/test\",\"data\":{\"hello\":\"world\",\"year\":2018,\"nested1\":{\"level1attribute\":\"level1attributeValue\",\"nested2\":{\"level2attribute\":\"level2attributeValue\",\"nested3\":{\"level3attribute\":\"level3attributeValue\"}}}},\"cloudEventsVersion\":\"0.1\",\"contentType\":\"application/json\",\"eventTime\":\"${commonEventTime.toISOString()}\",\"eventTypeVersion\":\"1.0.0\",\"extensions\":{\"exampleExtension\":\"value\",\"strict\":true},\"schemaURL\":\"http://my-schema.localhost.localdomain\"}`\r\n    t.strictSame(ceFullStrictSerialized, ceFullStrictSerializedComparison)\r\n    const ceFullStrictDeserialized = JSON.parse(ceFullStrictSerialized) // note that some fields (like dates) will be different when deserialized in this way ...\r\n    ceFullStrictDeserialized.eventTime = commonEventTime // quick fix for the Date/timestamo attribute in the deserialized object\r\n    t.same(ceFullStrict, ceFullStrictDeserialized)\r\n\r\n    // ensure payload data is a copy of event data\r\n    let dataShallowCloneStrict = ceFullStrict.payload\r\n    // then ensure they are different object (references) ...\r\n    assert(dataShallowCloneStrict !== null)\r\n    assert(dataShallowCloneStrict !== ceFullStrict.data) // they must be different object references\r\n    assert(dataShallowCloneStrict !== ceFullStrict.payload) // they must be different object references, at any invocation\r\n    t.notEqual(dataShallowCloneStrict, ceFullStrict.data)\r\n    t.notStrictEqual(dataShallowCloneStrict, ceFullStrict.data)\r\n    t.notEqual(dataShallowCloneStrict, ceFullStrict.payload)\r\n    dataShallowCloneStrict = 'changed: true' // reassign to test that data won't be affected by that change\r\n    t.notEqual(dataShallowCloneStrict, ceFullStrict.data)\r\n    t.strictNotSame(dataShallowCloneStrict, ceFullStrict.data)\r\n    t.notEqual(dataShallowCloneStrict, ceFullStrict.payload)\r\n  }\r\n})\r\n",
     "static": true,
     "longname": "/Users/martinis/work/prove/cloudevent.js/test/cloudevent-serialization.test.js",
     "access": null,
@@ -2573,7 +2617,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 115,
+    "__docId__": 116,
     "kind": "test",
     "name": "test0",
     "testId": 0,
@@ -2589,7 +2633,7 @@
     ]
   },
   {
-    "__docId__": 116,
+    "__docId__": 117,
     "kind": "test",
     "name": "test1",
     "testId": 1,
@@ -2605,7 +2649,7 @@
     ]
   },
   {
-    "__docId__": 117,
+    "__docId__": 118,
     "kind": "test",
     "name": "test2",
     "testId": 2,
@@ -2614,14 +2658,14 @@
     "static": true,
     "longname": "test/cloudevent-serialization.test.js~test2",
     "access": null,
-    "description": "serialize a CloudEvent instance with a non default contentType, expect error",
-    "lineNumber": 150,
+    "description": "serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error",
+    "lineNumber": 153,
     "testTargets": [
       "CloudEvent"
     ]
   },
   {
-    "__docId__": 118,
+    "__docId__": 119,
     "kind": "test",
     "name": "test3",
     "testId": 3,
@@ -2630,14 +2674,43 @@
     "static": true,
     "longname": "test/cloudevent-serialization.test.js~test3",
     "access": null,
-    "description": "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
-    "lineNumber": 178,
+    "description": "serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success",
+    "lineNumber": 215,
     "testTargets": [
       "CloudEvent"
     ]
   },
   {
-    "__docId__": 119,
+    "__docId__": 120,
+    "kind": "test",
+    "name": "test4",
+    "testId": 4,
+    "memberof": "test/cloudevent-serialization.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/cloudevent-serialization.test.js~test4",
+    "access": null,
+    "description": "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
+    "lineNumber": 294,
+    "testTargets": [
+      "CloudEvent"
+    ]
+  },
+  {
+    "__docId__": 121,
+    "kind": "test",
+    "name": "test5",
+    "testId": 5,
+    "memberof": "test/cloudevent-serialization.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/cloudevent-serialization.test.js~test5",
+    "access": null,
+    "description": "serialize some CloudEvent instances to JSON with nested data, and ensure they are right",
+    "lineNumber": 336
+  },
+  {
+    "__docId__": 122,
     "kind": "testFile",
     "name": "test/cloudevent.test.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure the CloudEvent class is exported by the library', (t) => {\r\n  t.plan(4)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  // optional, using some standard Node.js assert statements, as a sample\r\n  assert(CloudEvent !== null)\r\n  assert.strictEqual(typeof CloudEvent, 'function')\r\n  assert(new CloudEvent() instanceof CloudEvent)\r\n  assert.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n  t.ok(CloudEvent)\r\n  t.strictEqual(typeof CloudEvent, 'function')\r\n  t.strictEqual(new CloudEvent() instanceof CloudEvent, true)\r\n  t.strictEqual(CloudEvent.mediaType(), 'application/cloudevents+json')\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure isValid and validate works good on undefined and null objects', (t) => {\r\n  t.plan(7)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // undefined\r\n  t.notOk()\r\n  t.notOk(CloudEvent.isValidEvent())\r\n  t.strictSame(CloudEvent.validateEvent(), [new Error('CloudEvent undefined or null')])\r\n\r\n  // null\r\n  t.notOk(null)\r\n  t.notOk(CloudEvent.isValidEvent(null))\r\n  t.strictSame(CloudEvent.validateEvent(null), [new Error('CloudEvent undefined or null')])\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects', (t) => {\r\n  t.plan(11)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // create an instance without mandatory arguments (but no strict mode): expected success ...\r\n  const ceEmpty = new CloudEvent()\r\n  t.ok(ceEmpty)\r\n  t.ok(!CloudEvent.isValidEvent(ceEmpty))\r\n  // t.strictSame(CloudEvent.validateEvent(ceEmpty), []) // temp, to see the error during development ...\r\n  t.strictSame(CloudEvent.validateEvent(ceEmpty).length, 3) // simplify comparison of results, check only the  number of expected errors ...\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(!ceEmpty.isValid())\r\n  t.strictSame(ceEmpty.validate(ceEmpty).length, 3) // simplify comparison of results, check only the  number of expected errors ...\r\n\r\n  // create an instance without mandatory arguments (but with strict mode): expected failure ...\r\n  let ceEmpty2 = null\r\n  try {\r\n    ceEmpty2 = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true })\r\n    assert(ceEmpty2 === null) // never executed\r\n  } catch (e) {\r\n    t.ok(e) // expected error here\r\n    t.ok(!CloudEvent.isValidEvent(ceEmpty2))\r\n    t.strictSame(CloudEvent.validateEvent(ceEmpty2), [new Error('CloudEvent undefined or null')])\r\n    // the same but using normal instance methods, to ensure they works good ... no because here instance is null\r\n  }\r\n  t.equal(ceEmpty2, null)\r\n  // the same test, but in a shorter form ...\r\n  t.throws(function () {\r\n    const ce = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true })\r\n    assert(ce === null) // never executed\r\n  }, Error, 'Expected exception when creating a CloudEvent without mandatory arguments with strict flag enabled')\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('create some CloudEvent instances (with minimal fields set) and ensure they are different objects', (t) => {\r\n  t.plan(40)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // t.notSame(CloudEvent.isValidEvent, CloudEvent.validateEvent)\r\n  t.strictNotSame(CloudEvent.isValidEvent, CloudEvent.validateEvent)\r\n\r\n  // create an instance with only mandatory arguments (no strict mode, but doesn't matter in this case): expected success ...\r\n  const ceMinimal = new CloudEvent('1', // eventID\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\r\n    '/', // source\r\n    {} // data (empty) // optional, but useful the same in this sample usage\r\n  )\r\n  t.ok(ceMinimal)\r\n  // console.log(`DEBUG - cloudEvent details: ceMinimal = ${JSON.stringify(ceMinimal)}`)\r\n  // console.log(`DEBUG - cloudEvent details: ${CloudEvent.dumpObject(ceMinimal, 'ceMinimal')}`)\r\n  // console.log(`DEBUG - cloudEvent details: ${ceMinimal}`) // implicit call of its toString method ...\r\n  t.ok(CloudEvent.isValidEvent(ceMinimal))\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimal), [])\r\n  // t.strictSame(CloudEvent.validateEvent(ceEmpty), []) // temp, to see the error during development ...\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimal).length, 0) // simplify comparison of results, check only the  number of expected errors ...\r\n  // create another instance, similar\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceMinimal.isValid())\r\n  t.strictSame(ceMinimal.validate(), [])\r\n  t.strictSame(ceMinimal.validate().length, 0) // simplify comparison of results, check only the  number of expected errors ...\r\n  const ceMinimal2 = new CloudEvent('2', // eventID\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\r\n    '/', // source\r\n    {} // data (empty) // optional, but useful the same in this sample usage\r\n  )\r\n  t.ok(ceMinimal2)\r\n  t.ok(CloudEvent.isValidEvent(ceMinimal2)) // using default strict mode in the event\r\n  t.ok(CloudEvent.isValidEvent(ceMinimal2, { strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimal2), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimal2).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceMinimal2.isValid()) // using default strict mode in the event\r\n  t.ok(ceMinimal2.isValid({ strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(ceMinimal2.validate(), [])\r\n  t.strictSame(ceMinimal2.validate().length, 0)\r\n  // then ensure they are different (have different values inside) ...\r\n  assert(ceMinimal !== ceMinimal2) // they must be different object references\r\n  t.notSame(ceMinimal, ceMinimal2)\r\n  t.strictNotSame(ceMinimal, ceMinimal2)\r\n\r\n  // create an instance with a mandatory argument undefined (but no strict mode): expected success ...\r\n  // note that undefined arguments will be handled by default arguments, so all will be good the same here ...\r\n  const ceMinimalMandatoryUndefinedNoStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: false })\r\n  assert(ceMinimalMandatoryUndefinedNoStrict !== null)\r\n  t.ok(ceMinimalMandatoryUndefinedNoStrict)\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict)) // using default strict mode in the event\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict, { strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimalMandatoryUndefinedNoStrict, { strict: false }).length, 3)\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryUndefinedNoStrict, { strict: true })) // the same but validate with strict mode enabled ...\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(!ceMinimalMandatoryUndefinedNoStrict.isValid()) // using default strict mode in the event\r\n  t.ok(!ceMinimalMandatoryUndefinedNoStrict.isValid({ strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(ceMinimalMandatoryUndefinedNoStrict.validate({ strict: false }).length, 3)\r\n  t.ok(!ceMinimalMandatoryUndefinedNoStrict.isValid({ strict: true })) // the same but validate with strict mode enabled ...\r\n\r\n  // the same but with strict mode: expected exception ...\r\n  t.throws(function () {\r\n    const ceMinimalMandatoryUndefinedStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true })\r\n    assert(ceMinimalMandatoryUndefinedStrict === null) // never executed\r\n  }, Error, 'Expected exception when creating a CloudEvent without mandatory arguments with strict flag enabled')\r\n\r\n  // create an instance with a mandatory argument null (but no strict mode): expected success ...\r\n  // note that undefined arguments will be handled by default arguments, so all will be good the same here ...\r\n  const ceMinimalMandatoryNullNoStrict = new CloudEvent(null, null, null, null, { strict: false })\r\n  assert(ceMinimalMandatoryNullNoStrict !== null)\r\n  t.ok(ceMinimalMandatoryNullNoStrict)\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryNullNoStrict)) // using default strict mode in the event\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryNullNoStrict, { strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(CloudEvent.validateEvent(ceMinimalMandatoryNullNoStrict, { strict: false }).length, 3)\r\n  t.ok(!CloudEvent.isValidEvent(ceMinimalMandatoryNullNoStrict, { strict: true })) // the same but validate with strict mode enabled ...\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(!ceMinimalMandatoryNullNoStrict.isValid()) // using default strict mode in the event\r\n  t.ok(!ceMinimalMandatoryNullNoStrict.isValid({ strict: false })) // same of previous but using strict mode in validation options\r\n  t.strictSame(ceMinimalMandatoryNullNoStrict.validate({ strict: false }).length, 3)\r\n  t.ok(!ceMinimalMandatoryNullNoStrict.isValid({ strict: true })) // the same but validate with strict mode enabled ...\r\n\r\n  // the same but with strict mode: expected exception ...\r\n  t.throws(function () {\r\n    const ceMinimalMandatoryNullStrict = new CloudEvent(null, null, null, null, { strict: true })\r\n    assert(ceMinimalMandatoryNullStrict === null) // never executed\r\n  }, Error, 'Expected exception when creating a CloudEvent without mandatory arguments with strict flag enabled')\r\n})\r\n\r\n/** create some common options, for better reuse in tests */\r\nconst ceCommonOptions = {\r\n  eventTypeVersion: '1.0.0',\r\n  eventTime: new Date(),\r\n  extensions: { 'exampleExtension': 'value' },\r\n  contentType: 'application/json',\r\n  schemaURL: 'http://my-schema.localhost.localdomain',\r\n  strict: false\r\n}\r\n/** create some common options with strict flag enabled, for better reuse in tests */\r\nconst ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }\r\n/** create some common data from an object, for better reuse in tests */\r\nconst ceCommonData = { 'hello': 'world', year: 2018 }\r\n/** create some common data from a Map, for better reuse in tests */\r\nconst ceMapData = new Map() // empty Map\r\n// const ceMapData = new Map(['key-1', 'value 1'], ['key-2', 'value 2'])\r\nceMapData.set('key-1', 'value 1')\r\nceMapData.set('key-2', 'value 2')\r\n\r\n/** @test {CloudEvent} */\r\ntest('create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects', (t) => {\r\n  t.plan(21)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // create an instance with an undefined mandatory argument (handled by defaults), but with strict flag disabled: expected success ...\r\n  // note that null values are not handled by default values, only undefined values ...\r\n  const ceFull1 = new CloudEvent('1/full',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData,\r\n    ceCommonOptions\r\n  )\r\n  t.ok(ceFull1)\r\n  t.ok(CloudEvent.isValidEvent(ceFull1))\r\n  t.ok(CloudEvent.isValidEvent(ceFull1, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFull1), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFull1).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFull1.isValid())\r\n  t.ok(ceFull1.isValid({ strict: false }))\r\n  t.strictSame(ceFull1.validate(), [])\r\n  t.strictSame(ceFull1.validate().length, 0)\r\n\r\n  // create another instance with all fields equals: expected success ...\r\n  const ceFull1Clone = new CloudEvent('1/full', // should be '2/full/no-strict' ...\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceCommonData,\r\n    ceCommonOptions\r\n  )\r\n  t.ok(ceFull1Clone)\r\n  t.ok(CloudEvent.isValidEvent(ceFull1Clone))\r\n  t.ok(CloudEvent.isValidEvent(ceFull1Clone, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFull1Clone), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFull1Clone).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFull1Clone.isValid())\r\n  t.ok(ceFull1Clone.isValid({ strict: false }))\r\n  t.strictSame(ceFull1Clone.validate(), [])\r\n  t.strictSame(ceFull1Clone.validate().length, 0)\r\n\r\n  // then ensure they are different objects ...\r\n  assert(ceFull1 !== ceFull1Clone) // they must be different object references\r\n  t.same(ceFull1, ceFull1Clone)\r\n  t.strictSame(ceFull1, ceFull1Clone)\r\n})\r\n\r\n/** @test {CloudEvent} */\r\ntest('create CloudEvent instances with different kind of data attribute, and ensure the validation is right', (t) => {\r\n  t.plan(81)\r\n  const CloudEvent = require('../src/') // reference the library\r\n  t.ok(CloudEvent)\r\n\r\n  // create an instance with undefined data attribute, but with strict flag disabled: expected success ...\r\n  // note that null values are not handled by default values, only undefined values ...\r\n  const ceFullDataUndefined = new CloudEvent('1/full/undefined-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    undefined, // data\r\n    ceCommonOptions\r\n  )\r\n  assert(ceFullDataUndefined !== null)\r\n  t.ok(ceFullDataUndefined)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataUndefined))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataUndefined, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataUndefined), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataUndefined, { strict: false }).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataUndefined.isValid())\r\n  t.ok(ceFullDataUndefined.isValid({ strict: false }))\r\n  t.strictSame(ceFullDataUndefined.validate(), [])\r\n  t.strictSame(ceFullDataUndefined.validate({ strict: false }).length, 0)\r\n  // the same with with strict mode enabled ...\r\n  const ceFullDataUndefinedStrict = new CloudEvent('1/full/undefined-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    undefined, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullDataUndefinedStrict !== null)\r\n  t.ok(ceFullDataUndefinedStrict)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataUndefinedStrict))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataUndefinedStrict, { strict: true }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataUndefinedStrict), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataUndefinedStrict, { strict: true }).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataUndefinedStrict.isValid())\r\n  t.ok(ceFullDataUndefinedStrict.isValid({ strict: true }))\r\n  t.strictSame(ceFullDataUndefinedStrict.validate(), [])\r\n  t.strictSame(ceFullDataUndefinedStrict.validate({ strict: true }).length, 0)\r\n\r\n  // create an instance with null data attribute, but with strict flag disabled: expected success ...\r\n  // note that null values are not handled by default values, only undefined values ...\r\n  const ceFullDataNull = new CloudEvent('1/full/null-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    null, // data\r\n    ceCommonOptions\r\n  )\r\n  assert(ceFullDataNull !== null)\r\n  t.ok(ceFullDataNull)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataNull))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataNull, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataNull), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataNull, { strict: false }).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataNull.isValid())\r\n  t.ok(ceFullDataNull.isValid({ strict: false }))\r\n  t.strictSame(ceFullDataNull.validate(), [])\r\n  t.strictSame(ceFullDataNull.validate({ strict: false }).length, 0)\r\n  // the same with with strict mode enabled ...\r\n  const ceFullDataNullStrict = new CloudEvent('1/full/null-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    null, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullDataNullStrict !== null)\r\n  t.ok(ceFullDataNullStrict)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataNullStrict))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataNullStrict, { strict: true }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataNullStrict), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataNullStrict, { strict: true }).length, 0)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataNullStrict.isValid())\r\n  t.ok(ceFullDataNullStrict.isValid({ strict: true }))\r\n  t.strictSame(ceFullDataNullStrict.validate(), [])\r\n  t.strictSame(ceFullDataNullStrict.validate({ strict: true }).length, 0)\r\n\r\n  // create an instance with a string data attribute, but with strict flag disabled: expected success ...\r\n  const ceFullDataString = new CloudEvent('1/full/string-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    'data as a string, bad here', // data\r\n    ceCommonOptions\r\n  )\r\n  assert(ceFullDataString !== null)\r\n  t.ok(ceFullDataString)\r\n  // data type errors handled only in strict mode currently ...\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataString))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataString, { strict: false })) // good the same\r\n  t.ok(!CloudEvent.isValidEvent(ceFullDataString, { strict: true })) // bad here (right)\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataString), [])\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataString, { strict: false }).length, 0) // good the same\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataString, { strict: true }).length, 1) // bad here (right)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataString.isValid())\r\n  t.ok(ceFullDataString.isValid({ strict: false }))\r\n  t.ok(!ceFullDataString.isValid({ strict: true }))\r\n  t.strictSame(ceFullDataString.validate(), [])\r\n  t.strictSame(ceFullDataString.validate({ strict: false }).length, 0)\r\n  t.strictSame(ceFullDataString.validate({ strict: true }).length, 1)\r\n  // the same with with strict mode enabled ...\r\n  const ceFullDataStringStrict = new CloudEvent('1/full/string-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    'data as a string, bad here', // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullDataStringStrict !== null)\r\n  t.ok(ceFullDataStringStrict)\r\n  // data type errors handled only in strict mode currently ...\r\n  // note that in the following lines even if I force 'strict: false' he won't be used because already set in the object instance ...\r\n  t.ok(!CloudEvent.isValidEvent(ceFullDataStringStrict))\r\n  t.ok(!CloudEvent.isValidEvent(ceFullDataStringStrict, { strict: true }))\r\n  t.ok(!CloudEvent.isValidEvent(ceFullDataStringStrict, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataStringStrict).length, 1)\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataStringStrict, { strict: true }).length, 1)\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataStringStrict, { strict: false }).length, 1)\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(!ceFullDataStringStrict.isValid())\r\n  t.ok(!ceFullDataStringStrict.isValid({ strict: true }))\r\n  t.ok(!ceFullDataStringStrict.isValid({ strict: false }))\r\n  t.strictSame(ceFullDataStringStrict.validate().length, 1)\r\n  t.strictSame(ceFullDataStringStrict.validate({ strict: true }).length, 1)\r\n  t.strictSame(ceFullDataStringStrict.validate({ strict: false }).length, 1)\r\n\r\n  // create an instance with a sample Map data attribute, but with strict flag disabled: expected success ...\r\n  // note that null values are not handled by default values, only undefined values ...\r\n  const ceFullDataMap = new CloudEvent('1/full/map-data/no-strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceMapData, // data\r\n    ceCommonOptions\r\n  )\r\n  assert(ceFullDataMap !== null)\r\n  t.ok(ceFullDataMap)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataMap))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataMap, { strict: false }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataMap), []) // data type errors handled only in strict mode currently ...\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataMap, { strict: false }).length, 0) // data type errors handled only in strict mode currently ...\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataMap.isValid())\r\n  t.ok(ceFullDataMap.isValid({ strict: false }))\r\n  t.strictSame(ceFullDataMap.validate(), []) // data type errors handled only in strict mode currently ...\r\n  t.strictSame(ceFullDataMap.validate({ strict: false }).length, 0) // data type errors handled only in strict mode currently ...\r\n  // the same with with strict mode enabled ...\r\n  const ceFullDataMapStrict = new CloudEvent('1/full/map-data/strict',\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent',\r\n    '/test',\r\n    ceMapData, // data\r\n    ceCommonOptionsStrict\r\n  )\r\n  assert(ceFullDataMapStrict !== null)\r\n  t.ok(ceFullDataMapStrict)\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataMapStrict))\r\n  t.ok(CloudEvent.isValidEvent(ceFullDataMapStrict, { strict: true }))\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataMapStrict).length, 0) // data type errors handled only in strict mode currently ...\r\n  t.strictSame(CloudEvent.validateEvent(ceFullDataMapStrict, { strict: true }).length, 0) // data type errors handled only in strict mode currently ...\r\n  // the same but using normal instance methods, to ensure they works good ...\r\n  t.ok(ceFullDataMapStrict.isValid())\r\n  t.ok(ceFullDataMapStrict.isValid({ strict: true }))\r\n  t.strictSame(ceFullDataMapStrict.validate().length, 0) // data type errors handled only in strict mode currently ...\r\n  t.strictSame(ceFullDataMapStrict.validate({ strict: true }).length, 0) // data type errors handled only in strict mode currently ...\r\n})\r\n",
@@ -2648,39 +2721,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 120,
-    "kind": "test",
-    "name": "test4",
-    "testId": 4,
-    "memberof": "test/cloudevent.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "test/cloudevent.test.js~test4",
-    "access": null,
-    "description": "ensure the CloudEvent class is exported by the library",
-    "lineNumber": 22,
-    "testTargets": [
-      "CloudEvent"
-    ]
-  },
-  {
-    "__docId__": 121,
-    "kind": "test",
-    "name": "test5",
-    "testId": 5,
-    "memberof": "test/cloudevent.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "test/cloudevent.test.js~test5",
-    "access": null,
-    "description": "ensure isValid and validate works good on undefined and null objects",
-    "lineNumber": 37,
-    "testTargets": [
-      "CloudEvent"
-    ]
-  },
-  {
-    "__docId__": 122,
+    "__docId__": 123,
     "kind": "test",
     "name": "test6",
     "testId": 6,
@@ -2689,14 +2730,14 @@
     "static": true,
     "longname": "test/cloudevent.test.js~test6",
     "access": null,
-    "description": "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
-    "lineNumber": 54,
+    "description": "ensure the CloudEvent class is exported by the library",
+    "lineNumber": 22,
     "testTargets": [
       "CloudEvent"
     ]
   },
   {
-    "__docId__": 123,
+    "__docId__": 124,
     "kind": "test",
     "name": "test7",
     "testId": 7,
@@ -2705,14 +2746,14 @@
     "static": true,
     "longname": "test/cloudevent.test.js~test7",
     "access": null,
-    "description": "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
-    "lineNumber": 89,
+    "description": "ensure isValid and validate works good on undefined and null objects",
+    "lineNumber": 37,
     "testTargets": [
       "CloudEvent"
     ]
   },
   {
-    "__docId__": 124,
+    "__docId__": 125,
     "kind": "test",
     "name": "test8",
     "testId": 8,
@@ -2721,14 +2762,14 @@
     "static": true,
     "longname": "test/cloudevent.test.js~test8",
     "access": null,
-    "description": "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
-    "lineNumber": 199,
+    "description": "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
+    "lineNumber": 54,
     "testTargets": [
       "CloudEvent"
     ]
   },
   {
-    "__docId__": 125,
+    "__docId__": 126,
     "kind": "test",
     "name": "test9",
     "testId": 9,
@@ -2737,6 +2778,38 @@
     "static": true,
     "longname": "test/cloudevent.test.js~test9",
     "access": null,
+    "description": "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
+    "lineNumber": 89,
+    "testTargets": [
+      "CloudEvent"
+    ]
+  },
+  {
+    "__docId__": 127,
+    "kind": "test",
+    "name": "test10",
+    "testId": 10,
+    "memberof": "test/cloudevent.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/cloudevent.test.js~test10",
+    "access": null,
+    "description": "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
+    "lineNumber": 199,
+    "testTargets": [
+      "CloudEvent"
+    ]
+  },
+  {
+    "__docId__": 128,
+    "kind": "test",
+    "name": "test11",
+    "testId": 11,
+    "memberof": "test/cloudevent.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/cloudevent.test.js~test11",
+    "access": null,
     "description": "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "lineNumber": 248,
     "testTargets": [
@@ -2744,7 +2817,7 @@
     ]
   },
   {
-    "__docId__": 126,
+    "__docId__": 129,
     "kind": "testFile",
     "name": "test/validator.test.js",
     "content": "/*\r\n * Copyright 2018 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\n// const ceClassname = 'CloudEvent'\r\n\r\n/** @test {CloudEvent} */\r\ntest('ensure the Validator class (not exported by the library) works good', (t) => {\r\n  t.plan(4)\r\n  const V = require('../src/validator') // direct reference to the library\r\n  t.ok(V)\r\n  t.strictEqual(typeof V, 'function')\r\n\r\n  // optional, using some standard Node.js assert statements, as a sample\r\n  assert(V !== null)\r\n  assert.strictEqual(typeof V, 'function')\r\n  // assert(new V() instanceof V) // no more allowed\r\n\r\n  t.ok(V.isFunction(V.isClass))\r\n  t.throws(function () {\r\n    const v = new V()\r\n    assert(v === null) // never executed\r\n  }, Error, 'Expected exception when creating a Validator instance')\r\n})\r\n\r\n/** create some classes, for better reuse in following tests */\r\nconst CloudEvent = require('../src/') // reference the library\r\nclass NotCESubclass {\r\n}\r\nclass CESubclass extends CloudEvent {\r\n}\r\n\r\n/** @test {CloudEvent} */\r\ntest('create CloudEvent instances with different class hierarchy, and ensure the validation is right', (t) => {\r\n  t.plan(14)\r\n  const CEClass = require('../src/') // reference the library\r\n  t.ok(CEClass)\r\n  const V = require('../src/validator') // direct reference to the library\r\n  t.ok(V)\r\n\r\n  t.strictEqual(typeof V.isClass, 'function')\r\n  t.ok(V.isFunction(V.isClass))\r\n\r\n  // create an instance with only mandatory arguments (no strict mode, but doesn't matter in this case): expected success ...\r\n  const ceMinimal = new CEClass('1', // eventID\r\n    'com.github.smartiniOnGitHub.cloudeventjs.testevent', // eventType\r\n    {} // data (empty) // optional, but useful the same in this sample usage\r\n  )\r\n  t.ok(ceMinimal)\r\n  // console.log(`DEBUG - cloudEvent details: ceMinimal = ${JSON.stringify(ceMinimal)}`)\r\n  // console.log(`DEBUG - cloudEvent details: ${CEClass.dumpObject(ceMinimal, 'ceMinimal')}`)\r\n\r\n  // check that created instances belongs to the right base class\r\n  t.ok(V.isClass(ceMinimal, CEClass))\r\n  t.ok(V.isClass(ceMinimal, CloudEvent))\r\n  t.ok(!V.isClass(ceMinimal, NotCESubclass))\r\n  t.ok(!V.isClass(ceMinimal, CESubclass))\r\n\r\n  // create an instance with only mandatory arguments (no strict mode, but doesn't matter in this case): expected success ...\r\n  const ceMinimalSubclass = new CESubclass('1EX', // eventID\r\n    'org.github.smartiniOnGitHub.cloudeventjs.testeventEx', // eventType\r\n    {} // data (empty) // optional, but useful the same in this sample usage\r\n  )\r\n  t.ok(ceMinimalSubclass)\r\n  // console.log(`DEBUG - cloudEvent details: ceMinimalSubclass = ${JSON.stringify(ceMinimalSubclass)}`)\r\n  // console.log(`DEBUG - cloudEvent details: ${CEClass.dumpObject(ceMinimalSubclass, 'ceMinimalSubclass')}`)\r\n\r\n  // check that created instances belongs to the right base class\r\n  t.ok(V.isClass(ceMinimalSubclass, CEClass))\r\n  t.ok(V.isClass(ceMinimalSubclass, CloudEvent))\r\n  t.ok(!V.isClass(ceMinimalSubclass, NotCESubclass))\r\n  t.ok(V.isClass(ceMinimalSubclass, CESubclass))\r\n})\r\n",
@@ -2755,14 +2828,14 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 127,
+    "__docId__": 130,
     "kind": "test",
-    "name": "test10",
-    "testId": 10,
+    "name": "test12",
+    "testId": 12,
     "memberof": "test/validator.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "test/validator.test.js~test10",
+    "longname": "test/validator.test.js~test12",
     "access": null,
     "description": "ensure the Validator class (not exported by the library) works good",
     "lineNumber": 24,
@@ -2771,14 +2844,14 @@
     ]
   },
   {
-    "__docId__": 128,
+    "__docId__": 131,
     "kind": "test",
-    "name": "test11",
-    "testId": 11,
+    "name": "test13",
+    "testId": 13,
     "memberof": "test/validator.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "test/validator.test.js~test11",
+    "longname": "test/validator.test.js~test13",
     "access": null,
     "description": "create CloudEvent instances with different class hierarchy, and ensure the validation is right",
     "lineNumber": 50,

@@ -76,16 +76,17 @@
       
     <li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber22">ensure decorator functions (exposed by the plugin) exists</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber64">serialize some CloudEvent instances to JSON, and ensure they are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber199">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber248">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber24">ensure the Validator class (not exported by the library) works good</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber50">create CloudEvent instances with different class hierarchy, and ensure the validation is right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber150">serialize a CloudEvent instance with a non default contentType, expect error</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber178">ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber153">serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber215">serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber294">ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber22">ensure the CloudEvent class is exported by the library</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber37">ensure isValid and validate works good on undefined and null objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber54">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber89">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber199">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber248">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
 </ul>
   </div>
 
@@ -257,7 +258,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-serializeEvent">serializeEvent</a></span></span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-serializeEvent">serializeEvent</a></span></span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -423,6 +424,36 @@
         
         
         <div data-ice="description"><p>Getter method to tell if the object has the strict flag enabled.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-get-payload">payload</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Getter method to return a copy of CloudEvent data attribute,
+or original data payload.</p>
 </div>
       </div>
     </td>
@@ -807,7 +838,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-method-serialize">serialize</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-method-serialize">serialize</a></span></span><span class="code" data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -982,7 +1013,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber298">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber315">source</a></span></span>
     </span>
   </h3>
 
@@ -1263,11 +1294,11 @@ but only in some serialization libraries.</p>
     
     
     
-    <span class="code" data-ice="name">serializeEvent</span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">serializeEvent</span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber277">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber281">source</a></span></span>
     </span>
   </h3>
 
@@ -1275,7 +1306,8 @@ but only in some serialization libraries.</p>
   
   
   <div data-ice="description"><p>Serialize the given CloudEvent in JSON format.
-Note that here standard serialization to JSON is used (no additional libraries).</p>
+Note that here standard serialization to JSON is used (no additional libraries).
+Note that the result of encoder function is assigned to encoded data.</p>
 </div>
 
   
@@ -1293,6 +1325,15 @@ Note that here standard serialization to JSON is used (no additional libraries).
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
       <td data-ice="appendix"><ul><li>nullable: false</li></ul></td>
       <td data-ice="description"><p>the CloudEvent to serialize</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">options</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>optional serialization attributes:
+       encoder (function, default null) a function that takes data and returns encoded data,
+       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),</p>
 </td>
     </tr>
 </tbody>
@@ -1593,7 +1634,7 @@ Note that here standard serialization to JSON is used (no additional libraries).
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber400">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber432">source</a></span></span>
     </span>
   </h3>
 
@@ -1651,7 +1692,7 @@ Note that here standard serialization to JSON is used (no additional libraries).
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber367">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber387">source</a></span></span>
     </span>
   </h3>
 
@@ -1660,6 +1701,52 @@ Note that here standard serialization to JSON is used (no additional libraries).
   
   <div data-ice="description"><p>Getter method to tell if the object has the strict flag enabled.</p>
 <p>See <span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-isStrictEvent">CloudEvent.isStrictEvent</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-payload">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span class="code" data-ice="name">payload</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber410">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Getter method to return a copy of CloudEvent data attribute,
+or original data payload.</p>
+<p>See <span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-data">CloudEvent.data</a></span>.</p>
 </div>
 
   
@@ -1696,7 +1783,7 @@ Note that here standard serialization to JSON is used (no additional libraries).
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber378">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber398">source</a></span></span>
     </span>
   </h3>
 
@@ -2190,7 +2277,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber356">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber376">source</a></span></span>
     </span>
   </h3>
 
@@ -2261,11 +2348,11 @@ Copy the original object to avoid changing objects that could be shared.</p>
     
     
     
-    <span class="code" data-ice="name">serialize</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">serialize</span><span class="code" data-ice="signature">(options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber332">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber352">source</a></span></span>
     </span>
   </h3>
 
@@ -2273,12 +2360,31 @@ Copy the original object to avoid changing objects that could be shared.</p>
   
   
   <div data-ice="description"><p>Serialize the current CloudEvent.</p>
-<p>See <span>CloudEvent.serializeeEvent</span>.</p>
+<p>See <span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-serializeEvent">CloudEvent.serializeEvent</a></span>.</p>
 </div>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">options</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>optional serialization attributes:
+       encoder (function, default null) a function that takes data and returns encoded data,
+       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -2323,7 +2429,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber389">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber421">source</a></span></span>
     </span>
   </h3>
 
@@ -2381,7 +2487,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber344">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber364">source</a></span></span>
     </span>
   </h3>
 
