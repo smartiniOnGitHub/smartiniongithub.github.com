@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 847,
+  "end": 1232,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 24,
+      "line": 44,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 847,
+    "end": 1232,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 24,
+        "line": 44,
         "column": 0
       }
     },
@@ -30,44 +30,44 @@
     "body": [
       {
         "type": "ImportDeclaration",
-        "start": 708,
-        "end": 755,
+        "start": 740,
+        "end": 787,
         "loc": {
           "start": {
-            "line": 21,
+            "line": 23,
             "column": 0
           },
           "end": {
-            "line": 21,
+            "line": 23,
             "column": 47
           }
         },
         "specifiers": [
           {
             "type": "ImportDefaultSpecifier",
-            "start": 715,
-            "end": 735,
+            "start": 747,
+            "end": 767,
             "loc": {
               "start": {
-                "line": 21,
+                "line": 23,
                 "column": 7
               },
               "end": {
-                "line": 21,
+                "line": 23,
                 "column": 27
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 715,
-              "end": 735,
+              "start": 747,
+              "end": 767,
               "loc": {
                 "start": {
-                  "line": 21,
+                  "line": 23,
                   "column": 7
                 },
                 "end": {
-                  "line": 21,
+                  "line": 23,
                   "column": 27
                 },
                 "identifierName": "cloudEventDefinition"
@@ -80,15 +80,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 741,
-          "end": 755,
+          "start": 773,
+          "end": 787,
           "loc": {
             "start": {
-              "line": 21,
+              "line": 23,
               "column": 33
             },
             "end": {
-              "line": 21,
+              "line": 23,
               "column": 47
             }
           },
@@ -103,16 +103,16 @@
         "leadingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\r\n * Get a reference to cloudevent class definition.\r\n ",
+            "value": "*\r\n * Get a reference to CloudEvent class definition.\r\n *\r\n * See {@link CloudEvent}.\r\n ",
             "start": 646,
-            "end": 706,
+            "end": 738,
             "loc": {
               "start": {
                 "line": 18,
                 "column": 0
               },
               "end": {
-                "line": 20,
+                "line": 22,
                 "column": 3
               }
             }
@@ -120,18 +120,216 @@
         ],
         "trailingComments": [
           {
-            "type": "CommentLine",
-            "value": " get CloudEvent definition and related utilities",
-            "start": 756,
-            "end": 806,
+            "type": "CommentBlock",
+            "value": "*\r\n * Get a reference to cloudevent class Validator.\r\n *\r\n * See {@link Validator}.\r\n ",
+            "start": 791,
+            "end": 881,
             "loc": {
               "start": {
-                "line": 21,
-                "column": 48
+                "line": 25,
+                "column": 0
               },
               "end": {
-                "line": 21,
-                "column": 98
+                "line": 29,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 883,
+        "end": 928,
+        "loc": {
+          "start": {
+            "line": 30,
+            "column": 0
+          },
+          "end": {
+            "line": 30,
+            "column": 45
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportDefaultSpecifier",
+            "start": 890,
+            "end": 909,
+            "loc": {
+              "start": {
+                "line": 30,
+                "column": 7
+              },
+              "end": {
+                "line": 30,
+                "column": 26
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 890,
+              "end": 909,
+              "loc": {
+                "start": {
+                  "line": 30,
+                  "column": 7
+                },
+                "end": {
+                  "line": 30,
+                  "column": 26
+                },
+                "identifierName": "cloudEventValidator"
+              },
+              "name": "cloudEventValidator",
+              "leadingComments": null
+            },
+            "leadingComments": null
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 915,
+          "end": 928,
+          "loc": {
+            "start": {
+              "line": 30,
+              "column": 32
+            },
+            "end": {
+              "line": 30,
+              "column": 45
+            }
+          },
+          "extra": {
+            "rawValue": "./validator",
+            "raw": "'./validator'"
+          },
+          "value": "./validator",
+          "leadingComments": null,
+          "trailingComments": null
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\r\n * Get a reference to cloudevent class Validator.\r\n *\r\n * See {@link Validator}.\r\n ",
+            "start": 791,
+            "end": 881,
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 0
+              },
+              "end": {
+                "line": 29,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\r\n * Get a reference to cloudevent class Transformer.\r\n *\r\n * See {@link Transformer}.\r\n ",
+            "start": 932,
+            "end": 1026,
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 36,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 1028,
+        "end": 1077,
+        "loc": {
+          "start": {
+            "line": 37,
+            "column": 0
+          },
+          "end": {
+            "line": 37,
+            "column": 49
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportDefaultSpecifier",
+            "start": 1035,
+            "end": 1056,
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 7
+              },
+              "end": {
+                "line": 37,
+                "column": 28
+              }
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 1035,
+              "end": 1056,
+              "loc": {
+                "start": {
+                  "line": 37,
+                  "column": 7
+                },
+                "end": {
+                  "line": 37,
+                  "column": 28
+                },
+                "identifierName": "cloudEventTransformer"
+              },
+              "name": "cloudEventTransformer",
+              "leadingComments": null
+            },
+            "leadingComments": null
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 1062,
+          "end": 1077,
+          "loc": {
+            "start": {
+              "line": 37,
+              "column": 34
+            },
+            "end": {
+              "line": 37,
+              "column": 49
+            }
+          },
+          "extra": {
+            "rawValue": "./transformer",
+            "raw": "'./transformer'"
+          },
+          "value": "./transformer"
+        },
+        "leadingComments": [
+          {
+            "type": "CommentBlock",
+            "value": "*\r\n * Get a reference to cloudevent class Transformer.\r\n *\r\n * See {@link Transformer}.\r\n ",
+            "start": 932,
+            "end": 1026,
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 36,
+                "column": 3
               }
             }
           }
@@ -139,72 +337,193 @@
       },
       {
         "type": "ExportDefaultDeclaration",
-        "start": 810,
-        "end": 845,
+        "start": 1081,
+        "end": 1230,
         "loc": {
           "start": {
-            "line": 23,
+            "line": 39,
             "column": 0
           },
           "end": {
-            "line": 23,
-            "column": 35
+            "line": 43,
+            "column": 1
           }
         },
         "declaration": {
-          "type": "Identifier",
-          "start": 825,
-          "end": 845,
+          "type": "ObjectExpression",
+          "start": 1096,
+          "end": 1230,
           "loc": {
             "start": {
-              "line": 23,
+              "line": 39,
               "column": 15
             },
             "end": {
-              "line": 23,
-              "column": 35
-            },
-            "identifierName": "cloudEventDefinition"
+              "line": 43,
+              "column": 1
+            }
           },
-          "name": "cloudEventDefinition",
-          "leadingComments": [
+          "properties": [
             {
-              "type": "CommentLine",
-              "value": " get CloudEvent definition and related utilities",
-              "start": 756,
-              "end": 806,
+              "type": "ObjectProperty",
+              "start": 1101,
+              "end": 1133,
               "loc": {
                 "start": {
-                  "line": 21,
-                  "column": 48
+                  "line": 40,
+                  "column": 2
                 },
                 "end": {
-                  "line": 21,
-                  "column": 98
+                  "line": 40,
+                  "column": 34
                 }
+              },
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 1101,
+                "end": 1111,
+                "loc": {
+                  "start": {
+                    "line": 40,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 12
+                  },
+                  "identifierName": "CloudEvent"
+                },
+                "name": "CloudEvent"
+              },
+              "value": {
+                "type": "Identifier",
+                "start": 1113,
+                "end": 1133,
+                "loc": {
+                  "start": {
+                    "line": 40,
+                    "column": 14
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 34
+                  },
+                  "identifierName": "cloudEventDefinition"
+                },
+                "name": "cloudEventDefinition"
+              }
+            },
+            {
+              "type": "ObjectProperty",
+              "start": 1138,
+              "end": 1178,
+              "loc": {
+                "start": {
+                  "line": 41,
+                  "column": 2
+                },
+                "end": {
+                  "line": 41,
+                  "column": 42
+                }
+              },
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 1138,
+                "end": 1157,
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 21
+                  },
+                  "identifierName": "CloudEventValidator"
+                },
+                "name": "CloudEventValidator"
+              },
+              "value": {
+                "type": "Identifier",
+                "start": 1159,
+                "end": 1178,
+                "loc": {
+                  "start": {
+                    "line": 41,
+                    "column": 23
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 42
+                  },
+                  "identifierName": "cloudEventValidator"
+                },
+                "name": "cloudEventValidator"
+              }
+            },
+            {
+              "type": "ObjectProperty",
+              "start": 1183,
+              "end": 1227,
+              "loc": {
+                "start": {
+                  "line": 42,
+                  "column": 2
+                },
+                "end": {
+                  "line": 42,
+                  "column": 46
+                }
+              },
+              "method": false,
+              "shorthand": false,
+              "computed": false,
+              "key": {
+                "type": "Identifier",
+                "start": 1183,
+                "end": 1204,
+                "loc": {
+                  "start": {
+                    "line": 42,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 42,
+                    "column": 23
+                  },
+                  "identifierName": "CloudEventTransformer"
+                },
+                "name": "CloudEventTransformer"
+              },
+              "value": {
+                "type": "Identifier",
+                "start": 1206,
+                "end": 1227,
+                "loc": {
+                  "start": {
+                    "line": 42,
+                    "column": 25
+                  },
+                  "end": {
+                    "line": 42,
+                    "column": 46
+                  },
+                  "identifierName": "cloudEventTransformer"
+                },
+                "name": "cloudEventTransformer"
               }
             }
           ],
+          "leadingComments": [],
           "trailingComments": []
-        },
-        "leadingComments": [
-          {
-            "type": "CommentLine",
-            "value": " get CloudEvent definition and related utilities",
-            "start": 756,
-            "end": 806,
-            "loc": {
-              "start": {
-                "line": 21,
-                "column": 48
-              },
-              "end": {
-                "line": 21,
-                "column": 98
-              }
-            }
-          }
-        ]
+        }
       }
     ],
     "directives": [
@@ -265,16 +584,16 @@
         "trailingComments": [
           {
             "type": "CommentBlock",
-            "value": "*\r\n * Get a reference to cloudevent class definition.\r\n ",
+            "value": "*\r\n * Get a reference to CloudEvent class definition.\r\n *\r\n * See {@link CloudEvent}.\r\n ",
             "start": 646,
-            "end": 706,
+            "end": 738,
             "loc": {
               "start": {
                 "line": 18,
                 "column": 0
               },
               "end": {
-                "line": 20,
+                "line": 22,
                 "column": 3
               }
             }
@@ -302,33 +621,49 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\r\n * Get a reference to cloudevent class definition.\r\n ",
+      "value": "*\r\n * Get a reference to CloudEvent class definition.\r\n *\r\n * See {@link CloudEvent}.\r\n ",
       "start": 646,
-      "end": 706,
+      "end": 738,
       "loc": {
         "start": {
           "line": 18,
           "column": 0
         },
         "end": {
-          "line": 20,
+          "line": 22,
           "column": 3
         }
       }
     },
     {
-      "type": "CommentLine",
-      "value": " get CloudEvent definition and related utilities",
-      "start": 756,
-      "end": 806,
+      "type": "CommentBlock",
+      "value": "*\r\n * Get a reference to cloudevent class Validator.\r\n *\r\n * See {@link Validator}.\r\n ",
+      "start": 791,
+      "end": 881,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 48
+          "line": 25,
+          "column": 0
         },
         "end": {
-          "line": 21,
-          "column": 98
+          "line": 29,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\r\n * Get a reference to cloudevent class Transformer.\r\n *\r\n * See {@link Transformer}.\r\n ",
+      "start": 932,
+      "end": 1026,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 3
         }
       }
     }
@@ -379,16 +714,16 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\r\n * Get a reference to cloudevent class definition.\r\n ",
+      "value": "*\r\n * Get a reference to CloudEvent class definition.\r\n *\r\n * See {@link CloudEvent}.\r\n ",
       "start": 646,
-      "end": 706,
+      "end": 738,
       "loc": {
         "start": {
           "line": 18,
           "column": 0
         },
         "end": {
-          "line": 20,
+          "line": 22,
           "column": 3
         }
       }
@@ -408,15 +743,15 @@
         "updateContext": null
       },
       "value": "import",
-      "start": 708,
-      "end": 714,
+      "start": 740,
+      "end": 746,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 23,
           "column": 0
         },
         "end": {
-          "line": 21,
+          "line": 23,
           "column": 6
         }
       }
@@ -434,15 +769,15 @@
         "binop": null
       },
       "value": "cloudEventDefinition",
-      "start": 715,
-      "end": 735,
+      "start": 747,
+      "end": 767,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 23,
           "column": 7
         },
         "end": {
-          "line": 21,
+          "line": 23,
           "column": 27
         }
       }
@@ -460,15 +795,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 736,
-      "end": 740,
+      "start": 768,
+      "end": 772,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 23,
           "column": 28
         },
         "end": {
-          "line": 21,
+          "line": 23,
           "column": 32
         }
       }
@@ -487,32 +822,262 @@
         "updateContext": null
       },
       "value": "./cloudevent",
-      "start": 741,
-      "end": 755,
+      "start": 773,
+      "end": 787,
       "loc": {
         "start": {
-          "line": 21,
+          "line": 23,
           "column": 33
         },
         "end": {
-          "line": 21,
+          "line": 23,
           "column": 47
         }
       }
     },
     {
-      "type": "CommentLine",
-      "value": " get CloudEvent definition and related utilities",
-      "start": 756,
-      "end": 806,
+      "type": "CommentBlock",
+      "value": "*\r\n * Get a reference to cloudevent class Validator.\r\n *\r\n * See {@link Validator}.\r\n ",
+      "start": 791,
+      "end": 881,
       "loc": {
         "start": {
-          "line": 21,
-          "column": 48
+          "line": 25,
+          "column": 0
         },
         "end": {
-          "line": 21,
-          "column": 98
+          "line": 29,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 883,
+      "end": 889,
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "cloudEventValidator",
+      "start": 890,
+      "end": 909,
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 7
+        },
+        "end": {
+          "line": 30,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 910,
+      "end": 914,
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 27
+        },
+        "end": {
+          "line": 30,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./validator",
+      "start": 915,
+      "end": 928,
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 32
+        },
+        "end": {
+          "line": 30,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\r\n * Get a reference to cloudevent class Transformer.\r\n *\r\n * See {@link Transformer}.\r\n ",
+      "start": 932,
+      "end": 1026,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 1028,
+      "end": 1034,
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "cloudEventTransformer",
+      "start": 1035,
+      "end": 1056,
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 7
+        },
+        "end": {
+          "line": 37,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 1057,
+      "end": 1061,
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 29
+        },
+        "end": {
+          "line": 37,
+          "column": 33
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./transformer",
+      "start": 1062,
+      "end": 1077,
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 34
+        },
+        "end": {
+          "line": 37,
+          "column": 49
         }
       }
     },
@@ -531,15 +1096,15 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 810,
-      "end": 816,
+      "start": 1081,
+      "end": 1087,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 39,
           "column": 0
         },
         "end": {
-          "line": 23,
+          "line": 39,
           "column": 6
         }
       }
@@ -559,16 +1124,93 @@
         "updateContext": null
       },
       "value": "default",
-      "start": 817,
-      "end": 824,
+      "start": 1088,
+      "end": 1095,
       "loc": {
         "start": {
-          "line": 23,
+          "line": 39,
           "column": 7
         },
         "end": {
-          "line": 23,
+          "line": 39,
           "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1096,
+      "end": 1097,
+      "loc": {
+        "start": {
+          "line": 39,
+          "column": 15
+        },
+        "end": {
+          "line": 39,
+          "column": 16
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "CloudEvent",
+      "start": 1101,
+      "end": 1111,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 2
+        },
+        "end": {
+          "line": 40,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1111,
+      "end": 1112,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 12
+        },
+        "end": {
+          "line": 40,
+          "column": 13
         }
       }
     },
@@ -585,16 +1227,249 @@
         "binop": null
       },
       "value": "cloudEventDefinition",
-      "start": 825,
-      "end": 845,
+      "start": 1113,
+      "end": 1133,
       "loc": {
         "start": {
-          "line": 23,
-          "column": 15
+          "line": 40,
+          "column": 14
         },
         "end": {
-          "line": 23,
+          "line": 40,
+          "column": 34
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1133,
+      "end": 1134,
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 34
+        },
+        "end": {
+          "line": 40,
           "column": 35
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "CloudEventValidator",
+      "start": 1138,
+      "end": 1157,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 2
+        },
+        "end": {
+          "line": 41,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1157,
+      "end": 1158,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 21
+        },
+        "end": {
+          "line": 41,
+          "column": 22
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "cloudEventValidator",
+      "start": 1159,
+      "end": 1178,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 23
+        },
+        "end": {
+          "line": 41,
+          "column": 42
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1178,
+      "end": 1179,
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 42
+        },
+        "end": {
+          "line": 41,
+          "column": 43
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "CloudEventTransformer",
+      "start": 1183,
+      "end": 1204,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 42,
+          "column": 23
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 1204,
+      "end": 1205,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 23
+        },
+        "end": {
+          "line": 42,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "cloudEventTransformer",
+      "start": 1206,
+      "end": 1227,
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 25
+        },
+        "end": {
+          "line": 42,
+          "column": 46
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 1229,
+      "end": 1230,
+      "loc": {
+        "start": {
+          "line": 43,
+          "column": 0
+        },
+        "end": {
+          "line": 43,
+          "column": 1
         }
       }
     },
@@ -611,15 +1486,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 847,
-      "end": 847,
+      "start": 1232,
+      "end": 1232,
       "loc": {
         "start": {
-          "line": 24,
+          "line": 44,
           "column": 0
         },
         "end": {
-          "line": 24,
+          "line": 44,
           "column": 0
         }
       }

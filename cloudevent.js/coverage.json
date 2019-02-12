@@ -1,16 +1,21 @@
 {
   "coverage": "100%",
-  "expectCount": 62,
-  "actualCount": 62,
+  "expectCount": 81,
+  "actualCount": 81,
   "files": {
     "src/cloudevent.js": {
-      "expectCount": 28,
-      "actualCount": 28,
+      "expectCount": 30,
+      "actualCount": 30,
+      "undocumentLines": []
+    },
+    "src/transformer.js": {
+      "expectCount": 9,
+      "actualCount": 9,
       "undocumentLines": []
     },
     "src/validator.js": {
-      "expectCount": 34,
-      "actualCount": 34,
+      "expectCount": 42,
+      "actualCount": 42,
       "undocumentLines": []
     }
   }

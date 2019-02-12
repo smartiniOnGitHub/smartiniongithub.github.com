@@ -30,19 +30,20 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CloudEvent from &apos;<span><a href="file/src/cloudevent.js.html#lineNumber33">cloudevent/src/cloudevent.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import CloudEvent from &apos;<span><a href="file/src/cloudevent.js.html#lineNumber42">cloudevent/src/cloudevent.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/cloudevent.js.html#lineNumber33">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/cloudevent.js.html#lineNumber42">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -74,19 +75,16 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber22">ensure decorator functions (exposed by the plugin) exists</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber64">serialize some CloudEvent instances to JSON, and ensure they are right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber199">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber248">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber24">ensure the Validator class (not exported by the library) works good</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber50">create CloudEvent instances with different class hierarchy, and ensure the validation is right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber153">serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber215">serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent-serialization.test.js.html#lineNumber294">ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber22">ensure the CloudEvent class is exported by the library</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber37">ensure isValid and validate works good on undefined and null objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber54">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber89">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber22">ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber60">ensure isValid and validate works good on undefined and null objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber42">create CloudEvent instances with different class hierarchy, and ensure the validation is right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber119">ensure some (less used) validation functions are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber77">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber117">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber238">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber287">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber464">ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/index.test.js.html#lineNumber22">ensure objects exported by index script, exists and are of the right type</a></span></li>
 </ul>
   </div>
 
@@ -112,13 +110,42 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-dumpObject">dumpObject</a></span></span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-contentTypeDefault">contentTypeDefault</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Utility function that return a dump of the given object.</p>
+        <div data-ice="description"><p>Return the default content Type for a CloudEvent</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-deserializeEvent">deserializeEvent</a></span></span><span class="code" data-ice="signature">(ser: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Deserialize/parse the given CloudEvent from JSON format.</p>
 </div>
       </div>
     </td>
@@ -148,6 +175,35 @@
         
         
         <div data-ice="description"><p>Get the JSON Schema for a CloudEvent.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-isCloudEvent">isCloudEvent</a></span></span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell the given CloudEvent, if it&apos;s instance of the CloudEvent class or a subclass of it.</p>
 </div>
       </div>
     </td>
@@ -921,54 +977,30 @@ or original data payload.</p>
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-dumpObject">
+  <h3 data-ice="anchor" id="static-method-contentTypeDefault">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span class="code" data-ice="name">dumpObject</span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">contentTypeDefault</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber148">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber165">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Utility function that return a dump of the given object.</p>
+  <div data-ice="description"><p>Return the default content Type for a CloudEvent</p>
 </div>
 
   
 
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">obj</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the object to dump</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to assign in the returned string</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
+  <div data-ice="properties">
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -977,7 +1009,7 @@ or original data payload.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>the dump of the object or a message when obj is undefined/null/not an object</p>
+          <td class="return-desc" data-ice="returnDescription"><p>the value</p>
 </td>
         </tr>
       </tbody>
@@ -1002,6 +1034,108 @@ or original data payload.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-deserializeEvent">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">deserializeEvent</span><span class="code" data-ice="signature">(ser: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber333">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Deserialize/parse the given CloudEvent from JSON format.
+Note that here standard parse from JSON is used (no additional libraries).
+Note that the result of decoder function is assigned to decoded data.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">ser</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: false</li></ul></td>
+      <td data-ice="description"><p>the serialized CloudEvent to parse/deserialize</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">options</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>optional deserialization attributes:
+       decoder (function, no default) a function that takes data and returns decoder data,
+       decodedData (object, no default) already decoded data (but consistency with the contentType is not checked),</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the deserialized event as a CloudEvent instance</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
+        <td data-ice="throwDesc"><p>if event is undefined or null, or an option is undefined/null/wrong</p>
+</td>
+      </tr>
+<tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
+        <td data-ice="throwDesc"><p>in case of JSON parsing error</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-getJSONSchema">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -1013,7 +1147,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber315">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber394">source</a></span></span>
     </span>
   </h3>
 
@@ -1062,6 +1196,80 @@ but only in some serialization libraries.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-isCloudEvent">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">isCloudEvent</span><span class="code" data-ice="signature">(event: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber276">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Tell the given CloudEvent, if it&apos;s instance of the CloudEvent class or a subclass of it.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">event</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: false</li></ul></td>
+      <td data-ice="description"><p>the CloudEvent to check</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s an instance (or a subclass), otherwise false</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-isStrictEvent">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -1073,7 +1281,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber189">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber188">source</a></span></span>
     </span>
   </h3>
 
@@ -1130,8 +1338,13 @@ but only in some serialization libraries.</p>
       <tbody>
       
       <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></p></td>
+        <td data-ice="throwDesc"><p>if event is not a CloudEvent instance or subclass</p>
+</td>
+      </tr>
+<tr class="throw" data-ice="throw">
         <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
-        <td data-ice="throwDesc"><p>if event if undefined or null</p>
+        <td data-ice="throwDesc"><p>if event is undefined or null</p>
 </td>
       </tr>
 </tbody>
@@ -1159,7 +1372,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber264">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber263">source</a></span></span>
     </span>
   </h3>
 
@@ -1241,7 +1454,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber177">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber175">source</a></span></span>
     </span>
   </h3>
 
@@ -1298,7 +1511,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber281">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber295">source</a></span></span>
     </span>
   </h3>
 
@@ -1332,8 +1545,8 @@ Note that the result of encoder function is assigned to encoded data.</p>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional serialization attributes:
-       encoder (function, default null) a function that takes data and returns encoded data,
-       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),</p>
+       encoder (function, no default) a function that takes data and returns encoded data,
+       encodedData (string, no default) already encoded data (but consistency with the contentType is not checked),</p>
 </td>
     </tr>
 </tbody>
@@ -1360,7 +1573,19 @@ Note that the result of encoder function is assigned to encoded data.</p>
 
   
 
-  
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
+        <td data-ice="throwDesc"><p>if event is undefined or null, or an option is undefined/null/wrong</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 
@@ -1383,7 +1608,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber208">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber207">source</a></span></span>
     </span>
   </h3>
 
@@ -1464,7 +1689,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber167">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber155">source</a></span></span>
     </span>
   </h3>
 
@@ -1524,7 +1749,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber49">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber58">source</a></span></span>
     </span>
   </h3>
 
@@ -1634,7 +1859,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber432">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber510">source</a></span></span>
     </span>
   </h3>
 
@@ -1692,7 +1917,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber387">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber465">source</a></span></span>
     </span>
   </h3>
 
@@ -1737,7 +1962,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber410">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber488">source</a></span></span>
     </span>
   </h3>
 
@@ -1783,7 +2008,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber398">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber476">source</a></span></span>
     </span>
   </h3>
 
@@ -1830,7 +2055,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber99">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -1874,7 +2099,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -1918,7 +2143,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber88">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber97">source</a></span></span>
     </span>
   </h3>
 
@@ -1964,7 +2189,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber68">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber77">source</a></span></span>
     </span>
   </h3>
 
@@ -2008,7 +2233,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber121">source</a></span></span>
     </span>
   </h3>
 
@@ -2053,7 +2278,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber74">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber83">source</a></span></span>
     </span>
   </h3>
 
@@ -2097,7 +2322,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber118">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber127">source</a></span></span>
     </span>
   </h3>
 
@@ -2141,7 +2366,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber125">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber134">source</a></span></span>
     </span>
   </h3>
 
@@ -2186,7 +2411,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber131">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber140">source</a></span></span>
     </span>
   </h3>
 
@@ -2230,7 +2455,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber80">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber89">source</a></span></span>
     </span>
   </h3>
 
@@ -2277,7 +2502,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber376">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber454">source</a></span></span>
     </span>
   </h3>
 
@@ -2352,7 +2577,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber352">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber430">source</a></span></span>
     </span>
   </h3>
 
@@ -2429,7 +2654,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber421">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber499">source</a></span></span>
     </span>
   </h3>
 
@@ -2487,7 +2712,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber364">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber442">source</a></span></span>
     </span>
   </h3>
 

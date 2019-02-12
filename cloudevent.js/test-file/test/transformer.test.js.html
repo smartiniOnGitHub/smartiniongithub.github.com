@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/transformer.test.js | cloudevent</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/smartiniOnGitHub/cloudevent.js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">test/transformer.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/*
+ * Copyright 2018 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+&apos;use strict&apos;
+
+const assert = require(&apos;assert&apos;)
+const test = require(&apos;tap&apos;).test
+
+/** @test {Transformer} */
+test(&apos;ensure the Transformer class (direct reference to it) works good&apos;, (t) =&gt; {
+  t.plan(4)
+
+  {
+    const T = require(&apos;../src/transformer&apos;) // direct reference to the library
+    t.ok(T)
+    t.strictEqual(typeof T, &apos;function&apos;)
+    // optional, using some standard Node.js assert statements, as a sample
+    assert(T !== null)
+    assert.strictEqual(typeof T, &apos;function&apos;)
+    // assert(new T() instanceof T) // no more allowed
+  }
+
+  {
+    const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+    t.ok(V.isFunction(T))
+    t.throws(function () {
+      const t = new T()
+      assert(t === null) // never executed
+    }, Error, &apos;Expected exception when creating a Transformer instance&apos;)
+  }
+})
+
+/** @test {Transformer} */
+test(&apos;ensure the Transformer class is good and expose some functions to transform timestamps&apos;, (t) =&gt; {
+  t.plan(10)
+  const { CloudEvent, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.strictEqual(typeof CloudEvent, &apos;function&apos;)
+  t.strictEqual(typeof V.isClass, &apos;function&apos;)
+  t.strictEqual(typeof T.dumpObject, &apos;function&apos;)
+  t.strictEqual(typeof T.timestampFromString, &apos;function&apos;)
+  t.strictEqual(typeof T.timestampToString, &apos;function&apos;)
+  t.ok(V.isFunction(CloudEvent))
+  t.ok(V.isFunction(V.isClass))
+  t.ok(V.isFunction(T.dumpObject))
+  t.ok(V.isFunction(T.timestampFromString))
+  t.ok(V.isFunction(T.timestampToString))
+})
+
+/** create some common options, for better reuse in tests */
+const commonEventTime = new Date()
+const endOf2018TimestampAsString = &apos;2018-12-31T23:59:59.999Z&apos;
+
+/** @test {Transformer} */
+test(&apos;ensure timestamps are transformed to string in the right way&apos;, (t) =&gt; {
+  t.plan(14)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(T))
+  t.ok(endOf2018TimestampAsString)
+  t.ok(V.isString(endOf2018TimestampAsString))
+  t.ok(V.isStringNotEmpty(endOf2018TimestampAsString))
+  t.ok(!V.ensureIsString(endOf2018TimestampAsString, &apos;endOf2018TimestampAsString&apos;)) // no error returned
+  t.ok(!V.ensureIsStringNotEmpty(endOf2018TimestampAsString, &apos;endOf2018TimestampAsString&apos;)) // no error returned
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString()
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to a string&apos;)
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString(undefined)
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to a string&apos;)
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString(null)
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming an null timestamp to a string&apos;)
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString({})
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp (Date) to a string&apos;)
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString(&apos;bad timestamp&apos;)
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp (Date) to a string&apos;)
+
+  t.throws(function () {
+    const timestampAsString = T.timestampToString(endOf2018TimestampAsString) // ok but no string accepted here
+    assert(timestampAsString === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp (Date) to a string&apos;)
+
+  {
+    const timestampAsString = T.timestampToString(commonEventTime)
+    t.ok(timestampAsString)
+    t.ok(V.isString(timestampAsString))
+    // console.log(`timestampAsString: &apos;${timestampAsString}&apos;`)
+  }
+})
+
+/** @test {Transformer} */
+test(&apos;ensure timestamps are transformed from string in the right way&apos;, (t) =&gt; {
+  t.plan(20)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(T))
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString()
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to a timestamp (Date)&apos;)
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString(undefined)
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to a timestamp (Date)&apos;)
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString(null)
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming an null timestamp string to a timestamp (Date)&apos;)
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString({})
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp string to a timestamp (Date)&apos;)
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString(&apos;bad timestamp&apos;)
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp string to a timestamp (Date)&apos;)
+
+  {
+    const timestamp = T.timestampFromString(endOf2018TimestampAsString)
+    t.ok(timestamp)
+    t.ok(V.isDateValid(timestamp))
+    t.ok(V.isNumber(timestamp.getTime()))
+    // console.log(`timestamp: &apos;${timestamp}&apos;`)
+  }
+
+  {
+    const timestampFuture = new Date(Date.now() + 1000)
+    t.ok(timestampFuture)
+    t.ok(V.isDateValid(timestampFuture))
+    t.ok(V.isNumber(timestampFuture.getTime()))
+    t.ok(!V.isDatePast(timestampFuture))
+    t.ok(V.isDateFuture(timestampFuture))
+    t.ok(V.ensureIsDatePast(timestampFuture, &apos;timestampFuture&apos;)) // expected error returned
+    t.ok(!V.ensureIsDateFuture(timestampFuture, &apos;timestampFuture&apos;)) // no error returned
+    t.strictSame(V.ensureIsDate(timestampFuture, &apos;timestampFuture&apos;), undefined) // no error returned
+    t.strictSame(V.ensureIsDatePast(timestampFuture, &apos;timestampFuture&apos;) instanceof Error, true) // expected error returned
+    t.strictSame(V.ensureIsDateFuture(timestampFuture, &apos;timestampFuture&apos;), undefined) // no error returned
+  }
+
+  t.throws(function () {
+    const timestamp = T.timestampFromString(commonEventTime) // ok but no Date accepted here
+    assert(timestamp === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right timestamp string to a timestamp (Date)&apos;)
+})
+
+/** @test {Transformer} */
+test(&apos;ensure the current timestamp is transformed to string and back as date in the right way&apos;, (t) =&gt; {
+  t.plan(8)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(T))
+
+  const timestampAsString = T.timestampToString(commonEventTime)
+  t.ok(timestampAsString)
+  t.ok(V.isString(timestampAsString))
+  // console.log(`current timestamp as string (UTC): &apos;${timestampAsString}&apos;`)
+
+  const timestampFromString = T.timestampFromString(timestampAsString)
+  t.ok(timestampFromString)
+  t.ok(V.isDateValid(timestampFromString))
+  // console.log(`current timestamp from string (with timezone offset): &apos;${timestampFromString}&apos;`)
+
+  // ensure both timestamps have the same value, but they are different object references
+  t.strictSame(timestampFromString.getTime() - T.timezoneOffsetMsec, commonEventTime.getTime())
+  t.notStrictEqual(timestampFromString, commonEventTime)
+  t.notEqual(timestampFromString, commonEventTime)
+})
+
+/** @test {Transformer} */
+test(&apos;ensure errors are transformed into data attribute in the right way&apos;, (t) =&gt; {
+  t.plan(51)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(T))
+
+  t.throws(function () {
+    const data = T.errorToData()
+    assert(data === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to object&apos;)
+
+  t.throws(function () {
+    const data = T.errorToData(undefined)
+    assert(data === null) // never executed
+  }, Error, &apos;Expected exception when transforming an undefined reference to object&apos;)
+
+  t.throws(function () {
+    const data = T.errorToData(null)
+    assert(data === null) // never executed
+  }, Error, &apos;Expected exception when transforming an null error to object&apos;)
+
+  t.throws(function () {
+    const data = T.errorToData({})
+    assert(data === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right error to object&apos;)
+
+  t.throws(function () {
+    const data = T.errorToData(&apos;error string&apos;)
+    assert(data === null) // never executed
+  }, Error, &apos;Expected exception when transforming not a right error to object&apos;)
+
+  {
+    const error = {}
+    // console.log(`DEBUG - error details: ${T.dumpObject(error, &apos;error&apos;)}`)
+    t.ok(!V.isError(error))
+    t.ok(!V.ensureIsObjectOrCollection(error, &apos;error&apos;)) // no error returned
+    t.ok(V.ensureIsError(error, &apos;error&apos;)) // expected error returned
+    t.strictSame(V.ensureIsObjectOrCollection(error, &apos;error&apos;), undefined) // no error returned
+    t.strictSame(V.ensureIsError(error, &apos;error&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const error = new Error()
+    // console.log(`DEBUG - error details: ${T.dumpObject(error, &apos;error&apos;)}`)
+    t.ok(V.isError(error))
+    const data = T.errorToData(error)
+    // console.log(`DEBUG - data details: ${T.dumpObject(data, &apos;data&apos;)}`)
+    t.ok(data)
+    t.ok(V.isObject(data))
+    t.strictSame(data, { name: &apos;Error&apos;, message: &apos;&apos;, stack: null, status: &apos;error&apos; })
+  }
+
+  {
+    const error = new TypeError()
+    // console.log(`DEBUG - error details: ${T.dumpObject(error, &apos;error&apos;)}`)
+    t.ok(V.isError(error))
+    const data = T.errorToData(error)
+    // console.log(`DEBUG - data details: ${T.dumpObject(data, &apos;data&apos;)}`)
+    t.ok(data)
+    t.ok(V.isObject(data))
+    t.strictSame(data, { name: &apos;TypeError&apos;, message: &apos;&apos;, stack: null, status: &apos;error&apos; })
+  }
+
+  {
+    const error = new Error(&apos;sample error&apos;)
+    t.ok(V.isError(error))
+    error.code = 1000 // add a sample error code, as number
+    t.ok(V.isNumber(error.code))
+    const data = T.errorToData(error, {
+      includeStackTrace: true,
+      // addStatus: false,
+      addTimestamp: true
+    })
+    t.ok(data)
+    t.ok(V.isObject(data))
+    t.ok(data.stack)
+    t.ok(V.isString(data.stack))
+    data.stack = null // empty the attribute to simplify next comparison
+    t.ok(data.timestamp)
+    t.ok(V.isNumber(data.timestamp))
+    const timestampParsed = new Date(data.timestamp)
+    t.ok(V.isDatePast(timestampParsed))
+    t.ok(!V.isDateFuture(timestampParsed))
+    t.ok(!V.ensureIsDate(timestampParsed, &apos;timestampParsed&apos;)) // no error returned
+    t.ok(!V.ensureIsDatePast(timestampParsed, &apos;timestampParsed&apos;)) // no error returned
+    t.ok(V.ensureIsDateFuture(timestampParsed, &apos;timestampParsed&apos;)) // expected error returned
+    t.strictSame(V.ensureIsDate(timestampParsed, &apos;timestampParsed&apos;), undefined) // no error returned
+    t.strictSame(V.ensureIsDateFuture(timestampParsed, &apos;timestampParsed&apos;) instanceof Error, true) // expected error returned
+    delete data.code // delete the attribute to simplify next comparison
+    delete data.timestamp // delete the attribute to simplify next comparison
+    t.strictSame(data, { name: &apos;Error&apos;, message: &apos;sample error&apos;, stack: null, status: &apos;error&apos; })
+  }
+
+  {
+    const error = new TypeError(&apos;sample type error&apos;)
+    t.ok(V.isError(error))
+    error.code = &apos;1000&apos; // add a sample error code, as string
+    t.ok(V.isString(error.code))
+    const data = T.errorToData(error, {
+      includeStackTrace: true,
+      // addStatus: false,
+      addTimestamp: true
+    })
+    t.ok(data)
+    t.ok(V.isObject(data))
+    t.ok(data.stack)
+    t.ok(V.isString(data.stack))
+    data.stack = null // empty the attribute to simplify next comparison
+    t.ok(data.timestamp)
+    t.ok(V.isNumber(data.timestamp))
+    const timestampParsed = new Date(data.timestamp)
+    t.ok(V.isDatePast(timestampParsed))
+    t.ok(!V.isDateFuture(timestampParsed))
+    t.ok(!V.ensureIsDate(timestampParsed, &apos;timestampParsed&apos;)) // no error returned
+    t.ok(!V.ensureIsDatePast(timestampParsed, &apos;timestampParsed&apos;)) // no error returned
+    t.ok(V.ensureIsDateFuture(timestampParsed, &apos;timestampParsed&apos;)) // expected error returned
+    t.strictSame(V.ensureIsDate(timestampParsed, &apos;timestampParsed&apos;), undefined) // no error returned
+    t.strictSame(V.ensureIsDateFuture(timestampParsed, &apos;timestampParsed&apos;) instanceof Error, true) // expected error returned
+    delete data.code // delete the attribute to simplify next comparison
+    delete data.timestamp // delete the attribute to simplify next comparison
+    t.strictSame(data, { name: &apos;TypeError&apos;, message: &apos;sample type error&apos;, stack: null, status: &apos;error&apos; })
+  }
+})
+
+/** @test {Transformer} */
+test(&apos;ensure dumpObject works in the right way&apos;, (t) =&gt; {
+  t.plan(12)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(T))
+
+  t.ok(T.dumpObject())
+  t.ok(T.dumpObject(null))
+  t.ok(T.dumpObject(null, null))
+  t.ok(T.dumpObject({}, &apos;empty_object&apos;))
+  t.ok(T.dumpObject({ name: &apos;Name&apos;, age: 20, note: null }, &apos;object&apos;))
+  t.ok(T.dumpObject([1, 2, 3, null], &apos;array&apos;))
+  t.ok(T.dumpObject(new Map([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]]), &apos;map&apos;))
+  t.ok(T.dumpObject(new Set([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]]), &apos;set&apos;))
+  t.ok(T.dumpObject(`12345 67890 `, &apos;string&apos;))
+  t.ok(T.dumpObject(1234567890, &apos;number&apos;))
+  t.ok(T.dumpObject(true, &apos;boolean&apos;))
+})
+
+/** @test {Transformer} */
+test(&apos;ensure process info are transformed into data attribute in the right way&apos;, (t) =&gt; {
+  t.plan(10)
+
+  const { CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(V.isFunction(V))
+  t.ok(V.isFunction(T))
+  t.ok(V.isFunction(T.processInfoToData))
+
+  const hostname = require(&apos;os&apos;).hostname()
+  const pid = require(&apos;process&apos;).pid
+
+  {
+    const data = T.processInfoToData()
+    // console.log(`DEBUG - data: ${T.dumpObject(data, &apos;data&apos;)}`)
+    t.ok(V.isObject(data))
+    t.ok(!V.ensureIsObjectOrCollection(data, &apos;data&apos;)) // no error returned
+    t.strictSame(V.ensureIsObjectOrCollection(data, &apos;data&apos;), undefined) // no error returned
+    t.ok(data.hostname)
+    t.ok(data.pid)
+    t.strictSame(data.hostname, hostname)
+    t.strictSame(data.pid, pid)
+  }
+})
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

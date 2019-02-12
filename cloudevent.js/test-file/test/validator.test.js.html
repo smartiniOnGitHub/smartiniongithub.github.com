@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
 </div>
@@ -56,11 +57,9 @@
 const assert = require(&apos;assert&apos;)
 const test = require(&apos;tap&apos;).test
 
-// const ceClassname = &apos;CloudEvent&apos;
-
-/** @test {CloudEvent} */
-test(&apos;ensure the Validator class (not exported by the library) works good&apos;, (t) =&gt; {
-  t.plan(4)
+/** @test {Validator} */
+test(&apos;ensure the Validator class (direct reference to it) works good&apos;, (t) =&gt; {
+  t.plan(5)
   const V = require(&apos;../src/validator&apos;) // direct reference to the library
   t.ok(V)
   t.strictEqual(typeof V, &apos;function&apos;)
@@ -70,6 +69,7 @@ test(&apos;ensure the Validator class (not exported by the library) works good&a
   assert.strictEqual(typeof V, &apos;function&apos;)
   // assert(new V() instanceof V) // no more allowed
 
+  t.ok(V.isFunction(V))
   t.ok(V.isFunction(V.isClass))
   t.throws(function () {
     const v = new V()
@@ -77,53 +77,228 @@ test(&apos;ensure the Validator class (not exported by the library) works good&a
   }, Error, &apos;Expected exception when creating a Validator instance&apos;)
 })
 
-/** create some classes, for better reuse in following tests */
-const CloudEvent = require(&apos;../src/&apos;) // reference the library
-class NotCESubclass {
-}
-class CESubclass extends CloudEvent {
-}
-
 /** @test {CloudEvent} */
 test(&apos;create CloudEvent instances with different class hierarchy, and ensure the validation is right&apos;, (t) =&gt; {
-  t.plan(14)
-  const CEClass = require(&apos;../src/&apos;) // reference the library
-  t.ok(CEClass)
-  const V = require(&apos;../src/validator&apos;) // direct reference to the library
+  t.plan(33)
+
+  /** create some classes, for better reuse in following tests */
+  const { CloudEvent: CEClass } = require(&apos;../src/&apos;) // get references via destructuring
+  class NotCESubclass {
+  }
+  class CESubclass extends CEClass {
+  }
+
+  {
+    const { CloudEvent, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+    t.strictEqual(typeof CloudEvent, &apos;function&apos;)
+    t.strictEqual(typeof CloudEvent.version, &apos;function&apos;)
+    t.strictEqual(typeof V.isClass, &apos;function&apos;)
+    t.strictEqual(typeof T.dumpObject, &apos;function&apos;)
+    t.ok(V.isFunction(CloudEvent))
+    t.ok(V.isFunction(V.isClass))
+    t.ok(V.isFunction(T.dumpObject))
+
+    // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
+    const ceMinimal = new CEClass(&apos;1&apos;, // eventID
+      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+      &apos;/&apos;, // source
+      {} // data (empty) // optional, but useful the same in this sample usage
+    )
+    t.ok(ceMinimal)
+    // console.log(`DEBUG - cloudEvent details: ceMinimal = ${JSON.stringify(ceMinimal)}`)
+    // console.log(`DEBUG - cloudEvent details: ${T.dumpObject(ceMinimal, &apos;ceMinimal&apos;)}`)
+
+    // check that created instances belongs to the right base class
+    t.ok(V.isClass(ceMinimal, CloudEvent))
+    t.ok(V.isClass(ceMinimal, CEClass))
+    t.ok(!V.isClass(ceMinimal, NotCESubclass))
+    t.ok(!V.isClass(ceMinimal, CESubclass))
+    t.ok(!V.ensureIsClass(ceMinimal, CloudEvent, &apos;ceMinimal&apos;)) // no error returned
+    t.ok(!V.ensureIsClass(ceMinimal, CEClass, &apos;ceMinimal&apos;)) // no error returned
+    t.ok(V.isClass(V.ensureIsClass(ceMinimal, CESubclass, &apos;ceMinimal&apos;), TypeError)) // expected error returned
+    t.ok(V.isClass(V.ensureIsClass(ceMinimal, NotCESubclass, &apos;ceMinimal&apos;), TypeError)) // expected error returned
+
+    // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
+    const ceMinimalSubclass = new CESubclass(&apos;1EX&apos;, // eventID
+      &apos;org.github.smartiniOnGitHub.cloudeventjs.testeventEx&apos;, // eventType
+      &apos;/&apos;, // source
+      {} // data (empty) // optional, but useful the same in this sample usage
+    )
+    t.ok(ceMinimalSubclass)
+    // console.log(`DEBUG - cloudEvent details: ceMinimalSubclass = ${JSON.stringify(ceMinimalSubclass)}`)
+    // console.log(`DEBUG - cloudEvent details: ${T.dumpObject(ceMinimalSubclass, &apos;ceMinimalSubclass&apos;)}`)
+
+    // check that created instances belongs to the right base class
+    t.ok(V.isClass(ceMinimalSubclass, CloudEvent))
+    t.ok(V.isClass(ceMinimalSubclass, CEClass))
+    t.ok(!V.isClass(ceMinimalSubclass, NotCESubclass))
+    t.ok(V.isClass(ceMinimalSubclass, CESubclass))
+    t.ok(!V.ensureIsClass(ceMinimalSubclass, CloudEvent, &apos;ceMinimal&apos;)) // no error returned
+    t.ok(!V.ensureIsClass(ceMinimalSubclass, CEClass, &apos;ceMinimal&apos;)) // no error returned
+    t.ok(!V.ensureIsClass(ceMinimalSubclass, CESubclass, &apos;ceMinimal&apos;)) // no error returned
+    t.ok(V.isClass(V.ensureIsClass(ceMinimalSubclass, NotCESubclass, &apos;ceMinimal&apos;), TypeError)) // expected error returned
+  }
+
+  {
+    const { CloudEventValidator: V } = require(&apos;../src/&apos;) // get references via destructuring
+    t.strictEqual(typeof V, &apos;function&apos;)
+    t.strictEqual(typeof V.isClass, &apos;function&apos;)
+    t.ok(V.isFunction(V))
+    t.ok(V.isFunction(V.isClass))
+
+    const { CloudEvent, CloudEventValidator } = require(&apos;../src/&apos;) // get references via destructuring
+    t.strictEqual(typeof CloudEvent, &apos;function&apos;)
+    t.strictEqual(typeof CloudEventValidator, &apos;function&apos;)
+    t.ok(V.isFunction(CloudEvent))
+    t.ok(V.isFunction(CloudEventValidator))
+  }
+})
+
+/** @test {CloudEvent} */
+test(&apos;ensure some (less used) validation functions are right&apos;, (t) =&gt; {
+  t.plan(70)
+
+  const { CloudEvent, CloudEventValidator: V } = require(&apos;../src/&apos;) // get references via destructuring
+  t.ok(CloudEvent)
   t.ok(V)
 
-  t.strictEqual(typeof V.isClass, &apos;function&apos;)
-  t.ok(V.isFunction(V.isClass))
+  {
+    const undefinedGood = undefined
+    t.ok(V.isUndefined(undefinedGood))
+    t.strictSame(V.ensureIsUndefined(undefinedGood, &apos;test&apos;), undefined) // no error returned
+    t.ok(V.isUndefinedOrNull(undefinedGood))
+    t.strictSame(V.ensureIsUndefinedOrNull(undefinedGood, &apos;test&apos;), undefined) // no error returned
+    const undefinedBad = &apos;defined&apos;
+    t.ok(!V.isUndefined(undefinedBad))
+    t.strictSame(V.ensureIsUndefined(undefinedBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+    t.ok(!V.isUndefinedOrNull(undefinedBad))
+    t.strictSame(V.ensureIsUndefinedOrNull(undefinedBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
 
-  // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-  const ceMinimal = new CEClass(&apos;1&apos;, // eventID
-    &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
-    {} // data (empty) // optional, but useful the same in this sample usage
-  )
-  t.ok(ceMinimal)
-  // console.log(`DEBUG - cloudEvent details: ceMinimal = ${JSON.stringify(ceMinimal)}`)
-  // console.log(`DEBUG - cloudEvent details: ${CEClass.dumpObject(ceMinimal, &apos;ceMinimal&apos;)}`)
+  {
+    const nullGood = null
+    t.ok(V.isNull(nullGood))
+    t.strictSame(V.ensureIsNull(nullGood, &apos;test&apos;), undefined) // no error returned
+    t.ok(V.isUndefinedOrNull(nullGood))
+    t.strictSame(V.ensureIsUndefinedOrNull(nullGood, &apos;test&apos;), undefined) // no error returned
+    const nullBad = &apos;defined&apos;
+    t.ok(!V.isNull(nullBad))
+    t.strictSame(V.ensureIsNull(nullBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+    t.ok(!V.isUndefinedOrNull(nullBad))
+    t.strictSame(V.ensureIsUndefinedOrNull(nullBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
 
-  // check that created instances belongs to the right base class
-  t.ok(V.isClass(ceMinimal, CEClass))
-  t.ok(V.isClass(ceMinimal, CloudEvent))
-  t.ok(!V.isClass(ceMinimal, NotCESubclass))
-  t.ok(!V.isClass(ceMinimal, CESubclass))
+  {
+    const dateGood = new Date()
+    t.ok(V.isDate(dateGood))
+    t.strictSame(V.ensureIsDate(dateGood, &apos;test&apos;), undefined) // no error returned
+    const dateBad = Date.now()
+    t.ok(!V.isDate(dateBad))
+    t.strictSame(V.ensureIsDate(dateBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
 
-  // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-  const ceMinimalSubclass = new CESubclass(&apos;1EX&apos;, // eventID
-    &apos;org.github.smartiniOnGitHub.cloudeventjs.testeventEx&apos;, // eventType
-    {} // data (empty) // optional, but useful the same in this sample usage
-  )
-  t.ok(ceMinimalSubclass)
-  // console.log(`DEBUG - cloudEvent details: ceMinimalSubclass = ${JSON.stringify(ceMinimalSubclass)}`)
-  // console.log(`DEBUG - cloudEvent details: ${CEClass.dumpObject(ceMinimalSubclass, &apos;ceMinimalSubclass&apos;)}`)
+  {
+    const relGood = &apos;1.0.0&apos;
+    t.ok(V.isVersion(relGood))
+    t.strictSame(V.ensureIsVersion(relGood, &apos;test&apos;), undefined) // no error returned
+    const relBad = &apos;a.b.c-d&apos;
+    t.ok(!V.isVersion(relBad))
+    t.strictSame(V.ensureIsVersion(relBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
 
-  // check that created instances belongs to the right base class
-  t.ok(V.isClass(ceMinimalSubclass, CEClass))
-  t.ok(V.isClass(ceMinimalSubclass, CloudEvent))
-  t.ok(!V.isClass(ceMinimalSubclass, NotCESubclass))
-  t.ok(V.isClass(ceMinimalSubclass, CESubclass))
+  {
+    const objectBad = 1234567890
+    t.ok(V.isNumber(objectBad))
+    t.ok(!V.isObject(objectBad))
+    t.ok(V.ensureIsObjectOrCollection(objectBad, &apos;error&apos;)) // expected error returned
+    t.strictSame(V.ensureIsObjectOrCollection(objectBad, &apos;error&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const stringBad = 1234567890
+    t.ok(!V.isString(stringBad))
+    t.ok(!V.isStringNotEmpty(stringBad))
+    t.ok(V.ensureIsString(stringBad, &apos;error&apos;)) // expected error returned
+    t.strictSame(V.ensureIsString(stringBad, &apos;error&apos;) instanceof Error, true) // expected error returned
+    t.ok(V.ensureIsStringNotEmpty(stringBad, &apos;error&apos;)) // expected error returned
+    t.strictSame(V.ensureIsStringNotEmpty(stringBad, &apos;error&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const functionBad = &apos;1234567890&apos;
+    t.ok(V.isString(functionBad))
+    t.ok(!V.isFunction(functionBad))
+    t.ok(V.ensureIsFunction(functionBad, &apos;error&apos;)) // expected error returned
+    t.strictSame(V.ensureIsFunction(functionBad, &apos;error&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const boolGood = true
+    t.ok(V.isBoolean(boolGood))
+    t.strictSame(V.ensureIsBoolean(boolGood, &apos;test&apos;), undefined) // no error returned
+    const boolBad = &apos;false&apos;
+    t.ok(!V.isBoolean(boolBad))
+    t.strictSame(V.ensureIsBoolean(boolBad, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const uriGood = &apos;http://localhost:3000/path/nested?param1=value1&apos;
+    t.ok(V.isURI(uriGood))
+    t.strictSame(V.ensureIsURI(uriGood, null, &apos;test&apos;), undefined) // no error returned
+    const uriBad = &apos;path/nested?param1=value1&apos; // not relative nor absolute uri, so not a real uri string
+    t.ok(!V.isURI(uriBad))
+    t.strictSame(V.ensureIsURI(uriBad, null, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const uriGoodPath = &apos;/path/nested?param1=value1&apos;
+    const uriGoodBase = &apos;http://localhost:3000&apos;
+    t.ok(V.isURI(uriGoodPath, uriGoodBase))
+    t.strictSame(V.ensureIsURI(uriGoodPath, uriGoodBase, &apos;test&apos;), undefined) // no error returned
+    const uriBad = &apos;path/nested?param1=value1&apos; // not relative nor absolute uri, so not a real uri string
+    t.ok(!V.isURI(uriBad, null))
+    t.strictSame(V.ensureIsURI(uriBad, null, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    const uriGoodPath = &apos;/path/nested?param1=value1&apos;
+    const uriBadBase = &apos;httpz:bad&apos;
+    t.ok(!V.isURI(uriGoodPath, uriBadBase))
+    t.strictSame(V.ensureIsURI(uriGoodPath, uriBadBase, &apos;test&apos;) instanceof Error, true) // expected error returned
+  }
+
+  {
+    // test getSize with different argument types
+    t.ok(V.isUndefined(V.getSize(null)))
+    t.strictSame(V.getSize(null), undefined)
+    const obj = { name: &apos;Name&apos;, age: 20, note: null }
+    t.ok(V.isNumber(V.getSize(obj)))
+    t.strictSame(V.getSize(obj), 3) // include even null items in the size
+    const arr = [1, 2, 3, null]
+    t.ok(V.isNumber(V.getSize(arr)))
+    t.strictSame(V.getSize(arr), 4) // include even null items in the size
+    const map = new Map([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]])
+    t.ok(V.isNumber(V.getSize(map)))
+    t.strictSame(V.getSize(map), 2)
+    const set = new Set([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]])
+    t.ok(V.isNumber(V.getSize(set)))
+    t.strictSame(V.getSize(set), 2)
+    const str = &apos;12345 67890 &apos;
+    t.ok(V.isNumber(V.getSize(str)))
+    t.strictSame(V.getSize(str), 12)
+    const otherBadNumber = 1234567890
+    t.ok(V.isNumber(otherBadNumber))
+    t.throws(function () {
+      const size = V.getSize(otherBadNumber)
+      assert(size !== null) // never executed
+    }, Error, &apos;Expected exception when trying to get the size of a bad object&apos;)
+    const otherBadBoolean = true
+    t.ok(V.isBoolean(otherBadBoolean))
+    t.throws(function () {
+      const size = V.getSize(otherBadBoolean)
+      assert(size !== null) // never executed
+    }, Error, &apos;Expected exception when trying to get the size of a bad object&apos;)
+  }
 })
 </code></pre>
 

@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
 </div>
@@ -69,6 +70,9 @@ const url = require(&apos;url&apos;)
 class Validator {
   /**
    * Create a new instance of a Validator object.
+   *
+   * Note that instancing is not allowed for this class because all its methods are static.
+   *
    * @throws {Error} because instancing not allowed for this class
    */
   constructor () {
@@ -87,7 +91,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is undefined.
+   * Tell if the given argument is undefined.
    *
    * @static
    * @param {object} arg the object to check
@@ -98,7 +102,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is null.
+   * Tell if the given argument is null.
    *
    * @static
    * @param {object} arg the object to check
@@ -109,7 +113,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is undefined or null.
+   * Tell if the given argument is undefined or null.
    *
    * @static
    * @param {object} arg the object to check
@@ -120,7 +124,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is defined and not null.
+   * Tell if the given argument is defined and not null.
    *
    * @static
    * @param {object} arg the object to check
@@ -131,7 +135,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a string.
+   * Tell if the given argument is a string.
    *
    * @static
    * @param {object} arg the object to check
@@ -142,7 +146,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a not empty string.
+   * Tell if the given argument is a not empty string.
    *
    * See {@link Validator.isString}.
    *
@@ -155,7 +159,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a date.
+   * Tell if the given argument is a date.
    *
    * @static
    * @param {object} arg the object to check
@@ -166,7 +170,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a valid date.
+   * Tell if the given argument is a valid date.
    *
    * See {@link Validator.isDate}.
    *
@@ -179,20 +183,33 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a valid date and in the past.
+   * Tell if the given argument is a valid date and in the past or now.
    *
    * See {@link Validator.isDateValid}.
    *
    * @static
    * @param {object} arg the object to check
-   * @return {boolean} true if it&apos;s a valid date in the past, false otherwise
+   * @return {boolean} true if it&apos;s a valid date in the past (or now), false otherwise
    */
   static isDatePast (arg) {
-    return (Validator.isDateValid(arg) &amp;&amp; arg &lt; Date.now())
+    return (Validator.isDateValid(arg) &amp;&amp; arg &lt;= Date.now())
   }
 
   /**
-   * Tell if the given ergument is a number.
+   * Tell if the given argument is a valid date and in the future or now.
+   *
+   * See {@link Validator.isDateValid}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @return {boolean} true if it&apos;s a valid date in the future (or now), false otherwise
+   */
+  static isDateFuture (arg) {
+    return (Validator.isDateValid(arg) &amp;&amp; arg &gt;= Date.now())
+  }
+
+  /**
+   * Tell if the given argument is a number.
    *
    * @static
    * @param {object} arg the object to check
@@ -203,7 +220,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an array.
+   * Tell if the given argument is an array.
    *
    * @static
    * @param {object} arg the object to check
@@ -214,7 +231,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a boolean.
+   * Tell if the given argument is a boolean.
    *
    * @static
    * @param {object} arg the object to check
@@ -225,7 +242,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an instance of the given class reference.
+   * Tell if the given argument is an instance of the given class reference.
    *
    * @static
    * @param {object} arg the object to check
@@ -237,7 +254,18 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a function.
+   * Tell if the given argument is an error.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @return {boolean} true if it&apos;s an error, false otherwise
+   */
+  static isError (arg) {
+    return (arg instanceof Error &amp;&amp; typeof arg.message !== &apos;undefined&apos;)
+  }
+
+  /**
+   * Tell if the given argument is a function.
    *
    * @static
    * @param {object} arg the object to check
@@ -248,7 +276,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an object.
+   * Tell if the given argument is an object.
    *
    * @static
    * @param {object} arg the object to check
@@ -259,7 +287,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a keyed collection.
+   * Tell if the given argument is a keyed collection.
    *
    * @static
    * @param {object} arg the object to check
@@ -273,7 +301,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an object or a keyed collection.
+   * Tell if the given argument is an object or a keyed collection.
    *
    * See {@link Validator.isObject}, {@link Validator.isKeyedCollection}.
    *
@@ -286,7 +314,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an object or a keyed collection, but not a string.
+   * Tell if the given argument is an object or a keyed collection, but not a string.
    *
    * See {@link Validator.isObjectOrCollection}.
    *
@@ -299,7 +327,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is a string representation of a version number.
+   * Tell if the given argument is a string representation of a version number.
    *
    * Note that the version string could be something like:
    * - as minimum a number is needed for an integer version
@@ -318,7 +346,7 @@ class Validator {
   }
 
   /**
-   * Tell if the given ergument is an URI or an URL.
+   * Tell if the given argument is an URI or an URL.
    *
    * @static
    * @param {string} arg the uri/url to check
@@ -357,7 +385,63 @@ class Validator {
   }
 
   /**
-   * Ensure that the given ergument is an instance of the given class reference.
+   * Ensure that the given argument is undefined.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {TypeError} if it&apos;s not undefined, nothing otherwise
+   */
+  static ensureIsUndefined (arg, name) {
+    if (!Validator.isUndefined(arg)) {
+      return new TypeError(`The argument &apos;${name}&apos; must be undefined, instead got a &apos;${typeof arg}&apos;`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is null.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {TypeError} if it&apos;s not null, nothing otherwise
+   */
+  static ensureIsNull (arg, name) {
+    if (!Validator.isNull(arg)) {
+      return new TypeError(`The argument &apos;${name}&apos; must be null, instead got a &apos;${typeof arg}&apos;`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is undefined or null.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {TypeError} if it&apos;s not undefined or null, nothing otherwise
+   */
+  static ensureIsUndefinedOrNull (arg, name) {
+    if (!Validator.isUndefinedOrNull(arg)) {
+      return new TypeError(`The argument &apos;${name}&apos; must be undefined or null, instead got a &apos;${typeof arg}&apos;`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is a boolean.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {TypeError} if it&apos;s not a boolean, nothing otherwise
+   */
+  static ensureIsBoolean (arg, name) {
+    if (!Validator.isBoolean(arg)) {
+      return new TypeError(`The argument &apos;${name}&apos; must be a boolean, instead got a &apos;${typeof arg}&apos;`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is an instance of the given class reference.
    *
    * @static
    * @param {object} arg the object to check
@@ -372,12 +456,12 @@ class Validator {
   }
 
   /**
-   * Ensure that the given ergument is a function.
+   * Ensure that the given argument is a function.
    *
    * @static
    * @param {object} arg the object to check
    * @param {string} name the name to use in generated error (if any)
-   * @return {TypeError} if it&apos;s not an instance (or extends) that class, nothing otherwise
+   * @return {TypeError} if it&apos;s not a function, nothing otherwise
    */
   static ensureIsFunction (arg, name) {
     if (!Validator.isFunction(arg)) {
@@ -466,7 +550,7 @@ class Validator {
   }
 
   /**
-   * Ensure that the given argument ia a date in the past.
+   * Ensure that the given argument ia a date in the past or now.
    *
    * See {@link Validator.isDatePast}.
    *
@@ -478,6 +562,38 @@ class Validator {
   static ensureIsDatePast (arg, name) {
     if (!Validator.isDatePast(arg)) {
       return new Error(`The object &apos;${name}&apos; must be a Date that belongs to the past`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument ia a date in the future or now.
+   *
+   * See {@link Validator.isDateFuture}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {Error} if it&apos;s not a date in the future, nothing otherwise
+   */
+  static ensureIsDateFuture (arg, name) {
+    if (!Validator.isDateFuture(arg)) {
+      return new Error(`The object &apos;${name}&apos; must be a Date that belongs to the future`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is an error instance or its subclass.
+   *
+   * See {@link Validator.isError}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {Error} if it&apos;s not an error or its subclass, nothing otherwise
+   */
+  static ensureIsError (arg, name) {
+    if (!Validator.isError(arg)) {
+      return new Error(`The object &apos;${name}&apos; must be an Error or a subclass of it`)
     }
   }
 
@@ -504,17 +620,18 @@ class Validator {
    *
    * @static
    * @param {object} arg the object to check
+   * @param {string} base the (optional) base to build the full URL
    * @param {string} name the name to use in generated error (if any)
    * @return {Error} if it&apos;s not an URI/URL, nothing otherwise
    */
-  static ensureIsURI (arg, name) {
-    if (!Validator.isURI(arg)) {
-      return new Error(`The object &apos;${name}&apos; must be an URI or URL string, and not &apos;${arg}&apos;`)
+  static ensureIsURI (arg, base, name) {
+    if (!Validator.isURI(arg, base)) {
+      return new Error(`The object &apos;${name}&apos; must be an URI or URL string, and not &apos;${arg}&apos;, &apos;${base}&apos;`)
     }
   }
 
   /**
-   * Tell the size of the given aobject
+   * Tell the size of the given object
    *
    * @static
    * @param {object} arg the object to check
@@ -533,6 +650,8 @@ class Validator {
     } else if (typeof arg === &apos;string&apos;) {
       return arg.length
     }
+    // else
+    throw new TypeError(`Unable to calculate the size of the argument &apos;${arg}&apos;.`)
   }
 }
 

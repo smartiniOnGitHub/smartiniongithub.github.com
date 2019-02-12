@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/transformer.js | cloudevent</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="JavaScript/Node.js implementation of the CloudEvents standard format"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="cloudevent"><meta property="twitter:description" content="JavaScript/Node.js implementation of the CloudEvents standard format"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/smartiniOnGitHub/cloudevent.js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/transformer.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/*
+ * Copyright 2018 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+&apos;use strict&apos;
+
+/**
+ * Transformers:
+ * this module exports some useful generic functions for the transformation of objects.
+ */
+
+/**
+ * Get a reference to cloudevent Validator class.
+ *
+ * See {@link Validator}.
+ */
+const V = require(&apos;./validator&apos;) // get validator from here
+
+/** Get the host name where this code is runninng */
+const hostname = require(&apos;os&apos;).hostname()
+
+/** Get the process id (pid) where this code is runninng */
+const pid = require(&apos;process&apos;).pid
+
+/**
+ * Useful Transformations for CloudEvent objects.
+ *
+ * Note that all methods here are static, so no need to instance this class;
+ * see it as an Utility/Companion class.
+ */
+class Transformer {
+  /**
+   * Create a new instance of a Transformer object.
+   *
+   * Note that instancing is not allowed for this class because all its methods are static.
+   *
+   * @throws {Error} because instancing not allowed for this class
+   */
+  constructor () {
+    throw new Error(`Instancing not allowed for this class`)
+  }
+
+  /**
+   * Gives a string valued property that is used in the creation of the default string description of an object.
+   *
+   * See {@link Symbol.toStringTag}.
+   *
+   * @return {string} a string representation of the object type
+   */
+  get [Symbol.toStringTag] () {
+    return &apos;Transformer&apos;
+  }
+
+  /**
+   * Utility function that return a dump of the given object.
+   *
+   * @static
+   * @param {(object|Map|Set)} obj the object to dump
+   * @param {string} name the name to assign in the returned string
+   * @return {string} the dump of the object or a message when obj is undefined/null/not an object
+   */
+  static dumpObject (obj, name) {
+    const n = name || &apos;noname&apos;
+    if (V.isUndefined(obj)) {
+      return `${n}: undefined`
+    } else if (V.isNull(obj)) {
+      return `${n}: null`
+    } else if (!V.isObjectOrCollection(obj)) {
+      return `${n}: &apos;${obj.toString()}&apos;`
+    } else {
+      return `${n}: ${JSON.stringify(obj)}`
+    }
+  }
+
+  /**
+   * Utility function that returns the timezone offset value, in msec.
+   *
+   * @static
+   * @return {number} the timezone offset, in msec
+   */
+  static get timezoneOffsetMsec () {
+    return new Date().getTimezoneOffset() * 60 * 1000
+  }
+
+  /**
+   * Utility function that parse a string representation
+   * (compatible with the CloudEvent standard) of the given timestamp (Date)
+   * and returns it (if possible).
+   *
+   * Note that the value returned has already been adjusted with the current timezone offset.
+   *
+   * @static
+   * @param {!string} obj the timestamp/date to parse (as a string)
+   * @return {object} the parsed version, as a timestamp (Date) object, if possible
+   * @throws {Error} if obj is undefined or null, or is not a string
+   */
+  static timestampFromString (obj) {
+    if (!V.isStringNotEmpty(obj)) {
+      throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a string and not a: &apos;${typeof obj}&apos;.`)
+    }
+    const timestampMsec = Date.parse(obj)
+    return new Date(timestampMsec + Transformer.timezoneOffsetMsec)
+  }
+
+  /**
+   * Utility function that return a string representation
+   * (compatible with the CloudEvent standard) of the given timestamp (Date).
+   *
+   * Note that the value returned is in the UTC format.
+   *
+   * @static
+   * @param {!object} obj the timestamp/date to convert
+   * @return {string} the string representation of the object
+   * @throws {Error} if obj is undefined or null, or is not a Date instance
+   */
+  static timestampToString (obj) {
+    if (!V.isDateValid(obj)) {
+      throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a date and not a: &apos;${typeof obj}&apos;.`)
+    }
+    return obj.toISOString()
+  }
+
+  /**
+   * Utility function that map an Error into an object
+   * (compatible with the CloudEvent standard), to fill its &apos;data&apos; attribute.
+   *
+   * @static
+   * @param {!Error} err the Error to transform
+   * @param {object} options transformation options:
+   *        includeStackTrace flag (default false) to add the StackTrace into the object to return,
+   *        addStatus flag (default true) to add a &apos;status&apos; attribute into the object to return,
+   *        addTimestamp flag (default false) to add the current &apos;timestamp&apos; as attribute into the object to return,
+   * @return {object} the object representation of the error
+   * @throws {Error} if err is undefined or null, or is not an Error instance
+   */
+  static errorToData (err, {
+    includeStackTrace = false,
+    addStatus = true,
+    addTimestamp = false
+  } = {}
+  ) {
+    if (!V.isError(err)) {
+      throw new Error(`Missing or wrong argument: &apos;${err}&apos; must be an Error and not a: &apos;${typeof err}&apos;.`)
+    }
+    const data = {
+      name: err.name,
+      message: err.message,
+      stack: (includeStackTrace === true) ? err.stack : null
+    }
+    if (V.isDefinedAndNotNull(err.code)) {
+      data.code = err.code
+    }
+    if (addStatus === true) {
+      data.status = &apos;error&apos;
+    }
+    if (addTimestamp === true) {
+      data.timestamp = Date.now()
+    }
+    return data
+  }
+
+  /**
+   * Utility function that get some process-related info and wrap into an object
+   * (compatible with the CloudEvent standard), to fill its &apos;data&apos; attribute.
+   *
+   * @static
+   * @return {object} the object representation of process-related info data
+   */
+  static processInfoToData () {
+    return {
+      hostname: hostname,
+      pid: pid
+    }
+  }
+}
+
+module.exports = Transformer
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

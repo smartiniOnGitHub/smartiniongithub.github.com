@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "cloudevent/src/transformer.js~transformer",
+    "class/src/transformer.js~Transformer.html",
+    "<span>Transformer</span> <span class=\"search-result-import-path\">cloudevent/src/transformer.js</span>",
+    "class"
+  ],
+  [
     "cloudevent/src/validator.js~validator",
     "class/src/validator.js~Validator.html",
     "<span>Validator</span> <span class=\"search-result-import-path\">cloudevent/src/validator.js</span>",
@@ -13,86 +19,116 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/validator.test.js.html#lineNumber50",
+    "test-file/test/validator.test.js.html#lineNumber42",
     "create CloudEvent instances with different class hierarchy, and ensure the validation is right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber248",
+    "test-file/test/cloudevent.test.js.html#lineNumber287",
     "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber54",
+    "test-file/test/cloudevent.test.js.html#lineNumber77",
     "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber89",
+    "test-file/test/cloudevent.test.js.html#lineNumber117",
     "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber199",
+    "test-file/test/cloudevent.test.js.html#lineNumber238",
     "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber22",
-    "ensure decorator functions (exposed by the plugin) exists",
+    "test-file/test/cloudevent.test.js.html#lineNumber22",
+    "ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber37",
+    "test-file/test/cloudevent.test.js.html#lineNumber464",
+    "ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber324",
+    "ensure dumpObject works in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber199",
+    "ensure errors are transformed into data attribute in the right way",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber60",
     "ensure isValid and validate works good on undefined and null objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber22",
-    "ensure the CloudEvent class is exported by the library",
+    "test-file/test/index.test.js.html#lineNumber22",
+    "ensure objects exported by index script, exists and are of the right type",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber344",
+    "ensure process info are transformed into data attribute in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber294",
-    "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
+    "test-file/test/validator.test.js.html#lineNumber119",
+    "ensure some (less used) validation functions are right",
     "test"
   ],
   [
-    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/validator.test.js.html#lineNumber24",
-    "ensure the Validator class (not exported by the library) works good",
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber22",
+    "ensure the Transformer class (direct reference to it) works good",
     "test"
   ],
   [
-    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber215",
-    "serialize a CloudEvent instance with a non default contentType and a right encodedData options, expect success",
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber46",
+    "ensure the Transformer class is good and expose some functions to transform timestamps",
     "test"
   ],
   [
-    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber153",
-    "serialize a CloudEvent instance with a non default contentType and empty serialization options, expect error",
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber22",
+    "ensure the Validator class (direct reference to it) works good",
     "test"
   ],
   [
-    "",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber336",
-    "serialize some CloudEvent instances to JSON with nested data, and ensure they are right",
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber176",
+    "ensure the current timestamp is transformed to string and back as date in the right way",
     "test"
   ],
   [
-    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber64",
-    "serialize some CloudEvent instances to JSON, and ensure they are right",
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber116",
+    "ensure timestamps are transformed from string in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber66",
+    "ensure timestamps are transformed to string in the right way",
     "test"
   ],
   [
@@ -498,15 +534,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/cloudevent.js~cloudevent.dumpobject",
-    "class/src/cloudevent.js~CloudEvent.html#static-method-dumpObject",
-    "src/cloudevent.js~CloudEvent.dumpObject",
+    "src/cloudevent.js~cloudevent.contenttypedefault",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-contentTypeDefault",
+    "src/cloudevent.js~CloudEvent.contentTypeDefault",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.deserializeevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-deserializeEvent",
+    "src/cloudevent.js~CloudEvent.deserializeEvent",
     "method"
   ],
   [
     "src/cloudevent.js~cloudevent.getjsonschema",
     "class/src/cloudevent.js~CloudEvent.html#static-method-getJSONSchema",
     "src/cloudevent.js~CloudEvent.getJSONSchema",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.iscloudevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isCloudEvent",
+    "src/cloudevent.js~CloudEvent.isCloudEvent",
     "method"
   ],
   [
@@ -552,6 +600,60 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/transformer.js",
+    "file/src/transformer.js.html",
+    "src/transformer.js",
+    "file"
+  ],
+  [
+    "src/transformer.js~transformer#[symbol.tostringtag]",
+    "class/src/transformer.js~Transformer.html#instance-get-[Symbol.toStringTag]",
+    "src/transformer.js~Transformer#[Symbol.toStringTag]",
+    "member"
+  ],
+  [
+    "src/transformer.js~transformer#constructor",
+    "class/src/transformer.js~Transformer.html#instance-constructor-constructor",
+    "src/transformer.js~Transformer#constructor",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.dumpobject",
+    "class/src/transformer.js~Transformer.html#static-method-dumpObject",
+    "src/transformer.js~Transformer.dumpObject",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.errortodata",
+    "class/src/transformer.js~Transformer.html#static-method-errorToData",
+    "src/transformer.js~Transformer.errorToData",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.processinfotodata",
+    "class/src/transformer.js~Transformer.html#static-method-processInfoToData",
+    "src/transformer.js~Transformer.processInfoToData",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.timestampfromstring",
+    "class/src/transformer.js~Transformer.html#static-method-timestampFromString",
+    "src/transformer.js~Transformer.timestampFromString",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.timestamptostring",
+    "class/src/transformer.js~Transformer.html#static-method-timestampToString",
+    "src/transformer.js~Transformer.timestampToString",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.timezoneoffsetmsec",
+    "class/src/transformer.js~Transformer.html#static-get-timezoneOffsetMsec",
+    "src/transformer.js~Transformer.timezoneOffsetMsec",
+    "member"
+  ],
+  [
     "src/validator.js",
     "file/src/validator.js.html",
     "src/validator.js",
@@ -570,6 +672,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureisboolean",
+    "class/src/validator.js~Validator.html#static-method-ensureIsBoolean",
+    "src/validator.js~Validator.ensureIsBoolean",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureisclass",
     "class/src/validator.js~Validator.html#static-method-ensureIsClass",
     "src/validator.js~Validator.ensureIsClass",
@@ -582,15 +690,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureisdatefuture",
+    "class/src/validator.js~Validator.html#static-method-ensureIsDateFuture",
+    "src/validator.js~Validator.ensureIsDateFuture",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureisdatepast",
     "class/src/validator.js~Validator.html#static-method-ensureIsDatePast",
     "src/validator.js~Validator.ensureIsDatePast",
     "method"
   ],
   [
+    "src/validator.js~validator.ensureiserror",
+    "class/src/validator.js~Validator.html#static-method-ensureIsError",
+    "src/validator.js~Validator.ensureIsError",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureisfunction",
     "class/src/validator.js~Validator.html#static-method-ensureIsFunction",
     "src/validator.js~Validator.ensureIsFunction",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisnull",
+    "class/src/validator.js~Validator.html#static-method-ensureIsNull",
+    "src/validator.js~Validator.ensureIsNull",
     "method"
   ],
   [
@@ -621,6 +747,18 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.ensureisuri",
     "class/src/validator.js~Validator.html#static-method-ensureIsURI",
     "src/validator.js~Validator.ensureIsURI",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisundefined",
+    "class/src/validator.js~Validator.html#static-method-ensureIsUndefined",
+    "src/validator.js~Validator.ensureIsUndefined",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisundefinedornull",
+    "class/src/validator.js~Validator.html#static-method-ensureIsUndefinedOrNull",
+    "src/validator.js~Validator.ensureIsUndefinedOrNull",
     "method"
   ],
   [
@@ -660,6 +798,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.isdatefuture",
+    "class/src/validator.js~Validator.html#static-method-isDateFuture",
+    "src/validator.js~Validator.isDateFuture",
+    "method"
+  ],
+  [
     "src/validator.js~validator.isdatepast",
     "class/src/validator.js~Validator.html#static-method-isDatePast",
     "src/validator.js~Validator.isDatePast",
@@ -675,6 +819,12 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.isdefinedandnotnull",
     "class/src/validator.js~Validator.html#static-method-isDefinedAndNotNull",
     "src/validator.js~Validator.isDefinedAndNotNull",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.iserror",
+    "class/src/validator.js~Validator.html#static-method-isError",
+    "src/validator.js~Validator.isError",
     "method"
   ],
   [
@@ -756,15 +906,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "test/cloudevent-serialization.test.js",
-    "test-file/test/cloudevent-serialization.test.js.html",
-    "test/cloudevent-serialization.test.js",
-    "testFile"
-  ],
-  [
     "test/cloudevent.test.js",
     "test-file/test/cloudevent.test.js.html",
     "test/cloudevent.test.js",
+    "testFile"
+  ],
+  [
+    "test/index.test.js",
+    "test-file/test/index.test.js.html",
+    "test/index.test.js",
+    "testFile"
+  ],
+  [
+    "test/transformer.test.js",
+    "test-file/test/transformer.test.js.html",
+    "test/transformer.test.js",
     "testFile"
   ],
   [
