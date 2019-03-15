@@ -80,17 +80,6 @@ class Validator {
   }
 
   /**
-   * Gives a string valued property that is used in the creation of the default string description of an object.
-   *
-   * See {@link Symbol.toStringTag}.
-   *
-   * @return {string} a string representation of the object type
-   */
-  get [Symbol.toStringTag] () {
-    return &apos;Validator&apos;
-  }
-
-  /**
    * Tell if the given argument is undefined.
    *
    * @static
@@ -327,6 +316,19 @@ class Validator {
   }
 
   /**
+   * Tell if the given argument is an object or a keyed collection, or a string.
+   *
+   * See {@link Validator.isObjectOrCollection}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @return {boolean} true if it&apos;s an object or a keyed collection or a string, false otherwise
+   */
+  static isObjectOrCollectionOrString (arg) {
+    return (Validator.isObjectOrCollection(arg) || (typeof arg === &apos;string&apos;))
+  }
+
+  /**
    * Tell if the given argument is a string representation of a version number.
    *
    * Note that the version string could be something like:
@@ -534,6 +536,22 @@ class Validator {
   }
 
   /**
+   * Ensure that the given argument ia an object or a collection, or a string.
+   *
+   * See {@link Validator.isObjectOrCollectionOrString}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {TypeError} if it&apos;s not an object nor a collection nor a string, nothing otherwise
+   */
+  static ensureIsObjectOrCollectionOrString (arg, name) {
+    if (!Validator.isObjectOrCollectionOrString(arg)) {
+      return new TypeError(`The object &apos;${name}&apos; must be an object or a collection, or a string`)
+    }
+  }
+
+  /**
    * Ensure that the given argument ia a date.
    *
    * See {@link Validator.isDate}.
@@ -578,6 +596,22 @@ class Validator {
   static ensureIsDateFuture (arg, name) {
     if (!Validator.isDateFuture(arg)) {
       return new Error(`The object &apos;${name}&apos; must be a Date that belongs to the future`)
+    }
+  }
+
+  /**
+   * Ensure that the given argument is a number.
+   *
+   * See {@link Validator.isNumber}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any)
+   * @return {Error} if it&apos;s not a number, nothing otherwise
+   */
+  static ensureIsNumber (arg, name) {
+    if (!Validator.isNumber(arg)) {
+      return new Error(`The object &apos;${name}&apos; must be a Number`)
     }
   }
 

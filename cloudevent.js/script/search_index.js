@@ -49,6 +49,12 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber545",
+    "ensure CloudEvent and objects are merged in the right way",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
     "test-file/test/cloudevent.test.js.html#lineNumber22",
     "ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library",
     "test"
@@ -61,13 +67,13 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber324",
+    "test-file/test/transformer.test.js.html#lineNumber429",
     "ensure dumpObject works in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber199",
+    "test-file/test/transformer.test.js.html#lineNumber304",
     "ensure errors are transformed into data attribute in the right way",
     "test"
   ],
@@ -78,6 +84,12 @@ window.esdocSearchIndex = [
     "test"
   ],
   [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber544",
+    "ensure objects are merged in the right way",
+    "test"
+  ],
+  [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
     "test-file/test/index.test.js.html#lineNumber22",
     "ensure objects exported by index script, exists and are of the right type",
@@ -85,7 +97,7 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber344",
+    "test-file/test/transformer.test.js.html#lineNumber449",
     "ensure process info are transformed into data attribute in the right way",
     "test"
   ],
@@ -115,20 +127,38 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber176",
+    "test-file/test/transformer.test.js.html#lineNumber266",
+    "ensure the current timestamp is transformed to number and back as date in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber177",
     "ensure the current timestamp is transformed to string and back as date in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber116",
+    "test-file/test/transformer.test.js.html#lineNumber200",
+    "ensure timestamps are transformed from number in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber117",
     "ensure timestamps are transformed from string in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber66",
+    "test-file/test/transformer.test.js.html#lineNumber67",
     "ensure timestamps are transformed to string in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber474",
+    "ensure uri/url are stripped by query arguments in the right way",
     "test"
   ],
   [
@@ -606,12 +636,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/transformer.js~transformer#[symbol.tostringtag]",
-    "class/src/transformer.js~Transformer.html#instance-get-[Symbol.toStringTag]",
-    "src/transformer.js~Transformer#[Symbol.toStringTag]",
-    "member"
-  ],
-  [
     "src/transformer.js~transformer#constructor",
     "class/src/transformer.js~Transformer.html#instance-constructor-constructor",
     "src/transformer.js~Transformer#constructor",
@@ -630,15 +654,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/transformer.js~transformer.mergeobjects",
+    "class/src/transformer.js~Transformer.html#static-method-mergeObjects",
+    "src/transformer.js~Transformer.mergeObjects",
+    "method"
+  ],
+  [
     "src/transformer.js~transformer.processinfotodata",
     "class/src/transformer.js~Transformer.html#static-method-processInfoToData",
     "src/transformer.js~Transformer.processInfoToData",
     "method"
   ],
   [
+    "src/transformer.js~transformer.timestampfromnumber",
+    "class/src/transformer.js~Transformer.html#static-method-timestampFromNumber",
+    "src/transformer.js~Transformer.timestampFromNumber",
+    "method"
+  ],
+  [
     "src/transformer.js~transformer.timestampfromstring",
     "class/src/transformer.js~Transformer.html#static-method-timestampFromString",
     "src/transformer.js~Transformer.timestampFromString",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.timestamptonumber",
+    "class/src/transformer.js~Transformer.html#static-method-timestampToNumber",
+    "src/transformer.js~Transformer.timestampToNumber",
     "method"
   ],
   [
@@ -654,16 +696,16 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/transformer.js~transformer.uristriparguments",
+    "class/src/transformer.js~Transformer.html#static-method-uriStripArguments",
+    "src/transformer.js~Transformer.uriStripArguments",
+    "method"
+  ],
+  [
     "src/validator.js",
     "file/src/validator.js.html",
     "src/validator.js",
     "file"
-  ],
-  [
-    "src/validator.js~validator#[symbol.tostringtag]",
-    "class/src/validator.js~Validator.html#instance-get-[Symbol.toStringTag]",
-    "src/validator.js~Validator#[Symbol.toStringTag]",
-    "member"
   ],
   [
     "src/validator.js~validator#constructor",
@@ -720,6 +762,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureisnumber",
+    "class/src/validator.js~Validator.html#static-method-ensureIsNumber",
+    "src/validator.js~Validator.ensureIsNumber",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureisobjectorcollection",
     "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollection",
     "src/validator.js~Validator.ensureIsObjectOrCollection",
@@ -729,6 +777,12 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.ensureisobjectorcollectionnotstring",
     "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollectionNotString",
     "src/validator.js~Validator.ensureIsObjectOrCollectionNotString",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisobjectorcollectionorstring",
+    "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollectionOrString",
+    "src/validator.js~Validator.ensureIsObjectOrCollectionOrString",
     "method"
   ],
   [
@@ -867,6 +921,12 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.isobjectorcollectionnotstring",
     "class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotString",
     "src/validator.js~Validator.isObjectOrCollectionNotString",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.isobjectorcollectionorstring",
+    "class/src/validator.js~Validator.html#static-method-isObjectOrCollectionOrString",
+    "src/validator.js~Validator.isObjectOrCollectionOrString",
     "method"
   ],
   [

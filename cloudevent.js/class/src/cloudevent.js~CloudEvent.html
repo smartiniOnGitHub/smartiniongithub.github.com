@@ -77,13 +77,14 @@
       
     <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber22">ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber60">ensure isValid and validate works good on undefined and null objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber77">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber42">create CloudEvent instances with different class hierarchy, and ensure the validation is right</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber119">ensure some (less used) validation functions are right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber77">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber117">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber238">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber287">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber464">ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber545">ensure CloudEvent and objects are merged in the right way</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/index.test.js.html#lineNumber22">ensure objects exported by index script, exists and are of the right type</a></span></li>
 </ul>
   </div>
@@ -1045,7 +1046,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber333">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber349">source</a></span></span>
     </span>
   </h3>
 
@@ -1080,7 +1081,8 @@ Note that the result of decoder function is assigned to decoded data.</p>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional deserialization attributes:
        decoder (function, no default) a function that takes data and returns decoder data,
-       decodedData (object, no default) already decoded data (but consistency with the contentType is not checked),</p>
+       decodedData (object, no default) already decoded data (but consistency with the contentType is not checked),
+       onlyValid (boolean, default false) to serialize only if it&apos;s a valid instance,</p>
 </td>
     </tr>
 </tbody>
@@ -1147,7 +1149,7 @@ Note that the result of decoder function is assigned to decoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber394">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber415">source</a></span></span>
     </span>
   </h3>
 
@@ -1207,7 +1209,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber276">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber281">source</a></span></span>
     </span>
   </h3>
 
@@ -1372,7 +1374,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber263">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber268">source</a></span></span>
     </span>
   </h3>
 
@@ -1511,7 +1513,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber295">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber301">source</a></span></span>
     </span>
   </h3>
 
@@ -1546,7 +1548,8 @@ Note that the result of encoder function is assigned to encoded data.</p>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional serialization attributes:
        encoder (function, no default) a function that takes data and returns encoded data,
-       encodedData (string, no default) already encoded data (but consistency with the contentType is not checked),</p>
+       encodedData (string, no default) already encoded data (but consistency with the contentType is not checked),
+       onlyValid (boolean, default false) to serialize only if it&apos;s a valid instance,</p>
 </td>
     </tr>
 </tbody>
@@ -1859,7 +1862,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber510">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber531">source</a></span></span>
     </span>
   </h3>
 
@@ -1917,7 +1920,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber465">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber486">source</a></span></span>
     </span>
   </h3>
 
@@ -1962,7 +1965,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber488">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber509">source</a></span></span>
     </span>
   </h3>
 
@@ -2008,7 +2011,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber476">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber497">source</a></span></span>
     </span>
   </h3>
 
@@ -2502,7 +2505,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber454">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber475">source</a></span></span>
     </span>
   </h3>
 
@@ -2577,7 +2580,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber430">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber451">source</a></span></span>
     </span>
   </h3>
 
@@ -2654,7 +2657,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber499">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber520">source</a></span></span>
     </span>
   </h3>
 
@@ -2712,7 +2715,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber442">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber463">source</a></span></span>
     </span>
   </h3>
 

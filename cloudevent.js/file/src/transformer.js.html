@@ -91,34 +91,22 @@ class Transformer {
   }
 
   /**
-   * Gives a string valued property that is used in the creation of the default string description of an object.
-   *
-   * See {@link Symbol.toStringTag}.
-   *
-   * @return {string} a string representation of the object type
-   */
-  get [Symbol.toStringTag] () {
-    return &apos;Transformer&apos;
-  }
-
-  /**
    * Utility function that return a dump of the given object.
    *
    * @static
    * @param {(object|Map|Set)} obj the object to dump
-   * @param {string} name the name to assign in the returned string
+   * @param {string} name the name to assign in the returned string, or &apos;noname&apos; as default value
    * @return {string} the dump of the object or a message when obj is undefined/null/not an object
    */
-  static dumpObject (obj, name) {
-    const n = name || &apos;noname&apos;
+  static dumpObject (obj, name = &apos;noname&apos;) {
     if (V.isUndefined(obj)) {
-      return `${n}: undefined`
+      return `${name}: undefined`
     } else if (V.isNull(obj)) {
-      return `${n}: null`
+      return `${name}: null`
     } else if (!V.isObjectOrCollection(obj)) {
-      return `${n}: &apos;${obj.toString()}&apos;`
+      return `${name}: &apos;${obj.toString()}&apos;`
     } else {
-      return `${n}: ${JSON.stringify(obj)}`
+      return `${name}: ${JSON.stringify(obj)}`
     }
   }
 
@@ -168,6 +156,47 @@ class Transformer {
       throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a date and not a: &apos;${typeof obj}&apos;.`)
     }
     return obj.toISOString()
+  }
+
+  /**
+   * Utility function that parse a number representation
+   * of the given timestamp (Date)
+   * and returns it (if possible).
+   *
+   * Note that the value returned has already been adjusted with the current timezone offset.
+   *
+   * @static
+   * @param {!number} obj the timestamp/date to parse (as a number)
+   * @return {object} the parsed version, as a timestamp (Date) object, if possible
+   * @throws {Error} if obj is undefined or null, or is not a number
+   */
+  static timestampFromNumber (obj) {
+    if (!V.isNumber(obj)) {
+      throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a number and not a: &apos;${typeof obj}&apos;.`)
+    }
+    return new Date(obj + Transformer.timezoneOffsetMsec)
+  }
+
+  /**
+   * Utility function that return a number representation
+   * of the given timestamp (Date), or the current one will be used.
+   *
+   * Note that the value returned is in the UTC format.
+   *
+   * @static
+   * @param {object} obj the timestamp/date to convert, or the current one
+   * @return {number} the number representation of the object
+   * @throws {Error} if obj is not a Date instance
+   */
+  static timestampToNumber (obj) {
+    let timestamp = obj
+    if (V.isUndefinedOrNull(timestamp)) {
+      timestamp = new Date()
+    }
+    if (!V.isDateValid(timestamp)) {
+      throw new Error(`Wrong timestamp: &apos;${timestamp}&apos; must be a date and not a: &apos;${typeof timestamp}&apos;.`)
+    }
+    return timestamp.getTime()
   }
 
   /**
@@ -221,6 +250,46 @@ class Transformer {
       hostname: hostname,
       pid: pid
     }
+  }
+
+  /**
+   * Utility function that strip all arguments (if any) from the given URI/URL string
+   * and returns the string without them.
+   *
+   * @static
+   * @param {!string} url the URI/URL (as a string)
+   * @param {object} options containing: strict (boolean, default false) to check it in a more strict way
+   * @return {string} the parsed version, but without arguments (if any)
+   * @throws {Error} if url is undefined or null, or is not a string
+   */
+  static uriStripArguments (url, { strict = false } = {}) {
+    if (!V.isString(url)) {
+      throw new Error(`Missing or wrong URL: &apos;${url}&apos; must be a string and not a: &apos;${typeof url}&apos;.`)
+    }
+    if (strict === true) {
+      if (!V.isURI(url)) {
+        throw new Error(`Missing or wrong URL: &apos;${url}&apos;`)
+      }
+    }
+    return url.split(&apos;?&apos;)[0]
+  }
+
+  /**
+   * Utility function that merge the given objects (at least one base and another)
+   * and returns the new one (but with the prototype of the first).
+   *
+   * @static
+   * @param {!object} base the first object to merge
+   * @param {object} others all other(s) object to merge (at least one)
+   * @return {object} the new object
+   * @throws {Error} if base is undefined or null, or is not an object
+   */
+  static mergeObjects (base, ...others) {
+    if (!V.isObject(base)) {
+      throw new Error(`Missing or wrong argument: &apos;${base}&apos; must be an object and not a: &apos;${typeof base}&apos;.`)
+    }
+    const baseProto = Object.getPrototypeOf(base)
+    return Object.assign(Object.create(baseProto), base, ...others) // set the prototype of the first argument in the clone
   }
 }
 

@@ -155,14 +155,18 @@ console.log(`Validation output for ceEmpty, force strict mode to true is size: $
 const ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)
 const ceFullSerialized = ceFull.serialize()
 console.log(`Serialization output for ceFull, details:\n` + ceFullSerialized)
+const ceFullStrictSerialized = ceFullStrict.serialize()
+console.log(`Serialization output for ceFullStrict, details:\n` + ceFullStrictSerialized)
 // non default contentType
 const ceFullStrictOtherContentTypeSerializedStatic = CloudEvent.serializeEvent(ceFullStrictOtherContentType, {
-  // encoder: (data) =&gt; &apos;&lt;data &quot;encoder&quot;=&quot;sample&quot; /&gt;&apos;
-  encodedData: &apos;&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2018&quot; /&gt;&apos;
+  // encoder: (data) =&gt; &apos;&lt;data &quot;encoder&quot;=&quot;sample&quot; /&gt;&apos;,
+  encodedData: &apos;&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2018&quot; /&gt;&apos;,
+  onlyValid: true
 })
 const ceFullStrictOtherContentTypeSerialized = ceFullStrictOtherContentType.serialize({
-  // encoder: (data) =&gt; &apos;&lt;data &quot;encoder&quot;=&quot;sample&quot; /&gt;&apos;
-  encodedData: &apos;&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2018&quot; /&gt;&apos;
+  // encoder: (data) =&gt; &apos;&lt;data &quot;encoder&quot;=&quot;sample&quot; /&gt;&apos;,
+  encodedData: &apos;&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2018&quot; /&gt;&apos;,
+  onlyValid: true
 })
 console.log(`Serialization output for ceFullStrictOtherContentType, details:\n` + ceFullStrictOtherContentTypeSerialized)
 
@@ -179,10 +183,14 @@ assert(ceFullDeserialized.isValid())
 assert(!ceFullDeserialized.isStrict)
 assert(CloudEvent.isCloudEvent(ceFullDeserialized))
 console.log(`cloudEvent dump: ${T.dumpObject(ceFullDeserialized, &apos;ceFullDeserialized&apos;)}`)
+const ceFullStrictDeserializedOnlyValid = CloudEvent.deserializeEvent(ceFullStrictSerialized, { onlyValid: true })
+assert(ceFullStrictDeserializedOnlyValid !== null)
+console.log(`cloudEvent dump: ${T.dumpObject(ceFullStrictDeserializedOnlyValid, &apos;ceFullStrictDeserializedOnlyValid&apos;)}`)
 // non default contentType
 const ceFullStrictOtherContentTypeDeserialized = CloudEvent.deserializeEvent(ceFullStrictOtherContentTypeSerialized, {
   // decoder: (data) =&gt; { decoder: &apos;Sample&apos; },
-  decodedData: { hello: &apos;world&apos;, year: 2018 }
+  decodedData: { hello: &apos;world&apos;, year: 2018 },
+  onlyValid: true
 })
 assert(ceFullStrictOtherContentTypeDeserialized !== null)
 assert(ceFullStrictOtherContentTypeDeserialized.isValid())
