@@ -57,6 +57,28 @@
 const assert = require(&apos;assert&apos;)
 const test = require(&apos;tap&apos;).test
 
+/** create some common options, for better reuse in tests */
+const ceCommonOptions = {
+  time: new Date(),
+  extensions: { &apos;exampleExtension&apos;: &apos;value&apos; },
+  contenttype: &apos;application/json&apos;,
+  schemaurl: &apos;http://my-schema.localhost.localdomain&apos;,
+  strict: false
+}
+/** create some common options with strict flag enabled, for better reuse in tests */
+const ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }
+/** create a sample namespace for events here, for better reuse in tests */
+const ceNamespace = &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;
+/** create a sample common server URL, for better reuse in tests */
+const ceServerUrl = &apos;/test&apos;
+/** create some common data from an object, for better reuse in tests */
+const ceCommonData = { &apos;hello&apos;: &apos;world&apos;, year: 2019 }
+/** create some common data from a Map, for better reuse in tests */
+const ceMapData = new Map() // empty Map
+// const ceMapData = new Map([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]])
+ceMapData.set(&apos;key-1&apos;, &apos;value 1&apos;)
+ceMapData.set(&apos;key-2&apos;, &apos;value 2&apos;)
+
 /** @test {CloudEvent} */
 test(&apos;ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library&apos;, (t) =&gt; {
   t.plan(13)
@@ -80,8 +102,8 @@ test(&apos;ensure CloudEvent class (and related Validator and Transformer classe
     t.strictEqual(CloudEvent.mediaType(), &apos;application/cloudevents+json&apos;)
 
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-    const ceMinimal = new CloudEvent(&apos;1&apos;, // eventID
-      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+    const ceMinimal = new CloudEvent(&apos;1&apos;, // id
+      ceNamespace, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )
@@ -163,8 +185,8 @@ test(&apos;create some CloudEvent instances (with minimal fields set) and ensure
 
   {
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-    const ceMinimal = new CloudEvent(&apos;1&apos;, // eventID
-      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+    const ceMinimal = new CloudEvent(&apos;1&apos;, // id
+      ceNamespace, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )
@@ -182,8 +204,8 @@ test(&apos;create some CloudEvent instances (with minimal fields set) and ensure
     t.strictSame(ceMinimal.validate(), [])
     t.strictSame(ceMinimal.validate().length, 0) // simplify comparison of results, check only the  number of expected errors ...
     t.ok(!ceMinimal.isStrict)
-    const ceMinimal2 = new CloudEvent(&apos;2&apos;, // eventID
-      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+    const ceMinimal2 = new CloudEvent(&apos;2&apos;, // id
+      ceNamespace, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )
@@ -249,29 +271,6 @@ test(&apos;create some CloudEvent instances (with minimal fields set) and ensure
     }, Error, &apos;Expected exception when creating a CloudEvent without mandatory arguments with strict flag enabled&apos;)
   }
 })
-
-/** create some common options, for better reuse in tests */
-const ceCommonOptions = {
-  eventTypeVersion: &apos;1.0.0&apos;,
-  eventTime: new Date(),
-  extensions: { &apos;exampleExtension&apos;: &apos;value&apos; },
-  contentType: &apos;application/json&apos;,
-  schemaURL: &apos;http://my-schema.localhost.localdomain&apos;,
-  strict: false
-}
-/** create some common options with strict flag enabled, for better reuse in tests */
-const ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }
-/** create a sample namespace for events here, for better reuse in tests */
-const ceNamespace = &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;
-/** create a sample common server URL, for better reuse in tests */
-const ceServerUrl = &apos;/test&apos;
-/** create some common data from an object, for better reuse in tests */
-const ceCommonData = { &apos;hello&apos;: &apos;world&apos;, year: 2018 }
-/** create some common data from a Map, for better reuse in tests */
-const ceMapData = new Map() // empty Map
-// const ceMapData = new Map([[&apos;key-1&apos;, &apos;value 1&apos;], [&apos;key-2&apos;, &apos;value 2&apos;]])
-ceMapData.set(&apos;key-1&apos;, &apos;value 1&apos;)
-ceMapData.set(&apos;key-2&apos;, &apos;value 2&apos;)
 
 /** @test {CloudEvent} */
 test(&apos;create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects&apos;, (t) =&gt; {
@@ -348,7 +347,7 @@ test(&apos;create CloudEvent instances with different kind of data attribute, an
     t.ok(ceFullDataUndefined.isValid({ strict: false }))
     t.strictSame(ceFullDataUndefined.validate(), [])
     t.strictSame(ceFullDataUndefined.validate({ strict: false }).length, 0)
-    // the same with with strict mode enabled ...
+    // the same but with strict mode enabled ...
     const ceFullDataUndefinedStrict = new CloudEvent(&apos;1/full/undefined-data/strict&apos;,
       ceNamespace,
       ceServerUrl,
@@ -388,7 +387,7 @@ test(&apos;create CloudEvent instances with different kind of data attribute, an
     t.ok(ceFullDataNull.isValid({ strict: false }))
     t.strictSame(ceFullDataNull.validate(), [])
     t.strictSame(ceFullDataNull.validate({ strict: false }).length, 0)
-    // the same with with strict mode enabled ...
+    // the same but with strict mode enabled ...
     const ceFullDataNullStrict = new CloudEvent(&apos;1/full/null-data/strict&apos;,
       ceNamespace,
       ceServerUrl,
@@ -432,7 +431,7 @@ test(&apos;create CloudEvent instances with different kind of data attribute, an
     t.strictSame(ceFullDataString.validate(), [])
     t.strictSame(ceFullDataString.validate({ strict: false }).length, 0)
     t.strictSame(ceFullDataString.validate({ strict: true }).length, 1)
-    // the same with with strict mode enabled ...
+    // the same but with strict mode enabled ...
     const ceFullDataStringStrict = new CloudEvent(&apos;1/full/string-data/strict&apos;,
       ceNamespace,
       ceServerUrl,
@@ -478,7 +477,7 @@ test(&apos;create CloudEvent instances with different kind of data attribute, an
     t.ok(ceFullDataMap.isValid({ strict: false }))
     t.strictSame(ceFullDataMap.validate(), []) // data type errors handled only in strict mode currently ...
     t.strictSame(ceFullDataMap.validate({ strict: false }).length, 0) // data type errors handled only in strict mode currently ...
-    // the same with with strict mode enabled ...
+    // the same but with strict mode enabled ...
     const ceFullDataMapStrict = new CloudEvent(&apos;1/full/map-data/strict&apos;,
       ceNamespace,
       ceServerUrl,
@@ -597,7 +596,7 @@ test(&apos;ensure CloudEvent and objects are merged in the right way&apos;, (t) 
     t.strictSame(Object.getPrototypeOf(obj), Object.getPrototypeOf(base))
   }
   {
-    const base = new CloudEvent(&apos;1&apos;, // eventID
+    const base = new CloudEvent(&apos;1&apos;, // id
       ceNamespace,
       ceServerUrl,
       {} // data (empty) // optional, but useful the same in this sample usage

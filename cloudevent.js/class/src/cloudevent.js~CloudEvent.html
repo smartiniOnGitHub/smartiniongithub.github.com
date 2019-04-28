@@ -75,16 +75,16 @@
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber22">ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber60">ensure isValid and validate works good on undefined and null objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber77">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
+    <li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber44">ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber82">ensure isValid and validate works good on undefined and null objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber99">create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber42">create CloudEvent instances with different class hierarchy, and ensure the validation is right</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber119">ensure some (less used) validation functions are right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber117">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber238">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber287">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber464">ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects</a></span></li>
-<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber545">ensure CloudEvent and objects are merged in the right way</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber139">create some CloudEvent instances (with minimal fields set) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber237">create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber286">create CloudEvent instances with different kind of data attribute, and ensure the validation is right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber463">ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/cloudevent.test.js.html#lineNumber544">ensure CloudEvent and objects are merged in the right way</a></span></li>
 <li data-ice="test"><span><a href="test-file/test/index.test.js.html#lineNumber22">ensure objects exported by index script, exists and are of the right type</a></span></li>
 </ul>
   </div>
@@ -111,7 +111,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-contentTypeDefault">contentTypeDefault</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#static-method-contenttypeDefault">contenttypeDefault</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -409,7 +409,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(eventID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, eventType: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, source: <span>uri</span>, data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, source: <span>uri</span>, data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
         </p>
       </div>
       <div>
@@ -568,36 +568,7 @@ or original data payload.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-cloudEventsVersion">cloudEventsVersion</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>The CloudEvent specification version.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-contentType">contentType</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-contenttype">contenttype</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -655,122 +626,6 @@ or original data payload.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-eventID">eventID</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>The event ID.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-eventTime">eventTime</a></span></span><span class="code" data-ice="signature">: <span>timestamp</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>The event timestamp.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-eventType">eventType</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>The event type.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-eventTypeVersion">eventTypeVersion</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>The event version.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
           <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-extensions">extensions</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
         </p>
       </div>
@@ -800,7 +655,36 @@ or original data payload.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-schemaURL">schemaURL</a></span></span><span class="code" data-ice="signature">: <span>uri</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-id">id</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The event ID.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-schemaurl">schemaurl</a></span></span><span class="code" data-ice="signature">: <span>uri</span></span>
         </p>
       </div>
       <div>
@@ -836,6 +720,93 @@ or original data payload.</p>
         
         
         <div data-ice="description"><p>The source URI of the event.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-specversion">specversion</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The CloudEvent specification version.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-time">time</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The event timestamp.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html#instance-member-type">type</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>The event type.</p>
 </div>
       </div>
     </td>
@@ -978,18 +949,18 @@ or original data payload.</p>
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-contentTypeDefault">
+  <h3 data-ice="anchor" id="static-method-contenttypeDefault">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span class="code" data-ice="name">contentTypeDefault</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">contenttypeDefault</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber165">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber158">source</a></span></span>
     </span>
   </h3>
 
@@ -1046,7 +1017,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber349">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber336">source</a></span></span>
     </span>
   </h3>
 
@@ -1081,7 +1052,7 @@ Note that the result of decoder function is assigned to decoded data.</p>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional deserialization attributes:
        decoder (function, no default) a function that takes data and returns decoder data,
-       decodedData (object, no default) already decoded data (but consistency with the contentType is not checked),
+       decodedData (object, no default) already decoded data (but consistency with the contenttype is not checked),
        onlyValid (boolean, default false) to serialize only if it&apos;s a valid instance,</p>
 </td>
     </tr>
@@ -1149,7 +1120,7 @@ Note that the result of decoder function is assigned to decoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber415">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber408">source</a></span></span>
     </span>
   </h3>
 
@@ -1158,7 +1129,14 @@ Note that the result of decoder function is assigned to decoded data.</p>
   
   <div data-ice="description"><p>Get the JSON Schema for a CloudEvent.
 Note that it&apos;s not used in standard serialization to JSON,
-but only in some serialization libraries.</p>
+but only in some serialization libraries.
+Note that schema definitions for data and extensions are right,
+but I need to keep them commented here and to set the flag
+additionalProperties to true,
+or when used both data and extensions will be empty in JSON output.
+Note that for time I had to keep its schema definition commented
+or schema validation on object instances would fail (because in the
+object model I store it as a timestamp/date currently and not as a string).</p>
 <p>See JSON Schema.</p>
 </div>
 
@@ -1209,7 +1187,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber281">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber268">source</a></span></span>
     </span>
   </h3>
 
@@ -1283,7 +1261,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber188">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber181">source</a></span></span>
     </span>
   </h3>
 
@@ -1374,7 +1352,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber268">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber255">source</a></span></span>
     </span>
   </h3>
 
@@ -1456,7 +1434,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber175">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber168">source</a></span></span>
     </span>
   </h3>
 
@@ -1513,7 +1491,7 @@ but only in some serialization libraries.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber301">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber288">source</a></span></span>
     </span>
   </h3>
 
@@ -1548,7 +1526,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional serialization attributes:
        encoder (function, no default) a function that takes data and returns encoded data,
-       encodedData (string, no default) already encoded data (but consistency with the contentType is not checked),
+       encodedData (string, no default) already encoded data (but consistency with the contenttype is not checked),
        onlyValid (boolean, default false) to serialize only if it&apos;s a valid instance,</p>
 </td>
     </tr>
@@ -1611,7 +1589,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber207">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber200">source</a></span></span>
     </span>
   </h3>
 
@@ -1692,7 +1670,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber155">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber148">source</a></span></span>
     </span>
   </h3>
 
@@ -1748,11 +1726,11 @@ Note that the result of encoder function is assigned to encoded data.</p>
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(eventID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, eventType: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, source: <span>uri</span>, data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, source: <span>uri</span>, data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a></span>, options: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber58">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber57">source</a></span></span>
     </span>
   </h3>
 
@@ -1773,14 +1751,14 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">eventID</td>
+      <td data-ice="name" class="code" data-depth="0">id</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"><ul><li>nullable: false</li></ul></td>
       <td data-ice="description"><p>the ID of the event (unique), mandatory</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">eventType</td>
+      <td data-ice="name" class="code" data-depth="0">type</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"><ul><li>nullable: false</li></ul></td>
       <td data-ice="description"><p>the type of the event (usually), mandatory</p>
@@ -1805,11 +1783,10 @@ Note that the result of encoder function is assigned to encoded data.</p>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional attributes of the event; some has default values chosen here:
-       eventTypeVersion (string) optional,
-       eventTime (timestamp, default now),
+       time (timestamp/date, default now),
        extensions (object) optional but if given must contain at least 1 property (key/value),
-       contentType (string, default &apos;application/json&apos;) tell how the data attribute must be encoded,
-       schemaURL (uri) optional,
+       contenttype (string, default &apos;application/json&apos;) tell how the data attribute must be encoded,
+       schemaurl (uri) optional,
        strict (boolean, default false) tell if object instance will be validated in a more strict way</p>
 </td>
     </tr>
@@ -1831,7 +1808,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
       
       <tr class="throw" data-ice="throw">
         <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
-        <td data-ice="throwDesc"><p>if strict is true and eventID or eventType is undefined or null</p>
+        <td data-ice="throwDesc"><p>if strict is true and id or type is undefined or null</p>
 </td>
       </tr>
 </tbody>
@@ -1862,7 +1839,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber531">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber523">source</a></span></span>
     </span>
   </h3>
 
@@ -1920,7 +1897,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber486">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber478">source</a></span></span>
     </span>
   </h3>
 
@@ -1965,7 +1942,7 @@ Note that the result of encoder function is assigned to encoded data.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber509">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber501">source</a></span></span>
     </span>
   </h3>
 
@@ -2011,7 +1988,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber497">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber489">source</a></span></span>
     </span>
   </h3>
 
@@ -2047,62 +2024,18 @@ or original data payload.</p>
 <h2 data-ice="title">Private Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-cloudEventsVersion">
+  <h3 data-ice="anchor" id="instance-member-contenttype">
     <span class="access" data-ice="access">private</span>
     
     
     
     
     
-    <span class="code" data-ice="name">cloudEventsVersion</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">contenttype</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber108">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>The CloudEvent specification version.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-contentType">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">contentType</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber114">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber112">source</a></span></span>
     </span>
   </h3>
 
@@ -2146,7 +2079,7 @@ or original data payload.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber97">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber95">source</a></span></span>
     </span>
   </h3>
 
@@ -2156,183 +2089,6 @@ or original data payload.</p>
   <div data-ice="description"><p>The real event data.
 Usually it&apos;s an object, but could be even a Map or a Set.
 Copy the original object to avoid changing objects that could be shared.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-eventID">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">eventID</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber77">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>The event ID.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-eventTime">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">eventTime</span><span class="code" data-ice="signature">: <span>timestamp</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber121">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>The event timestamp.
-Copy the original object to avoid changing objects that could be shared.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-eventType">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">eventType</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber83">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>The event type.</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-eventTypeVersion">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">eventTypeVersion</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber127">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>The event version.</p>
 </div>
 
   
@@ -2369,7 +2125,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber134">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber127">source</a></span></span>
     </span>
   </h3>
 
@@ -2403,18 +2159,62 @@ Copy the original object to avoid changing objects that could be shared.</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-schemaURL">
+  <h3 data-ice="anchor" id="instance-member-id">
     <span class="access" data-ice="access">private</span>
     
     
     
     
     
-    <span class="code" data-ice="name">schemaURL</span><span class="code" data-ice="signature">: <span>uri</span></span>
+    <span class="code" data-ice="name">id</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber140">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber75">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The event ID.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-schemaurl">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">schemaurl</span><span class="code" data-ice="signature">: <span>uri</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber133">source</a></span></span>
     </span>
   </h3>
 
@@ -2458,7 +2258,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber89">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber87">source</a></span></span>
     </span>
   </h3>
 
@@ -2466,6 +2266,140 @@ Copy the original object to avoid changing objects that could be shared.</p>
   
   
   <div data-ice="description"><p>The source URI of the event.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-specversion">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">specversion</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber106">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The CloudEvent specification version.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-time">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">time</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber120">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The event timestamp.
+Copy the original object to avoid changing objects that could be shared.
+Note that here the object will be transformed into string when serialized.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-type">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">type</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber81">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>The event type.</p>
 </div>
 
   
@@ -2505,7 +2439,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber475">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber467">source</a></span></span>
     </span>
   </h3>
 
@@ -2580,7 +2514,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber451">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber443">source</a></span></span>
     </span>
   </h3>
 
@@ -2607,7 +2541,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>optional serialization attributes:
        encoder (function, default null) a function that takes data and returns encoded data,
-       encodedData (string, default null) already encoded data (but consistency with the contentType is not checked),</p>
+       encodedData (string, default null) already encoded data (but consistency with the contenttype is not checked),</p>
 </td>
     </tr>
 </tbody>
@@ -2657,7 +2591,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber520">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber512">source</a></span></span>
     </span>
   </h3>
 
@@ -2715,7 +2649,7 @@ Copy the original object to avoid changing objects that could be shared.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber463">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/cloudevent.js.html#lineNumber455">source</a></span></span>
     </span>
   </h3>
 

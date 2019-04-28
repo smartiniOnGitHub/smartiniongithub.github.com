@@ -99,8 +99,8 @@ test(&apos;create CloudEvent instances with different class hierarchy, and ensur
     t.ok(V.isFunction(T.dumpObject))
 
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-    const ceMinimal = new CEClass(&apos;1&apos;, // eventID
-      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+    const ceMinimal = new CEClass(&apos;1&apos;, // id
+      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )
@@ -119,8 +119,8 @@ test(&apos;create CloudEvent instances with different class hierarchy, and ensur
     t.ok(V.isClass(V.ensureIsClass(ceMinimal, NotCESubclass, &apos;ceMinimal&apos;), TypeError)) // expected error returned
 
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-    const ceMinimalSubclass = new CESubclass(&apos;1EX&apos;, // eventID
-      &apos;org.github.smartiniOnGitHub.cloudeventjs.testeventEx&apos;, // eventType
+    const ceMinimalSubclass = new CESubclass(&apos;1EX&apos;, // id
+      &apos;org.github.smartiniOnGitHub.cloudeventjs.testeventEx&apos;, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )

@@ -25,43 +25,43 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber287",
+    "test-file/test/cloudevent.test.js.html#lineNumber286",
     "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber77",
+    "test-file/test/cloudevent.test.js.html#lineNumber99",
     "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber117",
+    "test-file/test/cloudevent.test.js.html#lineNumber139",
     "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber238",
+    "test-file/test/cloudevent.test.js.html#lineNumber237",
     "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber545",
+    "test-file/test/cloudevent.test.js.html#lineNumber544",
     "ensure CloudEvent and objects are merged in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber22",
+    "test-file/test/cloudevent.test.js.html#lineNumber44",
     "ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber464",
+    "test-file/test/cloudevent.test.js.html#lineNumber463",
     "ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects",
     "test"
   ],
@@ -79,7 +79,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber60",
+    "test-file/test/cloudevent.test.js.html#lineNumber82",
     "ensure isValid and validate works good on undefined and null objects",
     "test"
   ],
@@ -456,12 +456,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/cloudevent.js~cloudevent#cloudeventsversion",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-cloudEventsVersion",
-    "src/cloudevent.js~CloudEvent#cloudEventsVersion",
-    "member"
-  ],
-  [
     "src/cloudevent.js~cloudevent#constructor",
     "class/src/cloudevent.js~CloudEvent.html#instance-constructor-constructor",
     "src/cloudevent.js~CloudEvent#constructor",
@@ -469,8 +463,8 @@ window.esdocSearchIndex = [
   ],
   [
     "src/cloudevent.js~cloudevent#contenttype",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-contentType",
-    "src/cloudevent.js~CloudEvent#contentType",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-contenttype",
+    "src/cloudevent.js~CloudEvent#contenttype",
     "member"
   ],
   [
@@ -480,33 +474,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/cloudevent.js~cloudevent#eventid",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-eventID",
-    "src/cloudevent.js~CloudEvent#eventID",
-    "member"
-  ],
-  [
-    "src/cloudevent.js~cloudevent#eventtime",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-eventTime",
-    "src/cloudevent.js~CloudEvent#eventTime",
-    "member"
-  ],
-  [
-    "src/cloudevent.js~cloudevent#eventtype",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-eventType",
-    "src/cloudevent.js~CloudEvent#eventType",
-    "member"
-  ],
-  [
-    "src/cloudevent.js~cloudevent#eventtypeversion",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-eventTypeVersion",
-    "src/cloudevent.js~CloudEvent#eventTypeVersion",
-    "member"
-  ],
-  [
     "src/cloudevent.js~cloudevent#extensions",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-extensions",
     "src/cloudevent.js~CloudEvent#extensions",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#id",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-id",
+    "src/cloudevent.js~CloudEvent#id",
     "member"
   ],
   [
@@ -535,8 +511,8 @@ window.esdocSearchIndex = [
   ],
   [
     "src/cloudevent.js~cloudevent#schemaurl",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-schemaURL",
-    "src/cloudevent.js~CloudEvent#schemaURL",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-schemaurl",
+    "src/cloudevent.js~CloudEvent#schemaurl",
     "member"
   ],
   [
@@ -552,10 +528,28 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/cloudevent.js~cloudevent#specversion",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-specversion",
+    "src/cloudevent.js~CloudEvent#specversion",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#time",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-time",
+    "src/cloudevent.js~CloudEvent#time",
+    "member"
+  ],
+  [
     "src/cloudevent.js~cloudevent#tostring",
     "class/src/cloudevent.js~CloudEvent.html#instance-method-toString",
     "src/cloudevent.js~CloudEvent#toString",
     "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#type",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-type",
+    "src/cloudevent.js~CloudEvent#type",
+    "member"
   ],
   [
     "src/cloudevent.js~cloudevent#validate",
@@ -565,8 +559,8 @@ window.esdocSearchIndex = [
   ],
   [
     "src/cloudevent.js~cloudevent.contenttypedefault",
-    "class/src/cloudevent.js~CloudEvent.html#static-method-contentTypeDefault",
-    "src/cloudevent.js~CloudEvent.contentTypeDefault",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-contenttypeDefault",
+    "src/cloudevent.js~CloudEvent.contenttypeDefault",
     "method"
   ],
   [

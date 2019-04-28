@@ -93,8 +93,8 @@ test(&apos;ensure objects exported by index script, exists and are of the right 
     t.strictEqual(typeof CloudEvent, &apos;function&apos;)
 
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
-    const ceMinimal = new CEClass(&apos;1&apos;, // eventID
-      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // eventType
+    const ceMinimal = new CEClass(&apos;1&apos;, // id
+      &apos;com.github.smartiniOnGitHub.cloudeventjs.testevent&apos;, // type
       &apos;/&apos;, // source
       {} // data (empty) // optional, but useful the same in this sample usage
     )
