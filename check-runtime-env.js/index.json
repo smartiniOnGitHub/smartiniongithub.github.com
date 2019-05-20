@@ -1,0 +1,963 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * RuntimeEnvChecker:\r\n * this module exports some useful generic functions\r\n * for checks of some environment properties as runtime.\r\n */\r\n\r\nconst semver = require('semver')\r\n\r\n/** Get the host name where this code is runninng */\r\nconst hostname = require('os').hostname()\r\n\r\n/** Get the process id (pid) where this code is runninng */\r\nconst pid = require('process').pid\r\n\r\n/** Get the list of engines needed, if specified in 'package.json' */\r\nconst engines = require('../package.json').engines\r\n\r\n/**\r\n * Checker for Runtime Environment properties.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass RuntimeEnvChecker {\r\n  /**\r\n   * Create a new instance of a RuntimeEnvChecker class.\r\n   *\r\n   * Note that instancing is not allowed for this class because all its methods are static.\r\n   *\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Utility method that get some process-related info\r\n   * and wraps them into an object.\r\n   *\r\n   * @static\r\n   * @return {object} the object representation of process-related info data\r\n   */\r\n  static processInfo () {\r\n    return {\r\n      hostname,\r\n      pid\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility method that tell if the given version is compatible\r\n   * with the expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version is compatible with the given constraint, otherwise false\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   */\r\n  static isVersionCompatible (version, expectedVersion) {\r\n    if (version && typeof version !== 'string') {\r\n      throw new TypeError(`The argument 'version' must be a string, instead got a '${typeof version}'`)\r\n    }\r\n    if (expectedVersion && typeof expectedVersion !== 'string') {\r\n      throw new TypeError(`The argument 'expectedVersion' must be a string, instead got a '${typeof expectedVersion}'`)\r\n    }\r\n    if (version !== null && expectedVersion !== null) {\r\n      return semver.satisfies(version, expectedVersion)\r\n    }\r\n    return false\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given version is compatible\r\n   * with the given expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see isVersionCompatible\r\n   */\r\n  static checkVersion (version, expectedVersion) {\r\n    const compatible = RuntimeEnvChecker.isVersionCompatible(version, expectedVersion)\r\n    if (version !== null && expectedVersion !== null) {\r\n      if (!compatible) {\r\n        throw new Error(`RuntimeEnvChecker - found version '${version}', but expected version '${expectedVersion}'`)\r\n      } else {\r\n        return true\r\n      }\r\n    }\r\n    return false\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given Node.js version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), by default current Node.js version\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'node', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNode (\r\n    version = process.version,\r\n    versionExpected = engines.node\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given NPM version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), default null\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'npm', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNpm (\r\n    version = null,\r\n    versionExpected = engines.npm\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that gets current NPM version.\r\n   * Note that NPM is executed in a child process (but only to get its version),\r\n   * in a synchronous way.\r\n   *\r\n   * @static\r\n   * @return {string} npm version (as a string) if found, otherwise null\r\n   */\r\n  static getVersionOfNpm () {\r\n    const { execSync } = require('child_process')\r\n    let npmVersion = null\r\n    try {\r\n      npmVersion = execSync('npm -version')\r\n      npmVersion = npmVersion.toString().replace(/(\\r\\n|\\n|\\r)/gm, '')\r\n    } catch (e) {\r\n      // error running the command, maybe npm not installed or not found\r\n    }\r\n    return npmVersion\r\n  }\r\n}\r\n\r\nmodule.exports = RuntimeEnvChecker\r\n",
+    "static": true,
+    "longname": "/Users/martinis/work/prove/check-runtime-env.js/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "RuntimeEnvChecker",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker",
+    "access": "public",
+    "export": true,
+    "importPath": "check-runtime-env/src/index.js",
+    "importStyle": "RuntimeEnvChecker",
+    "description": "Checker for Runtime Environment properties.\n\nNote that all methods here are static, so no need to instance this class;\nsee it as an Utility/Companion class.",
+    "lineNumber": 41,
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~RuntimeEnvChecker#constructor",
+    "access": "public",
+    "description": "Create a new instance of a RuntimeEnvChecker class.\n\nNote that instancing is not allowed for this class because all its methods are static.",
+    "lineNumber": 49,
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "because instancing not allowed for this class"
+      }
+    ]
+  },
+  {
+    "__docId__": 51,
+    "kind": "method",
+    "name": "processInfo",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.processInfo",
+    "access": "public",
+    "description": "Utility method that get some process-related info\nand wraps them into an object.",
+    "lineNumber": 60,
+    "return": {
+      "nullable": null,
+      "types": [
+        "object"
+      ],
+      "spread": false,
+      "description": "the object representation of process-related info data"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 52,
+    "kind": "method",
+    "name": "isVersionCompatible",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.isVersionCompatible",
+    "access": "public",
+    "description": "Utility method that tell if the given version is compatible\nwith the expected version (using then semver syntax).",
+    "lineNumber": 77,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "version",
+        "description": "the version to check (as a string)"
+      },
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "expectedVersion",
+        "description": "the expected version for the comparison (as a semver string)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if version is compatible with the given constraint, otherwise false"
+    },
+    "throws": [
+      {
+        "types": [
+          "TypeError"
+        ],
+        "description": "if at least an argument is wrong"
+      }
+    ]
+  },
+  {
+    "__docId__": 53,
+    "kind": "method",
+    "name": "checkVersion",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkVersion",
+    "access": "public",
+    "description": "Utility method that check if the given version is compatible\nwith the given expected version (using then semver syntax).",
+    "see": [
+      "isVersionCompatible"
+    ],
+    "lineNumber": 102,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "version",
+        "description": "the version to check (as a string)"
+      },
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "expectedVersion",
+        "description": "the expected version for the comparison (as a semver string)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if version matches, false if one of versions is null"
+    },
+    "throws": [
+      {
+        "types": [
+          "TypeError"
+        ],
+        "description": "if at least an argument is wrong"
+      },
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if versions are comparable but does not matches"
+      }
+    ]
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "checkVersionOfNode",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkVersionOfNode",
+    "access": "public",
+    "description": "Utility method that check if the given Node.js version is compatible\nwith the given expected version (using then semver syntax),\nusually read from a specific field in 'package.json'.",
+    "see": [
+      "checkVersion"
+    ],
+    "lineNumber": 127,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "version",
+        "description": "the version to check (as a string), by default current Node.js version"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "versionExpected",
+        "description": "the expected version for the comparison (as a semver string), by default current value for 'node', under 'engines' in 'package.json' (if set)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if version matches, false if one of versions is null"
+    },
+    "throws": [
+      {
+        "types": [
+          "TypeError"
+        ],
+        "description": "if at least an argument is wrong"
+      },
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if versions are comparable but does not matches"
+      }
+    ]
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "checkVersionOfNpm",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkVersionOfNpm",
+    "access": "public",
+    "description": "Utility method that check if the given NPM version is compatible\nwith the given expected version (using then semver syntax),\nusually read from a specific field in 'package.json'.",
+    "see": [
+      "checkVersion"
+    ],
+    "lineNumber": 147,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "version",
+        "description": "the version to check (as a string), default null"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "versionExpected",
+        "description": "the expected version for the comparison (as a semver string), by default current value for 'npm', under 'engines' in 'package.json' (if set)"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if version matches, false if one of versions is null"
+    },
+    "throws": [
+      {
+        "types": [
+          "TypeError"
+        ],
+        "description": "if at least an argument is wrong"
+      },
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if versions are comparable but does not matches"
+      }
+    ]
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
+    "name": "getVersionOfNpm",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.getVersionOfNpm",
+    "access": "public",
+    "description": "Utility method that gets current NPM version.\nNote that NPM is executed in a child process (but only to get its version),\nin a synchronous way.",
+    "lineNumber": 162,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "npm version (as a string) if found, otherwise null"
+    },
+    "params": []
+  },
+  {
+    "kind": "index",
+    "content": "# check-runtime-env / check-runtime-env.js\n\n  [![NPM Version](https://img.shields.io/npm/v/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![NPM Downloads](https://img.shields.io/npm/dm/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)\n  [![Coverage Status](https://coveralls.io/repos/github/smartiniOnGitHub/check-runtime-env.js/badge.svg?branch=master)](https://coveralls.io/github/smartiniOnGitHub/check-runtime-env.js/?branch=master)\n  [![dependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js)\n  [![devDependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/dev-status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js?type=dev)\n\nNode.js implementation of a checker for some runtime environment properties.\n\nThe purpose of this library is to simplify some check in the environment where \nthe code is running (at runtime).\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\nconst assert = require('assert')\n\n// reference the library, not needed if using destructuring assignment, see below\nconst RuntimeEnvChecker = require('../src/') // from local path\nassert(RuntimeEnvChecker !== null)\n```\n\nget some runtime data and version constraints, optional:\n\n```js\nconst nodeVersion = process.version\nassert(nodeVersion !== null)\nconst npmVersion = RuntimeEnvChecker.getVersionOfNpm()\nassert(npmVersion !== null)\nconst engines = require('../package.json').engines\nassert(engines !== null)\nconst expectedNodeVersion = engines.node\nassert(expectedNodeVersion !== null)\nconst expectedNPMVersion = engines.npm\nassert(expectedNPMVersion !== null)\n\nconsole.log(`Node.js current version: ${nodeVersion}`)\nconsole.log(`Node.js version expected in 'package.json': ${engines.node}`)\nconsole.log(`NPM current version: ${npmVersion}`)\nconsole.log(`NPM version expected in 'package.json': ${engines.npm}`)\n```\n\ncall some static method exposed by the class:\n\n```js\nconsole.log(`Doing some tests; note that a check not satisfied will throw Error ...`)\nconsole.log(`Check version of Node, using defaults, success: ${RuntimeEnvChecker.checkVersionOfNode()}`)\nconsole.log(`Check version of Node, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNode(nodeVersion, expectedNodeVersion)}`)\nconsole.log(`Check version of NPM, using NPM release found, and NPM expected value implicit, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion)}`)\nconsole.log(`Check version of NPM, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion, expectedNPMVersion)}`)\nconsole.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=8.9.0 <12.0.0')}`)\ntry {\n  console.log(`Sample failure in check version (generic): expected error`)\n  console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=12.0.0')}`)\n} catch (e) {\n  console.log(e)\n}\nconsole.log(`Tell the given version '10.13.0', if it's compatible with the constraint '>=12.0.0': ${RuntimeEnvChecker.isVersionCompatible('10.13.0', '>=12.0.0')}, but anyway no error raised here`)\nconsole.log(`No more tests.`)\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library \n(inline but it's the same using it from npm registry).\n\nA sample usage could be to check if current Node.js release satisfies \nthe release wanted, and if not throw an Error (or instead log a Warning).\n\n\n## Requirements\n\nNode.js 8.9.0 or later; NPM 6.4.1 or later.\n\n\n## Note\n\nThe library exposes some static methods useful at runtime; \nfor example to check the given version, \nif it's compatible with an expected version, \nusing the semver syntax for constraints.\n\nCurrent Node.js version if read from the memory as a default value; \nNPM version must be retrieved by executing it, so if needed it has to be done \nby calling related method (could take some time).\n\nThe general behavior of check/checker methods here is to throw Error if the check \ndoes not pass (if it's false); or return true if successful, or even false\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/check-runtime-env.js/).\n\nThe package name is simplified into 'check-runtime-env', so it will be easier to get it at npm.\n\nSee the Semantic Versioning Specification at [semver](https://semver.org).\n\nMore features will be added later to the library.\n\n\n## Contributing\n\n1. Fork it ( https://github.com/smartiniOnGitHub/check-runtime-env.js/fork )\n2. Create your feature branch (git checkout -b my-new-feature)\n3. Commit your changes (git commit -am 'Add some feature')\n4. Push to the branch (git push origin my-new-feature)\n5. Create a new Pull Request\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
+    "longname": "/Users/martinis/work/prove/check-runtime-env.js/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"check-runtime-env\",\n  \"version\": \"0.1.0\",\n  \"description\": \"Node.js implementation of a checker for some runtime environment properties\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"dependency:log\": \"npm list > ./temp/dependencies.log\",\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"lint:log\": \"npm run lint > ./temp/lint-standard.log\",\n    \"license-check\": \"npx legally\",\n    \"license-check:log\": \"npx legally > ./temp/license-check.log\",\n    \"license-checker\": \"npx license-checker --production --onlyAllow='Apache-2.0;BSD-2-Clause;BSD-3-Clause;MIT;ISC'\",\n    \"license-checker:log\": \"npm run license-checker | tee ./temp/license-checker.log\",\n    \"test:unit\": \"tap -J --comments --strict --no-esm test/*.test.js\",\n    \"test:unit:debug\": \"tap -T --node-arg=--inspect-brk --comments --strict --no-esm test/*.test.js\",\n    \"test:coverage\": \"npm run test:unit -- --cov --coverage-report=html\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {\n    \"semver\": \"^6.0.0\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.4\",\n    \"standard\": \"^12.0.1\",\n    \"tap\": \"^12.7.0\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.9.0\",\n    \"npm\": \">=6.4.1\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/check-runtime-env.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"check\",\n    \"ensure\",\n    \"runtime\",\n    \"environment\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
+    "longname": "/Users/martinis/work/prove/check-runtime-env.js/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "__docId__": 57,
+    "kind": "testFile",
+    "name": "test/index.test.js",
+    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\nconst REC = require('../src/') // reference the library\r\nassert(REC !== null)\r\nassert.strictEqual(typeof REC, 'function')\r\n\r\nconst nodeVersion = process.version\r\nassert(nodeVersion !== null)\r\nconst engines = require('../package.json').engines\r\nassert(engines !== null)\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure objects exported by index script, exists and are of the right type', (t) => {\r\n  t.plan(4)\r\n\r\n  t.comment('testing RuntimeEnvChecker class')\r\n  t.ok(REC)\r\n  t.strictEqual(typeof REC, 'function')\r\n  t.ok(engines)\r\n\r\n  t.throws(function () {\r\n    const rec = new REC()\r\n    assert(rec === null) // never executed\r\n  }, Error, 'Expected exception when creating a RuntimeEnvChecker instance')\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure process info returns right values', (t) => {\r\n  t.plan(2)\r\n\r\n  t.comment('testing processInfo')\r\n  const procInfo = REC.processInfo()\r\n  t.ok(procInfo)\r\n  t.strictEqual(typeof procInfo, 'object')\r\n  // but do not test too low level details for attributes inside procInfo\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure version checks are done in the right way', (t) => {\r\n  t.plan(46)\r\n\r\n  {\r\n    const comment = 'testing checkVersion'\r\n    t.comment(comment)\r\n    t.throws(function () {\r\n      const check = REC.checkVersion()\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.ok(!REC.checkVersion(null)) // not ok but does not throw error\r\n    t.ok(!REC.checkVersion(null, null)) // not ok but does not throw error\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion(1.0, '1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0', 1.0)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('0.1.0', '1.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('3.2.1', '>=1.0.0 <2.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.ok(REC.checkVersion('1.0.0', '1.0.0'))\r\n    t.ok(REC.checkVersion('1.2.3', '1.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '1.2.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '~1.2.5'))\r\n    t.ok(REC.checkVersion('1.3.0', '^1.2.5'))\r\n    t.ok(REC.checkVersion('1.9.9', '^1.2.5'))\r\n    t.ok(REC.checkVersion('8.9.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.9.1', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n  }\r\n\r\n  {\r\n    const comment = 'testing checkVersionOfNode'\r\n    t.comment(comment)\r\n    t.comment(`Node.js current version: ${nodeVersion}`)\r\n    t.comment(`Node.js version expected in 'package.json': ${engines.node}`)\r\n\r\n    t.ok(REC.checkVersionOfNode()) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode('10.15.3')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined)) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined, undefined)) // ok because of default values\r\n    t.strictEqual(REC.checkVersionOfNode(null, null), false) // not error, but false result\r\n    t.strictEqual(REC.checkVersionOfNode('10.15.3', null), false) // not error, but false result\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode(6.17, '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('6.17.0', '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '8.16.0'))\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n    t.ok(REC.checkVersion('10.15.3', engines.node))\r\n    t.ok(REC.checkVersion('10.15.3', `${engines.node}`))\r\n    t.strictEqual(REC.checkVersionOfNode('10.15.3', engines.notExisting), true) // ok because of default values with a not existing expected value (undefined)\r\n  }\r\n\r\n  {\r\n    const comment = 'testing getVersionOfNpm and checkVersionOfNpm'\r\n    t.comment(comment)\r\n    const npmVersion = REC.getVersionOfNpm()\r\n    assert(npmVersion !== null)\r\n    t.ok(npmVersion)\r\n    t.comment(`NPM current version: ${npmVersion}`)\r\n    t.comment(`NPM version expected in 'package.json': ${engines.npm}`)\r\n\r\n    t.ok(!REC.checkVersionOfNpm()) // not ok because of default values\r\n    t.ok(!REC.checkVersionOfNpm(null)) // not ok because of default values\r\n    t.ok(REC.checkVersionOfNpm('6.4.1')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNpm('6.4.1', '>=6.4.1'))\r\n    t.ok(!REC.checkVersionOfNpm(undefined)) // not ok because of default values\r\n    t.ok(!REC.checkVersionOfNpm(undefined, undefined)) // not ok because of default values\r\n    t.strictEqual(REC.checkVersionOfNpm(null, null), false) // not error, but false result\r\n    t.strictEqual(REC.checkVersionOfNpm('6.4.1', null), false) // not error, but false result\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('6.17.0', '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0', '>=6.4.1')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n  }\r\n})\r\n",
+    "static": true,
+    "longname": "/Users/martinis/work/prove/check-runtime-env.js/test/index.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 58,
+    "kind": "test",
+    "name": "test0",
+    "testId": 0,
+    "memberof": "test/index.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.test.js~test0",
+    "access": null,
+    "description": "ensure objects exported by index script, exists and are of the right type",
+    "lineNumber": 31,
+    "testTargets": [
+      "RuntimeEnvChecker"
+    ]
+  },
+  {
+    "__docId__": 59,
+    "kind": "test",
+    "name": "test1",
+    "testId": 1,
+    "memberof": "test/index.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.test.js~test1",
+    "access": null,
+    "description": "ensure process info returns right values",
+    "lineNumber": 46,
+    "testTargets": [
+      "RuntimeEnvChecker"
+    ]
+  },
+  {
+    "__docId__": 60,
+    "kind": "test",
+    "name": "test2",
+    "testId": 2,
+    "memberof": "test/index.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.test.js~test2",
+    "access": null,
+    "description": "ensure version checks are done in the right way",
+    "lineNumber": 57,
+    "testTargets": [
+      "RuntimeEnvChecker"
+    ]
+  }
+]
