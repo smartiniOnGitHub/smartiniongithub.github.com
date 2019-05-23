@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/index.js",
-    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * RuntimeEnvChecker:\r\n * this module exports some useful generic functions\r\n * for checks of some environment properties as runtime.\r\n */\r\n\r\nconst semver = require('semver')\r\n\r\n/** Get the host name where this code is runninng */\r\nconst hostname = require('os').hostname()\r\n\r\n/** Get the process id (pid) where this code is runninng */\r\nconst pid = require('process').pid\r\n\r\n/** Get the list of engines needed, if specified in 'package.json' */\r\nconst engines = require('../package.json').engines\r\n\r\n/**\r\n * Checker for Runtime Environment properties.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass RuntimeEnvChecker {\r\n  /**\r\n   * Create a new instance of a RuntimeEnvChecker class.\r\n   *\r\n   * Note that instancing is not allowed for this class because all its methods are static.\r\n   *\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Utility method that get some process-related info\r\n   * and wraps them into an object.\r\n   *\r\n   * @static\r\n   * @return {object} the object representation of process-related info data\r\n   */\r\n  static processInfo () {\r\n    return {\r\n      hostname,\r\n      pid\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Utility method that tell if the given version is compatible\r\n   * with the expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version is compatible with the given constraint, otherwise false\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   */\r\n  static isVersionCompatible (version, expectedVersion) {\r\n    if (version && typeof version !== 'string') {\r\n      throw new TypeError(`The argument 'version' must be a string, instead got a '${typeof version}'`)\r\n    }\r\n    if (expectedVersion && typeof expectedVersion !== 'string') {\r\n      throw new TypeError(`The argument 'expectedVersion' must be a string, instead got a '${typeof expectedVersion}'`)\r\n    }\r\n    if (version !== null && expectedVersion !== null) {\r\n      return semver.satisfies(version, expectedVersion)\r\n    }\r\n    return false\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given version is compatible\r\n   * with the given expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see isVersionCompatible\r\n   */\r\n  static checkVersion (version, expectedVersion) {\r\n    const compatible = RuntimeEnvChecker.isVersionCompatible(version, expectedVersion)\r\n    if (version !== null && expectedVersion !== null) {\r\n      if (!compatible) {\r\n        throw new Error(`RuntimeEnvChecker - found version '${version}', but expected version '${expectedVersion}'`)\r\n      } else {\r\n        return true\r\n      }\r\n    }\r\n    return false\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given Node.js version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), by default current Node.js version\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'node', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNode (\r\n    version = process.version,\r\n    versionExpected = engines.node\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given NPM version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), default null\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'npm', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {TypeError} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNpm (\r\n    version = null,\r\n    versionExpected = engines.npm\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that gets current NPM version.\r\n   * Note that NPM is executed in a child process (but only to get its version),\r\n   * in a synchronous way.\r\n   *\r\n   * @static\r\n   * @return {string} npm version (as a string) if found, otherwise null\r\n   */\r\n  static getVersionOfNpm () {\r\n    const { execSync } = require('child_process')\r\n    let npmVersion = null\r\n    try {\r\n      npmVersion = execSync('npm -version')\r\n      npmVersion = npmVersion.toString().replace(/(\\r\\n|\\n|\\r)/gm, '')\r\n    } catch (e) {\r\n      // error running the command, maybe npm not installed or not found\r\n    }\r\n    return npmVersion\r\n  }\r\n}\r\n\r\nmodule.exports = RuntimeEnvChecker\r\n",
+    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\n/**\r\n * RuntimeEnvChecker:\r\n * this module exports some useful generic functions\r\n * for checks of some environment properties as runtime.\r\n */\r\n\r\nconst semver = require('semver')\r\n\r\n/** Get the host name where this code is runninng */\r\nconst hostname = require('os').hostname()\r\n\r\n/** Get the process id (pid) where this code is runninng */\r\nconst pid = require('process').pid\r\n\r\n/** Get the list of engines needed, if specified in 'package.json' */\r\nconst engines = require('../package.json').engines\r\n\r\n/**\r\n * Checker for Runtime Environment properties.\r\n *\r\n * Note that all methods here are static, so no need to instance this class;\r\n * see it as an Utility/Companion class.\r\n */\r\nclass RuntimeEnvChecker {\r\n  /**\r\n   * Create a new instance of a RuntimeEnvChecker class.\r\n   *\r\n   * Note that instancing is not allowed for this class because all its methods are static.\r\n   *\r\n   * @throws {Error} because instancing not allowed for this class\r\n   */\r\n  constructor () {\r\n    throw new Error(`Instancing not allowed for this class`)\r\n  }\r\n\r\n  /**\r\n   * Utility method that get some process-related info\r\n   * and wraps them into an object.\r\n   *\r\n   * @static\r\n   * @return {object} the object representation of process-related info data\r\n   */\r\n  static processInfo () {\r\n    return {\r\n      hostname,\r\n      pid\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Tell if the given argument is defined and not null.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if defined and not null, false otherwise\r\n   */\r\n  static isDefinedAndNotNull (arg) {\r\n    return (arg !== undefined && arg !== null)\r\n  }\r\n\r\n  /**\r\n   * Tell if the given argument is defined and not null,\r\n   * is a string and is not empty.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isDefinedAndNotNull}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @return {boolean} true if it's a not empty string, false otherwise\r\n   */\r\n  static isStringNotEmpty (arg) {\r\n    return ((RuntimeEnvChecker.isDefinedAndNotNull(arg) &&\r\n      (typeof arg === 'string') &&\r\n      (arg.length > 0))\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Tell if the environment variable with the given name\r\n   * is defined and has a value.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isStringNotEmpty}.\r\n   *\r\n   * @static\r\n   * @param {!string} name the name to check\r\n   * @return {boolean} true if it's defined and has a value, false otherwise\r\n   */\r\n  static isEnvVarDefined (name) {\r\n    return RuntimeEnvChecker.isStringNotEmpty(process.env[name])\r\n  }\r\n\r\n  /**\r\n   * Tell if the current Node.js environment is production.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isEnvVarDefined}.\r\n   *\r\n   * @static\r\n   * @return {boolean} true if it's production, false otherwise\r\n   */\r\n  static isNodeEnvProduction () {\r\n    const nodeEnv = RuntimeEnvChecker.getNodeEnv()\r\n    return (RuntimeEnvChecker.isEnvVarDefined('NODE_ENV') &&\r\n      nodeEnv === 'production')\r\n  }\r\n\r\n  /**\r\n   * Utility method that tell if the given version is compatible\r\n   * with the expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version is compatible with the given constraint, otherwise false\r\n   * @throws {Error} if at least an argument is wrong\r\n   */\r\n  static isVersionCompatible (version, expectedVersion) {\r\n    if (RuntimeEnvChecker.isStringNotEmpty(version) && RuntimeEnvChecker.isStringNotEmpty(expectedVersion)) {\r\n      return semver.satisfies(version, expectedVersion)\r\n    }\r\n    return false\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given argument is a not empty string.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isStringNotEmpty}.\r\n   *\r\n   * @static\r\n   * @param {object} arg the object to check\r\n   * @param {string} name the name to use in generated error (if any), empty name as default\r\n   * @return {boolean} true if it's a not empty string\r\n   * @throws {Error} if it's an empty string or it's null or undefined\r\n   */\r\n  static checkStringNotEmpty (arg, name = '') {\r\n    if (RuntimeEnvChecker.isStringNotEmpty(arg) !== true) {\r\n      throw new Error(`RuntimeEnvChecker - the string '${name}' must be not empty`)\r\n    }\r\n    return true\r\n  }\r\n\r\n  /**\r\n   * Ensure that the given environment variable is defined and has a value.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isEnvVarDefined}.\r\n   *\r\n   * @static\r\n   * @param {string} name the name of the variable to check\r\n   * @return {boolean} true if it's defined and has a value\r\n   * @throws {Error} if it's not defined or does not have a value\r\n   */\r\n  static checkEnvVarDefined (name) {\r\n    if (RuntimeEnvChecker.isEnvVarDefined(name) !== true) {\r\n      throw new Error(`RuntimeEnvChecker - the env var '${name}' must be defined and not empty`)\r\n    }\r\n    return true\r\n  }\r\n\r\n  /**\r\n   * Ensure that the current Node.js environment is production.\r\n   *\r\n   * See {@link RuntimeEnvChecker.isEnvVarDefined}.\r\n   *\r\n   * @static\r\n   * @return {boolean} true if it's a not empty string\r\n   * @throws {Error} if it's not production\r\n   */\r\n  static checkNodeEnvProduction () {\r\n    if (RuntimeEnvChecker.isNodeEnvProduction() !== true) {\r\n      throw new Error(`RuntimeEnvChecker - Node.js environment is '${RuntimeEnvChecker.getNodeEnv()}' and not 'production'`)\r\n    }\r\n    return true\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given version is compatible\r\n   * with the given expected version (using then semver syntax).\r\n   *\r\n   * @static\r\n   * @param {!string} version the version to check (as a string)\r\n   * @param {!string} expectedVersion the expected version for the comparison (as a semver string)\r\n   * @return {boolean} true if version matches\r\n   * @throws {Error} if at least an argument is wrong\r\n   * @throws {Error} if versions does not matches\r\n   * @see isVersionCompatible\r\n   */\r\n  static checkVersion (version, expectedVersion) {\r\n    RuntimeEnvChecker.checkStringNotEmpty(version, 'version')\r\n    RuntimeEnvChecker.checkStringNotEmpty(expectedVersion, 'expectedVersion')\r\n    const compatible = RuntimeEnvChecker.isVersionCompatible(version, expectedVersion)\r\n    if (compatible !== true) {\r\n      throw new Error(`RuntimeEnvChecker - found version '${version}', but expected version '${expectedVersion}'`)\r\n    }\r\n    return true\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given Node.js version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), by default current Node.js version\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'node', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {Error} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNode (\r\n    version = process.version,\r\n    versionExpected = engines.node\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that check if the given NPM version is compatible\r\n   * with the given expected version (using then semver syntax),\r\n   * usually read from a specific field in 'package.json'.\r\n   *\r\n   * @static\r\n   * @param {string} version the version to check (as a string), default null\r\n   * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for 'npm', under 'engines' in 'package.json' (if set)\r\n   * @return {boolean} true if version matches, false if one of versions is null\r\n   * @throws {Error} if at least an argument is wrong\r\n   * @throws {Error} if versions are comparable but does not matches\r\n   * @see checkVersion\r\n   */\r\n  static checkVersionOfNpm (\r\n    version = null,\r\n    versionExpected = engines.npm\r\n  ) {\r\n    return RuntimeEnvChecker.checkVersion(version, versionExpected)\r\n  }\r\n\r\n  /**\r\n   * Utility method that gets current NPM version.\r\n   * Note that NPM is executed in a child process (but only to get its version),\r\n   * in a synchronous way.\r\n   *\r\n   * @static\r\n   * @return {string} npm version (as a string) if found, otherwise null\r\n   */\r\n  static getVersionOfNpm () {\r\n    const { execSync } = require('child_process')\r\n    let npmVersion = null\r\n    try {\r\n      npmVersion = execSync('npm -version')\r\n      npmVersion = npmVersion.toString().replace(/(\\r\\n|\\n|\\r)/gm, '')\r\n    } catch (e) {\r\n      // error running the command, maybe npm not installed or not found\r\n    }\r\n    return npmVersion\r\n  }\r\n\r\n  /**\r\n   * Utility method that gets the value of Node.js environment variable.\r\n   *\r\n   * @static\r\n   * @return {string} Node.js env var NODE_ENV value (as a string)\r\n   */\r\n  static getNodeEnv () {\r\n    return process.env.NODE_ENV\r\n  }\r\n}\r\n\r\nmodule.exports = RuntimeEnvChecker\r\n",
     "static": true,
     "longname": "/Users/martinis/work/prove/check-runtime-env.js/src/index.js",
     "access": "public",
@@ -635,6 +635,127 @@
   {
     "__docId__": 52,
     "kind": "method",
+    "name": "isDefinedAndNotNull",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.isDefinedAndNotNull",
+    "access": "public",
+    "description": "Tell if the given argument is defined and not null.",
+    "lineNumber": 74,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if defined and not null, false otherwise"
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "method",
+    "name": "isStringNotEmpty",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.isStringNotEmpty",
+    "access": "public",
+    "description": "Tell if the given argument is defined and not null,\nis a string and is not empty.\n\nSee {@link RuntimeEnvChecker.isDefinedAndNotNull}.",
+    "lineNumber": 88,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a not empty string, false otherwise"
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "isEnvVarDefined",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.isEnvVarDefined",
+    "access": "public",
+    "description": "Tell if the environment variable with the given name\nis defined and has a value.\n\nSee {@link RuntimeEnvChecker.isStringNotEmpty}.",
+    "lineNumber": 105,
+    "params": [
+      {
+        "nullable": false,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's defined and has a value, false otherwise"
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "isNodeEnvProduction",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.isNodeEnvProduction",
+    "access": "public",
+    "description": "Tell if the current Node.js environment is production.\n\nSee {@link RuntimeEnvChecker.isEnvVarDefined}.",
+    "lineNumber": 117,
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's production, false otherwise"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 56,
+    "kind": "method",
     "name": "isVersionCompatible",
     "memberof": "src/index.js~RuntimeEnvChecker",
     "generator": false,
@@ -643,7 +764,7 @@
     "longname": "src/index.js~RuntimeEnvChecker.isVersionCompatible",
     "access": "public",
     "description": "Utility method that tell if the given version is compatible\nwith the expected version (using then semver syntax).",
-    "lineNumber": 77,
+    "lineNumber": 133,
     "params": [
       {
         "nullable": false,
@@ -677,14 +798,136 @@
     "throws": [
       {
         "types": [
-          "TypeError"
+          "Error"
         ],
         "description": "if at least an argument is wrong"
       }
     ]
   },
   {
-    "__docId__": 53,
+    "__docId__": 57,
+    "kind": "method",
+    "name": "checkStringNotEmpty",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkStringNotEmpty",
+    "access": "public",
+    "description": "Ensure that the given argument is a not empty string.\n\nSee {@link RuntimeEnvChecker.isStringNotEmpty}.",
+    "lineNumber": 151,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "arg",
+        "description": "the object to check"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name to use in generated error (if any), empty name as default"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a not empty string"
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if it's an empty string or it's null or undefined"
+      }
+    ]
+  },
+  {
+    "__docId__": 58,
+    "kind": "method",
+    "name": "checkEnvVarDefined",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkEnvVarDefined",
+    "access": "public",
+    "description": "Ensure that the given environment variable is defined and has a value.\n\nSee {@link RuntimeEnvChecker.isEnvVarDefined}.",
+    "lineNumber": 168,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "the name of the variable to check"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's defined and has a value"
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if it's not defined or does not have a value"
+      }
+    ]
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "name": "checkNodeEnvProduction",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.checkNodeEnvProduction",
+    "access": "public",
+    "description": "Ensure that the current Node.js environment is production.\n\nSee {@link RuntimeEnvChecker.isEnvVarDefined}.",
+    "lineNumber": 184,
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "true if it's a not empty string"
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if it's not production"
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 60,
     "kind": "method",
     "name": "checkVersion",
     "memberof": "src/index.js~RuntimeEnvChecker",
@@ -697,7 +940,7 @@
     "see": [
       "isVersionCompatible"
     ],
-    "lineNumber": 102,
+    "lineNumber": 203,
     "params": [
       {
         "nullable": false,
@@ -726,12 +969,12 @@
         "boolean"
       ],
       "spread": false,
-      "description": "true if version matches, false if one of versions is null"
+      "description": "true if version matches"
     },
     "throws": [
       {
         "types": [
-          "TypeError"
+          "Error"
         ],
         "description": "if at least an argument is wrong"
       },
@@ -739,12 +982,12 @@
         "types": [
           "Error"
         ],
-        "description": "if versions are comparable but does not matches"
+        "description": "if versions does not matches"
       }
     ]
   },
   {
-    "__docId__": 54,
+    "__docId__": 61,
     "kind": "method",
     "name": "checkVersionOfNode",
     "memberof": "src/index.js~RuntimeEnvChecker",
@@ -757,7 +1000,7 @@
     "see": [
       "checkVersion"
     ],
-    "lineNumber": 127,
+    "lineNumber": 226,
     "params": [
       {
         "nullable": null,
@@ -791,7 +1034,7 @@
     "throws": [
       {
         "types": [
-          "TypeError"
+          "Error"
         ],
         "description": "if at least an argument is wrong"
       },
@@ -804,7 +1047,7 @@
     ]
   },
   {
-    "__docId__": 55,
+    "__docId__": 62,
     "kind": "method",
     "name": "checkVersionOfNpm",
     "memberof": "src/index.js~RuntimeEnvChecker",
@@ -817,7 +1060,7 @@
     "see": [
       "checkVersion"
     ],
-    "lineNumber": 147,
+    "lineNumber": 246,
     "params": [
       {
         "nullable": null,
@@ -851,7 +1094,7 @@
     "throws": [
       {
         "types": [
-          "TypeError"
+          "Error"
         ],
         "description": "if at least an argument is wrong"
       },
@@ -864,7 +1107,7 @@
     ]
   },
   {
-    "__docId__": 56,
+    "__docId__": 63,
     "kind": "method",
     "name": "getVersionOfNpm",
     "memberof": "src/index.js~RuntimeEnvChecker",
@@ -874,7 +1117,7 @@
     "longname": "src/index.js~RuntimeEnvChecker.getVersionOfNpm",
     "access": "public",
     "description": "Utility method that gets current NPM version.\nNote that NPM is executed in a child process (but only to get its version),\nin a synchronous way.",
-    "lineNumber": 162,
+    "lineNumber": 261,
     "return": {
       "nullable": null,
       "types": [
@@ -886,8 +1129,30 @@
     "params": []
   },
   {
+    "__docId__": 64,
+    "kind": "method",
+    "name": "getNodeEnv",
+    "memberof": "src/index.js~RuntimeEnvChecker",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~RuntimeEnvChecker.getNodeEnv",
+    "access": "public",
+    "description": "Utility method that gets the value of Node.js environment variable.",
+    "lineNumber": 279,
+    "return": {
+      "nullable": null,
+      "types": [
+        "string"
+      ],
+      "spread": false,
+      "description": "Node.js env var NODE_ENV value (as a string)"
+    },
+    "params": []
+  },
+  {
     "kind": "index",
-    "content": "# check-runtime-env / check-runtime-env.js\n\n  [![NPM Version](https://img.shields.io/npm/v/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![NPM Downloads](https://img.shields.io/npm/dm/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)\n  [![Coverage Status](https://coveralls.io/repos/github/smartiniOnGitHub/check-runtime-env.js/badge.svg?branch=master)](https://coveralls.io/github/smartiniOnGitHub/check-runtime-env.js/?branch=master)\n  [![dependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js)\n  [![devDependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/dev-status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js?type=dev)\n\nNode.js implementation of a checker for some runtime environment properties.\n\nThe purpose of this library is to simplify some check in the environment where \nthe code is running (at runtime).\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\nconst assert = require('assert')\n\n// reference the library, not needed if using destructuring assignment, see below\nconst RuntimeEnvChecker = require('../src/') // from local path\nassert(RuntimeEnvChecker !== null)\n```\n\nget some runtime data and version constraints, optional:\n\n```js\nconst nodeVersion = process.version\nassert(nodeVersion !== null)\nconst npmVersion = RuntimeEnvChecker.getVersionOfNpm()\nassert(npmVersion !== null)\nconst engines = require('../package.json').engines\nassert(engines !== null)\nconst expectedNodeVersion = engines.node\nassert(expectedNodeVersion !== null)\nconst expectedNPMVersion = engines.npm\nassert(expectedNPMVersion !== null)\n\nconsole.log(`Node.js current version: ${nodeVersion}`)\nconsole.log(`Node.js version expected in 'package.json': ${engines.node}`)\nconsole.log(`NPM current version: ${npmVersion}`)\nconsole.log(`NPM version expected in 'package.json': ${engines.npm}`)\n```\n\ncall some static method exposed by the class:\n\n```js\nconsole.log(`Doing some tests; note that a check not satisfied will throw Error ...`)\nconsole.log(`Check version of Node, using defaults, success: ${RuntimeEnvChecker.checkVersionOfNode()}`)\nconsole.log(`Check version of Node, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNode(nodeVersion, expectedNodeVersion)}`)\nconsole.log(`Check version of NPM, using NPM release found, and NPM expected value implicit, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion)}`)\nconsole.log(`Check version of NPM, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion, expectedNPMVersion)}`)\nconsole.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=8.9.0 <12.0.0')}`)\ntry {\n  console.log(`Sample failure in check version (generic): expected error`)\n  console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=12.0.0')}`)\n} catch (e) {\n  console.log(e)\n}\nconsole.log(`Tell the given version '10.13.0', if it's compatible with the constraint '>=12.0.0': ${RuntimeEnvChecker.isVersionCompatible('10.13.0', '>=12.0.0')}, but anyway no error raised here`)\nconsole.log(`No more tests.`)\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library \n(inline but it's the same using it from npm registry).\n\nA sample usage could be to check if current Node.js release satisfies \nthe release wanted, and if not throw an Error (or instead log a Warning).\n\n\n## Requirements\n\nNode.js 8.9.0 or later; NPM 6.4.1 or later.\n\n\n## Note\n\nThe library exposes some static methods useful at runtime; \nfor example to check the given version, \nif it's compatible with an expected version, \nusing the semver syntax for constraints.\n\nCurrent Node.js version if read from the memory as a default value; \nNPM version must be retrieved by executing it, so if needed it has to be done \nby calling related method (could take some time).\n\nThe general behavior of check/checker methods here is to throw Error if the check \ndoes not pass (if it's false); or return true if successful, or even false\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/check-runtime-env.js/).\n\nThe package name is simplified into 'check-runtime-env', so it will be easier to get it at npm.\n\nSee the Semantic Versioning Specification at [semver](https://semver.org).\n\nMore features will be added later to the library.\n\n\n## Contributing\n\n1. Fork it ( https://github.com/smartiniOnGitHub/check-runtime-env.js/fork )\n2. Create your feature branch (git checkout -b my-new-feature)\n3. Commit your changes (git commit -am 'Add some feature')\n4. Push to the branch (git push origin my-new-feature)\n5. Create a new Pull Request\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
+    "content": "# check-runtime-env / check-runtime-env.js\n\n  [![NPM Version](https://img.shields.io/npm/v/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![NPM Downloads](https://img.shields.io/npm/dm/check-runtime-env.svg?style=flat)](https://npmjs.org/package/check-runtime-env/)\n  [![Code Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)\n  [![Coverage Status](https://coveralls.io/repos/github/smartiniOnGitHub/check-runtime-env.js/badge.svg?branch=master)](https://coveralls.io/github/smartiniOnGitHub/check-runtime-env.js/?branch=master)\n  [![dependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js)\n  [![devDependencies Status](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/dev-status.svg)](https://david-dm.org/smartiniOnGitHub/check-runtime-env.js?type=dev)\n\nNode.js implementation of a checker for some runtime environment properties.\n\nThe purpose of this library is to simplify some check in the environment where \nthe code is running (at runtime).\n\n\n## Usage\n\nGet a reference to the library:\n\n```js\n// Node.js example\nconst assert = require('assert')\n\n// reference the library, not needed if using destructuring assignment, see below\nconst RuntimeEnvChecker = require('../src/') // from local path\nassert(RuntimeEnvChecker !== null)\n```\n\nget some runtime data and version constraints, optional:\n\n```js\nconst nodeVersion = process.version\nassert(nodeVersion !== null)\nconst npmVersion = RuntimeEnvChecker.getVersionOfNpm()\nassert(npmVersion !== null)\nconst engines = require('../package.json').engines\nassert(engines !== null)\nconst expectedNodeVersion = engines.node\nassert(expectedNodeVersion !== null)\nconst expectedNPMVersion = engines.npm\nassert(expectedNPMVersion !== null)\n\nconsole.log(`Node.js current version: ${nodeVersion}`)\nconsole.log(`Node.js version expected in 'package.json': ${engines.node}`)\nconsole.log(`NPM current version: ${npmVersion}`)\nconsole.log(`NPM version expected in 'package.json': ${engines.npm}`)\n```\n\ncall some static method exposed by the class:\n\n```js\nconsole.log(`Doing some tests; note that a check not satisfied will throw Error ...`)\nconsole.log(`Check version of Node, using defaults, success: ${RuntimeEnvChecker.checkVersionOfNode()}`)\nconsole.log(`Check version of Node, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNode(nodeVersion, expectedNodeVersion)}`)\nconsole.log(`Check version of NPM, using NPM release found, and NPM expected value implicit, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion)}`)\nconsole.log(`Check version of NPM, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion, expectedNPMVersion)}`)\nconsole.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=8.9.0 <12.0.0')}`)\ntry {\n  console.log(`Sample failure in check version (generic): expected error`)\n  console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=12.0.0')}`)\n} catch (e) {\n  console.log(e)\n}\nconsole.log(`Tell the given version '10.13.0', if it's compatible with the constraint '>=12.0.0': ${RuntimeEnvChecker.isVersionCompatible('10.13.0', '>=12.0.0')}, but anyway no error raised here`)\n\nconsole.log(`Check that the given string is not empty (generic), success: ${RuntimeEnvChecker.checkStringNotEmpty('10.13.0')}`)\nconsole.log(`Node.js environment is: '${process.env.NODE_ENV}'`)\nconsole.log(`Node.js environment from the library is: '${RuntimeEnvChecker.getNodeEnv()}'`)\nconsole.log(`Node.js environment is defined: ${RuntimeEnvChecker.isEnvVarDefined('NODE_ENV')}`)\nconsole.log(`Node.js environment is production: ${RuntimeEnvChecker.isNodeEnvProduction()}`)\n// console.log(`Check that Node.js environment is production: ${RuntimeEnvChecker.checkNodeEnvProduction()}`)\n\nconsole.log(`No more tests.`)\n```\n\nLook into the [example](./example/) folder for more sample scripts that uses the library \n(inline but it's the same using it from npm registry).\n\nA sample usage could be to check if current Node.js release satisfies \nthe release wanted, and if not throw an Error (or instead log a Warning).\n\n\n## Requirements\n\nNode.js 8.9.0 or later; NPM 6.4.1 or later.\n\n\n## Note\n\nThe library exposes some static methods useful at runtime; \nfor example to check the given version, \nif it's compatible with an expected version, \nusing the semver syntax for constraints.\n\nCurrent Node.js version if read from the memory as a default value; \nNPM version must be retrieved by executing it, so if needed it has to be done \nby calling related method (could take some time).\n\nThe general behavior of check/checker methods here is to throw Error if the check \ndoes not pass (if it's false); or return true if successful, or even false\n\nYou can find Code Documentation for the API of the library [here](https://smartiniongithub.github.io/check-runtime-env.js/).\n\nThe package name is simplified into 'check-runtime-env', so it will be easier to get it at npm.\n\nSee the Semantic Versioning Specification at [semver](https://semver.org).\n\nMore features will be added later to the library.\n\n\n## Contributing\n\n1. Fork it ( https://github.com/smartiniOnGitHub/check-runtime-env.js/fork )\n2. Create your feature branch (git checkout -b my-new-feature)\n3. Commit your changes (git commit -am 'Add some feature')\n4. Push to the branch (git push origin my-new-feature)\n5. Create a new Pull Request\n\n\n## License\n\nLicensed under [Apache-2.0](./LICENSE).\n\n----\n",
     "longname": "/Users/martinis/work/prove/check-runtime-env.js/README.md",
     "name": "./README.md",
     "static": true,
@@ -895,17 +1160,17 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"check-runtime-env\",\n  \"version\": \"0.1.0\",\n  \"description\": \"Node.js implementation of a checker for some runtime environment properties\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"dependency:log\": \"npm list > ./temp/dependencies.log\",\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"lint:log\": \"npm run lint > ./temp/lint-standard.log\",\n    \"license-check\": \"npx legally\",\n    \"license-check:log\": \"npx legally > ./temp/license-check.log\",\n    \"license-checker\": \"npx license-checker --production --onlyAllow='Apache-2.0;BSD-2-Clause;BSD-3-Clause;MIT;ISC'\",\n    \"license-checker:log\": \"npm run license-checker | tee ./temp/license-checker.log\",\n    \"test:unit\": \"tap -J --comments --strict --no-esm test/*.test.js\",\n    \"test:unit:debug\": \"tap -T --node-arg=--inspect-brk --comments --strict --no-esm test/*.test.js\",\n    \"test:coverage\": \"npm run test:unit -- --cov --coverage-report=html\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {\n    \"semver\": \"^6.0.0\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.4\",\n    \"standard\": \"^12.0.1\",\n    \"tap\": \"^12.7.0\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.9.0\",\n    \"npm\": \">=6.4.1\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/check-runtime-env.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"check\",\n    \"ensure\",\n    \"runtime\",\n    \"environment\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
+    "content": "{\n  \"name\": \"check-runtime-env\",\n  \"version\": \"0.2.0\",\n  \"description\": \"Node.js implementation of a checker for some runtime environment properties\",\n  \"main\": \"src/index\",\n  \"scripts\": {\n    \"dependency:log\": \"npm list > ./temp/dependencies.log\",\n    \"docs\": \"npx esdoc\",\n    \"example\": \"node example/nodejs-base\",\n    \"lint\": \"standard \\\"./src/**/*.js\\\" \\\"./test/**/*.test.js\\\" \\\"./example/**/*.js\\\"\",\n    \"lint:log\": \"npm run lint > ./temp/lint-standard.log\",\n    \"license-check\": \"npx legally\",\n    \"license-check:log\": \"npx legally > ./temp/license-check.log\",\n    \"license-checker\": \"npx license-checker --production --onlyAllow='Apache-2.0;BSD-2-Clause;BSD-3-Clause;MIT;ISC'\",\n    \"license-checker:log\": \"npm run license-checker | tee ./temp/license-checker.log\",\n    \"test:unit\": \"tap -J --comments --strict --no-esm test/*.test.js\",\n    \"test:unit:debug\": \"tap -T --node-arg=--inspect-brk --comments --strict --no-esm test/*.test.js\",\n    \"test:coverage\": \"NODE_ENV=production npm run test:unit -- --cov --coverage-report=html\",\n    \"test\": \"npm run lint && npm run test:unit\"\n  },\n  \"dependencies\": {\n    \"semver\": \"^6.0.0\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-node\": \"^1.0.4\",\n    \"standard\": \"^12.0.1\",\n    \"tap\": \"^14.1.1\"\n  },\n  \"peerDependencies\": {},\n  \"engines\": {\n    \"node\": \">=8.9.0\",\n    \"npm\": \">=6.4.1\"\n  },\n  \"homepage\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/smartiniOnGitHub/check-runtime-env.js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/smartiniOnGitHub/check-runtime-env.js/issues\"\n  },\n  \"keywords\": [\n    \"library\",\n    \"check\",\n    \"ensure\",\n    \"runtime\",\n    \"environment\"\n  ],\n  \"author\": \"Sandro Martini <sandro.martini@gmail.com>\",\n  \"license\": \"Apache-2.0\"\n}\n",
     "longname": "/Users/martinis/work/prove/check-runtime-env.js/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 57,
+    "__docId__": 65,
     "kind": "testFile",
     "name": "test/index.test.js",
-    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\nconst REC = require('../src/') // reference the library\r\nassert(REC !== null)\r\nassert.strictEqual(typeof REC, 'function')\r\n\r\nconst nodeVersion = process.version\r\nassert(nodeVersion !== null)\r\nconst engines = require('../package.json').engines\r\nassert(engines !== null)\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure objects exported by index script, exists and are of the right type', (t) => {\r\n  t.plan(4)\r\n\r\n  t.comment('testing RuntimeEnvChecker class')\r\n  t.ok(REC)\r\n  t.strictEqual(typeof REC, 'function')\r\n  t.ok(engines)\r\n\r\n  t.throws(function () {\r\n    const rec = new REC()\r\n    assert(rec === null) // never executed\r\n  }, Error, 'Expected exception when creating a RuntimeEnvChecker instance')\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure process info returns right values', (t) => {\r\n  t.plan(2)\r\n\r\n  t.comment('testing processInfo')\r\n  const procInfo = REC.processInfo()\r\n  t.ok(procInfo)\r\n  t.strictEqual(typeof procInfo, 'object')\r\n  // but do not test too low level details for attributes inside procInfo\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure version checks are done in the right way', (t) => {\r\n  t.plan(46)\r\n\r\n  {\r\n    const comment = 'testing checkVersion'\r\n    t.comment(comment)\r\n    t.throws(function () {\r\n      const check = REC.checkVersion()\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.ok(!REC.checkVersion(null)) // not ok but does not throw error\r\n    t.ok(!REC.checkVersion(null, null)) // not ok but does not throw error\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion(1.0, '1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0', 1.0)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('0.1.0', '1.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('3.2.1', '>=1.0.0 <2.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.ok(REC.checkVersion('1.0.0', '1.0.0'))\r\n    t.ok(REC.checkVersion('1.2.3', '1.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '1.2.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '~1.2.5'))\r\n    t.ok(REC.checkVersion('1.3.0', '^1.2.5'))\r\n    t.ok(REC.checkVersion('1.9.9', '^1.2.5'))\r\n    t.ok(REC.checkVersion('8.9.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.9.1', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n  }\r\n\r\n  {\r\n    const comment = 'testing checkVersionOfNode'\r\n    t.comment(comment)\r\n    t.comment(`Node.js current version: ${nodeVersion}`)\r\n    t.comment(`Node.js version expected in 'package.json': ${engines.node}`)\r\n\r\n    t.ok(REC.checkVersionOfNode()) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode('10.15.3')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined)) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined, undefined)) // ok because of default values\r\n    t.strictEqual(REC.checkVersionOfNode(null, null), false) // not error, but false result\r\n    t.strictEqual(REC.checkVersionOfNode('10.15.3', null), false) // not error, but false result\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode(6.17, '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('6.17.0', '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '8.16.0'))\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n    t.ok(REC.checkVersion('10.15.3', engines.node))\r\n    t.ok(REC.checkVersion('10.15.3', `${engines.node}`))\r\n    t.strictEqual(REC.checkVersionOfNode('10.15.3', engines.notExisting), true) // ok because of default values with a not existing expected value (undefined)\r\n  }\r\n\r\n  {\r\n    const comment = 'testing getVersionOfNpm and checkVersionOfNpm'\r\n    t.comment(comment)\r\n    const npmVersion = REC.getVersionOfNpm()\r\n    assert(npmVersion !== null)\r\n    t.ok(npmVersion)\r\n    t.comment(`NPM current version: ${npmVersion}`)\r\n    t.comment(`NPM version expected in 'package.json': ${engines.npm}`)\r\n\r\n    t.ok(!REC.checkVersionOfNpm()) // not ok because of default values\r\n    t.ok(!REC.checkVersionOfNpm(null)) // not ok because of default values\r\n    t.ok(REC.checkVersionOfNpm('6.4.1')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNpm('6.4.1', '>=6.4.1'))\r\n    t.ok(!REC.checkVersionOfNpm(undefined)) // not ok because of default values\r\n    t.ok(!REC.checkVersionOfNpm(undefined, undefined)) // not ok because of default values\r\n    t.strictEqual(REC.checkVersionOfNpm(null, null), false) // not error, but false result\r\n    t.strictEqual(REC.checkVersionOfNpm('6.4.1', null), false) // not error, but false result\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('6.17.0', '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0', '>=6.4.1')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n  }\r\n})\r\n",
+    "content": "/*\r\n * Copyright 2019 the original author or authors.\r\n *\r\n * Licensed under the Apache License, Version 2.0 (the \"License\");\r\n * you may not use this file except in compliance with the License.\r\n * You may obtain a copy of the License at\r\n *\r\n *     http://www.apache.org/licenses/LICENSE-2.0\r\n *\r\n * Unless required by applicable law or agreed to in writing, software\r\n * distributed under the License is distributed on an \"AS IS\" BASIS,\r\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n * See the License for the specific language governing permissions and\r\n * limitations under the License.\r\n */\r\n'use strict'\r\n\r\nconst assert = require('assert')\r\nconst test = require('tap').test\r\n\r\nconst REC = require('../src/') // reference the library\r\nassert(REC !== null)\r\nassert.strictEqual(typeof REC, 'function')\r\n\r\nconst nodeVersion = process.version\r\nassert(nodeVersion !== null)\r\nconst engines = require('../package.json').engines\r\nassert(engines !== null)\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure objects exported by index script, exists and are of the right type', (t) => {\r\n  t.plan(4)\r\n\r\n  t.comment('testing RuntimeEnvChecker class')\r\n  t.ok(REC)\r\n  t.strictEqual(typeof REC, 'function')\r\n  t.ok(engines)\r\n\r\n  t.throws(function () {\r\n    const rec = new REC()\r\n    assert(rec === null) // never executed\r\n  }, Error, 'Expected exception when creating a RuntimeEnvChecker instance')\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure process info returns right values', (t) => {\r\n  t.plan(2)\r\n\r\n  t.comment('testing processInfo')\r\n  const procInfo = REC.processInfo()\r\n  t.ok(procInfo)\r\n  t.strictEqual(typeof procInfo, 'object')\r\n  // but do not test too low level details for attributes inside procInfo\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure version checks are done in the right way', (t) => {\r\n  t.plan(48)\r\n\r\n  {\r\n    const comment = 'testing checkVersion'\r\n    t.comment(comment)\r\n    t.ok(!REC.isVersionCompatible('', ''))\r\n    t.ok(REC.isVersionCompatible('10.13.0', '>=8.9.0 <12.0.0'))\r\n    t.throws(function () {\r\n      const check = REC.checkVersion()\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion(null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion(null, null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion(1.0, '1.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('1.0', 1.0)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('0.1.0', '1.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.throws(function () {\r\n      const check = REC.checkVersion('3.2.1', '>=1.0.0 <2.0.0')\r\n      assert(check === false) // never executed\r\n    }, Error, `Expected exception when checking version that doesn't match`)\r\n    t.ok(REC.checkVersion('1.0.0', '1.0.0'))\r\n    t.ok(REC.checkVersion('1.2.3', '1.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '1.2.x'))\r\n    t.ok(REC.checkVersion('1.2.9', '~1.2.5'))\r\n    t.ok(REC.checkVersion('1.3.0', '^1.2.5'))\r\n    t.ok(REC.checkVersion('1.9.9', '^1.2.5'))\r\n    t.ok(REC.checkVersion('8.9.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.9.1', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n  }\r\n\r\n  {\r\n    const comment = 'testing checkVersionOfNode'\r\n    t.comment(comment)\r\n    t.comment(`Node.js current version: ${nodeVersion}`)\r\n    t.comment(`Node.js version expected in 'package.json': ${engines.node}`)\r\n\r\n    t.ok(REC.checkVersionOfNode()) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode('10.15.3')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined)) // ok because of default values\r\n    t.ok(REC.checkVersionOfNode(undefined, undefined)) // ok because of default values\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode(null, null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('10.15.3', null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode(6.17, '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong arguments')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNode('6.17.0', '>=8.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '8.16.0'))\r\n    t.ok(REC.checkVersionOfNode('8.16.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0'))\r\n    t.ok(REC.checkVersion('10.13.0', '>=8.9.0 <12.0.0'))\r\n    t.ok(REC.checkVersion('10.15.3', engines.node))\r\n    t.ok(REC.checkVersion('10.15.3', `${engines.node}`))\r\n    t.strictEqual(REC.checkVersionOfNode('10.15.3', engines.notExisting), true) // ok because of default values with a not existing expected value (undefined)\r\n  }\r\n\r\n  {\r\n    const comment = 'testing getVersionOfNpm and checkVersionOfNpm'\r\n    t.comment(comment)\r\n    const npmVersion = REC.getVersionOfNpm()\r\n    assert(npmVersion !== null)\r\n    t.ok(npmVersion)\r\n    t.comment(`NPM current version: ${npmVersion}`)\r\n    t.comment(`NPM version expected in 'package.json': ${engines.npm}`)\r\n\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm()\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm(null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm(undefined)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm(undefined, undefined)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm(null, null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.1', null)\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0', '>=6.9.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking node version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n    t.throws(function () {\r\n      const check = REC.checkVersionOfNpm('6.4.0', '>=6.4.1')\r\n      assert(check === false) // never executed\r\n    }, Error, 'Expected exception when checking npm version with wrong values')\r\n    t.ok(REC.checkVersionOfNpm('6.4.1')) // ok because of default values\r\n    t.ok(REC.checkVersionOfNpm('6.4.1', '>=6.4.1'))\r\n  }\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure generic utility methods works in the right way', (t) => {\r\n  t.plan(5)\r\n\r\n  t.comment('testing checkStringNotEmpty and other utility methods')\r\n  t.throws(function () {\r\n    const check = REC.checkStringNotEmpty()\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for not empty string with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkStringNotEmpty(undefined)\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for not empty string with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkStringNotEmpty(null)\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for not empty string with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkStringNotEmpty('')\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for not empty string with wrong arguments')\r\n  t.ok(REC.checkStringNotEmpty('1.0.0'))\r\n})\r\n\r\n/** @test {RuntimeEnvChecker} */\r\ntest('ensure utility methods on env vars works in the right way', (t) => {\r\n  if (REC.isEnvVarDefined('NODE_ENV')) {\r\n    t.plan(9)\r\n  } else {\r\n    t.plan(5)\r\n  }\r\n\r\n  t.comment('testing checkEnvVarDefined and related utility methods')\r\n  t.comment(`Node.js environment is: '${process.env.NODE_ENV}'`)\r\n  t.throws(function () {\r\n    const check = REC.checkEnvVarDefined()\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkEnvVarDefined(undefined)\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkEnvVarDefined(null)\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkEnvVarDefined('')\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n  t.throws(function () {\r\n    const check = REC.checkEnvVarDefined('NOT_EXISTING')\r\n    assert(check === false) // never executed\r\n  }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n  // could be undefined, so I do the following test only when it's defined\r\n  if (REC.isEnvVarDefined('NODE_ENV')) {\r\n    t.ok(REC.checkEnvVarDefined('NODE_ENV'))\r\n    const nodeEnv = REC.getNodeEnv()\r\n    switch (nodeEnv) {\r\n      case 'production':\r\n        t.ok(nodeEnv)\r\n        t.ok(REC.isNodeEnvProduction())\r\n        t.ok(REC.checkNodeEnvProduction())\r\n        break\r\n      default:\r\n        t.ok(!nodeEnv)\r\n        t.ok(!REC.isNodeEnvProduction())\r\n        t.throws(function () {\r\n          const check = REC.checkNodeEnvProduction()\r\n          assert(check === false) // never executed\r\n        }, Error, 'Expected exception when checking for defined env var with wrong arguments')\r\n        break\r\n    }\r\n  }\r\n  t.comment('testing checkEnvVarDefined and related utility methods finished\\n\\n\\n') // workaround to have all comments visible\r\n})\r\n",
     "static": true,
     "longname": "/Users/martinis/work/prove/check-runtime-env.js/test/index.test.js",
     "access": null,
@@ -913,7 +1178,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 58,
+    "__docId__": 66,
     "kind": "test",
     "name": "test0",
     "testId": 0,
@@ -929,7 +1194,7 @@
     ]
   },
   {
-    "__docId__": 59,
+    "__docId__": 67,
     "kind": "test",
     "name": "test1",
     "testId": 1,
@@ -945,7 +1210,7 @@
     ]
   },
   {
-    "__docId__": 60,
+    "__docId__": 68,
     "kind": "test",
     "name": "test2",
     "testId": 2,
@@ -956,6 +1221,38 @@
     "access": null,
     "description": "ensure version checks are done in the right way",
     "lineNumber": 57,
+    "testTargets": [
+      "RuntimeEnvChecker"
+    ]
+  },
+  {
+    "__docId__": 69,
+    "kind": "test",
+    "name": "test3",
+    "testId": 3,
+    "memberof": "test/index.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.test.js~test3",
+    "access": null,
+    "description": "ensure generic utility methods works in the right way",
+    "lineNumber": 196,
+    "testTargets": [
+      "RuntimeEnvChecker"
+    ]
+  },
+  {
+    "__docId__": 70,
+    "kind": "test",
+    "name": "test4",
+    "testId": 4,
+    "memberof": "test/index.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/index.test.js~test4",
+    "access": null,
+    "description": "ensure utility methods on env vars works in the right way",
+    "lineNumber": 220,
     "testTargets": [
       "RuntimeEnvChecker"
     ]

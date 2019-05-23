@@ -82,6 +82,14 @@ try {
   console.log(e)
 }
 console.log(`Tell the given version &apos;10.13.0&apos;, if it&apos;s compatible with the constraint &apos;&gt;=12.0.0&apos;: ${RuntimeEnvChecker.isVersionCompatible(&apos;10.13.0&apos;, &apos;&gt;=12.0.0&apos;)}, but anyway no error raised here`)
+
+console.log(`Check that the given string is not empty (generic), success: ${RuntimeEnvChecker.checkStringNotEmpty(&apos;10.13.0&apos;)}`)
+console.log(`Node.js environment is: &apos;${process.env.NODE_ENV}&apos;`)
+console.log(`Node.js environment from the library is: &apos;${RuntimeEnvChecker.getNodeEnv()}&apos;`)
+console.log(`Node.js environment is defined: ${RuntimeEnvChecker.isEnvVarDefined(&apos;NODE_ENV&apos;)}`)
+console.log(`Node.js environment is production: ${RuntimeEnvChecker.isNodeEnvProduction()}`)
+// console.log(`Check that Node.js environment is production: ${RuntimeEnvChecker.checkNodeEnvProduction()}`)
+
 console.log(`No more tests.`)</code>
 </code></pre>
 <p>Look into the <a href="./example/">example</a> folder for more sample scripts that uses the library 

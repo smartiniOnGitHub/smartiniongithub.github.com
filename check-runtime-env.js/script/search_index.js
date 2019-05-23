@@ -7,6 +7,12 @@ window.esdocSearchIndex = [
   ],
   [
     "runtimeenvchecker src/index.js~runtimeenvchecker,runtimeenvchecker",
+    "test-file/test/index.test.js.html#lineNumber196",
+    "ensure generic utility methods works in the right way",
+    "test"
+  ],
+  [
+    "runtimeenvchecker src/index.js~runtimeenvchecker,runtimeenvchecker",
     "test-file/test/index.test.js.html#lineNumber31",
     "ensure objects exported by index script, exists and are of the right type",
     "test"
@@ -15,6 +21,12 @@ window.esdocSearchIndex = [
     "runtimeenvchecker src/index.js~runtimeenvchecker,runtimeenvchecker",
     "test-file/test/index.test.js.html#lineNumber46",
     "ensure process info returns right values",
+    "test"
+  ],
+  [
+    "runtimeenvchecker src/index.js~runtimeenvchecker,runtimeenvchecker",
+    "test-file/test/index.test.js.html#lineNumber220",
+    "ensure utility methods on env vars works in the right way",
     "test"
   ],
   [
@@ -318,6 +330,24 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~runtimeenvchecker.checkenvvardefined",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-checkEnvVarDefined",
+    "src/index.js~RuntimeEnvChecker.checkEnvVarDefined",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.checknodeenvproduction",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-checkNodeEnvProduction",
+    "src/index.js~RuntimeEnvChecker.checkNodeEnvProduction",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.checkstringnotempty",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-checkStringNotEmpty",
+    "src/index.js~RuntimeEnvChecker.checkStringNotEmpty",
+    "method"
+  ],
+  [
     "src/index.js~runtimeenvchecker.checkversion",
     "class/src/index.js~RuntimeEnvChecker.html#static-method-checkVersion",
     "src/index.js~RuntimeEnvChecker.checkVersion",
@@ -336,9 +366,39 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~runtimeenvchecker.getnodeenv",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-getNodeEnv",
+    "src/index.js~RuntimeEnvChecker.getNodeEnv",
+    "method"
+  ],
+  [
     "src/index.js~runtimeenvchecker.getversionofnpm",
     "class/src/index.js~RuntimeEnvChecker.html#static-method-getVersionOfNpm",
     "src/index.js~RuntimeEnvChecker.getVersionOfNpm",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.isdefinedandnotnull",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-isDefinedAndNotNull",
+    "src/index.js~RuntimeEnvChecker.isDefinedAndNotNull",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.isenvvardefined",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-isEnvVarDefined",
+    "src/index.js~RuntimeEnvChecker.isEnvVarDefined",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.isnodeenvproduction",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-isNodeEnvProduction",
+    "src/index.js~RuntimeEnvChecker.isNodeEnvProduction",
+    "method"
+  ],
+  [
+    "src/index.js~runtimeenvchecker.isstringnotempty",
+    "class/src/index.js~RuntimeEnvChecker.html#static-method-isStringNotEmpty",
+    "src/index.js~RuntimeEnvChecker.isStringNotEmpty",
     "method"
   ],
   [

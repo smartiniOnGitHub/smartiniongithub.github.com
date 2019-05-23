@@ -102,6 +102,62 @@ class RuntimeEnvChecker {
   }
 
   /**
+   * Tell if the given argument is defined and not null.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @return {boolean} true if defined and not null, false otherwise
+   */
+  static isDefinedAndNotNull (arg) {
+    return (arg !== undefined &amp;&amp; arg !== null)
+  }
+
+  /**
+   * Tell if the given argument is defined and not null,
+   * is a string and is not empty.
+   *
+   * See {@link RuntimeEnvChecker.isDefinedAndNotNull}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @return {boolean} true if it&apos;s a not empty string, false otherwise
+   */
+  static isStringNotEmpty (arg) {
+    return ((RuntimeEnvChecker.isDefinedAndNotNull(arg) &amp;&amp;
+      (typeof arg === &apos;string&apos;) &amp;&amp;
+      (arg.length &gt; 0))
+    )
+  }
+
+  /**
+   * Tell if the environment variable with the given name
+   * is defined and has a value.
+   *
+   * See {@link RuntimeEnvChecker.isStringNotEmpty}.
+   *
+   * @static
+   * @param {!string} name the name to check
+   * @return {boolean} true if it&apos;s defined and has a value, false otherwise
+   */
+  static isEnvVarDefined (name) {
+    return RuntimeEnvChecker.isStringNotEmpty(process.env[name])
+  }
+
+  /**
+   * Tell if the current Node.js environment is production.
+   *
+   * See {@link RuntimeEnvChecker.isEnvVarDefined}.
+   *
+   * @static
+   * @return {boolean} true if it&apos;s production, false otherwise
+   */
+  static isNodeEnvProduction () {
+    const nodeEnv = RuntimeEnvChecker.getNodeEnv()
+    return (RuntimeEnvChecker.isEnvVarDefined(&apos;NODE_ENV&apos;) &amp;&amp;
+      nodeEnv === &apos;production&apos;)
+  }
+
+  /**
    * Utility method that tell if the given version is compatible
    * with the expected version (using then semver syntax).
    *
@@ -109,19 +165,64 @@ class RuntimeEnvChecker {
    * @param {!string} version the version to check (as a string)
    * @param {!string} expectedVersion the expected version for the comparison (as a semver string)
    * @return {boolean} true if version is compatible with the given constraint, otherwise false
-   * @throws {TypeError} if at least an argument is wrong
+   * @throws {Error} if at least an argument is wrong
    */
   static isVersionCompatible (version, expectedVersion) {
-    if (version &amp;&amp; typeof version !== &apos;string&apos;) {
-      throw new TypeError(`The argument &apos;version&apos; must be a string, instead got a &apos;${typeof version}&apos;`)
-    }
-    if (expectedVersion &amp;&amp; typeof expectedVersion !== &apos;string&apos;) {
-      throw new TypeError(`The argument &apos;expectedVersion&apos; must be a string, instead got a &apos;${typeof expectedVersion}&apos;`)
-    }
-    if (version !== null &amp;&amp; expectedVersion !== null) {
+    if (RuntimeEnvChecker.isStringNotEmpty(version) &amp;&amp; RuntimeEnvChecker.isStringNotEmpty(expectedVersion)) {
       return semver.satisfies(version, expectedVersion)
     }
     return false
+  }
+
+  /**
+   * Ensure that the given argument is a not empty string.
+   *
+   * See {@link RuntimeEnvChecker.isStringNotEmpty}.
+   *
+   * @static
+   * @param {object} arg the object to check
+   * @param {string} name the name to use in generated error (if any), empty name as default
+   * @return {boolean} true if it&apos;s a not empty string
+   * @throws {Error} if it&apos;s an empty string or it&apos;s null or undefined
+   */
+  static checkStringNotEmpty (arg, name = &apos;&apos;) {
+    if (RuntimeEnvChecker.isStringNotEmpty(arg) !== true) {
+      throw new Error(`RuntimeEnvChecker - the string &apos;${name}&apos; must be not empty`)
+    }
+    return true
+  }
+
+  /**
+   * Ensure that the given environment variable is defined and has a value.
+   *
+   * See {@link RuntimeEnvChecker.isEnvVarDefined}.
+   *
+   * @static
+   * @param {string} name the name of the variable to check
+   * @return {boolean} true if it&apos;s defined and has a value
+   * @throws {Error} if it&apos;s not defined or does not have a value
+   */
+  static checkEnvVarDefined (name) {
+    if (RuntimeEnvChecker.isEnvVarDefined(name) !== true) {
+      throw new Error(`RuntimeEnvChecker - the env var &apos;${name}&apos; must be defined and not empty`)
+    }
+    return true
+  }
+
+  /**
+   * Ensure that the current Node.js environment is production.
+   *
+   * See {@link RuntimeEnvChecker.isEnvVarDefined}.
+   *
+   * @static
+   * @return {boolean} true if it&apos;s a not empty string
+   * @throws {Error} if it&apos;s not production
+   */
+  static checkNodeEnvProduction () {
+    if (RuntimeEnvChecker.isNodeEnvProduction() !== true) {
+      throw new Error(`RuntimeEnvChecker - Node.js environment is &apos;${RuntimeEnvChecker.getNodeEnv()}&apos; and not &apos;production&apos;`)
+    }
+    return true
   }
 
   /**
@@ -131,21 +232,19 @@ class RuntimeEnvChecker {
    * @static
    * @param {!string} version the version to check (as a string)
    * @param {!string} expectedVersion the expected version for the comparison (as a semver string)
-   * @return {boolean} true if version matches, false if one of versions is null
-   * @throws {TypeError} if at least an argument is wrong
-   * @throws {Error} if versions are comparable but does not matches
+   * @return {boolean} true if version matches
+   * @throws {Error} if at least an argument is wrong
+   * @throws {Error} if versions does not matches
    * @see isVersionCompatible
    */
   static checkVersion (version, expectedVersion) {
+    RuntimeEnvChecker.checkStringNotEmpty(version, &apos;version&apos;)
+    RuntimeEnvChecker.checkStringNotEmpty(expectedVersion, &apos;expectedVersion&apos;)
     const compatible = RuntimeEnvChecker.isVersionCompatible(version, expectedVersion)
-    if (version !== null &amp;&amp; expectedVersion !== null) {
-      if (!compatible) {
-        throw new Error(`RuntimeEnvChecker - found version &apos;${version}&apos;, but expected version &apos;${expectedVersion}&apos;`)
-      } else {
-        return true
-      }
+    if (compatible !== true) {
+      throw new Error(`RuntimeEnvChecker - found version &apos;${version}&apos;, but expected version &apos;${expectedVersion}&apos;`)
     }
-    return false
+    return true
   }
 
   /**
@@ -157,7 +256,7 @@ class RuntimeEnvChecker {
    * @param {string} version the version to check (as a string), by default current Node.js version
    * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for &apos;node&apos;, under &apos;engines&apos; in &apos;package.json&apos; (if set)
    * @return {boolean} true if version matches, false if one of versions is null
-   * @throws {TypeError} if at least an argument is wrong
+   * @throws {Error} if at least an argument is wrong
    * @throws {Error} if versions are comparable but does not matches
    * @see checkVersion
    */
@@ -177,7 +276,7 @@ class RuntimeEnvChecker {
    * @param {string} version the version to check (as a string), default null
    * @param {string} versionExpected the expected version for the comparison (as a semver string), by default current value for &apos;npm&apos;, under &apos;engines&apos; in &apos;package.json&apos; (if set)
    * @return {boolean} true if version matches, false if one of versions is null
-   * @throws {TypeError} if at least an argument is wrong
+   * @throws {Error} if at least an argument is wrong
    * @throws {Error} if versions are comparable but does not matches
    * @see checkVersion
    */
@@ -206,6 +305,16 @@ class RuntimeEnvChecker {
       // error running the command, maybe npm not installed or not found
     }
     return npmVersion
+  }
+
+  /**
+   * Utility method that gets the value of Node.js environment variable.
+   *
+   * @static
+   * @return {string} Node.js env var NODE_ENV value (as a string)
+   */
+  static getNodeEnv () {
+    return process.env.NODE_ENV
   }
 }
 
