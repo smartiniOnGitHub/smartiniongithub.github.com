@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jsonbatch.js~JSONBatch.html">JSONBatch</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
@@ -54,12 +55,12 @@
  */
 &apos;use strict&apos;
 
-const assert = require(&apos;assert&apos;)
+const assert = require(&apos;assert&apos;).strict
 const test = require(&apos;tap&apos;).test
 
 /** @test {CloudEvent} */
 test(&apos;ensure objects exported by index script, exists and are of the right type&apos;, (t) =&gt; {
-  t.plan(19)
+  t.plan(25)
 
   {
     const CloudEventExports = require(&apos;../src/&apos;) // reference the library
@@ -76,21 +77,28 @@ test(&apos;ensure objects exported by index script, exists and are of the right 
     const CloudEventTransformer = CloudEventExports.CloudEventTransformer // reference the transformer class
     t.ok(CloudEventTransformer)
     t.strictEqual(typeof CloudEventTransformer, &apos;function&apos;)
+    const JSONBatchClass = CloudEventExports.JSONBatch // reference the implementation class
+    t.ok(JSONBatchClass)
+    t.strictEqual(typeof JSONBatchClass, &apos;function&apos;)
   }
 
   {
-    const { CloudEvent: CEClass, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
-    // const { CloudEvent, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+    const { CloudEvent: CEClass, JSONBatch: JSONBClass, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
+    // const { CloudEvent, JSONBatch, CloudEventValidator: V, CloudEventTransformer: T } = require(&apos;../src/&apos;) // get references via destructuring
     t.strictEqual(typeof CEClass, &apos;function&apos;)
     t.strictEqual(typeof V.isClass, &apos;function&apos;)
     t.strictEqual(typeof T.dumpObject, &apos;function&apos;)
+    t.strictEqual(typeof JSONBClass, &apos;function&apos;)
     t.ok(V.isFunction(CEClass))
     t.ok(V.isFunction(V.isClass))
     t.ok(V.isFunction(T.dumpObject))
+    t.ok(V.isFunction(JSONBClass))
 
-    const { CloudEvent } = require(&apos;../src/&apos;) // get references via destructuring
+    const { CloudEvent, JSONBatch } = require(&apos;../src/&apos;) // get references via destructuring
     t.ok(CloudEvent)
     t.strictEqual(typeof CloudEvent, &apos;function&apos;)
+    t.ok(JSONBatch)
+    t.strictEqual(typeof JSONBatch, &apos;function&apos;)
 
     // create an instance with only mandatory arguments (no strict mode, but doesn&apos;t matter in this case): expected success ...
     const ceMinimal = new CEClass(&apos;1&apos;, // id

@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jsonbatch.js~JSONBatch.html">JSONBatch</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
@@ -87,15 +88,15 @@ class Transformer {
    * @throws {Error} because instancing not allowed for this class
    */
   constructor () {
-    throw new Error(`Instancing not allowed for this class`)
+    throw new Error(&apos;Instancing not allowed for this class&apos;)
   }
 
   /**
    * Utility function that return a dump of the given object.
    *
    * @static
-   * @param {(object|Map|Set)} obj the object to dump
-   * @param {string} name the name to assign in the returned string, or &apos;noname&apos; as default value
+   * @param {(?object|Map|Set)} obj the object to dump
+   * @param {string} [name=&apos;noname&apos;] the name to assign in the returned string, or &apos;noname&apos; as default value
    * @return {string} the dump of the object or a message when obj is undefined/null/not an object
    */
   static dumpObject (obj, name = &apos;noname&apos;) {
@@ -103,21 +104,11 @@ class Transformer {
       return `${name}: undefined`
     } else if (V.isNull(obj)) {
       return `${name}: null`
-    } else if (!V.isObjectOrCollection(obj)) {
-      return `${name}: &apos;${obj.toString()}&apos;`
-    } else {
+    } else if (V.isObject(obj) || V.isKeyedCollection(obj)) {
       return `${name}: ${JSON.stringify(obj)}`
+    } else {
+      return `${name}: &apos;${obj.toString()}&apos;`
     }
-  }
-
-  /**
-   * Utility function that returns the timezone offset value, in msec.
-   *
-   * @static
-   * @return {number} the timezone offset, in msec
-   */
-  static get timezoneOffsetMsec () {
-    return new Date().getTimezoneOffset() * 60 * 1000
   }
 
   /**
@@ -125,19 +116,20 @@ class Transformer {
    * (compatible with the CloudEvent standard) of the given timestamp (Date)
    * and returns it (if possible).
    *
-   * Note that the value returned has already been adjusted with the current timezone offset.
+   * Note that the value returned could be adjusted with the current timezone offset.
    *
    * @static
    * @param {!string} obj the timestamp/date to parse (as a string)
+   * @param {number} [timezoneOffset=0] a timezone offset to add (in msec, default 0)
    * @return {object} the parsed version, as a timestamp (Date) object, if possible
-   * @throws {Error} if obj is undefined or null, or is not a string
+   * @throws {TypeError} if obj is undefined or null, or is not a string
    */
-  static timestampFromString (obj) {
+  static timestampFromString (obj, timezoneOffset = 0) {
     if (!V.isStringNotEmpty(obj)) {
-      throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a string and not a: &apos;${typeof obj}&apos;.`)
+      throw new TypeError(`Missing or wrong timestamp: &apos;${obj}&apos; must be a string and not a: &apos;${typeof obj}&apos;.`)
     }
     const timestampMsec = Date.parse(obj)
-    return new Date(timestampMsec + Transformer.timezoneOffsetMsec)
+    return new Date(timestampMsec + timezoneOffset)
   }
 
   /**
@@ -148,9 +140,9 @@ class Transformer {
    * Note that the value returned is in the UTC format.
    *
    * @static
-   * @param {object} obj the timestamp/date to convert, or the current one
+   * @param {?object} obj the timestamp/date to convert, or the current one if not defined or null
    * @return {string} the string representation of the object
-   * @throws {Error} if obj is undefined or null, or is not a Date instance
+   * @throws {TypeError} if obj is undefined or null, or is not a Date instance
    */
   static timestampToString (obj) {
     let timestamp = obj
@@ -158,7 +150,7 @@ class Transformer {
       timestamp = new Date()
     }
     if (!V.isDateValid(timestamp)) {
-      throw new Error(`Missing or wrong timestamp: &apos;${timestamp}&apos; must be a date and not a: &apos;${typeof timestamp}&apos;.`)
+      throw new TypeError(`Missing or wrong timestamp: &apos;${timestamp}&apos; must be a date and not a: &apos;${typeof timestamp}&apos;.`)
     }
     return timestamp.toISOString()
   }
@@ -168,18 +160,19 @@ class Transformer {
    * of the given timestamp (Date)
    * and returns it (if possible).
    *
-   * Note that the value returned has already been adjusted with the current timezone offset.
+   * Note that the value returned could be adjusted with the current timezone offset.
    *
    * @static
    * @param {!number} obj the timestamp/date to parse (as a number)
+   * @param {number} [timezoneOffset=0] a timezone offset to add (in msec, default 0)
    * @return {object} the parsed version, as a timestamp (Date) object, if possible
-   * @throws {Error} if obj is undefined or null, or is not a number
+   * @throws {TypeError} if obj is undefined or null, or is not a number
    */
-  static timestampFromNumber (obj) {
+  static timestampFromNumber (obj, timezoneOffset = 0) {
     if (!V.isNumber(obj)) {
-      throw new Error(`Missing or wrong timestamp: &apos;${obj}&apos; must be a number and not a: &apos;${typeof obj}&apos;.`)
+      throw new TypeError(`Missing or wrong timestamp: &apos;${obj}&apos; must be a number and not a: &apos;${typeof obj}&apos;.`)
     }
-    return new Date(obj + Transformer.timezoneOffsetMsec)
+    return new Date(obj + timezoneOffset)
   }
 
   /**
@@ -189,9 +182,9 @@ class Transformer {
    * Note that the value returned is in the UTC format.
    *
    * @static
-   * @param {object} obj the timestamp/date to convert, or the current one
+   * @param {?object} obj the timestamp/date to convert, or the current one if not defined or null
    * @return {number} the number representation of the object
-   * @throws {Error} if obj is not a Date instance
+   * @throws {TypeError} if obj is not a Date instance
    */
   static timestampToNumber (obj) {
     let timestamp = obj
@@ -199,9 +192,50 @@ class Transformer {
       timestamp = new Date()
     }
     if (!V.isDateValid(timestamp)) {
-      throw new Error(`Wrong timestamp: &apos;${timestamp}&apos; must be a date and not a: &apos;${typeof timestamp}&apos;.`)
+      throw new TypeError(`Wrong timestamp: &apos;${timestamp}&apos; must be a date and not a: &apos;${typeof timestamp}&apos;.`)
     }
     return timestamp.getTime()
+  }
+
+  /**
+   * Utility function that encodes a string
+   * in base64 (compatible with the CloudEvent standard).
+   *
+   * @static
+   * @param {?string} obj the string to encode, or &apos;&apos; if not defined or null
+   * @return {string} the string encoded in base64
+   * @throws {TypeError} if str is not a string instance
+   */
+  static stringToBase64 (obj) {
+    let str = obj
+    if (V.isUndefinedOrNull(obj)) {
+      str = &apos;&apos;
+    }
+    if (!V.isString(str)) {
+      throw new TypeError(`Missing or wrong argument: &apos;${str}&apos; must be a string and not a: &apos;${typeof str}&apos;.`)
+    }
+    return Buffer.from(str).toString(&apos;base64&apos;)
+  }
+
+  /**
+   * Utility function that decodes a base64 string
+   * into a normal string using &apos;utf8&apos; encoding
+   * (compatible with the CloudEvent standard).
+   *
+   * @static
+   * @param {?string} obj the string to decode, or &apos;&apos; if not defined or null
+   * @return {string} the string decoded from base64
+   * @throws {TypeError} if str is not a string instance
+   */
+  static stringFromBase64 (obj) {
+    let str = obj
+    if (V.isUndefinedOrNull(obj)) {
+      str = &apos;&apos;
+    }
+    if (!V.isString(str)) {
+      throw new TypeError(`Missing or wrong argument: &apos;${str}&apos; must be a string and not a: &apos;${typeof str}&apos;.`)
+    }
+    return Buffer.from(str, &apos;base64&apos;).toString(&apos;utf8&apos;)
   }
 
   /**
@@ -210,12 +244,12 @@ class Transformer {
    *
    * @static
    * @param {!Error} err the Error to transform
-   * @param {object} options transformation options:
+   * @param {object} [options={}] transformation options:
    *        includeStackTrace flag (default false) to add the StackTrace into the object to return,
    *        addStatus flag (default true) to add a &apos;status&apos; attribute into the object to return,
    *        addTimestamp flag (default false) to add the current &apos;timestamp&apos; as attribute into the object to return,
    * @return {object} the object representation of the error
-   * @throws {Error} if err is undefined or null, or is not an Error instance
+   * @throws {TypeError} if err is undefined or null, or is not an Error instance
    */
   static errorToData (err, {
     includeStackTrace = false,
@@ -224,7 +258,7 @@ class Transformer {
   } = {}
   ) {
     if (!V.isError(err)) {
-      throw new Error(`Missing or wrong argument: &apos;${err}&apos; must be an Error and not a: &apos;${typeof err}&apos;.`)
+      throw new TypeError(`Missing or wrong argument: &apos;${err}&apos; must be an Error and not a: &apos;${typeof err}&apos;.`)
     }
     const data = {
       name: err.name,
@@ -263,17 +297,17 @@ class Transformer {
    *
    * @static
    * @param {!string} url the URI/URL (as a string)
-   * @param {object} options containing: strict (boolean, default false) to check it in a more strict way
+   * @param {object} [options={}] containing: strict (boolean, default false) to check it in a more strict way
    * @return {string} the parsed version, but without arguments (if any)
-   * @throws {Error} if url is undefined or null, or is not a string
+   * @throws {TypeError} if url is undefined or null, or is not a string
    */
   static uriStripArguments (url, { strict = false } = {}) {
     if (!V.isString(url)) {
-      throw new Error(`Missing or wrong URL: &apos;${url}&apos; must be a string and not a: &apos;${typeof url}&apos;.`)
+      throw new TypeError(`Missing or wrong URL: &apos;${url}&apos; must be a string and not a: &apos;${typeof url}&apos;.`)
     }
     if (strict === true) {
       if (!V.isURI(url)) {
-        throw new Error(`Missing or wrong URL: &apos;${url}&apos;`)
+        throw new TypeError(`Missing or wrong URL: &apos;${url}&apos;`)
       }
     }
     return url.split(&apos;?&apos;)[0]
@@ -287,16 +321,23 @@ class Transformer {
    * @param {!object} base the first object to merge
    * @param {object} others all other(s) object to merge (at least one)
    * @return {object} the new object
-   * @throws {Error} if base is undefined or null, or is not an object
+   * @throws {TypeError} if base is undefined or null, or is not an object
    */
   static mergeObjects (base, ...others) {
     if (!V.isObject(base)) {
-      throw new Error(`Missing or wrong argument: &apos;${base}&apos; must be an object and not a: &apos;${typeof base}&apos;.`)
+      throw new TypeError(`Missing or wrong argument: &apos;${base}&apos; must be an object and not a: &apos;${typeof base}&apos;.`)
     }
     const baseProto = Object.getPrototypeOf(base)
     return Object.assign(Object.create(baseProto), base, ...others) // set the prototype of the first argument in the clone
   }
 }
+
+/**
+ * Utility variable that returns the timezone offset value, in msec.
+ *
+ * @static
+ */
+Transformer.timezoneOffsetMsec = new Date().getTimezoneOffset() * 60 * 1000
 
 module.exports = Transformer
 </code></pre>

@@ -1,21 +1,28 @@
 {
-  "coverage": "100%",
-  "expectCount": 85,
-  "actualCount": 85,
+  "coverage": "99.18%",
+  "expectCount": 123,
+  "actualCount": 122,
   "files": {
     "src/cloudevent.js": {
-      "expectCount": 29,
-      "actualCount": 29,
+      "expectCount": 39,
+      "actualCount": 38,
+      "undocumentLines": [
+        103
+      ]
+    },
+    "src/jsonbatch.js": {
+      "expectCount": 10,
+      "actualCount": 10,
       "undocumentLines": []
     },
     "src/transformer.js": {
-      "expectCount": 12,
-      "actualCount": 12,
+      "expectCount": 13,
+      "actualCount": 13,
       "undocumentLines": []
     },
     "src/validator.js": {
-      "expectCount": 44,
-      "actualCount": 44,
+      "expectCount": 61,
+      "actualCount": 61,
       "undocumentLines": []
     }
   }

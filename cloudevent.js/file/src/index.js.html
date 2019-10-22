@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jsonbatch.js~JSONBatch.html">JSONBatch</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
@@ -62,6 +63,13 @@
 const cloudEventDefinition = require(&apos;./cloudevent&apos;)
 
 /**
+ * Get a reference to JSONBatch class definition.
+ *
+ * See {@link JSONBatch}.
+ */
+const jsonBatchDefinition = require(&apos;./jsonbatch&apos;)
+
+/**
  * Get a reference to cloudevent class Validator.
  *
  * See {@link Validator}.
@@ -77,6 +85,7 @@ const cloudEventTransformer = require(&apos;./transformer&apos;)
 
 module.exports = {
   CloudEvent: cloudEventDefinition,
+  JSONBatch: jsonBatchDefinition,
   CloudEventValidator: cloudEventValidator,
   CloudEventTransformer: cloudEventTransformer
 }

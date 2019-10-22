@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/cloudevent.js~CloudEvent.html">CloudEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/jsonbatch.js~JSONBatch.html">JSONBatch</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transformer.js~Transformer.html">Transformer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator.js~Validator.html">Validator</a></span></span></li>
 </ul>
@@ -78,6 +79,12 @@ see it as an Utility/Companion class.</p>
     <ul>
       
     <li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber22">ensure the Validator class (direct reference to it) works good</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber119">ensure some (edge cases for) validation functions are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber165">ensure some (less used) validation functions are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber404">ensure some (utility) functions are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber449">ensure validation functions on standard properties are right</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber483">ensure validation functions to filter bad object instances raise exceptions</a></span></li>
+<li data-ice="test"><span><a href="test-file/test/validator.test.js.html#lineNumber505">ensure validation functions to throw exceptions, works good</a></span></li>
 </ul>
   </div>
 
@@ -90,6 +97,94 @@ see it as an Utility/Companion class.</p>
   <tbody>
   
   <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-doesObjectContainsStandardProperty">doesObjectContainsStandardProperty</a></span></span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell if the given object contains at least one property
+that has a standard (reserved) property name.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-doesStringIsStandardProperty">doesStringIsStandardProperty</a></span></span><span class="code" data-ice="signature">(str: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell if the given string has a standard (reserved) property name.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsArray">ensureIsArray</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given argument is an array.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
       <span data-ice="static">static</span>
@@ -167,7 +262,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a date.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a date.</p>
 </div>
       </div>
     </td>
@@ -196,7 +291,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a date in the future or now.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a date in the future or now.</p>
 </div>
       </div>
     </td>
@@ -225,7 +320,36 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a date in the past or now.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a date in the past or now.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsDefinedAndNotNull">ensureIsDefinedAndNotNull</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given argument is defined and not null.</p>
 </div>
       </div>
     </td>
@@ -364,13 +488,71 @@ see it as an Utility/Companion class.</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsObject">ensureIsObject</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given argument is an object.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollection">ensureIsObjectOrCollection</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia an object or a collection.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollectionNotArray">ensureIsObjectOrCollectionNotArray</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, not an array.</p>
 </div>
       </div>
     </td>
@@ -399,7 +581,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia an object or a collection, not a string.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, not a string.</p>
 </div>
       </div>
     </td>
@@ -428,7 +610,38 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia an object or a collection, or a string.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, or a string.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureIsObjectPlain">ensureIsObjectPlain</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given argument is a plain object
+and not: undefined, null, Array, Date, Number, String,
+Symbol, Map/WeakMap, Set/WeakSet, etc.</p>
 </div>
       </div>
     </td>
@@ -457,7 +670,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a string.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a string.</p>
 </div>
       </div>
     </td>
@@ -486,7 +699,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a not empty string.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a not empty string.</p>
 </div>
       </div>
     </td>
@@ -515,7 +728,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia an URI/URL.</p>
+        <div data-ice="description"><p>Ensure that the given argument is an URI/URL.</p>
 </div>
       </div>
     </td>
@@ -602,7 +815,155 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Ensure that the given argument ia a string version.</p>
+        <div data-ice="description"><p>Ensure that the given argument is a string version.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-ensureObjectDoesNotContainStandardProperty">ensureObjectDoesNotContainStandardProperty</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Ensure that the given object does not contain any property
+that has a standard (reserved) property name.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-getArgumentName">getArgumentName</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Return the name of the variable given as argument.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-getArgumentValue">getArgumentValue</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Return the value of the variable given as argument.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-getObjectFilteredProperties">getObjectFilteredProperties</a></span></span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, propFilter: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Return a copy of the given ibject,
+with all properties filtered by the given function (predicate).</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-getOrElse">getOrElse</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, def: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Return the argument if it&apos;s defined and not null,
+otherwise the given default value is returned.</p>
 </div>
       </div>
     </td>
@@ -632,6 +993,35 @@ see it as an Utility/Companion class.</p>
         
         
         <div data-ice="description"><p>Tell the size of the given object</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-getSizeInBytes">getSizeInBytes</a></span></span><span class="code" data-ice="signature">(str: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell the size in bytes of the given string.</p>
 </div>
       </div>
     </td>
@@ -1037,7 +1427,8 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Tell if the given argument is an object.</p>
+        <div data-ice="description"><p>Tell if the given argument is an object
+and is defined and not null.</p>
 </div>
       </div>
     </td>
@@ -1066,7 +1457,36 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection.</p>
+        <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotArray">isObjectOrCollectionNotArray</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, but not an array.</p>
 </div>
       </div>
     </td>
@@ -1095,7 +1515,7 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection, but not a string.</p>
+        <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, but not a string.</p>
 </div>
       </div>
     </td>
@@ -1124,7 +1544,38 @@ see it as an Utility/Companion class.</p>
       <div>
         
         
-        <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection, or a string.</p>
+        <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, or a string.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-isObjectPlain">isObjectPlain</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Tell if the given argument is a plain object
+and not: undefined, null, Array, Date, Number, String,
+Symbol, Map/WeakMap, Set/WeakSet, etc.</p>
 </div>
       </div>
     </td>
@@ -1307,6 +1758,64 @@ see it as an Utility/Companion class.</p>
       
     </td>
   </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-throwOnError">throwOnError</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Throw if the given argument is an error instance or its subclass.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/validator.js~Validator.html#static-method-throwOnFalse">throwOnFalse</a></span></span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Throw if the given argument is false.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
 </tbody>
 </table>
 </div>
@@ -1355,25 +1864,189 @@ see it as an Utility/Companion class.</p>
 <div data-ice="staticMethodDetails"><h2 data-ice="title">Static Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-method-ensureIsBoolean">
+  <h3 data-ice="anchor" id="static-method-doesObjectContainsStandardProperty">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
     
     
     
     
-    <span class="code" data-ice="name">ensureIsBoolean</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="code" data-ice="name">doesObjectContainsStandardProperty</span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber400">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber387">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument is a boolean.</p>
+  <div data-ice="description"><p>Tell if the given object contains at least one property
+that has a standard (reserved) property name.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">obj</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">isPropStandard</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the function that tell the given argument (property), if it&apos;s standard</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>true if at least one property with a standard name is found, otherwise false</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-doesStringIsStandardProperty">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">doesStringIsStandardProperty</span><span class="code" data-ice="signature">(str: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber408">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Tell if the given string has a standard (reserved) property name.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">str</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the string to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">isPropStandard</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the function that tell the given argument (property), if it&apos;s standard</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>true if the given string has a standard name, otherwise false</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsArray">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsArray</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber492">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is an array.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isArray">Validator.isArray</a></span>.</p>
 </div>
 
   
@@ -1389,15 +2062,99 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not an array, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsBoolean">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsBoolean</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber508">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is a boolean.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isBoolean">Validator.isBoolean</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1447,7 +2204,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber415">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber525">source</a></span></span>
     </span>
   </h3>
 
@@ -1455,6 +2212,7 @@ see it as an Utility/Companion class.</p>
   
   
   <div data-ice="description"><p>Ensure that the given argument is an instance of the given class reference.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isClass">Validator.isClass</a></span>.</p>
 </div>
 
   
@@ -1470,22 +2228,23 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">classReference</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the class that should be implemented/extended</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1535,14 +2294,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber525">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber687">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a date.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a date.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isDate">Validator.isDate</a></span>.</p>
 </div>
 
@@ -1559,15 +2318,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1617,14 +2377,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber557">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber719">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a date in the future or now.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a date in the future or now.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isDateFuture">Validator.isDateFuture</a></span>.</p>
 </div>
 
@@ -1641,15 +2401,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1699,14 +2460,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber541">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber703">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a date in the past or now.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a date in the past or now.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isDatePast">Validator.isDatePast</a></span>.</p>
 </div>
 
@@ -1723,15 +2484,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1770,6 +2532,89 @@ see it as an Utility/Companion class.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsDefinedAndNotNull">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsDefinedAndNotNull</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber476">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is defined and not null.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isDefinedAndNotNull">Validator.isDefinedAndNotNull</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not undefined or null, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-ensureIsError">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -1781,7 +2626,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber589">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber751">source</a></span></span>
     </span>
   </h3>
 
@@ -1805,15 +2650,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1863,7 +2709,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber429">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber541">source</a></span></span>
     </span>
   </h3>
 
@@ -1871,6 +2717,7 @@ see it as an Utility/Companion class.</p>
   
   
   <div data-ice="description"><p>Ensure that the given argument is a function.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isFunction">Validator.isFunction</a></span>.</p>
 </div>
 
   
@@ -1886,15 +2733,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -1944,7 +2792,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber372">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber444">source</a></span></span>
     </span>
   </h3>
 
@@ -1952,6 +2800,7 @@ see it as an Utility/Companion class.</p>
   
   
   <div data-ice="description"><p>Ensure that the given argument is null.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isNull">Validator.isNull</a></span>.</p>
 </div>
 
   
@@ -1967,15 +2816,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2025,7 +2875,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber573">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber735">source</a></span></span>
     </span>
   </h3>
 
@@ -2049,15 +2899,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2096,6 +2947,89 @@ see it as an Utility/Companion class.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsObject">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsObject</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber589">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is an object.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObject">Validator.isObject</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not an object, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-ensureIsObjectOrCollection">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -2107,14 +3041,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber477">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber623">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia an object or a collection.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollection">Validator.isObjectOrCollection</a></span>.</p>
 </div>
 
@@ -2131,15 +3065,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2153,7 +3088,90 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not an object nor a collection, nothing otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a plain object nor a collection, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsObjectOrCollectionNotArray">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsObjectOrCollectionNotArray</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber639">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, not an array.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotArray">Validator.isObjectOrCollectionNotArray</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a plain object nor a collection or it&apos;s an array, nothing otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -2189,14 +3207,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber493">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber655">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia an object or a collection, not a string.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, not a string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotString">Validator.isObjectOrCollectionNotString</a></span>.</p>
 </div>
 
@@ -2213,15 +3231,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2235,7 +3254,7 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not an object nor a collection, nothing otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a plain object nor a collection or it&apos;s a string, nothing otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -2271,14 +3290,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber509">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber671">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia an object or a collection, or a string.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a plain object or a collection, or a string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollectionOrString">Validator.isObjectOrCollectionOrString</a></span>.</p>
 </div>
 
@@ -2295,15 +3314,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2317,7 +3337,92 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not an object nor a collection nor a string, nothing otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a plain object nor a collection nor a string, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureIsObjectPlain">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureIsObjectPlain</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber607">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given argument is a plain object
+and not: undefined, null, Array, Date, Number, String,
+Symbol, Map/WeakMap, Set/WeakSet, etc.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectPlain">Validator.isObjectPlain</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a plain object, nothing otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -2353,14 +3458,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber445">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber557">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a string.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isString">Validator.isString</a></span>.</p>
 </div>
 
@@ -2377,15 +3482,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2435,14 +3541,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber461">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber573">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a not empty string.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a not empty string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isStringNotEmpty">Validator.isStringNotEmpty</a></span>.</p>
 </div>
 
@@ -2459,15 +3565,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2481,7 +3588,7 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a not empty string, nothing otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>if it&apos;s not a string not empty, nothing otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -2517,14 +3624,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber622">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber784">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia an URI/URL.</p>
+  <div data-ice="description"><p>Ensure that the given argument is an URI/URL.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isURI">Validator.isURI</a></span>.</p>
 </div>
 
@@ -2541,22 +3648,23 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">base</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the (optional) base to build the full URL</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2606,7 +3714,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber358">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber428">source</a></span></span>
     </span>
   </h3>
 
@@ -2614,6 +3722,7 @@ see it as an Utility/Companion class.</p>
   
   
   <div data-ice="description"><p>Ensure that the given argument is undefined.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isUndefined">Validator.isUndefined</a></span>.</p>
 </div>
 
   
@@ -2629,15 +3738,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2687,7 +3797,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber386">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber460">source</a></span></span>
     </span>
   </h3>
 
@@ -2695,6 +3805,7 @@ see it as an Utility/Companion class.</p>
   
   
   <div data-ice="description"><p>Ensure that the given argument is undefined or null.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isUndefinedOrNull">Validator.isUndefinedOrNull</a></span>.</p>
 </div>
 
   
@@ -2710,15 +3821,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2768,14 +3880,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber605">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber767">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Ensure that the given argument ia a string version.</p>
+  <div data-ice="description"><p>Ensure that the given argument is a string version.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isVersion">Validator.isVersion</a></span>.</p>
 </div>
 
@@ -2792,15 +3904,16 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the name to use in generated error (if any)</p>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
 </td>
     </tr>
 </tbody>
@@ -2839,6 +3952,431 @@ see it as an Utility/Companion class.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-ensureObjectDoesNotContainStandardProperty">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">ensureObjectDoesNotContainStandardProperty</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, isPropStandard: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber802">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Ensure that the given object does not contain any property
+that has a standard (reserved) property name.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-doesObjectContainsStandardProperty">Validator.doesObjectContainsStandardProperty</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">isPropStandard</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the function that tell the given argument (property), if it&apos;s standard</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>if at least one property with a standard name is found, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getArgumentName">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">getArgumentName</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber886">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Return the name of the variable given as argument.</p>
+<p>To use it, must be called using the trick to wrap argument
+inside an object literal, so for example use it inside a template string with:
+<code>${getArgumentName({x})}</code>
+with nested objects (like with options with a property x inside)
+you need to use with:
+<code>${getArgumentName({options})}.${getArgumentName({x})}</code>.
+Note that this could have been written (in a shorter way)
+as an arrow function.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the argument</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the name of the variable (if defined and not null), nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getArgumentValue">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">getArgumentValue</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber862">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Return the value of the variable given as argument.</p>
+<p>Note that this could have been written (in a shorter way)
+as an arrow function.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the argument</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the value of the variable (if defined and not null), nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getObjectFilteredProperties">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">getObjectFilteredProperties</span><span class="code" data-ice="signature">(obj: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, propFilter: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber921">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Return a copy of the given ibject,
+with all properties filtered by the given function (predicate).</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">obj</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the base object</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">propFilter</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the function (predicate) for filtering properties</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>a new object containing only filtered properties</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></p></td>
+        <td data-ice="throwDesc"><p>if obj is not a plain object, or propFilter is not a function</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getOrElse">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">getOrElse</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, def: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber903">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Return the argument if it&apos;s defined and not null,
+otherwise the given default value is returned.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the argument to return</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">def</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the default value to return</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the argument (if defined and not null), otherwise the default value</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-method-getSize">
     <span class="access" data-ice="access">public</span>
     <span data-ice="static">static</span>
@@ -2850,7 +4388,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber635">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber816">source</a></span></span>
     </span>
   </h3>
 
@@ -2873,7 +4411,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -2901,7 +4439,105 @@ see it as an Utility/Companion class.</p>
 
   
 
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></p></td>
+        <td data-ice="throwDesc"><p>if it&apos;s not an array nor a collection nor object nor a string</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
+
   
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-getSizeInBytes">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">getSizeInBytes</span><span class="code" data-ice="signature">(str: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber841">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Tell the size in bytes of the given string.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">str</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the string to check</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the size if it&apos;s a string, nothing otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError">TypeError</a></span></p></td>
+        <td data-ice="throwDesc"><p>if it&apos;s not a string</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 
@@ -2947,7 +4583,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3021,7 +4657,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3095,14 +4731,14 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">classReference</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the class that should be implemented/extended</p>
 </td>
     </tr>
@@ -3176,7 +4812,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3251,7 +4887,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3326,7 +4962,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3401,7 +5037,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3475,7 +5111,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3549,7 +5185,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3623,7 +5259,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3674,7 +5310,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber246">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber260">source</a></span></span>
     </span>
   </h3>
 
@@ -3697,7 +5333,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3771,7 +5407,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3845,7 +5481,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3896,14 +5532,15 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber235">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber236">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Tell if the given argument is an object.</p>
+  <div data-ice="description"><p>Tell if the given argument is an object
+and is defined and not null.</p>
 </div>
 
   
@@ -3919,7 +5556,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -3970,14 +5607,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber262">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber276">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection.</p>
+  <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObject">Validator.isObject</a></span>, <span><a href="class/src/validator.js~Validator.html#static-method-isKeyedCollection">Validator.isKeyedCollection</a></span>.</p>
 </div>
 
@@ -3994,7 +5631,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4009,7 +5646,83 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s an object or a keyed collection, false otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s a plain object or a keyed collection, false otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-isObjectOrCollectionNotArray">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">isObjectOrCollectionNotArray</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber290">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, but not an array.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollection">Validator.isObjectOrCollection</a></span>.
+See <span><a href="class/src/validator.js~Validator.html#static-method-isArray">Validator.isArray</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s a plain object or a keyed collection but not an array, false otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -4045,14 +5758,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber275">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber303">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection, but not a string.</p>
+  <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, but not a string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollection">Validator.isObjectOrCollection</a></span>.</p>
 </div>
 
@@ -4069,7 +5782,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4084,7 +5797,7 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s an object or a keyed collection but not a string, false otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s a plain object or a keyed collection but not a string, false otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -4120,14 +5833,14 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber288">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber316">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Tell if the given argument is an object or a keyed collection, or a string.</p>
+  <div data-ice="description"><p>Tell if the given argument is a plain object or a keyed collection, or a string.</p>
 <p>See <span><a href="class/src/validator.js~Validator.html#static-method-isObjectOrCollection">Validator.isObjectOrCollection</a></span>.</p>
 </div>
 
@@ -4144,7 +5857,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4159,7 +5872,83 @@ see it as an Utility/Companion class.</p>
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s an object or a keyed collection or a string, false otherwise</p>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s a plain object or a keyed collection or a string, false otherwise</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-isObjectPlain">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">isObjectPlain</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber249">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Tell if the given argument is a plain object
+and not: undefined, null, Array, Date, Number, String,
+Symbol, Map/WeakMap, Set/WeakSet, etc.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>true if it&apos;s a plain object, false otherwise</p>
 </td>
         </tr>
       </tbody>
@@ -4218,7 +6007,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4293,7 +6082,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4344,7 +6133,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber319">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber347">source</a></span></span>
     </span>
   </h3>
 
@@ -4367,14 +6156,14 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the uri/url to check</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">base</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the (optional) base to build the full URL</p>
 </td>
     </tr>
@@ -4448,7 +6237,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4522,7 +6311,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the object to check</p>
 </td>
     </tr>
@@ -4573,7 +6362,7 @@ see it as an Utility/Companion class.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber305">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber333">source</a></span></span>
     </span>
   </h3>
 
@@ -4603,7 +6392,7 @@ see it as an Utility/Companion class.</p>
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">arg</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
-      <td data-ice="appendix"></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
       <td data-ice="description"><p>the version string to check</p>
 </td>
     </tr>
@@ -4632,6 +6421,175 @@ see it as an Utility/Companion class.</p>
   
 
   
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-throwOnError">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">throwOnError</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber942">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Throw if the given argument is an error instance or its subclass.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isError">Validator.isError</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
+        <td data-ice="throwDesc"><p>the given error</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-method-throwOnFalse">
+    <span class="access" data-ice="access">public</span>
+    <span data-ice="static">static</span>
+    
+    
+    
+    
+    <span class="code" data-ice="name">throwOnFalse</span><span class="code" data-ice="signature">(arg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/validator.js.html#lineNumber959">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Throw if the given argument is false.
+Note that this is similar to assertions.</p>
+<p>See <span><a href="class/src/validator.js~Validator.html#static-method-isError">Validator.isError</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"><ul><li>nullable: true</li></ul></td>
+      <td data-ice="description"><p>the object to check</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;arg&apos;</li></ul></td>
+      <td data-ice="description"><p>the name to use in generated error (or the value of first argument if not given)</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  <div data-ice="throwWrap">
+    <h4>Throw:</h4>
+    <table>
+      <tbody>
+      
+      <tr class="throw" data-ice="throw">
+        <td><p data-ice="throwName"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></p></td>
+        <td data-ice="throwDesc"><p>if the given argument is not a boolean, or if it&apos;s false</p>
+</td>
+      </tr>
+</tbody>
+    </table>
+  </div>
 
   
 

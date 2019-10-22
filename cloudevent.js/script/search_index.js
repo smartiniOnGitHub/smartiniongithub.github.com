@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "cloudevent/src/jsonbatch.js~jsonbatch",
+    "class/src/jsonbatch.js~JSONBatch.html",
+    "<span>JSONBatch</span> <span class=\"search-result-import-path\">cloudevent/src/jsonbatch.js</span>",
+    "class"
+  ],
+  [
     "cloudevent/src/transformer.js~transformer",
     "class/src/transformer.js~Transformer.html",
     "<span>Transformer</span> <span class=\"search-result-import-path\">cloudevent/src/transformer.js</span>",
@@ -25,67 +31,133 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber286",
+    "test-file/test/cloudevent.test.js.html#lineNumber414",
     "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber99",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1829",
+    "create and deserialize some CloudEvent instances with datacontentencoding specified, and ensure they are right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber113",
     "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber139",
+    "test-file/test/cloudevent.test.js.html#lineNumber157",
     "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber237",
+    "test-file/test/cloudevent.test.js.html#lineNumber364",
     "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber544",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1144",
+    "deserialize a CloudEvent instance with a non default contenttype and empty/wrong deserialization options, expect error",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1266",
+    "deserialize a CloudEvent instance with a non default contenttype and right deserialization options, expect success",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber999",
+    "deserialize generic strings (not JSON representation for an Object) into a CloudEvent instance, expected Errors",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1044",
+    "deserialize some CloudEvent instances from JSON, and ensure built instances are right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/jsonbatch.test.js.html#lineNumber33",
+    "ensure CloudEvent and JSONBatch class (and related Validator and Transformer classes) are exported by the library",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber680",
     "ensure CloudEvent and objects are merged in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber44",
+    "test-file/test/cloudevent.test.js.html#lineNumber36",
     "ensure CloudEvent class (and related Validator and Transformer classes) are exported by the library",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber463",
+    "test-file/test/cloudevent.test.js.html#lineNumber715",
+    "ensure CloudEvent with datacontentencoding are managed in the right way",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber599",
     "ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber429",
+    "test-file/test/transformer.test.js.html#lineNumber489",
     "ensure dumpObject works in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber304",
+    "test-file/test/transformer.test.js.html#lineNumber344",
     "ensure errors are transformed into data attribute in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber82",
+    "test-file/test/cloudevent.test.js.html#lineNumber294",
+    "ensure extensions are managed in the right way",
+    "test"
+  ],
+  [
+    "jsonbatch src/jsonbatch.js~jsonbatch,jsonbatch",
+    "test-file/test/jsonbatch.test.js.html#lineNumber165",
+    "ensure isValid and validate works good on array and related items",
+    "test"
+  ],
+  [
+    "jsonbatch src/jsonbatch.js~jsonbatch,jsonbatch",
+    "test-file/test/jsonbatch.test.js.html#lineNumber253",
+    "ensure isValid and validate works good on plain object and even CloudEvent instance and CloudEvent subclasses and not",
+    "test"
+  ],
+  [
+    "jsonbatch src/jsonbatch.js~jsonbatch,jsonbatch",
+    "test-file/test/jsonbatch.test.js.html#lineNumber106",
+    "ensure isValid and validate works good on undefined and null arguments, and even on empty and bad ones",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber96",
     "ensure isValid and validate works good on undefined and null objects",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber544",
+    "test-file/test/transformer.test.js.html#lineNumber604",
     "ensure objects are merged in the right way",
     "test"
   ],
@@ -97,14 +169,68 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber449",
+    "test-file/test/transformer.test.js.html#lineNumber509",
     "ensure process info are transformed into data attribute in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber22",
+    "ensure serialization functions exists (check only the static method here)",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/jsonbatch-serialization.test.js.html#lineNumber46",
+    "ensure serialization functions exists (check only the static method here)",
+    "test"
+  ],
+  [
+    "jsonbatch src/jsonbatch.js~jsonbatch,jsonbatch",
+    "test-file/test/jsonbatch-serialization.test.js.html#lineNumber86",
+    "ensure serialization functions works good on undefined and null arguments, and even on empty and bad ones",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/jsonbatch-serialization.test.js.html#lineNumber191",
+    "ensure serialization functions works in the right way",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
     "test-file/test/validator.test.js.html#lineNumber119",
+    "ensure some (edge cases for) validation functions are right",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber165",
     "ensure some (less used) validation functions are right",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber404",
+    "ensure some (utility) functions are right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber255",
+    "ensure strict mode is managed in the right way",
+    "test"
+  ],
+  [
+    "transformer src/transformer.js~transformer,transformer",
+    "test-file/test/transformer.test.js.html#lineNumber636",
+    "ensure strings are encoded/decoded in th right way in base64",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber818",
+    "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
     "test"
   ],
   [
@@ -127,19 +253,19 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber266",
+    "test-file/test/transformer.test.js.html#lineNumber294",
     "ensure the current timestamp is transformed to number and back as date in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber177",
+    "test-file/test/transformer.test.js.html#lineNumber185",
     "ensure the current timestamp is transformed to string and back as date in the right way",
     "test"
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber200",
+    "test-file/test/transformer.test.js.html#lineNumber220",
     "ensure timestamps are transformed from number in the right way",
     "test"
   ],
@@ -157,8 +283,68 @@ window.esdocSearchIndex = [
   ],
   [
     "transformer src/transformer.js~transformer,transformer",
-    "test-file/test/transformer.test.js.html#lineNumber474",
+    "test-file/test/transformer.test.js.html#lineNumber534",
     "ensure uri/url are stripped by query arguments in the right way",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber449",
+    "ensure validation functions on standard properties are right",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber483",
+    "ensure validation functions to filter bad object instances raise exceptions",
+    "test"
+  ],
+  [
+    "validator src/validator.js~validator,validator",
+    "test-file/test/validator.test.js.html#lineNumber505",
+    "ensure validation functions to throw exceptions, works good",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber595",
+    "serialize a CloudEvent instance with a non default contenttype (but in the JSON-like family) and right serialization options, expect success",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber256",
+    "serialize a CloudEvent instance with a non default contenttype and empty serialization options, expect error",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber468",
+    "serialize a CloudEvent instance with a non default contenttype and right serialization options, expect success",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1356",
+    "serialize and deserialize a big CloudEvent instance (more than 64 KB)",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1546",
+    "serialize and deserialize a big CloudEvent instance with a non default contenttype (more than 64 KB)",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber870",
+    "serialize some CloudEvent instances to JSON with nested data, and ensure they are right",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber82",
+    "serialize some CloudEvent instances to JSON, and ensure they are right",
     "test"
   ],
   [
@@ -462,20 +648,26 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/cloudevent.js~cloudevent#contenttype",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-contenttype",
-    "src/cloudevent.js~CloudEvent#contenttype",
-    "member"
-  ],
-  [
     "src/cloudevent.js~cloudevent#data",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-data",
     "src/cloudevent.js~CloudEvent#data",
     "member"
   ],
   [
+    "src/cloudevent.js~cloudevent#datacontentencoding",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-datacontentencoding",
+    "src/cloudevent.js~CloudEvent#datacontentencoding",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#datacontenttype",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-datacontenttype",
+    "src/cloudevent.js~CloudEvent#datacontenttype",
+    "member"
+  ],
+  [
     "src/cloudevent.js~cloudevent#extensions",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-extensions",
+    "class/src/cloudevent.js~CloudEvent.html#instance-get-extensions",
     "src/cloudevent.js~CloudEvent#extensions",
     "member"
   ],
@@ -483,6 +675,12 @@ window.esdocSearchIndex = [
     "src/cloudevent.js~cloudevent#id",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-id",
     "src/cloudevent.js~CloudEvent#id",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#isdatacontenttypejson",
+    "class/src/cloudevent.js~CloudEvent.html#instance-get-isDatacontenttypeJSON",
+    "src/cloudevent.js~CloudEvent#isDatacontenttypeJSON",
     "member"
   ],
   [
@@ -534,6 +732,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/cloudevent.js~cloudevent#subject",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-subject",
+    "src/cloudevent.js~CloudEvent#subject",
+    "member"
+  ],
+  [
     "src/cloudevent.js~cloudevent#time",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-time",
     "src/cloudevent.js~CloudEvent#time",
@@ -558,9 +762,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/cloudevent.js~cloudevent.contenttypedefault",
-    "class/src/cloudevent.js~CloudEvent.html#static-method-contenttypeDefault",
-    "src/cloudevent.js~CloudEvent.contenttypeDefault",
+    "src/cloudevent.js~cloudevent.datacontenttypedefault",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-datacontenttypeDefault",
+    "src/cloudevent.js~CloudEvent.datacontenttypeDefault",
     "method"
   ],
   [
@@ -570,15 +774,45 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/cloudevent.js~cloudevent.getextensionsofevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-getExtensionsOfEvent",
+    "src/cloudevent.js~CloudEvent.getExtensionsOfEvent",
+    "method"
+  ],
+  [
     "src/cloudevent.js~cloudevent.getjsonschema",
     "class/src/cloudevent.js~CloudEvent.html#static-method-getJSONSchema",
     "src/cloudevent.js~CloudEvent.getJSONSchema",
     "method"
   ],
   [
+    "src/cloudevent.js~cloudevent.getstrictextensionofevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-getStrictExtensionOfEvent",
+    "src/cloudevent.js~CloudEvent.getStrictExtensionOfEvent",
+    "method"
+  ],
+  [
     "src/cloudevent.js~cloudevent.iscloudevent",
     "class/src/cloudevent.js~CloudEvent.html#static-method-isCloudEvent",
     "src/cloudevent.js~CloudEvent.isCloudEvent",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.isdatacontenttypejsonevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isDatacontenttypeJSONEvent",
+    "src/cloudevent.js~CloudEvent.isDatacontenttypeJSONEvent",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.isextensionproperty",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isExtensionProperty",
+    "src/cloudevent.js~CloudEvent.isExtensionProperty",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.isstandardproperty",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isStandardProperty",
+    "src/cloudevent.js~CloudEvent.isStandardProperty",
     "method"
   ],
   [
@@ -606,6 +840,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/cloudevent.js~cloudevent.setextensionsinevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-setExtensionsInEvent",
+    "src/cloudevent.js~CloudEvent.setExtensionsInEvent",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.setstrictextensioninevent",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-setStrictExtensionInEvent",
+    "src/cloudevent.js~CloudEvent.setStrictExtensionInEvent",
+    "method"
+  ],
+  [
     "src/cloudevent.js~cloudevent.validateevent",
     "class/src/cloudevent.js~CloudEvent.html#static-method-validateEvent",
     "src/cloudevent.js~CloudEvent.validateEvent",
@@ -622,6 +868,66 @@ window.esdocSearchIndex = [
     "file/src/index.js.html",
     "src/index.js",
     "file"
+  ],
+  [
+    "src/jsonbatch.js",
+    "file/src/jsonbatch.js.html",
+    "src/jsonbatch.js",
+    "file"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch#constructor",
+    "class/src/jsonbatch.js~JSONBatch.html#instance-constructor-constructor",
+    "src/jsonbatch.js~JSONBatch#constructor",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.deserializeevents",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-deserializeEvents",
+    "src/jsonbatch.js~JSONBatch.deserializeEvents",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.getevent",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-getEvent",
+    "src/jsonbatch.js~JSONBatch.getEvent",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.getevents",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-getEvents",
+    "src/jsonbatch.js~JSONBatch.getEvents",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.isjsonbatch",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-isJSONBatch",
+    "src/jsonbatch.js~JSONBatch.isJSONBatch",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.isvalidbatch",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-isValidBatch",
+    "src/jsonbatch.js~JSONBatch.isValidBatch",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.mediatype",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-mediaType",
+    "src/jsonbatch.js~JSONBatch.mediaType",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.serializeevents",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-serializeEvents",
+    "src/jsonbatch.js~JSONBatch.serializeEvents",
+    "method"
+  ],
+  [
+    "src/jsonbatch.js~jsonbatch.validatebatch",
+    "class/src/jsonbatch.js~JSONBatch.html#static-method-validateBatch",
+    "src/jsonbatch.js~JSONBatch.validateBatch",
+    "method"
   ],
   [
     "src/transformer.js",
@@ -660,6 +966,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/transformer.js~transformer.stringfrombase64",
+    "class/src/transformer.js~Transformer.html#static-method-stringFromBase64",
+    "src/transformer.js~Transformer.stringFromBase64",
+    "method"
+  ],
+  [
+    "src/transformer.js~transformer.stringtobase64",
+    "class/src/transformer.js~Transformer.html#static-method-stringToBase64",
+    "src/transformer.js~Transformer.stringToBase64",
+    "method"
+  ],
+  [
     "src/transformer.js~transformer.timestampfromnumber",
     "class/src/transformer.js~Transformer.html#static-method-timestampFromNumber",
     "src/transformer.js~Transformer.timestampFromNumber",
@@ -684,12 +1002,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/transformer.js~transformer.timezoneoffsetmsec",
-    "class/src/transformer.js~Transformer.html#static-get-timezoneOffsetMsec",
-    "src/transformer.js~Transformer.timezoneOffsetMsec",
-    "member"
-  ],
-  [
     "src/transformer.js~transformer.uristriparguments",
     "class/src/transformer.js~Transformer.html#static-method-uriStripArguments",
     "src/transformer.js~Transformer.uriStripArguments",
@@ -705,6 +1017,24 @@ window.esdocSearchIndex = [
     "src/validator.js~validator#constructor",
     "class/src/validator.js~Validator.html#instance-constructor-constructor",
     "src/validator.js~Validator#constructor",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.doesobjectcontainsstandardproperty",
+    "class/src/validator.js~Validator.html#static-method-doesObjectContainsStandardProperty",
+    "src/validator.js~Validator.doesObjectContainsStandardProperty",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.doesstringisstandardproperty",
+    "class/src/validator.js~Validator.html#static-method-doesStringIsStandardProperty",
+    "src/validator.js~Validator.doesStringIsStandardProperty",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisarray",
+    "class/src/validator.js~Validator.html#static-method-ensureIsArray",
+    "src/validator.js~Validator.ensureIsArray",
     "method"
   ],
   [
@@ -738,6 +1068,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureisdefinedandnotnull",
+    "class/src/validator.js~Validator.html#static-method-ensureIsDefinedAndNotNull",
+    "src/validator.js~Validator.ensureIsDefinedAndNotNull",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureiserror",
     "class/src/validator.js~Validator.html#static-method-ensureIsError",
     "src/validator.js~Validator.ensureIsError",
@@ -762,9 +1098,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureisobject",
+    "class/src/validator.js~Validator.html#static-method-ensureIsObject",
+    "src/validator.js~Validator.ensureIsObject",
+    "method"
+  ],
+  [
     "src/validator.js~validator.ensureisobjectorcollection",
     "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollection",
     "src/validator.js~Validator.ensureIsObjectOrCollection",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisobjectorcollectionnotarray",
+    "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollectionNotArray",
+    "src/validator.js~Validator.ensureIsObjectOrCollectionNotArray",
     "method"
   ],
   [
@@ -777,6 +1125,12 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.ensureisobjectorcollectionorstring",
     "class/src/validator.js~Validator.html#static-method-ensureIsObjectOrCollectionOrString",
     "src/validator.js~Validator.ensureIsObjectOrCollectionOrString",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.ensureisobjectplain",
+    "class/src/validator.js~Validator.html#static-method-ensureIsObjectPlain",
+    "src/validator.js~Validator.ensureIsObjectPlain",
     "method"
   ],
   [
@@ -816,9 +1170,45 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.ensureobjectdoesnotcontainstandardproperty",
+    "class/src/validator.js~Validator.html#static-method-ensureObjectDoesNotContainStandardProperty",
+    "src/validator.js~Validator.ensureObjectDoesNotContainStandardProperty",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.getargumentname",
+    "class/src/validator.js~Validator.html#static-method-getArgumentName",
+    "src/validator.js~Validator.getArgumentName",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.getargumentvalue",
+    "class/src/validator.js~Validator.html#static-method-getArgumentValue",
+    "src/validator.js~Validator.getArgumentValue",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.getobjectfilteredproperties",
+    "class/src/validator.js~Validator.html#static-method-getObjectFilteredProperties",
+    "src/validator.js~Validator.getObjectFilteredProperties",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.getorelse",
+    "class/src/validator.js~Validator.html#static-method-getOrElse",
+    "src/validator.js~Validator.getOrElse",
+    "method"
+  ],
+  [
     "src/validator.js~validator.getsize",
     "class/src/validator.js~Validator.html#static-method-getSize",
     "src/validator.js~Validator.getSize",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.getsizeinbytes",
+    "class/src/validator.js~Validator.html#static-method-getSizeInBytes",
+    "src/validator.js~Validator.getSizeInBytes",
     "method"
   ],
   [
@@ -912,6 +1302,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.isobjectorcollectionnotarray",
+    "class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotArray",
+    "src/validator.js~Validator.isObjectOrCollectionNotArray",
+    "method"
+  ],
+  [
     "src/validator.js~validator.isobjectorcollectionnotstring",
     "class/src/validator.js~Validator.html#static-method-isObjectOrCollectionNotString",
     "src/validator.js~Validator.isObjectOrCollectionNotString",
@@ -921,6 +1317,12 @@ window.esdocSearchIndex = [
     "src/validator.js~validator.isobjectorcollectionorstring",
     "class/src/validator.js~Validator.html#static-method-isObjectOrCollectionOrString",
     "src/validator.js~Validator.isObjectOrCollectionOrString",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.isobjectplain",
+    "class/src/validator.js~Validator.html#static-method-isObjectPlain",
+    "src/validator.js~Validator.isObjectPlain",
     "method"
   ],
   [
@@ -960,6 +1362,24 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/validator.js~validator.throwonerror",
+    "class/src/validator.js~Validator.html#static-method-throwOnError",
+    "src/validator.js~Validator.throwOnError",
+    "method"
+  ],
+  [
+    "src/validator.js~validator.throwonfalse",
+    "class/src/validator.js~Validator.html#static-method-throwOnFalse",
+    "src/validator.js~Validator.throwOnFalse",
+    "method"
+  ],
+  [
+    "test/cloudevent-serialization.test.js",
+    "test-file/test/cloudevent-serialization.test.js.html",
+    "test/cloudevent-serialization.test.js",
+    "testFile"
+  ],
+  [
     "test/cloudevent.test.js",
     "test-file/test/cloudevent.test.js.html",
     "test/cloudevent.test.js",
@@ -969,6 +1389,18 @@ window.esdocSearchIndex = [
     "test/index.test.js",
     "test-file/test/index.test.js.html",
     "test/index.test.js",
+    "testFile"
+  ],
+  [
+    "test/jsonbatch-serialization.test.js",
+    "test-file/test/jsonbatch-serialization.test.js.html",
+    "test/jsonbatch-serialization.test.js",
+    "testFile"
+  ],
+  [
+    "test/jsonbatch.test.js",
+    "test-file/test/jsonbatch.test.js.html",
+    "test/jsonbatch.test.js",
     "testFile"
   ],
   [
