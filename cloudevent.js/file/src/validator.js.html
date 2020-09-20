@@ -262,7 +262,7 @@ class Validator {
    * @return {boolean} true if it&apos;s a function, false otherwise
    */
   static isFunction (arg) {
-    return (typeof arg === &apos;function&apos;)
+    return (Validator.isDefinedAndNotNull(arg) &amp;&amp; (typeof arg === &apos;function&apos;))
   }
 
   /**
@@ -400,12 +400,12 @@ class Validator {
         return false
       }
     } else {
-      // simple check if it&apos;s an URI (or better, a relative URL)
-      if (arg.startsWith(&apos;/&apos;)) {
+      // simple check if it&apos;s an URI (or better: a relative URL, or a full URI with scheme etc)
+      const uriRegex = /^(\w+:|\/)/ // or /^(\w+:|\/)(.*)$/ for full match
+      if (uriRegex.test(arg)) {
         return true
       }
       try {
-        // return (new URL(arg) !== null)
         const u = new url.URL(arg)
         return (u !== null)
       } catch (e) {

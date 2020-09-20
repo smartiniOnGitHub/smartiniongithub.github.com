@@ -1,13 +1,13 @@
 {
-  "coverage": "99.18%",
-  "expectCount": 123,
-  "actualCount": 122,
+  "coverage": "99.2%",
+  "expectCount": 126,
+  "actualCount": 125,
   "files": {
     "src/cloudevent.js": {
-      "expectCount": 39,
-      "actualCount": 38,
+      "expectCount": 42,
+      "actualCount": 41,
       "undocumentLines": [
-        103
+        106
       ]
     },
     "src/jsonbatch.js": {

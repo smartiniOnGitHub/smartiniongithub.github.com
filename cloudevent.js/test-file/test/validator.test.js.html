@@ -442,7 +442,7 @@ test(&apos;ensure some (less used) validation functions are right&apos;, (t) =&g
 
 /** @test {Validator} */
 test(&apos;ensure some (utility) functions are right&apos;, (t) =&gt; {
-  t.plan(28)
+  t.plan(30)
 
   const { CloudEventValidator: V } = require(&apos;../src/&apos;) // get references via destructuring
   t.ok(V)
@@ -483,6 +483,9 @@ test(&apos;ensure some (utility) functions are right&apos;, (t) =&gt; {
     t.strictSame(V.getOrElse(u, o), o)
     t.strictSame(V.getOrElse(n, o), o)
   }
+
+  t.ok(V.isURI(&apos;protocol://sample&apos;))
+  t.notOk(V.isURI(&apos;sample&apos;))
 })
 
 /** @test {Validator} */

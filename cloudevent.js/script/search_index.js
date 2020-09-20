@@ -31,55 +31,61 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber414",
+    "test-file/test/cloudevent.test.js.html#lineNumber428",
     "create CloudEvent instances with different kind of data attribute, and ensure the validation is right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1829",
-    "create and deserialize some CloudEvent instances with datacontentencoding specified, and ensure they are right",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1841",
+    "create and deserialize some CloudEvent instances with data encoded in base64, and ensure they are right",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber113",
+    "test-file/test/cloudevent.test.js.html#lineNumber114",
     "create some CloudEvent instances (empty, without minimal arguments set or not set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber157",
+    "test-file/test/cloudevent.test.js.html#lineNumber158",
     "create some CloudEvent instances (with minimal fields set) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber364",
+    "test-file/test/cloudevent.test.js.html#lineNumber362",
     "create two CloudEvent instances with all arguments (mandatory and optional arguments) and ensure they are different objects",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1144",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1156",
     "deserialize a CloudEvent instance with a non default contenttype and empty/wrong deserialization options, expect error",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1266",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1278",
     "deserialize a CloudEvent instance with a non default contenttype and right deserialization options, expect success",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber999",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1009",
     "deserialize generic strings (not JSON representation for an Object) into a CloudEvent instance, expected Errors",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1044",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber2064",
+    "deserialize some CloudEvent instances (but a previous specversion) from JSON, and ensure errora are raised",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1054",
     "deserialize some CloudEvent instances from JSON, and ensure built instances are right",
     "test"
   ],
@@ -91,7 +97,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber680",
+    "test-file/test/cloudevent.test.js.html#lineNumber730",
     "ensure CloudEvent and objects are merged in the right way",
     "test"
   ],
@@ -103,13 +109,13 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber715",
-    "ensure CloudEvent with datacontentencoding are managed in the right way",
+    "test-file/test/cloudevent.test.js.html#lineNumber765",
+    "ensure CloudEvent with data encoded in base64 are managed in the right way",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber599",
+    "test-file/test/cloudevent.test.js.html#lineNumber649",
     "ensure a CloudEvent/subclass instance is seen as a CloudEvent instance, but not other objects",
     "test"
   ],
@@ -127,8 +133,14 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber294",
+    "test-file/test/cloudevent.test.js.html#lineNumber292",
     "ensure extensions are managed in the right way",
+    "test"
+  ],
+  [
+    "cloudevent src/cloudevent.js~cloudevent,cloudevent",
+    "test-file/test/cloudevent.test.js.html#lineNumber922",
+    "ensure internal methods on extensions checks are fully tested",
     "test"
   ],
   [
@@ -151,7 +163,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber96",
+    "test-file/test/cloudevent.test.js.html#lineNumber97",
     "ensure isValid and validate works good on undefined and null objects",
     "test"
   ],
@@ -168,6 +180,12 @@ window.esdocSearchIndex = [
     "test"
   ],
   [
+    "",
+    "test-file/test/cloudevent.test.js.html#lineNumber910",
+    "ensure old strict mode is no more valid (as per updated spec)",
+    "test"
+  ],
+  [
     "transformer src/transformer.js~transformer,transformer",
     "test-file/test/transformer.test.js.html#lineNumber509",
     "ensure process info are transformed into data attribute in the right way",
@@ -175,13 +193,13 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber22",
+    "test-file/test/jsonbatch-serialization.test.js.html#lineNumber46",
     "ensure serialization functions exists (check only the static method here)",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/jsonbatch-serialization.test.js.html#lineNumber46",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber22",
     "ensure serialization functions exists (check only the static method here)",
     "test"
   ],
@@ -217,7 +235,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent.test.js.html#lineNumber255",
+    "test-file/test/cloudevent.test.js.html#lineNumber256",
     "ensure strict mode is managed in the right way",
     "test"
   ],
@@ -229,7 +247,7 @@ window.esdocSearchIndex = [
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber818",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber828",
     "ensure the JSON Schema for a CloudEvent (static and for a normal instance) is available",
     "test"
   ],
@@ -289,55 +307,55 @@ window.esdocSearchIndex = [
   ],
   [
     "validator src/validator.js~validator,validator",
-    "test-file/test/validator.test.js.html#lineNumber449",
+    "test-file/test/validator.test.js.html#lineNumber452",
     "ensure validation functions on standard properties are right",
     "test"
   ],
   [
     "validator src/validator.js~validator,validator",
-    "test-file/test/validator.test.js.html#lineNumber483",
+    "test-file/test/validator.test.js.html#lineNumber486",
     "ensure validation functions to filter bad object instances raise exceptions",
     "test"
   ],
   [
     "validator src/validator.js~validator,validator",
-    "test-file/test/validator.test.js.html#lineNumber505",
+    "test-file/test/validator.test.js.html#lineNumber508",
     "ensure validation functions to throw exceptions, works good",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber595",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber605",
     "serialize a CloudEvent instance with a non default contenttype (but in the JSON-like family) and right serialization options, expect success",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber256",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber266",
     "serialize a CloudEvent instance with a non default contenttype and empty serialization options, expect error",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber468",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber478",
     "serialize a CloudEvent instance with a non default contenttype and right serialization options, expect success",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1356",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1368",
     "serialize and deserialize a big CloudEvent instance (more than 64 KB)",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1546",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber1558",
     "serialize and deserialize a big CloudEvent instance with a non default contenttype (more than 64 KB)",
     "test"
   ],
   [
     "cloudevent src/cloudevent.js~cloudevent,cloudevent",
-    "test-file/test/cloudevent-serialization.test.js.html#lineNumber870",
+    "test-file/test/cloudevent-serialization.test.js.html#lineNumber880",
     "serialize some CloudEvent instances to JSON with nested data, and ensure they are right",
     "test"
   ],
@@ -654,15 +672,27 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/cloudevent.js~cloudevent#datacontentencoding",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-datacontentencoding",
-    "src/cloudevent.js~CloudEvent#datacontentencoding",
+    "src/cloudevent.js~cloudevent#datatype",
+    "class/src/cloudevent.js~CloudEvent.html#instance-get-dataType",
+    "src/cloudevent.js~CloudEvent#dataType",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#data_base64",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-data_base64",
+    "src/cloudevent.js~CloudEvent#data_base64",
     "member"
   ],
   [
     "src/cloudevent.js~cloudevent#datacontenttype",
     "class/src/cloudevent.js~CloudEvent.html#instance-member-datacontenttype",
     "src/cloudevent.js~CloudEvent#datacontenttype",
+    "member"
+  ],
+  [
+    "src/cloudevent.js~cloudevent#dataschema",
+    "class/src/cloudevent.js~CloudEvent.html#instance-member-dataschema",
+    "src/cloudevent.js~CloudEvent#dataschema",
     "member"
   ],
   [
@@ -705,12 +735,6 @@ window.esdocSearchIndex = [
     "src/cloudevent.js~cloudevent#schema",
     "class/src/cloudevent.js~CloudEvent.html#instance-get-schema",
     "src/cloudevent.js~CloudEvent#schema",
-    "member"
-  ],
-  [
-    "src/cloudevent.js~cloudevent#schemaurl",
-    "class/src/cloudevent.js~CloudEvent.html#instance-member-schemaurl",
-    "src/cloudevent.js~CloudEvent#schemaurl",
     "member"
   ],
   [
@@ -804,9 +828,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/cloudevent.js~cloudevent.isextensionnamevalid",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isExtensionNameValid",
+    "src/cloudevent.js~CloudEvent.isExtensionNameValid",
+    "method"
+  ],
+  [
     "src/cloudevent.js~cloudevent.isextensionproperty",
     "class/src/cloudevent.js~CloudEvent.html#static-method-isExtensionProperty",
     "src/cloudevent.js~CloudEvent.isExtensionProperty",
+    "method"
+  ],
+  [
+    "src/cloudevent.js~cloudevent.isextensionvaluevalid",
+    "class/src/cloudevent.js~CloudEvent.html#static-method-isExtensionValueValid",
+    "src/cloudevent.js~CloudEvent.isExtensionValueValid",
     "method"
   ],
   [

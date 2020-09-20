@@ -686,7 +686,7 @@ test(&apos;ensure strings are encoded/decoded in th right way in base64&apos;, (
     const base64 = T.stringToBase64({}) // not a string
     assert(base64 === null) // never executed
   }, Error, &apos;Expected exception when transforming not a right string to a base64 (String)&apos;)
-  t.strictSame(T.stringToBase64(&apos;Hello World, 2019&apos;), &apos;SGVsbG8gV29ybGQsIDIwMTk=&apos;)
+  t.strictSame(T.stringToBase64(&apos;Hello World, 2020&apos;), &apos;SGVsbG8gV29ybGQsIDIwMjA=&apos;)
 
   t.strictSame(T.stringFromBase64(), &apos;&apos;)
   t.strictSame(T.stringFromBase64(undefined), &apos;&apos;)
@@ -696,9 +696,9 @@ test(&apos;ensure strings are encoded/decoded in th right way in base64&apos;, (
     const base64 = T.stringFromBase64({}) // not a string
     assert(base64 === null) // never executed
   }, Error, &apos;Expected exception when transforming not a right string from a base64 (String)&apos;)
-  t.strictSame(T.stringFromBase64(&apos;SGVsbG8gV29ybGQsIDIwMTk=&apos;), &apos;Hello World, 2019&apos;)
+  t.strictSame(T.stringFromBase64(&apos;SGVsbG8gV29ybGQsIDIwMjA=&apos;), &apos;Hello World, 2020&apos;)
 
-  t.strictSame(T.stringFromBase64(T.stringToBase64(&apos;Hello World, 2019&apos;)), &apos;Hello World, 2019&apos;)
+  t.strictSame(T.stringFromBase64(T.stringToBase64(&apos;Hello World, 2020&apos;)), &apos;Hello World, 2020&apos;)
 })
 </code></pre>
 
