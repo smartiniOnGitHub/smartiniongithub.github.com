@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>cloudevent / cloudevent.js</h1>
+<p><a href="https://npmjs.org/package/cloudevent/"><img src="https://img.shields.io/npm/v/cloudevent.svg?style=flat" alt="NPM Version"></a>
+<a href="https://npmjs.org/package/cloudevent/"><img src="https://img.shields.io/npm/dm/cloudevent.svg?style=flat" alt="NPM Downloads"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://coveralls.io/github/smartiniOnGitHub/cloudevent.js/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/cloudevent.js/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/cloudevent.js"><img src="https://david-dm.org/smartiniOnGitHub/cloudevent.js/status.svg" alt="dependencies Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/cloudevent.js?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/cloudevent.js/dev-status.svg" alt="devDependencies Status"></a>
+<a href="https://snyk.io//test/github/smartiniOnGitHub/cloudevent.js?targetFile=package.json"><img src="https://snyk.io//test/github/smartiniOnGitHub/cloudevent.js/badge.svg?targetFile=package.json" alt="Known Vulnerabilities"></a>
+<a href="http://opensource.org/licenses/APACHE-2.0"><img src="https://img.shields.io/npm/l/cloudevent.svg" alt="license - APACHE-2.0"></a></p>
+<p>JavaScript/Node.js implementation of <a href="http://cloudevents.io/">CloudEvents</a></p>
+<p>Current release implements the v1.0.1 of the CloudEvents Spec.</p>
+<p>The purpose of this library is to create instances of CloudEvents in a simple way
+(with some useful defaults), or in a full way (all attributes).
+Optional, it's possible to validate created instances to be sure they are compliant with the standard.</p>
+<p>Then, created instances can be serialized, for example to be sent (or saved/stored) somewhere.</p>
+<p>Note that many features are exposed directly by the CloudEvent class with standard class instance
+methods, and even as class static methods (that operates on a given CloudEvent).
+Anyway, to be more future-proof the library now exports a main object, with all features inside
+(the class for CloudEvent, its Validator class as CloudEventValidator, etc);
+using destructuring assignment (as seen in code samples) usage will be easier.</p>
+<p>For changes and release notes, see <a href="./CHANGELOG.md">CHANGELOG</a>.</p>
+<h2>Usage</h2>
+<p>Get a reference to the library:</p>
+<pre class="prettyprint source lang-js"><code>// Node.js example
+
+// minimal, most common usage
+// const { CloudEvent } = require('cloudevent')
+// other, get more objects exposed by the library
+const { CloudEvent, CloudEventValidator: V, CloudEventTransformer: T } = require('cloudevent')
+assert(CloudEvent !== null && V !== null && T !== null)
+</code></pre>
+<p>create some sample CloudEvent instances:</p>
+<pre class="prettyprint source lang-js"><code>// create some sample instances but without mandatory fields (so not good for validation) ...
+// note that errors will be thrown at instance creation only when strict mode is true
+const ceEmpty = new CloudEvent() // create an empty CloudEvent instance (not valid for the validator, even in default case, when strict mode flag is disabled)
+const ceMinimalMandatoryUndefinedNoStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: false }) // expected success
+const ceMinimalMandatoryUndefinedStrict = new CloudEvent(undefined, undefined, undefined, undefined, { strict: true }) // expected failure, so ceMinimalMandatoryUndefinedStrict will not be defined
+
+// define some common attributes
+const ceCommonOptions = {
+  time: new Date(), // same as default
+  datacontenttype: 'application/json',
+  dataschema: 'http://my-schema.localhost.localdomain/v1/',
+  subject: 'subject',
+  strict: false // same as default
+}
+const ceCommonOptionsStrict = { ...ceCommonOptions, strict: true }
+const ceCommonOptionsForTextData = { ...ceCommonOptions, datacontenttype: 'text/plain' }
+const ceCommonExtensions = { exampleextension: 'value' }
+const ceNamespace = 'com.github.smartiniOnGitHub.cloudeventjs.testevent-v1.0.0'
+const ceServerUrl = '/test'
+const ceCommonData = { hello: 'world', year: 2020, enabled: true }
+const ceDataAsJSONString = '{ &quot;hello&quot;: &quot;world&quot;, &quot;year&quot;: 2020, &quot;enabled&quot;: true }'
+const ceDataAsString = 'Hello World, 2020'
+const ceDataEncoded = 'SGVsbG8gV29ybGQsIDIwMjA='
+
+// create a sample minimal instance good for normal validation but not for strict validation ...
+const ceMinimalBadSource = new CloudEvent('1', ceNamespace, 'source (bad)', null)
+
+// create a sample minimal instance ...
+const ceMinimal = new CloudEvent('1', // id
+  ceNamespace, // type
+  '/', // source
+  {} // data (empty) // optional, even null is good is good in this case
+)
+
+// When creating instances with an undefined mandatory argument (handled by defaults),
+// but with strict flag disabled success is expected, otherwise with strict flag enabled a failure is expected ...
+// In JavaScript, null values are not handled as default values, only undefined values ...
+
+// create a sample instance with most common attributes defined ...
+const ceFull = new CloudEvent('1/full',
+  ceNamespace,
+  ceServerUrl,
+  ceCommonData, // data
+  ceCommonOptions,
+  ceCommonExtensions
+)
+// create a sample instance with strict mode (for validation) enabled ...
+const ceFullStrict = new CloudEvent('2/full-strict',
+  ceNamespace,
+  ceServerUrl,
+  ceCommonData, // data
+  ceCommonOptionsStrict, // use common options, but set strict mode to true
+  ceCommonExtensions
+)
+// create an instance with a JSON string as data
+const ceFullStrictJSONTextData = new CloudEvent('2/full-strict-json-string-data',
+  ceNamespace,
+  ceServerUrl,
+  ceDataAsJSONString, // data
+  ceCommonOptionsStrict, // use strict options
+  ceCommonExtensions
+)
+// create an instance that wrap an Error
+const error = new Error('sample error')
+error.code = 1000 // add a sample error code, as number
+const errorToData = T.errorToData(error, {
+  includeStackTrace: true,
+  // addStatus: false,
+  addTimestamp: true
+})
+const ceErrorStrict = new CloudEvent('3/error-strict',
+  ceNamespace,
+  ceServerUrl,
+  errorToData, // data
+  ceCommonOptionsStrict, // use common options, but set strict mode to true
+  ceCommonExtensions
+)
+// create an instance with a different content type
+const ceFullStrictOtherContentType = new CloudEvent('4/full-strict-other-content-type',
+  ceNamespace,
+  ceServerUrl,
+  ceCommonData, // data
+  { ...ceCommonOptionsStrict, datacontenttype: 'application/xml' }, // use common strict options, but set strict mode to true
+  ceCommonExtensions
+)
+// create an instance with data as a string, but not strict (to validate later in strict mode if needed)
+const ceFullTextData = new CloudEvent('5/no-strict-text-data',
+  ceNamespace,
+  ceServerUrl,
+  ceDataAsString, // data
+  // ceCommonOptions, // ok but not in strict validation
+  ceCommonOptionsForTextData, // ok even in strict validation
+  ceCommonExtensions
+)
+console.log(`cloudEvent payload: '${ceFullTextData.payload}', length: ${ceFullTextData.payload.length}`)
+// create an instance with data encoded in base64
+const ceFullStrictBinaryData = new CloudEvent('6/full-strict-binary-data',
+  ceNamespace,
+  ceServerUrl,
+  null, // data
+  { ...ceCommonOptionsStrict, datainbase64: ceDataEncoded }, // use common strict options, and set binary data in base64
+  ceCommonExtensions
+)
+console.log(`cloudEvent payload: '${ceFullStrictBinaryData.payload}', length: ${ceFullStrictBinaryData.payload.length}`)
+</code></pre>
+<p>optional, do some validations/checks on created instances.
+As sample, use class static methods like 'isValidEvent' and 'ValidateEvent',
+or instance methods like 'isValid', 'validate', etc ...</p>
+<pre class="prettyprint source lang-js"><code>assert(!ceEmpty.isValid())
+assert(!ceMinimalMandatoryUndefinedNoStrict.isValid())
+assert(ceMinimalBadSource.isValid())
+assert(!ceMinimalBadSource.isValid({ strict: true }))
+assert(ceMinimal.isValid())
+assert(ceMinimal.isValid({ strict: true }))
+assert(ceFull.isValid())
+assert(ceFullStrict.isValid())
+assert(ceErrorStrict.isValid())
+assert(ceFullStrictOtherContentType.isValid())
+assert(ceFullTextData.isValid())
+assert(ceFullTextData.isValid({ strict: true }))
+assert(CloudEvent.isValidEvent(ceFullTextData, { strict: true }))
+assert(CloudEvent.isValidEvent(ceFullStrictBinaryData))
+// etc ...
+
+console.log(`Validation on ceEmpty: isValid: ${ceEmpty.isValid()}`)
+console.log(`Validation output for ceEmpty, default strict mode is: size: ${CloudEvent.validateEvent(ceEmpty).length}, details:\n` + CloudEvent.validateEvent(ceEmpty))
+console.log(`Validation output for ceEmpty, force strict mode to true is size: ${CloudEvent.validateEvent(ceEmpty, { strict: true }).length}, details:\n` + CloudEvent.validateEvent(ceEmpty, { strict: true }))
+console.log(`Validation output for ceEmpty, alternative way: ${CloudEvent.dumpValidationResults(ceEmpty, { strict: true }, 'ceEmpty')}`)
+</code></pre>
+<p>serialization examples:</p>
+<pre class="prettyprint source lang-js"><code>// default contenttype
+const ceFullSerializedStatic = CloudEvent.serializeEvent(ceFull)
+const ceFullSerialized = ceFull.serialize()
+console.log('Serialization output for ceFull, details:\n' + ceFullSerialized)
+const ceFullStrictSerialized = ceFullStrict.serialize()
+console.log('Serialization output for ceFullStrict, details:\n' + ceFullStrictSerialized)
+// non default contenttype
+const ceFullStrictOtherContentTypeSerializedStatic = CloudEvent.serializeEvent(ceFullStrictOtherContentType, {
+  // encoder: (data) => '&lt;data &quot;encoder&quot;=&quot;sample&quot; />',
+  encodedData: '&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2020&quot; />',
+  onlyValid: true
+})
+const ceFullStrictOtherContentTypeSerialized = ceFullStrictOtherContentType.serialize({
+  // encoder: (data) => '&lt;data &quot;encoder&quot;=&quot;sample&quot; />',
+  encodedData: '&lt;data &quot;hello&quot;=&quot;world&quot; &quot;year&quot;=&quot;2020&quot; />',
+  onlyValid: true
+})
+console.log('Serialization output for ceFullStrictOtherContentType, details:\n' + ceFullStrictOtherContentTypeSerialized)
+const ceFullTextDataSerialized = CloudEvent.serializeEvent(ceFullTextData, { onlyValid: true })
+console.log('Serialization output for ceFullTextData, details:\n' + ceFullTextDataSerialized)
+const ceFullStrictBinaryDataSerialized = CloudEvent.serializeEvent(ceFullStrictBinaryData, { onlyValid: true })
+console.log('Serialization output for ceFullStrictBinaryData, details:\n' + ceFullStrictBinaryDataSerialized)
+
+// then use (send/store/etc) serialized instances ...
+
+</code></pre>
+<p>deserialization (parse) examples:</p>
+<pre class="prettyprint source lang-js"><code>// deserialization examples
+// default contenttype
+console.log('\nSome deserialization/parse examples:')
+const ceFullDeserialized = CloudEvent.deserializeEvent(ceFullSerialized)
+console.log(`cloudEvent dump: ${T.dumpObject(ceFullDeserialized, 'ceFullDeserialized')}`)
+const ceFullStrictDeserializedOnlyValid = CloudEvent.deserializeEvent(ceFullStrictSerialized, { onlyValid: true })
+console.log(`cloudEvent dump: ${T.dumpObject(ceFullStrictDeserializedOnlyValid, 'ceFullStrictDeserializedOnlyValid')}`)
+// non default contenttype
+const ceFullStrictOtherContentTypeDeserialized = CloudEvent.deserializeEvent(ceFullStrictOtherContentTypeSerialized, {
+  // decoder: (data) => { decoder: 'Sample' },
+  decodedData: { hello: 'world', year: 2020 },
+  onlyValid: true
+})
+console.log(`cloudEvent dump: ${T.dumpObject(ceFullStrictOtherContentTypeDeserialized, 'ceFullStrictOtherContentTypeDeserialized')}`)
+const ceFullTextDataDeserialized = CloudEvent.deserializeEvent(ceFullTextDataSerialized, { onlyValid: true })
+console.log(`ce dump: ${T.dumpObject(ceFullTextDataDeserialized, 'ceFullTextDataDeserialized')}`)
+const ceFullStrictBinaryDataDeserialized = CloudEvent.deserializeEvent(ceFullStrictBinaryDataSerialized, { onlyValid: true })
+console.log(`ce dump: ${T.dumpObject(ceFullStrictBinaryDataDeserialized, 'ceFullStrictBinaryDataDeserialized')}`)
+
+// then use (validate/send/store/etc) deserialized instances ...
+
+</code></pre>
+<p>From previous code blocks, I remove most assert statements, to simplify
+code reading and usage; but for a deeper comprension and usage,<br>
+look into the <a href="./example/">example</a> folder for more sample scripts that uses the library
+(inline but it's the same using it from npm registry);
+you can find even examples for using JSONBatch objects (array of CloudEvent instances).</p>
+<h2>Requirements</h2>
+<p>Node.js 10 LTS (but recommended 10.23.1) or later.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/cloudevent.js/">cloudevent.js</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/cloudevent.js/">here</a>.</p>
+<h2>Note</h2>
+<p>Note that in this implementation there is even the ability to validate CloudEvent instances
+in a stricter way, by setting to true the attribute 'strict' in constructor options;
+that attribute (when set) will be put in the extensions of the instance.
+Otherwise you can specify it only during validation, in validation options.</p>
+<p>See the CloudEvents Specification <a href="https://github.com/cloudevents/spec">here</a>.</p>
+<p>In the past the name for this package was 'cloudevent.js', but it has been deprecated now
+and changed to the simpler 'cloudevent', so it will be easier to get it at npm.</p>
+<p>Since v0.2 of the spec, there is no more a standard attribute to specify the version
+of any specific event type, so the best if to follow their recommendations,
+and for example add a version in the 'type' attribute
+(for example '-v1.0.0' at the end of its base value, or at the end of its full value),
+or into the 'schemaurl' attribute but only its major version
+(like '-v1' or '/v1/' at the end).
+Since v0.3 of the spec, there is no more a standard attribute for extensions,
+so they are merged into usual properties (but must not use names
+of standard properties); a best practice is to use reverse-DNS name
+but without dots, so like 'com_github_smartiniOnGitHub_cloudevent'.
+Since v1.0 of the spec, some properties has been removed/simplified;
+extension properties must be simple (no nested properties)
+and must contain only lowercase letters and numbers in the name (and less than 20 chars in total);
+so for example my strict extension now is 'strictvalidation' with a boolean value.
+Since v1.0.1 of the spec, some properties has been expanded/clarified.</p>
+<h2>Contributing</h2>
+<ol>
+<li>Fork it ( https://github.com/smartiniOnGitHub/cloudevent.js/fork )</li>
+<li>Create your feature branch (git checkout -b my-new-feature)</li>
+<li>Commit your changes (git commit -am 'Add some feature')</li>
+<li>Push to the branch (git push origin my-new-feature)</li>
+<li>Create a new Pull Request</li>
+</ol>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloudevent.html">cloudevent</a></li></ul><h3>Classes</h3><ul><li><a href="CloudEvent.html">CloudEvent</a></li><li><a href="JSONBatch.html">JSONBatch</a></li><li><a href="Transformer.html">Transformer</a></li><li><a href="Validator.html">Validator</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
