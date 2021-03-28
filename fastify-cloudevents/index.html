@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>fastify-cloudevents</h1>
+<p><a href="https://npmjs.org/package/fastify-cloudevents/"><img src="https://img.shields.io/npm/v/fastify-cloudevents.svg?style=flat" alt="NPM Version"></a>
+<a href="https://npmjs.org/package/fastify-cloudevents/"><img src="https://img.shields.io/npm/dm/fastify-cloudevents.svg?style=flat" alt="NPM Downloads"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://coveralls.io/github/smartiniOnGitHub/fastify-cloudevents/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/fastify-cloudevents/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-cloudevents"><img src="https://david-dm.org/smartiniOnGitHub/fastify-cloudevents/status.svg" alt="dependencies Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-cloudevents?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/fastify-cloudevents/dev-status.svg" alt="devDependencies Status"></a>
+<a href="https://snyk.io//test/github/smartiniOnGitHub/fastify-cloudevents?targetFile=package.json"><img src="https://snyk.io//test/github/smartiniOnGitHub/fastify-cloudevents/badge.svg?targetFile=package.json" alt="Known Vulnerabilities"></a></p>
+<p>Fastify Plugin to transform events in/from the CloudEvents standard format.</p>
+<p>Current release uses the v1.0.1 of the CloudEvents Spec.</p>
+<p>The purpose of this plugin is to let Fastify web applications create instances of CloudEvents
+in a simple way (with some useful defaults), or in a full way (all attributes).
+Optionally, it's possible to validate created instances to be sure they are compliant
+with the standard.
+Then, created instances can be serialized, for example to be sent (or saved/stored) somewhere.
+It's possible even to deserialize (parse) a string into a CloudEvent instance.</p>
+<p>Other features of the plugin: enable forwarding of Fastify events to given callbacks (using hooks),
+and wrapping main data of the original event in a specific CloudEvent instance.</p>
+<p>Note that all CloudEvents features exposed here are in the the library
+<a href="https://npmjs.org/package/cloudevent/">cloudevent</a>.</p>
+<h2>Usage</h2>
+<pre class="prettyprint source lang-js"><code>const fastify = require('fastify')()
+
+// define functions to use in plugin configuration:
+// idExample generator, callbackExample(ce) , etc ...
+
+// register the plugin with some options, for example:
+fastify.register(require('fastify-cloudevents'), {
+  serverUrl: 'http://0.0.0.0:3000',
+  idGenerator: idExample,
+  onRequestCallback: callbackExample,
+  onErrorCallback: callbackExample,
+  onResponseCallback: callbackExample,
+  cloudEventOptions: { }
+})
+
+// implementation ...
+
+fastify.listen(3000)
+</code></pre>
+<p>In the <a href="./example/">example</a> folder there are some simple server scripts
+that uses the plugin (inline but it's the same using it from npm registry):</p>
+<ul>
+<li><code>example</code> is a simple one</li>
+<li><code>example-enhanced</code> is a more complex sample
+to show even how to raise own events (normal, errors, and some custom)</li>
+</ul>
+<h2>Requirements</h2>
+<p>Fastify ^2.15.3 , Node.js 8.17.x (but recommended 10.23.1) or later.
+Note that plugin releases 2.x are for Fastify 2.x, etc.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/fastify-cloudevents">fastify-cloudevents</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/fastify-cloudevents/">here</a>.</p>
+<h2>Note</h2>
+<p>The plugin decorate Fastify and expose some functions:</p>
+<ul>
+<li><code>CloudEvent</code>, the CloudEvent implementation, as a class</li>
+<li><code>CloudEventTransformer</code>, the CloudEventTransformer utility class</li>
+<li><code>JSONBatch</code>, the class to handle JSONBatch instances</li>
+<li><code>cloudEventJSONSchema</code>, the JSONSchema for a CloudEvent used in the plugin, as an object</li>
+<li><code>cloudEventSerializeFast</code>, a serialize function implemented here using <code>fast-json-stringify</code>
+and not standard JSON serialization functions; note that similar features of the underlying library
+has been implemented here (like serialization options)</li>
+<li><code>cloudEventValidateFast</code>, a validation function implemented here using <code>ajv</code>
+(which is a dependency of <code>fast-json-stringify</code>) that uses a schema compiler</li>
+</ul>
+<p>Plugin options are:</p>
+<ul>
+<li><code>serverUrl</code>, the URL (absolute, or relative) of the current webapp,
+to use as a base <code>source</code> in generated CloudEvents</li>
+<li><code>serverUrlMode</code>, the mode to build the <code>source</code> attribute in generated CloudEvents;
+any not null value will cause this setting to be added to extensions (if set not null in plugin options):
+<ul>
+<li>null, (default value) same as 'pluginAndRequestSimplified'</li>
+<li>'pluginServerUrl', use only the given <code>serverUrl</code></li>
+<li>'pluginAndRequestUrl', use the given <code>serverUrl</code> and add the current request url</li>
+<li>'pluginAndRequestSimplified', use the given <code>serverUrl</code> and add the current request url,
+but without arguments (if any)</li>
+<li>'requestUrl', use only the request url</li>
+<li>anything other, will raise an <code>Error</code></li>
+</ul>
+</li>
+<li><code>baseNamespace</code>, a base namespace for the <code>type</code>; more specific suffix
+should be added to it in any CloudEvent</li>
+<li><code>idGenerator</code>, a generator function that returns the id (if possible, unique) for any CloudEvent</li>
+<li><code>includeHeaders</code>, a boolean flag to add request headers in generated CloudEvents when <code>true</code>
+(by default is <code>false</code>)</li>
+<li><code>includeHttpAttributes</code>, a boolean flag to add some HTTP attributes in generated CloudEvents when <code>true</code>
+(by default is <code>false</code>)</li>
+<li><code>includeRedundantAttributes</code>, a boolean flag to add some redundant attributes
+in the data section of generated CloudEvents when <code>true</code> (by default is <code>false</code>)</li>
+<li><code>onRequestCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRequest</code></li>
+<li><code>preParsingCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>preParsing</code></li>
+<li><code>preValidationCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>preValidation</code></li>
+<li><code>preHandlerCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>preHandler</code></li>
+<li><code>preSerializationCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>preSerialization</code></li>
+<li><code>onErrorCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onError</code></li>
+<li><code>onSendCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onSend</code></li>
+<li><code>onResponseCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onResponse</code></li>
+<li><code>onCloseCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onClose</code>, for the plugin</li>
+<li><code>onRouteCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRoute</code></li>
+<li><code>onRegisterCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRegister</code></li>
+<li><code>onReadyCallback</code>, callback to handle the generated CloudEvent in Fastify lifecycle function <code>ready</code>,
+for the plugin (when the plugin has been loaded)</li>
+<li><code>cloudEventOptions</code>, CloudEvent options common to all generated event instances;
+anyway objects are copied to not be shared between instances</li>
+</ul>
+<p>all plugin options are optional, and have a default value.</p>
+<p>Note that all callbacks given to hooks accepts only a single argument: the generated CloudEvent instance,
+and <em>not</em> arguments like in error-first callbacks: (error, data), because here is not really needed.</p>
+<p>Note that there is even the ability to validate CloudEvent instances
+in a stricter way, by setting to true the attribute 'strict' in constructor options;
+that attribute (when set) will be put in the extensions of the instance.
+Otherwise you can specify it only during validation, in validation options.</p>
+<p>You can find Code Documentation for the API of the library
+<a href="https://smartiniongithub.github.io/cloudevent.js/">here</a>.</p>
+<p>Since v0.2 of the spec, there is no more a standard attribute to specify the version
+of any specific event type, so the best if to follow their recommendations,
+and for example add a version in the 'type' attribute
+(for example '-v1.0.0' at the end of its base value, or at the end of its full value),
+or into the 'schemaurl' attribute but only its major version
+(like '-v1' or '/v1/' at the end).
+Since v0.3 of the spec, extensions are no more inside a specific attribute;
+as recommended even mine (for the 'strict' mode for example) has been moved into a namespaced one;
+plugin extensions ('serverUrlMode') has been moved in another (specific) namespace.
+Since v1.0 of the spec, some properties has been removed/simplified;
+extension properties must be simple (no nested properties)
+and must contain only lowercase letters and numbers in the name (and less than 20 chars in total);
+so for example my strict extension now is 'strictvalidation' with a boolean value.
+Even my plugin extension now is 'fastifyserverurlmode' with a string value.</p>
+<p>For more info on the standard, see the <a href="https://github.com/cloudevents/spec">CloudEvents Specification</a>.</p>
+<h2>Contributing</h2>
+<ol>
+<li>Fork it ( https://github.com/smartiniOnGitHub/fastify-cloudevents/fork )</li>
+<li>Create your feature branch (git checkout -b my-new-feature)</li>
+<li>Commit your changes (git commit -am 'Add some feature')</li>
+<li>Push to the branch (git push origin my-new-feature)</li>
+<li>Create a new Pull Request</li>
+</ol>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CloudEventLibrary">CloudEventLibrary</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
