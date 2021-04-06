@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>fastify-nats-client</h1>
+<p><a href="https://npmjs.org/package/fastify-nats-client/"><img src="https://img.shields.io/npm/v/fastify-nats-client.svg?style=flat" alt="NPM Version"></a>
+<a href="https://npmjs.org/package/fastify-nats-client/"><img src="https://img.shields.io/npm/dm/fastify-nats-client.svg?style=flat" alt="NPM Downloads"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://coveralls.io/github/smartiniOnGitHub/fastify-nats-client/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/fastify-nats-client/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-nats-client"><img src="https://david-dm.org/smartiniOnGitHub/fastify-nats-client/status.svg" alt="dependencies Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-nats-client?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/fastify-nats-client/dev-status.svg" alt="devDependencies Status"></a></p>
+<p>Fastify Plugin to use <a href="http://nats.io">NATS</a> Server as a queue, to exchange messages.</p>
+<p>Under the hood <a href="https://github.com/nats-io/node-nats">Node NATS</a> client is used, the options that you pass to <code>register</code> will be passed to the nats client.</p>
+<h2>Usage</h2>
+<p>Add it to you project with <code>register</code> and you are done!<br>
+You can access the <em>nats Connection</em> via <code>fastify.nats</code>.</p>
+<pre class="prettyprint source lang-js"><code>const fastify = require('fastify')
+
+// register the plugin with some options, for example:
+fastify.register(require('fastify-nats-client'), {
+  url: 'nats://demo.nats.io:4222'
+}, err => {
+  if (err) throw err
+})
+
+fastify.listen(3000, (err, address) => {
+  if (err) throw err
+  console.log(`server listening on ${address}`)
+})
+</code></pre>
+<p>and later</p>
+<pre class="prettyprint source lang-js"><code>fastify.nats.publish(topic, message);
+</code></pre>
+<h2>Requirements</h2>
+<p>Fastify ^2.15.3 , Node.js 8.17.x (but recommended 10.23.1) or later.
+Note that plugin releases 2.x are for Fastify 2.x, etc.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/fastify-nats-client">fastify-nats-client</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/fastify-nats-client/">here</a>.</p>
+<h2>Note</h2>
+<p>All the code here is based on the work done initially by its original author
+(mahmed8003 <a href="mailto:mahmed8003@gmail.com">mahmed8003@gmail.com</a>), in the upstream repository
+<a href="https://github.com/mahmed8003/fastify-nats">fastify-nats</a>, under the MIT license.</p>
+<p>The plugin decorate Fastify and expose some functions:</p>
+<ul>
+<li><code>nats</code>, the NATS Connection to use</li>
+</ul>
+<p>Some plugin options are forwarder to <a href="https://github.com/nats-io/node-nats">Node NATS</a> client, like:</p>
+<ul>
+<li><code>url</code>, the absolute URL of the NATS Server to use (including the port)
+while others are only used inside the plugin, to configure its behavior, like:</li>
+<li><code>disableDefaultNATSServer</code>, flag (by default false) to disable connections
+to default NATS Server (so if <code>url</code> is not specified, an Error will be raised);
+could be useful to avoid connections to that (external and public) server,
+for example by plugin configuration mistake</li>
+</ul>
+<p>all plugin options are optional, and have a default value set in the plugin.</p>
+<p>Default <code>url</code> for NATS Server in the plugin is set to <code>nats://demo.nats.io:4222</code>,
+to be able to do a quick start; anyway note that in some cases it could not be
+reachable (for example by corporate firewall rules), so even plugin tests could fail
+in that case.
+To perform some local tests, it's possible to use a NATS Server Docker image from
+standard image <a href="https://hub.docker.com/_/nats/">NATS - DockerHub</a>;
+for convenience, they are defined in <code>package.json</code> like <code>docker:nats:start</code>
+and the same for <code>log|process|stop</code> etc.</p>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">MIT</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
