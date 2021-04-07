@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>fastify-webhook</h1>
+<p><a href="https://npmjs.org/package/fastify-webhook/"><img src="https://img.shields.io/npm/v/fastify-webhook.svg?style=flat" alt="NPM Version"></a>
+<a href="https://npmjs.org/package/fastify-webhook/"><img src="https://img.shields.io/npm/dm/fastify-webhook.svg?style=flat" alt="NPM Downloads"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://coveralls.io/github/smartiniOnGitHub/fastify-webhook/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/fastify-webhook/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-webhook.svg"><img src="https://david-dm.org/smartiniOnGitHub/fastify-webhook.svg" alt="Dependencies"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-webhook?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/fastify-webhook/dev-status.svg" alt="devDependencies Status"></a></p>
+<p>Fastify Plugin to serve webhooks with some useful default settings.</p>
+<p>With this plugin, Fastify will have a route configured for <code>/webhook</code> POST requests.</p>
+<h2>Usage</h2>
+<pre class="prettyprint source lang-js"><code>const fastify = require('fastify')()
+
+// example without specifying options, returning a default webhook mapped to '/webhook' that only acknowledge the POST request
+fastify.register(require('fastify-webhook'))
+// or
+// example with custom webhook url and handler, and secret key
+// fastify.register(require('fastify-webhook'), {'url': '/custom-webhook', 'handler': myWebhookHandler, 'secretKey': 'secret key'})
+//
+// note that to use one of handlers bundled with the plugin, you need to get a reference to the plugin script 'src/handlers', and then as handler pass a reference to desired function, like:
+// const webhookHandlers = require('fastify-webhook/src/handlers') // get plugin handlers (optional)
+// const webhookPlugin = require('fastify-webhook')
+// fastify.register(webhookPlugin, { 'url': '/custom-webhook', 'handler': webhookHandlers.echo, 'secretKey': 'secret key'})
+//
+
+fastify.listen(3000)
+
+// To test, for example (in another terminal session) do:
+// curl http://127.0.0.1:3000/webhook -X POST -H 'Content-Type: application/json' -d '{&quot;payload&quot;:&quot;test&quot;}' => returning a JSON dump of the given data, and no thrown error
+// in Windows you need to escape double quote char in the given json body, so do:
+// curl http://127.0.0.1:3000/webhook -X POST -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;payload\&quot;:\&quot;test\&quot;}&quot;
+// or put data in a json file and pass with something like: '-d @body.json'
+</code></pre>
+<p>In the <a href="./example/">example</a> folder there are some simple server scripts that uses the plugin (inline but it's the same using it from npm registry).</p>
+<h2>Requirements</h2>
+<p>Fastify ^2.15.3 , Node.js 8.17.x (but recommended 10.23.1) or later.
+Note that plugin releases 2.x are for Fastify 2.x, etc.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/fastify-webhook">fastify-webhook</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/fastify-webhook/">here</a>.</p>
+<h2>Note</h2>
+<p>By default the plugin map a default handler on the URI <code>/webhook</code> to be called via POST, otherwise it's possible to change via the setting 'url' in plugin options.</p>
+<p>The plugin exposes some handlers, for common base operations (and webhook debug help).
+To use one of them, before registering the plugin, you need to get a reference from its <code>src/handlers</code> source file;
+then you can configure the desired one in the setting 'handler' in plugin options.
+They are:</p>
+<ul>
+<li><code>acknowledge</code> (default handler) that simply acknowledge the request, and reply with a simple json response</li>
+<li><code>echo</code> it dumps the given input data in the (json) response</li>
+<li><code>logger</code> it dumps some info on the request using Fastify logger
+but of course for a real world usage you need to specify your own handler function, with arguments '(request, reply)'.
+Otherwise you can use yours, with signature <code>function handler (request, reply)</code>.</li>
+</ul>
+<p>Other plugin options:</p>
+<ul>
+<li>'disableWebhook' (default false) to disable the registration of the route for the webhook</li>
+<li>'enableGetPlaceholder' (default false) to publish via GET a route with the same path of the webhook but returning an HTTP Error 405 Method Not Allowed</li>
+<li>'secretKey' (default null) to specify a string as secret key that callers of the webhook must provide, or webhook will reply with an error</li>
+<li>'preHandlers' is a list of functions to be used as preHandler in the specific route of the webhook; currently the list contains an internal function to check the secret key (if given); otherwise you can define and use yours, with signature <code>function preHandler (request, reply, done)</code>.</li>
+</ul>
+<p>Note that there is not a good general way to handle (usually user-specific) token in requests, so this is not managed via the plugin, but in examples and tests you can find some info.</p>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
