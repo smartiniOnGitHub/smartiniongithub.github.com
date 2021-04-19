@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>fastify-example</h1>
+<p><a href="https://hub.docker.com/r/smartiniatdocker09/fastify-example/"><img src="https://img.shields.io/docker/pulls/smartiniatdocker09/fastify-example.svg" alt="Docker Pulls"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-example"><img src="https://david-dm.org/smartiniOnGitHub/fastify-example/status.svg" alt="dependencies Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/fastify-example?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/fastify-example/dev-status.svg" alt="devDependencies Status"></a>
+<a href="https://snyk.io//test/github/smartiniOnGitHub/fastify-example?targetFile=package.json"><img src="https://snyk.io//test/github/smartiniOnGitHub/fastify-example/badge.svg" alt="Known Vulnerabilities"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache_2.0-green.svg?style=flat" alt="Apache 2.0 License"></a></p>
+<p>Example webapp with Fastify</p>
+<h2>Setup and run</h2>
+<p>To complete project setup, do:</p>
+<pre class="prettyprint source"><code>npm install
+</code></pre>
+<p>and run with</p>
+<pre class="prettyprint source"><code>npm start
+</code></pre>
+<p>then point your browser to <a href="http://localhost:8000">localhost:8000</a></p>
+<h2>Setup and run with Docker</h2>
+<p>Note that it's possible to let Docker do all inside a container, because
+all is described in a Dockerfile; see <a href="./docs/Dockerfile-usage.md">Dockerfile-usage</a>
+for related commands.</p>
+<p>Of course you need a local installation of Docker (recent, if possible latest),
+but nothing other.</p>
+<h2>Setup and run with Docker images at DockerHub</h2>
+<p>A simpler way to run the webapp is by using published images at DockerHub:
+<a href="https://hub.docker.com/r/smartiniatdocker09/fastify-example/">smartiniatdocker09/fastify-example</a>.
+Default images are based on default Node.js Docker image and contains
+development dependencies too (to reload content, run tests, etc), BASH shell, etc;
+there are even others:</p>
+<ul>
+<li>a variant one based on official Node.js Alpine Linux image,
+which is minimal (smaller, a lot) and is tailored for running in Production
+(dedicated user for running the webapp, no dev dependencies, no reload, etc)</li>
+<li>another based on official Distroless images for Node.js (from Google),
+small (but bigger than those based on Alpine Linux) and without a lot of stuff inside
+(there is no shell for example), so not so simple to debug but good for production environments
+Note that &quot;normal&quot; images are not so small (approx. 900 / 1000 MB) and could contain some vulnerability
+in some packages already installed in the OS, so pay attention
+if/when using them in production environments.</li>
+</ul>
+<p>For example, you can run directly with:
+<code>docker run -d -p 8000:8000 -t smartiniatdocker09/fastify-example:latest-alpine</code>
+and browse to <a href="http://localhost:8000">localhost:8000</a>.
+Published Docker tags are 'latest' / 'latest-alpine',
+and starting from source code tag '2.2.0' there is:
+the same tag, and even the '2.2.0-alpine' variant.
+For more info look at <a href="https://hub.docker.com/r/smartiniatdocker09/fastify-example/tags">tags - smartiniatdocker09/fastify-example</a>.</p>
+<p>Of course you need a local installation of Docker (recent, if possible latest),
+but nothing other.</p>
+<h2>Others</h2>
+<p>To run a development server (with hot reload enabled) instead execute this:</p>
+<pre class="prettyprint source"><code>npm run start:dev
+</code></pre>
+<p>For other custom commands look the 'scripts' section inside 'package.json'.</p>
+<h2>Requirements</h2>
+<p>Fastify ^2.15.3, Node.js 10 LTS (10.13.0) or later.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/fastify-example">fastify-example</a>.</p>
+<p>Documentation generated from source code (API):
+<a href="https://smartiniongithub.github.io/fastify-example/">here</a>.</p>
+<h2>Note</h2>
+<p>Some features can be configured via environment variables;
+if a <code>.env</code> file is found in project root, all its contents
+will be loaded into environmental variables.
+Supported variables:</p>
+<ul>
+<li><code>FASTIFY_OPTIONS</code>, set Fastify main options at startup, as a JSON string;
+to change logging level for example use something like: `{ &quot;logger&quot;: { &quot;level&quot;: &quot;debug&quot; } }'
+and to remove logging for example use: '{ }'</li>
+<li><code>HTTP_PORT</code>, set default HTTP port for the server</li>
+<li><code>HTTP_ADDRESS</code>, set default HTTP address for the server</li>
+<li><code>NATS_SERVER_URL</code>, set the URL for the NATS server (if enabled), or plugin default</li>
+<li><code>WEBHOOK_SECRET_KEY</code>, set the secret key to require by exposed webhook</li>
+<li><code>FEATURE_PLATFORM_INFO_DISABLE</code>, to disable the logging of some info
+related to the current runtime platform like:
+Node.js version, OS name, Fastify version, Webapp version, etc ...</li>
+<li><code>FEATURE_CHECK_RUNTIME_ENV_DISABLE</code>, to disable (not load) related plugin;
+if enabled and current Node.js environment is not compatible with the one
+set in 'package.json' by default it will throw an exception,
+so the webapp will crash (to avoid running the webapp in a not compliant env)</li>
+<li><code>FEATURE_FAVICON_DISABLE</code>, to disable (not load) related plugin</li>
+<li><code>FEATURE_WEBHOOK_DISABLE</code>, to disable (not load) related plugin</li>
+<li><code>FEATURE_HEALTHCHECK_DISABLE</code>, to disable (not load) related plugin</li>
+<li><code>FEATURE_CLOUDEVENTS_DISABLE</code>, to disable (not load) related plugin;
+note that this by default uses a public NATS server so disable it
+if not needed or if that server is not reachable for corporate firewall policies</li>
+<li><code>FEATURE_CLOUDEVENTS_STRICT_DISABLE</code>, to disable strict mode in generated CloudEvents
+(if/when related plugin is enabled)</li>
+<li><code>FEATURE_CLOUDEVENTS_LOG_CONSOLE_DISABLE</code>, to disable CloudEvent serialization to console</li>
+<li><code>FEATURE_CLOUDEVENTS_LOG_FILE_DISABLE</code>, to disable CloudEvent serialization to console,
+by default true (so disabled);
+note that when enabled a new log file will be created at any run of the server,
+but previous (if present) will be overwritten,
+so any new run is fresh and old logs will be discarded</li>
+<li><code>FEATURE_NATS_DISABLE</code>, to disable (not load) related plugin
+if not specified default behavior will be applied.</li>
+</ul>
+<p>As a sample, by default (unless disabled) some messages will be sent to a NATS queue,
+when the web application has started and when a client ask for a page.
+NATS server by default (in related plugin) is a public one,
+<a href="nats://demo.nats.io:4222">demo.nats.io</a>.</p>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
