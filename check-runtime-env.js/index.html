@@ -1,62 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <base data-ice="baseUrl">
-  <title data-ice="title">Home | check-runtime-env</title>
-  <link type="text/css" rel="stylesheet" href="css/style.css">
-  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
-  <script src="script/prettify/prettify.js"></script>
-  <script src="script/manual.js"></script>
-<meta name="description" content="Node.js implementation of a checker for some runtime environment properties"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="check-runtime-env"><meta property="twitter:description" content="Node.js implementation of a checker for some runtime environment properties"></head>
-<body class="layout-container" data-ice="rootContainer">
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
 
-<header>
-  <a href="./">Home</a>
-  
-  <a href="identifiers.html">Reference</a>
-  <a href="source.html">Source</a>
-  <a href="test.html" data-ice="testLink">Test</a>
-  <div class="search-box">
-  <span>
-    <img src="./image/search.png">
-    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
-  </span>
-    <ul class="search-result"></ul>
-  </div>
-<a style="position:relative; top:3px;" href="https://github.com/smartiniOnGitHub/check-runtime-env.js"><img width="20px" src="./image/github.png"></a></header>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
 
-<nav class="navigation" data-ice="nav"><div>
-  <ul>
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~RuntimeEnvChecker.html">RuntimeEnvChecker</a></span></span></li>
-</ul>
-</div>
-</nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="check-runtime-env---check-runtime-env-js">check-runtime-env / check-runtime-env.js</h1><p>  <a href="https://npmjs.org/package/check-runtime-env/"><img src="https://img.shields.io/npm/v/check-runtime-env.svg?style=flat" alt="NPM Version"></a>
-  <a href="https://npmjs.org/package/check-runtime-env/"><img src="https://img.shields.io/npm/dm/check-runtime-env.svg?style=flat" alt="NPM Downloads"></a>
-  <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
-  <a href="https://coveralls.io/github/smartiniOnGitHub/check-runtime-env.js/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/check-runtime-env.js/badge.svg?branch=master" alt="Coverage Status"></a>
-  <a href="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js"><img src="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/status.svg" alt="dependencies Status"></a>
-  <a href="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/dev-status.svg" alt="devDependencies Status"></a></p>
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>check-runtime-env / check-runtime-env.js</h1>
+<p><a href="https://npmjs.org/package/check-runtime-env/"><img src="https://img.shields.io/npm/v/check-runtime-env.svg?style=flat" alt="NPM Version"></a>
+<a href="https://npmjs.org/package/check-runtime-env/"><img src="https://img.shields.io/npm/dm/check-runtime-env.svg?style=flat" alt="NPM Downloads"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
+<a href="https://coveralls.io/github/smartiniOnGitHub/check-runtime-env.js/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/check-runtime-env.js/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js"><img src="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/status.svg" alt="dependencies Status"></a>
+<a href="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/check-runtime-env.js/dev-status.svg" alt="devDependencies Status"></a>
+<a href="http://opensource.org/licenses/APACHE-2.0"><img src="https://img.shields.io/npm/l/check-runtime-env.svg" alt="license - APACHE-2.0"></a></p>
 <p>Node.js implementation of a checker for some runtime environment properties.</p>
-<p>The purpose of this library is to simplify some check in the environment where 
+<p>The purpose of this library is to simplify some check in the environment where
 the code is running (at runtime).</p>
-<h2 id="usage">Usage</h2><p>Get a reference to the library:</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">// Node.js example
-const assert = require(&apos;assert&apos;)
+<h2>Usage</h2>
+<p>Get a reference to the library:</p>
+<pre class="prettyprint source lang-js"><code>// Node.js example
+const assert = require('assert').strict
 
 // reference the library, not needed if using destructuring assignment, see below
-const RuntimeEnvChecker = require(&apos;../src/&apos;) // from local path
-assert(RuntimeEnvChecker !== null)</code>
+const RuntimeEnvChecker = require('../src/') // from local path
+assert(RuntimeEnvChecker !== null)
 </code></pre>
 <p>get some runtime data and version constraints, optional:</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">const nodeVersion = process.version
+<pre class="prettyprint source lang-js"><code>const nodeVersion = process.version
 assert(nodeVersion !== null)
 const npmVersion = RuntimeEnvChecker.getVersionOfNpm()
 assert(npmVersion !== null)
-const engines = require(&apos;../package.json&apos;).engines
+const engines = require('../package.json').engines
 assert(engines !== null)
 const expectedNodeVersion = engines.node
 assert(expectedNodeVersion !== null)
@@ -64,74 +76,94 @@ const expectedNPMVersion = engines.npm
 assert(expectedNPMVersion !== null)
 
 console.log(`Node.js current version: ${nodeVersion}`)
-console.log(`Node.js version expected in &apos;package.json&apos;: ${engines.node}`)
+console.log(`Node.js version expected in 'package.json': ${engines.node}`)
 console.log(`NPM current version: ${npmVersion}`)
-console.log(`NPM version expected in &apos;package.json&apos;: ${engines.npm}`)</code>
+console.log(`NPM version expected in 'package.json': ${engines.npm}`)
 </code></pre>
 <p>call some static method exposed by the class:</p>
-<pre><code class="lang-js"><code class="source-code prettyprint">console.log(`Doing some tests; note that a check not satisfied will throw Error ...`)
+<pre class="prettyprint source lang-js"><code>console.log(`Doing some tests; note that a check not satisfied will throw Error ...`)
 console.log(`Check version of Node, using defaults, success: ${RuntimeEnvChecker.checkVersionOfNode()}`)
 console.log(`Check version of Node, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNode(nodeVersion, expectedNodeVersion)}`)
 console.log(`Check version of NPM, using NPM release found, and NPM expected value implicit, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion)}`)
 console.log(`Check version of NPM, using explicit values, success: ${RuntimeEnvChecker.checkVersionOfNpm(npmVersion, expectedNPMVersion)}`)
-console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion(&apos;10.13.0&apos;, &apos;&gt;=8.9.0 &lt;12.0.0&apos;)}`)
+console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=8.9.0 &lt;12.0.0')}`)
 try {
   console.log(`Sample failure in check version (generic): expected error`)
-  console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion(&apos;10.13.0&apos;, &apos;&gt;=12.0.0&apos;)}`)
+  console.log(`Check version (generic), using explicit values, success: ${RuntimeEnvChecker.checkVersion('10.13.0', '>=12.0.0')}`)
 } catch (e) {
   console.log(e)
 }
-console.log(`Tell the given version &apos;10.13.0&apos;, if it&apos;s compatible with the constraint &apos;&gt;=12.0.0&apos;: ${RuntimeEnvChecker.isVersionCompatible(&apos;10.13.0&apos;, &apos;&gt;=12.0.0&apos;)}, but anyway no error raised here`)
+console.log(`Tell the given version '10.13.0', if it's compatible with the constraint '>=12.0.0': ${RuntimeEnvChecker.isVersionCompatible('10.13.0', '>=12.0.0')}, but anyway no error raised here`)
 
-console.log(`Check that the given string is not empty (generic), success: ${RuntimeEnvChecker.checkStringNotEmpty(&apos;10.13.0&apos;)}`)
-console.log(`Node.js environment is: &apos;${process.env.NODE_ENV}&apos;`)
-console.log(`Node.js environment from the library is: &apos;${RuntimeEnvChecker.getNodeEnv()}&apos;`)
-console.log(`Node.js environment is defined: ${RuntimeEnvChecker.isEnvVarDefined(&apos;NODE_ENV&apos;)}`)
+console.log(`Check that the given string is not empty (generic), success: ${RuntimeEnvChecker.checkStringNotEmpty('10.13.0')}`)
+console.log(`Node.js environment is: '${process.env.NODE_ENV}'`)
+console.log(`Node.js environment from the library is: '${RuntimeEnvChecker.getNodeEnv()}'`)
+console.log(`Node.js environment is defined: ${RuntimeEnvChecker.isEnvVarDefined('NODE_ENV')}`)
 console.log(`Node.js environment is production: ${RuntimeEnvChecker.isNodeEnvProduction()}`)
 // console.log(`Check that Node.js environment is production: ${RuntimeEnvChecker.checkNodeEnvProduction()}`)
 
-console.log(`No more tests.`)</code>
+console.log('Ensure JavaScript strict mode is enabled (or an Exception will be thrown):')
+const checkSafeMode = RuntimeEnvChecker.checkStrictMode()
+console.log(`strict mode enabled : ${checkSafeMode}`)
+
+console.log(`No more tests.`)
 </code></pre>
-<p>Look into the <a href="./example/">example</a> folder for more sample scripts that uses the library 
-(inline but it&apos;s the same using it from npm registry).</p>
-<p>A sample usage could be to check if current Node.js release satisfies 
+<p>Look into the <a href="./example/">example</a> folder for more sample scripts that uses the library
+(inline but it's the same using it from npm registry).</p>
+<p>A sample usage could be to check if current Node.js release satisfies
 the release wanted, and if not throw an Error (or instead log a Warning).</p>
-<h2 id="requirements">Requirements</h2><p>Node.js 8.9.0 or later; NPM 6.4.1 or later.</p>
-<h2 id="note">Note</h2><p>The library exposes some static methods useful at runtime; 
-for example to check the given version, 
-if it&apos;s compatible with an expected version, 
+<h2>Requirements</h2>
+<p>Node.js 10 LTS (but recommended 10.24.1) or later; NPM 6.8.0 or later.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/check-runtime-env.js/">check-runtime-env.js</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/check-runtime-env.js/">here</a>.</p>
+<h2>Note</h2>
+<p>The library exposes some static methods useful at runtime;
+for example to check the given version,
+if it's compatible with an expected version,
 using the semver syntax for constraints.</p>
-<p>Current Node.js version if read from the memory as a default value; 
-NPM version must be retrieved by executing it, so if needed it has to be done 
+<p>Current Node.js version if read from the memory as a default value;
+NPM version must be retrieved by executing it, so if needed it has to be done
 by calling related method (could take some time).</p>
-<p>The general behavior of check/checker methods here is to throw Error if the check 
-does not pass (if it&apos;s false); or return true if successful, or even false</p>
+<p>The general behavior of check/checker methods here is to throw Error if the check
+does not pass (if it's false); or return true if successful, or even false</p>
 <p>You can find Code Documentation for the API of the library <a href="https://smartiniongithub.github.io/check-runtime-env.js/">here</a>.</p>
-<p>The package name is simplified into &apos;check-runtime-env&apos;, so it will be easier to get it at npm.</p>
+<p>The package name is simplified into 'check-runtime-env', so it will be easier to get it at npm.</p>
 <p>See the Semantic Versioning Specification at <a href="https://semver.org">semver</a>.</p>
 <p>More features will be added later to the library.</p>
-<h2 id="contributing">Contributing</h2><ol>
-<li>Fork it ( <a href="https://github.com/smartiniOnGitHub/check-runtime-env.js/fork">https://github.com/smartiniOnGitHub/check-runtime-env.js/fork</a> )</li>
+<h2>Contributing</h2>
+<ol>
+<li>Fork it ( https://github.com/smartiniOnGitHub/check-runtime-env.js/fork )</li>
 <li>Create your feature branch (git checkout -b my-new-feature)</li>
-<li>Commit your changes (git commit -am &apos;Add some feature&apos;)</li>
+<li>Commit your changes (git commit -am 'Add some feature')</li>
 <li>Push to the branch (git push origin my-new-feature)</li>
 <li>Create a new Pull Request</li>
 </ol>
-<h2 id="license">License</h2><p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
-<hr>
-</div>
+<h2>License</h2>
+<p>Licensed under <a href="./LICENSE">Apache-2.0</a>.</p>
+<hr></article>
+    </section>
+
+
+
+
+
+
 </div>
 
-<footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="RuntimeEnvChecker.html">RuntimeEnvChecker</a></li></ul><h3>Global</h3><ul><li><a href="global.html#engines">engines</a></li><li><a href="global.html#hostname">hostname</a></li><li><a href="global.html#pid">pid</a></li><li><a href="global.html#semver">semver</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a>
 </footer>
 
-<script src="script/search_index.js"></script>
-<script src="script/search.js"></script>
-<script src="script/pretty-print.js"></script>
-<script src="script/inherited-summary.js"></script>
-<script src="script/test-summary.js"></script>
-<script src="script/inner-link.js"></script>
-<script src="script/patch-for-local.js"></script>
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
 </body>
 </html>
