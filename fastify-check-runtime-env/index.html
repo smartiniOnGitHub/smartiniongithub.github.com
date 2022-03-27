@@ -48,8 +48,7 @@
 <a href="https://npmjs.org/package/fastify-check-runtime-env/"><img src="https://img.shields.io/npm/dm/fastify-check-runtime-env.svg?style=flat" alt="NPM Downloads"></a>
 <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
 <a href="https://coveralls.io/github/smartiniOnGitHub/fastify-check-runtime-env/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/fastify-check-runtime-env/badge.svg?branch=master" alt="Coverage Status"></a>
-<a href="https://david-dm.org/smartiniOnGitHub/fastify-check-runtime-env"><img src="https://david-dm.org/smartiniOnGitHub/fastify-check-runtime-env/status.svg" alt="dependencies Status"></a>
-<a href="https://david-dm.org/smartiniOnGitHub/fastify-check-runtime-env?type=dev"><img src="https://david-dm.org/smartiniOnGitHub/fastify-check-runtime-env/dev-status.svg" alt="devDependencies Status"></a></p>
+<a href="http://opensource.org/licenses/APACHE-2.0"><img src="https://img.shields.io/npm/l/check-runtime-env.svg" alt="license - APACHE-2.0"></a></p>
 <p>Fastify Plugin to check runtime environment properties</p>
 <p>The purpose of this plugin is to let Fastify web applications do some checks
 on some properties available at runtime (for example at application startup).
@@ -68,7 +67,7 @@ fastify.register(require('fastify-check-runtime-env'), {
   // nodeStrictCheckAtStartup: true, // same as default
   nodeVersionCheckAtStartup: true,
   nodeVersionExpected: engines.node
-  // nodeVersionExpected: '&lt;=8.17.0 >=200.0.0', // sample failing test
+  // nodeVersionExpected: '&lt;=10.13.0 >=200.0.0', // sample failing test
   // onCheckMismatch: 'exception' // throw an exception // same as default
 })
 
@@ -78,8 +77,13 @@ fastify.listen(3000)
 <p>In the <a href="./example/">example</a> folder there are some simple server scripts
 that uses the plugin (inline but it's the same using it from npm registry).</p>
 <h2>Requirements</h2>
-<p>Fastify ^2.12.0 , Node.js 8 LTS (8.9.x) or later.</p>
+<p>Fastify ^3.3.0 , Node.js 10 LTS (10.13.0) or later.</p>
 <p>Note that plugin releases 0.x are for Fastify 2.x, 3.x are for Fastify 3.x, etc.</p>
+<h2>Sources</h2>
+<p>Source code is all inside main repo:
+<a href="https://github.com/smartiniOnGitHub/fastify-check-runtime-env">fastify-check-runtime-env</a>.</p>
+<p>Documentation generated from source code (library API):
+<a href="https://smartiniongithub.github.io/fastify-check-runtime-env/">here</a>.</p>
 <h2>Note</h2>
 <p>The plugin decorate Fastify and expose some functions:</p>
 <ul>
