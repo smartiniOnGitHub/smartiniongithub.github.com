@@ -64,7 +64,7 @@ will be used, but if needed can be specified:</p>
 <li><code>exposeUptime</code>, to return even Node.js process uptime (by default disabled)</li>
 </ul>
 <p>Under the hood, the healthcheck status is determined by the
-<a href="https://www.npmjs.com/package/under-pressure">under-pressure</a> plugin,
+<a href="https://www.npmjs.com/package/@fastify/under-pressure">@fastify/under-pressure</a> plugin,
 used here as a dependency; so it's possible to specify all its
 configuration options here.</p>
 <p>To use all default values for <code>healthcheck</code> options, do not set its options
@@ -81,7 +81,7 @@ fastify.register(require('fastify-healthcheck'))
 // fastify.register(require('fastify-healthcheck'), { healthcheckUrl: '/custom-health', healthcheckUrlAlwaysFail: true })
 //
 
-fastify.listen(3000)
+fastify.listen({ port: 3000, host: 'localhost' })
 
 // To test, for example (in another terminal session) do:
 // `npm start`, or
@@ -116,8 +116,8 @@ container but manually</li>
 <li><code>docker:clean</code>, to remove generated image</li>
 </ul>
 <h2>Requirements</h2>
-<p>Fastify ^3.11.0 , Node.js 10 LTS (10.13.0) or later.
-Note that plugin releases 2.x are for Fastify 2.x, 3.x are for Fastify 3.x, etc.</p>
+<p>Fastify ^4.0.0 , Node.js 14 LTS (14.15.0) or later.
+Note that plugin releases 3.x are for Fastify 3.x, 4.x are for Fastify 4.x, etc.</p>
 <h2>Sources</h2>
 <p>Source code is all inside main repo:
 <a href="https://github.com/smartiniOnGitHub/fastify-healthcheck">fastify-healthcheck</a>.</p>
