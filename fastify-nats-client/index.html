@@ -47,9 +47,8 @@
 <p><a href="https://npmjs.org/package/fastify-nats-client/"><img src="https://img.shields.io/npm/v/fastify-nats-client.svg?style=flat" alt="NPM Version"></a>
 <a href="https://npmjs.org/package/fastify-nats-client/"><img src="https://img.shields.io/npm/dm/fastify-nats-client.svg?style=flat" alt="NPM Downloads"></a>
 <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="Code Style"></a>
-<a href="https://coveralls.io/github/smartiniOnGitHub/fastify-nats-client/?branch=master"><img src="https://coveralls.io/repos/github/smartiniOnGitHub/fastify-nats-client/badge.svg?branch=master" alt="Coverage Status"></a>
 <a href="http://opensource.org/licenses/APACHE-2.0"><img src="https://img.shields.io/npm/l/fastify-nats-client.svg" alt="license - APACHE-2.0"></a></p>
-<p>Fastify Plugin to use <a href="http://nats.io">NATS</a> Server as a queue, to exchange messages.</p>
+<p>Fastify Plugin to use <a href="http://nats.io">NATS</a> Server to exchange messages via queues etc.</p>
 <p>Under the hood <a href="https://github.com/nats-io/nats.js">nats.js</a> library is used;
 the plugin has some options (to set in the <code>register</code>),
 some will be sent to the nats library for connection details etc.</p>
@@ -65,7 +64,7 @@ fastify.register(require('fastify-nats-client'), {
   natsOptions: { servers: 'nats://demo.nats.io:4222' }
 })
 
-fastify.listen(3000, (err, address) => {
+fastify.listen({ port: 3000, host: 'localhost' }, (err, address) => {
   if (err) throw err
   console.log(`server listening on ${address}`)
 })
@@ -87,8 +86,8 @@ uses the plugin (inline but it's the same using it from npm registry).</p>
 <p>As you can see, the NATS.js library is complex and with a lot of features,
 please refer to its documentation and sources for more info and examples.</p>
 <h2>Requirements</h2>
-<p>Fastify ^3.3.0 , Node.js 10 LTS (10.13.0) or later.</p>
-<p>Note that plugin releases 2.x are for Fastify 2.x, 3.x are for Fastify 3.x, etc.</p>
+<p>Fastify ^4.0.0 , Node.js 10 LTS (14.15.0) or later.</p>
+<p>Note that plugin releases 3.x are for Fastify 3.x, 4.x are for Fastify 4.x, etc.</p>
 <h2>Sources</h2>
 <p>Source code is all inside main repo:
 <a href="https://github.com/smartiniOnGitHub/fastify-nats-client">fastify-nats-client</a>.</p>
