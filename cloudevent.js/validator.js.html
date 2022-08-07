@@ -52,7 +52,7 @@
  * Get a reference to Node.js url module.
  * @private
  */
-const url = require('url')
+const url = require('node:url')
 
 /**
  * Generic Validator implementation.
@@ -124,7 +124,9 @@ class Validator {
    * @return {boolean} true if it's a string, false otherwise
    */
   static isString (arg) {
-    return (Validator.isDefinedAndNotNull(arg) &amp;&amp; (typeof arg === 'string'))
+    // return (Validator.isDefinedAndNotNull(arg) &amp;&amp; (typeof arg === 'string'))
+    // rewritten inline and using new ES features for more performances
+    return ((arg?.length >= 0) &amp;&amp; (typeof arg === 'string'))
   }
 
   /**
@@ -137,7 +139,9 @@ class Validator {
    * @return {boolean} true if it's a not empty string, false otherwise
    */
   static isStringNotEmpty (arg) {
-    return (Validator.isString(arg) &amp;&amp; (arg.length > 0))
+    // return (Validator.isString(arg) &amp;&amp; (arg.length > 0))
+    // rewritten inline and using new ES features for more performances
+    return ((arg?.length > 0) &amp;&amp; (typeof arg === 'string'))
   }
 
   /**
@@ -268,7 +272,11 @@ class Validator {
    * @return {boolean} true if it's a function, false otherwise
    */
   static isFunction (arg) {
-    return (Validator.isDefinedAndNotNull(arg) &amp;&amp; (typeof arg === 'function'))
+    // return (Validator.isDefinedAndNotNull(arg) &amp;&amp; (typeof arg === 'function'))
+    // rewritten (inline same code here) for more performances
+    // return ((arg !== undefined &amp;&amp; arg !== null) &amp;&amp; (typeof arg === 'function'))
+    // rewritten using new ES features, but same behavior
+    return ((arg ?? false) &amp;&amp; (typeof arg === 'function'))
   }
 
   /**
@@ -480,6 +488,28 @@ class Validator {
         return false
       }
     }
+  }
+
+  /**
+   * Tell if the given object contains the given property.
+   *
+   * @static
+   * @param {?object} obj the object to check
+   * @param {?string} propName the name of the property
+   * @param {boolean} [includeInherited=false] specify if search in nested/inherited properties
+   * @return {boolean} true if the object contains theat property, otherwise false
+   */
+  static doesObjectContainsProperty (obj, propName, includeInherited = false) {
+    if (!Validator.isObject(obj)) return false
+    if (!Validator.isStringNotEmpty(propName)) return false
+    if (!Validator.isBoolean(includeInherited)) return false
+    let propFound = false
+    if (includeInherited === false) {
+      propFound = Object.prototype.hasOwnProperty.call(obj, propName)
+    } else {
+      propFound = propName in obj
+    }
+    return propFound
   }
 
   /**
@@ -978,6 +1008,24 @@ class Validator {
   }
 
   /**
+   * Ensure that the given object contains the given property.
+   *
+   * See {@link Validator.doesObjectContainsProperty}.
+   *
+   * @static
+   * @param {?object} obj the object to check
+   * @param {?string} propName the name of the property
+   * @param {boolean} [includeInherited=false] specify if search in nested/inherited properties
+   * @param {string} [name='arg'] the name to use in generated error (for the first argument)
+   * @return {boolean} true if the object contains theat property, otherwise false
+   */
+  static ensureObjectContainsProperty (obj, propName, includeInherited = false, name = 'arg') {
+    if (!Validator.doesObjectContainsProperty(obj, propName, includeInherited)) {
+      return new Error(`The object with name '${name}' does not contains the property '${propName}' with search in inherited: ${includeInherited}`)
+    }
+  }
+
+  /**
    * Ensure that the given object does not contain any property
    * that has a standard (reserved) property name.
    *
@@ -986,10 +1034,10 @@ class Validator {
    * @static
    * @param {?object} arg the object to check
    * @param {?function} isPropStandard the function that tell the given argument (property), if it's standard
-   * @param {string} [name='arg'] the name to use in generated error (or the value of first argument if not given)
+   * @param {string} [name='arg'] the name to use in generated error (for the first argument)
    * @return {Error} if at least one property with a standard name is found, nothing otherwise
    */
-  static ensureObjectDoesNotContainStandardProperty (arg, isPropStandard, name = 'arg') {
+  static ensureObjectDoesNotContainsStandardProperty (arg, isPropStandard, name = 'arg') {
     if (Validator.doesObjectContainsStandardProperty(arg, isPropStandard)) {
       return new Error(`The object with name '${name}' contains at least one property with a standard name`)
     }
@@ -1164,13 +1212,13 @@ module.exports = Validator
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloudevent.html">cloudevent</a></li></ul><h3>Classes</h3><ul><li><a href="CloudEvent.html">CloudEvent</a></li><li><a href="JSONBatch.html">JSONBatch</a></li><li><a href="Transformer.html">Transformer</a></li><li><a href="Validator.html">Validator</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloudevent.html">cloudevent</a></li><li><a href="module-utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="CloudEvent.html">CloudEvent</a></li><li><a href="JSONBatch.html">JSONBatch</a></li><li><a href="Transformer.html">Transformer</a></li><li><a href="Validator.html">Validator</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a>
 </footer>
 
 <script> prettyPrint(); </script>
