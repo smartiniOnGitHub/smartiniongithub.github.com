@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: fastifyCloudEvents</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: fastifyCloudEvents</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature">(async) </span></span>
+            <span class="ancestors"><a href="module-plugin.html">plugin</a>~</span>fastifyCloudEvents<span class="signature">(fastify<span class="signature-attributes">non-null</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+
+    
+    <p class="summary">Plugin implementation.</p>
+    
+
+
+
+<div class="description">
+    Plugin implementation.Note that's an async function.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fastify</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Fastify instance</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last">plugin configuration options<ul>    <li>baseNamespace (string, default `com.github.fastify.plugins.${pluginName}-v${pluginVersion}`) as base namespace for events generated,</li>    <li>cloudEventExtensions (object, default null) Extensions for events generated,</li>    <li>cloudEventOptions (object, default empty) Options for events generated,</li>    <li>idGenerator (function, default idMaker) to build ID for events generated,</li>    <li>includeHeaders (boolean, default false) flag to enable the add HTTP request Headers in events generated,</li>    <li>includeHttpAttributes (boolean, default false) flag to add some HTTP request attributes in events generated,</li>    <li>includeRedundantAttributes` (boolean, default false) flag to add some redundant attributes inside data in events generated,</li>    <li>onCloseCallback (function, no default) callback function for the 'onClose' hook,</li>    <li>onErrorCallback (function, no default) callback function for the 'onError' hook,</li>    <li>onReadyCallback (function, no default) callback function for the 'onReady' hook,</li>    <li>onRegisterCallback (function, no default) callback function for the 'onRegister' hook,</li>    <li>onRequestCallback (function, no default) callback function for the 'onRequest' hook,</li>    <li>onResponseCallback (function, no default) callback function for the 'onResponse' hook,</li>    <li>onRouteCallback (function, no default) callback function for the 'onRoute' hook,</li>    <li>onSendCallback (function, no default) callback function for the 'onSend' hook,</li>    <li>onTimeoutCallback (function, no default) callback function for the 'onTimeout' hook,</li>    <li>preHandlerCallback (function, no default) callback function for the 'preHandler' hook,</li>    <li>preParsingCallback (function, no default) callback function for the 'preParsing' hook,</li>    <li>preSerializationCallback (function, no default) callback function for the 'preSerialization' hook,</li>    <li>preValidationCallback (function, no default) callback function for the 'preValidation' hook,</li>    <li>serverUrl (string, default '/') used as base to calculate source URL in events generated,</li>    <li>serverUrlMode (string, default null so 'pluginAndRequestSimplified'; other values: 'pluginAndRequestUrl', 'pluginServerUrl','requestUrl') specify the way to calculate source URL in events generated,</li>    <li>See <a href="https://github.com/smartiniOnGitHub/cloudevent.js/blob/master/README.md">README - cloudevent.js - GitHub</a> for more info.</li>    <li>For Hooks, see <a href="https://github.com/fastify/fastify/blob/main/docs/Reference/Hooks.md">Hooks - Fastify reference - GitHub</a> for more info.</li></ul></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="plugin.js.html">plugin.js</a>, <a href="plugin.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~serialize"><span class="type-signature">(inner) </span>serialize<span class="signature">(event<span class="signature-attributes">non-null</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+    <p class="summary">Serialize the given CloudEvent in JSON format.</p>
+    
+
+
+
+<div class="description">
+    Serialize the given CloudEvent in JSON format.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">the CloudEvent to serialize</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last">optional serialization attributes:<ul>    <li>encoder (function, no default) a function that takes data and returns encoded data as a string,</li>    <li>encodedData (string, no default) already encoded data (but consistency with the datacontenttype is not checked),</li>    <li>onlyValid (boolean, default false) to serialize only if it's a valid instance,</li>    <li>printDebugInfo (boolean, default false) to print some debug info to the console,</li>    <li>timezoneOffset (number, default 0) to apply a different timezone offset,</li>    <li>See <a href="https://github.com/smartiniOnGitHub/cloudevent.js/blob/master/src/cloudevent.js">CloudEvent</a> and its static method serializeEvent for similar options.</li></ul></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="plugin.js.html">plugin.js</a>, <a href="plugin.js.html#line150">line 150</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        if event is undefined or null, or an option is undefined/null/wrong
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    
+        <li>
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        if onlyValid is true, and the given event is not a valid CloudEvent instance
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the serialized event, as a string
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~validate"><span class="type-signature">(inner) </span>validate<span class="signature">(event<span class="signature-attributes">non-null</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+    <p class="summary">Validate the given CloudEvent with the schema compiler already instanced.</p>
+    
+
+
+
+<div class="description">
+    Validate the given CloudEvent with the schema compiler already instanced.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">the CloudEvent to validate</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    null
+                
+                </td>
+            
+
+            <td class="description last">Ajv validation options, see <a href="https://ajv.js.org/options.html">Options - AJV Validator</a></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="plugin.js.html">plugin.js</a>, <a href="plugin.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        if event is undefined or null
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    object with validation results: 'valid' boolean and 'errors' as array of strings or null
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-plugin.html">plugin</a></li><li><a href="module-utility.html">utility</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-plugin-fastifyCloudEvents.html">fastifyCloudEvents</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

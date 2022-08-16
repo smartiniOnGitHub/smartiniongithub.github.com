@@ -43,36 +43,81 @@
  */
 'use strict'
 
+/**
+ * Plugin:
+ * this module exports the plugin as an async function.
+ * @module plugin
+ */
+
 const fp = require('fastify-plugin')
 const { CloudEvent, CloudEventTransformer, JSONBatch } = require('cloudevent') // get CloudEvent definition and related utilities
 
 const pluginName = require('../package.json').name // get plugin name
 const pluginVersion = require('../package.json').version // get plugin version
 
+/**
+ * Plugin implementation.
+ * Note that's an async function.
+ *
+ * @param {!object} fastify Fastify instance
+ * @param {object} [options={}] plugin configuration options
+ * &lt;ul>
+ *     &lt;li>baseNamespace (string, default `com.github.fastify.plugins.${pluginName}-v${pluginVersion}`) as base namespace for events generated,&lt;/li>
+ *     &lt;li>cloudEventExtensions (object, default null) Extensions for events generated,&lt;/li>
+ *     &lt;li>cloudEventOptions (object, default empty) Options for events generated,&lt;/li>
+ *     &lt;li>idGenerator (function, default idMaker) to build ID for events generated,&lt;/li>
+ *     &lt;li>includeHeaders (boolean, default false) flag to enable the add HTTP request Headers in events generated,&lt;/li>
+ *     &lt;li>includeHttpAttributes (boolean, default false) flag to add some HTTP request attributes in events generated,&lt;/li>
+ *     &lt;li>includeRedundantAttributes` (boolean, default false) flag to add some redundant attributes inside data in events generated,&lt;/li>
+ *     &lt;li>onCloseCallback (function, no default) callback function for the 'onClose' hook,&lt;/li>
+ *     &lt;li>onErrorCallback (function, no default) callback function for the 'onError' hook,&lt;/li>
+ *     &lt;li>onReadyCallback (function, no default) callback function for the 'onReady' hook,&lt;/li>
+ *     &lt;li>onRegisterCallback (function, no default) callback function for the 'onRegister' hook,&lt;/li>
+ *     &lt;li>onRequestCallback (function, no default) callback function for the 'onRequest' hook,&lt;/li>
+ *     &lt;li>onResponseCallback (function, no default) callback function for the 'onResponse' hook,&lt;/li>
+ *     &lt;li>onRouteCallback (function, no default) callback function for the 'onRoute' hook,&lt;/li>
+ *     &lt;li>onSendCallback (function, no default) callback function for the 'onSend' hook,&lt;/li>
+ *     &lt;li>onTimeoutCallback (function, no default) callback function for the 'onTimeout' hook,&lt;/li>
+ *     &lt;li>preHandlerCallback (function, no default) callback function for the 'preHandler' hook,&lt;/li>
+ *     &lt;li>preParsingCallback (function, no default) callback function for the 'preParsing' hook,&lt;/li>
+ *     &lt;li>preSerializationCallback (function, no default) callback function for the 'preSerialization' hook,&lt;/li>
+ *     &lt;li>preValidationCallback (function, no default) callback function for the 'preValidation' hook,&lt;/li>
+ *     &lt;li>serverUrl (string, default '/') used as base to calculate source URL in events generated,&lt;/li>
+ *     &lt;li>serverUrlMode (string, default null so 'pluginAndRequestSimplified'; other values: 'pluginAndRequestUrl', 'pluginServerUrl','requestUrl') specify the way to calculate source URL in events generated,&lt;/li>
+ *     &lt;li>See [README - cloudevent.js - GitHub]{@link https://github.com/smartiniOnGitHub/cloudevent.js/blob/master/README.md} for more info.&lt;/li>
+ *     &lt;li>For Hooks, see [Hooks - Fastify reference - GitHub]{@link https://github.com/fastify/fastify/blob/main/docs/Reference/Hooks.md} for more info.&lt;/li>
+ * &lt;/ul>
+ *
+ * @namespace
+ */
 async function fastifyCloudEvents (fastify, options) {
   const {
-    serverUrl = '/',
-    serverUrlMode = null,
     baseNamespace = `com.github.fastify.plugins.${pluginName}-v${pluginVersion}`,
+    cloudEventExtensions = null,
+    cloudEventOptions = {},
     idGenerator = idMaker(),
     includeHeaders = false,
     includeHttpAttributes = false,
     includeRedundantAttributes = false,
-    onRequestCallback = null,
-    preParsingCallback = null,
-    preValidationCallback = null,
-    preHandlerCallback = null,
-    preSerializationCallback = null,
-    onErrorCallback = null,
-    onSendCallback = null,
-    onResponseCallback = null,
     onCloseCallback = null,
-    onRouteCallback = null,
-    onRegisterCallback = null,
+    onErrorCallback = null,
     onReadyCallback = null,
-    cloudEventOptions = {},
-    cloudEventExtensions = null
+    onRegisterCallback = null,
+    onRequestCallback = null,
+    onResponseCallback = null,
+    onRouteCallback = null,
+    onSendCallback = null,
+    onTimeoutCallback = null,
+    preHandlerCallback = null,
+    preParsingCallback = null,
+    preSerializationCallback = null,
+    preValidationCallback = null,
+    serverUrl = '/',
+    serverUrlMode = null
   } = options
+
+  ensureIsObjectPlain(fastify, 'fastify')
+  // ensureIsObjectPlain(options, 'options')
 
   ensureIsString(serverUrl, 'serverUrl')
   ensureIsString(serverUrlMode, 'serverUrlMode')
@@ -93,6 +138,7 @@ async function fastifyCloudEvents (fastify, options) {
   ensureIsFunction(onRouteCallback, 'onRouteCallback')
   ensureIsFunction(onRegisterCallback, 'onRegisterCallback')
   ensureIsFunction(onReadyCallback, 'onReadyCallback')
+  ensureIsFunction(onTimeoutCallback, 'onTimeoutCallback')
   ensureIsObjectPlain(cloudEventOptions, 'cloudEventOptions')
   ensureIsObjectPlain(cloudEventExtensions, 'cloudEventExtensions')
 
@@ -115,19 +161,38 @@ async function fastifyCloudEvents (fastify, options) {
    *
    * @param {!object} event the CloudEvent to serialize
    * @param {object} [options={}] optional serialization attributes:
-   *        encoder (function, no default) a function that takes data and returns encoded data,
-   *        encodedData (string, no default) already encoded data (but consistency with the datacontenttype is not checked),
-   *        onlyValid (boolean, default false) to serialize only if it's a valid instance,
+   * &lt;ul>
+   *     &lt;li>encoder (function, no default) a function that takes data and returns encoded data as a string,&lt;/li>
+   *     &lt;li>encodedData (string, no default) already encoded data (but consistency with the datacontenttype is not checked),&lt;/li>
+   *     &lt;li>onlyValid (boolean, default false) to serialize only if it's a valid instance,&lt;/li>
+   *     &lt;li>printDebugInfo (boolean, default false) to print some debug info to the console,&lt;/li>
+   *     &lt;li>timezoneOffset (number, default 0) to apply a different timezone offset,&lt;/li>
+   *     &lt;li>See [CloudEvent]{@link https://github.com/smartiniOnGitHub/cloudevent.js/blob/master/src/cloudevent.js} and its [static method serializeEvent]{@link CloudEvent#serializeEvent} for similar options.&lt;/li>
+   * &lt;/ul>
    * @return {string} the serialized event, as a string
    * @throws {Error} if event is undefined or null, or an option is undefined/null/wrong
    * @throws {Error} if onlyValid is true, and the given event is not a valid CloudEvent instance
+   *
+   * @inner
    */
-  function serialize (event, { encoder, encodedData, onlyValid = false } = {}) {
+  function serialize (event, {
+    encoder, encodedData,
+    onlyValid = false,
+    printDebugInfo = false,
+    timezoneOffset = 0
+  } = {}) {
     ensureIsObjectPlain(event, 'event')
+    if (printDebugInfo === true) {
+      console.log(`DEBUG | trying to serialize ce: ${JSON.stringify(event)}`)
+    }
 
     if (event.datacontenttype === CloudEvent.datacontenttypeDefault()) {
-      if ((onlyValid === false) || (onlyValid === true &amp;&amp; CloudEvent.isValidEvent(event) === true)) {
-        return stringify(event)
+      if ((onlyValid === false) || (onlyValid === true &amp;&amp; CloudEvent.isValidEvent(event, { timezoneOffset }) === true)) {
+        const ser = stringify(event)
+        if (printDebugInfo === true) {
+          console.log(`DEBUG | ce successfully serialized as: ${ser}`)
+        }
+        return ser
       } else {
         throw new Error('Unable to serialize a not valid CloudEvent.')
       }
@@ -153,8 +218,12 @@ async function fastifyCloudEvents (fastify, options) {
     }
     const newEvent = CloudEventTransformer.mergeObjects(event, { data: encodedData })
     // console.log(`DEBUG - new event details: ${CloudEventTransformer.dumpObject(newEvent, 'newEvent')}`)
-    if ((onlyValid === false) || (onlyValid === true &amp;&amp; CloudEvent.isValidEvent(newEvent) === true)) {
-      return stringify(newEvent)
+    if ((onlyValid === false) || (onlyValid === true &amp;&amp; CloudEvent.isValidEvent(newEvent, { timezoneOffset }) === true)) {
+      const ser = stringify(newEvent)
+      if (printDebugInfo === true) {
+        console.log(`DEBUG | ce successfully serialized as: ${ser}`)
+      }
+      return ser
     } else {
       throw new Error('Unable to serialize a not valid CloudEvent.')
     }
@@ -162,18 +231,39 @@ async function fastifyCloudEvents (fastify, options) {
 
   // use 'ajv' (dependency of fast-json-stringify')
   const Ajv = require('ajv')
-  const ajv = new Ajv({ coerceTypes: true, removeAdditional: true })
-  const validateFromSchema = ajv.compile(ceSchema)
+  const addFormats = require('ajv-formats')
+  // define some default options for Ajv
+  const defaultAjvValidationOptions = {
+    coerceTypes: true,
+    removeAdditional: true
+  }
+  // create a default instance for Ajv and related schema validator
+  const defaultAjv = new Ajv(defaultAjvValidationOptions)
+  addFormats(defaultAjv)
+  const defaultAjvValidateFromSchema = defaultAjv.compile(ceSchema)
 
   /**
    * Validate the given CloudEvent with the schema compiler already instanced.
    *
-   * @param {!object} event the CloudEvent to serialize
-   * @return {object} validation results: 'valid' boolean and 'errors' as array of strings or null
+   * @param {!object} event the CloudEvent to validate
+   * @param {object} [options=null] Ajv validation options, see {@link https://ajv.js.org/options.html|Options - AJV Validator}
+   * @return {object} object with validation results: 'valid' boolean and 'errors' as array of strings or null
    * @throws {Error} if event is undefined or null
+   *
+   * @inner
    */
-  function validate (event) {
+  function validate (event, options = null) {
     ensureIsObjectPlain(event, 'event')
+
+    // depending on options given, it will be used a new Ajv instance
+    // or one already created with default settings, to speedup validation
+    let ajv = defaultAjv
+    let validateFromSchema = defaultAjvValidateFromSchema
+    if (options !== null) {
+      ajv = new Ajv(options)
+      addFormats(ajv)
+      validateFromSchema = ajv.compile(ceSchema)
+    }
 
     const isValid = validateFromSchema(event)
     return {
@@ -210,6 +300,8 @@ async function fastifyCloudEvents (fastify, options) {
   })
 
   // handle hooks, only when related callback are defined
+  // see [Hooks - Fastify reference - GitHub](https://github.com/fastify/fastify/blob/main/docs/Reference/Hooks.md)
+
   if (onRequestCallback !== null) {
     fastify.addHook('onRequest', async (request, reply) => {
       // small optimization: pass a null reply because no useful here
@@ -222,7 +314,7 @@ async function fastifyCloudEvents (fastify, options) {
       }
       // console.log(`DEBUG - onRequest: created CloudEvent ${CloudEventTransformer.dumpObject(ce, 'ce')}`)
       // send the event to the callback
-      onRequestCallback(ce)
+      await onRequestCallback(ce)
     })
   }
 
@@ -230,28 +322,28 @@ async function fastifyCloudEvents (fastify, options) {
     fastify.addHook('preParsing', async (request, reply, payload) => {
       const ce = builders.buildCloudEventForHook('preParsing', request, reply, // payload)
         null) // do not pass payload here or a "Converting circular structure to JSON" will be raised if enabled ...
-      preParsingCallback(ce)
+      await preParsingCallback(ce)
     })
   }
 
   if (preValidationCallback !== null) {
     fastify.addHook('preValidation', async (request, reply) => {
       const ce = builders.buildCloudEventForHook('preValidation', request, reply)
-      preValidationCallback(ce)
+      await preValidationCallback(ce)
     })
   }
 
   if (preHandlerCallback !== null) {
     fastify.addHook('preHandler', async (request, reply) => {
       const ce = builders.buildCloudEventForHook('preHandler', request, reply)
-      preHandlerCallback(ce)
+      await preHandlerCallback(ce)
     })
   }
 
   if (preSerializationCallback !== null) {
     fastify.addHook('preSerialization', async (request, reply, payload) => {
       const ce = builders.buildCloudEventForHook('preSerialization', request, reply, payload)
-      preSerializationCallback(ce)
+      await preSerializationCallback(ce)
     })
   }
 
@@ -280,7 +372,7 @@ async function fastifyCloudEvents (fastify, options) {
         cloudEventOptions,
         cloudEventExtensions
       )
-      onErrorCallback(ce)
+      await onErrorCallback(ce)
       // done() // do not pass the error to the done callback here
     })
   }
@@ -288,7 +380,7 @@ async function fastifyCloudEvents (fastify, options) {
   if (onSendCallback !== null) {
     fastify.addHook('onSend', async (request, reply, payload) => {
       const ce = builders.buildCloudEventForHook('onSend', request, reply, payload)
-      onSendCallback(ce)
+      await onSendCallback(ce)
     })
   }
 
@@ -296,7 +388,15 @@ async function fastifyCloudEvents (fastify, options) {
     fastify.addHook('onResponse', async (request, reply) => {
       const ce = builders.buildCloudEventForHook('onResponse', request, reply)
       // keep the request attribute from data, even if more data will be shown here
-      onResponseCallback(ce)
+      await onResponseCallback(ce)
+    })
+  }
+
+  if (onTimeoutCallback !== null) {
+    fastify.addHook('onTimeout', async (request, reply) => {
+      const ce = builders.buildCloudEventForHook('onTimeout', request, reply)
+      // keep the request attribute from data, even if more data will be shown here
+      await onTimeoutCallback(ce)
     })
   }
 
@@ -310,12 +410,12 @@ async function fastifyCloudEvents (fastify, options) {
         cloudEventOptions,
         cloudEventExtensions
       )
-      onCloseCallback(ce)
+      await onCloseCallback(ce)
     })
   }
 
   if (onRouteCallback !== null) {
-    fastify.addHook('onRoute', async (routeOptions) => {
+    fastify.addHook('onRoute', (routeOptions) => {
       const ce = new fastify.CloudEvent(idGenerator.next().value,
         `${baseNamespace}.onRoute`,
         builders.buildSourceUrl(),
@@ -328,7 +428,7 @@ async function fastifyCloudEvents (fastify, options) {
   }
 
   if (onRegisterCallback !== null) {
-    fastify.addHook('onRegister', async (instance, opts) => {
+    fastify.addHook('onRegister', (instance, opts) => {
       const ce = new fastify.CloudEvent(idGenerator.next().value,
         `${baseNamespace}.onRegister`,
         builders.buildSourceUrl(),
@@ -350,12 +450,14 @@ async function fastifyCloudEvents (fastify, options) {
         cloudEventOptions,
         cloudEventExtensions
       )
-      onReadyCallback(ce)
+      await onReadyCallback(ce)
     })
   }
 
   // done()
 }
+
+// utility functions
 
 function ensureIsString (arg, name = 'arg') {
   if (arg !== null &amp;&amp; typeof arg !== 'string') {
@@ -387,7 +489,7 @@ function ensureIsFunction (arg, name = 'arg') {
   }
 }
 
-const hostname = require('os').hostname()
+const hostname = require('node:os').hostname()
 const idPrefix = `fastify@${hostname}`
 function * idMaker () {
   while (true) {
@@ -407,7 +509,7 @@ function isValue (arg) {
 }
 
 module.exports = fp(fastifyCloudEvents, {
-  fastify: '^3.3.0',
+  fastify: '^4.0.1',
   name: 'fastify-cloudevents'
 })
 </code></pre>
@@ -420,13 +522,13 @@ module.exports = fp(fastifyCloudEvents, {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CloudEventLibrary">CloudEventLibrary</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-plugin.html">plugin</a></li><li><a href="module-utility.html">utility</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-plugin-fastifyCloudEvents.html">fastifyCloudEvents</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a>
 </footer>
 
 <script> prettyPrint(); </script>
