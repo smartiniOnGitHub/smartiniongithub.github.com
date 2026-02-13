@@ -142,9 +142,12 @@ but without arguments (if any)</li>
 </li>
 <li><code>onCloseCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onClose</code>, for the plugin</li>
 <li><code>onErrorCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onError</code></li>
+<li><code>onListenCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onListen</code>,
+when the server starts listening for requests</li>
 <li><code>onReadyCallback</code>, callback to handle the generated CloudEvent in Fastify lifecycle function <code>ready</code>,
 for the plugin (when the plugin has been loaded)</li>
 <li><code>onRegisterCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRegister</code></li>
+<li><code>onRequestAbortCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRequestAbort</code></li>
 <li><code>onRequestCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRequest</code></li>
 <li><code>onResponseCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onResponse</code></li>
 <li><code>onRouteCallback</code>, callback to handle generated CloudEvents in Fastify hook <code>onRoute</code></li>
